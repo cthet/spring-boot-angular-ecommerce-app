@@ -1,23 +1,23 @@
 package com.ecommerce.springbootecommerce.web.dto;
 
-import com.ecommerce.springbootecommerce.domain.ApparelCategory;
-import com.ecommerce.springbootecommerce.domain.GenderCategory;
-import com.ecommerce.springbootecommerce.domain.PriceRangeCategory;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
+
+@Getter
+@Setter
 @Data
-public class ApparelDTO implements Serializable {
+public class ProductDTO {
 
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("id")
-    private String apparelName;
+    @JsonProperty("product_name")
+    private String productName;
 
     @JsonProperty("unit_price")
     private BigDecimal unitPrice;
@@ -25,26 +25,46 @@ public class ApparelDTO implements Serializable {
     @JsonProperty("image_url")
     private String imageUrl;
 
-    @JsonProperty("units_in_stocks")
+    @JsonProperty("units_in_stock")
     private int unitsInStocks;
 
-    @JsonProperty("gender_category")
-    private GenderCategory genderCategory;
+    public Long getId() {
+        return id;
+    }
 
-    @JsonProperty("apparel_category")
-    private ApparelCategory apparelCategory;
-
-    @JsonProperty("priceRange_category")
-    private PriceRangeCategory priceRangeCategory;
-
-    @Builder
-    public ApparelDTO(Long id, String apparelName, BigDecimal unitPrice, String imageUrl, int unitsInStocks, GenderCategory genderCategory, ApparelCategory apparelCategory, PriceRangeCategory priceRangeCategory){
+    public void setId(Long id) {
         this.id = id;
-        this.apparelName = apparelName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getUnitsInStocks() {
+        return unitsInStocks;
+    }
+
+    public void setUnitsInStocks(int unitsInStocks) {
         this.unitsInStocks = unitsInStocks;
-        this.genderCategory = genderCategory;
-        this.apparelCategory = apparelCategory;
-        this.priceRangeCategory = priceRangeCategory;
-    };
+    }
 }

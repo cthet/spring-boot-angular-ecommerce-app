@@ -1,5 +1,6 @@
-package com.ecommerce.springbootecommerce.entity;
+package com.ecommerce.springbootecommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,11 +18,12 @@ public class GenderCategory {
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @Column(name = "gender_category")
     @NotNull
-    private String genderCategory;
+    @Column(name = "gender_category_type")
+    private String type;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "genderCategory")
-    private List<Product> product;
+    @OneToMany(mappedBy = "genderCategory")
+    @JsonIgnore
+    private List<Product> products;
 
 }

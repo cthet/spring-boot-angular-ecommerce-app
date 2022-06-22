@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Response {
+public class ProductsResponse {
 
     @JsonProperty("products")
     private ProductsDTO productsDTO;
@@ -23,10 +23,10 @@ public class Response {
     @JsonProperty("total_pages")
     private int totalPages;
 
-    public Response() {
+    public ProductsResponse() {
     }
 
-    public Response(ProductsDTO productsDTO, int currentPage, int size, Long totalItems, int totalPages) {
+    public ProductsResponse(ProductsDTO productsDTO, int currentPage, int size, Long totalItems, int totalPages) {
         this.productsDTO = productsDTO;
         this.currentPage = currentPage;
         this.size = size;
