@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO getProductById(Long productId) {
 
-        Product product = productRepository.findById(productId).orElseThrow(() -> new ApiRequestException("Apparel not found", HttpStatus.NOT_FOUND));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ApiRequestException("Product not found", HttpStatus.NOT_FOUND));
         ProductDTO productDTO = new ProductDTO();
         productDTO = modelMapper.map(product, ProductDTO.class);
 
@@ -41,8 +41,20 @@ public class ProductServiceImpl implements ProductService {
     public ProductsResponse getProducts(int gender, int apparel, int priceRange, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
+        Page<Product> pageProduct = null;
 
-        Page<Product> pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdAndPriceRangeCategoryId(gender, apparel, priceRange, pageable);
+        //gender is always != 0
+
+        if(gender != 0 && apparel == 0 && priceRange == 0) {
+            pageProduct = productRepository.findByGenderCategoryId(gender, pageable);
+        } else if (gender != 0 && apparel != 0 && priceRange == 0) {
+            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryId(gender, apparel, pageable);
+        } else if (gender != 0 && apparel == 0 && priceRange != 0) {
+            pageProduct = productRepository.findByGenderCategoryIdAndPriceRangeCategoryId(gender, priceRange, pageable);
+        } else if (gender != 0 && apparel != 0 && priceRange != 0) {
+            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdAndPriceRangeCategoryId(gender, apparel, priceRange, pageable);
+        }
+
         List<Product> products = pageProduct.getContent();
 
         List<ProductDTO> productDTOS = new ArrayList<ProductDTO>();

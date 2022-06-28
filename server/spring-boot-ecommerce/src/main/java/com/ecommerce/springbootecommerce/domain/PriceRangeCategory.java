@@ -1,6 +1,5 @@
 package com.ecommerce.springbootecommerce.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +22,6 @@ public class PriceRangeCategory {
     private String type;
 
     @OneToMany(mappedBy = "priceRangeCategory")
-    @JsonIgnore
     private List<Product> products;
 
 }

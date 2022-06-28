@@ -1,37 +1,18 @@
 package com.ecommerce.springbootecommerce.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
-public class ApparelsDTO {
+
+@Data
+public class ApparelCategoriesDTO {
 
     @JsonProperty("gender")
     String gender;
 
-    @JsonProperty("apparel")
-    List<ApparelDTO> apparel;
+    @JsonProperty("apparel_categories")
+    List<ApparelCategoryDTO> apparelCategories;
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public List<ApparelDTO> getApparels() {
-        return apparel;
-    }
-
-    public void setApparels(List<ApparelDTO> apparel) {
-        this.apparel = apparels;
-    }
-
-    public ApparelsDTO() {
-    }
 }
