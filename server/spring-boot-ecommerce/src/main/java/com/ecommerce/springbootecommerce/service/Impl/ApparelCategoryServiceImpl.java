@@ -32,6 +32,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
 
         for(ApparelCategory apparelCategory: apparelCategories){
             ApparelCategoryDTO apparelCategoryDTO = new ApparelCategoryDTO();
+            apparelCategoryDTO.setId(apparelCategory.getId());
             apparelCategoryDTO.setCategory(apparelCategory.getType());
             apparelCategoryDTOS.add(apparelCategoryDTO);
         }

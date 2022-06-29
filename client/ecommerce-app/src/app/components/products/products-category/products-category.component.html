@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ gender }} Apparels</h5>
+        <mat-radio-group class="radio-group">
+          <mat-radio-button
+            class="radio-button"
+            *ngFor="let apparelCategory of apparels_categories"
+            [value]="apparelCategory.id"
+            >{{ apparelCategory.apparel_category }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Price</h5>
+        <mat-radio-group class="radio-group">
+          <mat-radio-button
+            class="radio-button"
+            *ngFor="let priceRangeCategory of priceRange_categories"
+            [value]="priceRangeCategory.id"
+            >{{ priceRangeCategory.price_range_category }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+</div>

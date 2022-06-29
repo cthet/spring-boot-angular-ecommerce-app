@@ -32,6 +32,7 @@ public class PriceRangeCategoryServiceImpl implements PriceRangeCategoryService 
 
         for(PriceRangeCategory priceRangeCategory: priceRangeCategories) {
             PriceRangeCategoryDTO priceRangeCategoryDTO = new PriceRangeCategoryDTO();
+            priceRangeCategoryDTO.setId(priceRangeCategory.getId());
             priceRangeCategoryDTO.setCategory(priceRangeCategory.getType());
             priceRangeCategoriesDTOS.add(priceRangeCategoryDTO);
         }

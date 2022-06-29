@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class ApparelCategoryDTO {
 
+    @JsonProperty("id")
+    private int id;
+
     @JsonProperty("apparel_category")
     private String category;
 
