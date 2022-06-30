@@ -1,1 +1,13 @@
-
+<div class="col-md-12">
+  <div class="card" *ngFor="let product of products">
+    <a [routerLink]="[product.id]" routerLinkActive="active">
+      <img [src]="product.image_url" [alt]="product.product_name" />
+      <div class="card-body">
+        <div class="card-text">
+          {{ product.product_name }} |
+          {{ product.unit_price | currency: "EUR" }}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,10 +1,12 @@
 <div class="container pt-4">
   <div class="row">
     <div class="col-md-4">
-      <app-products-category></app-products-category>
+      <app-products-category
+        (apparelsCategory)="onapparels($event)"
+      ></app-products-category>
     </div>
     <div class="col-md-8">
-      <app-products-list></app-products-list>
+      <app-products-list [apparelsId]="ApparelsId"></app-products-list>
     </div>
   </div>
 </div>

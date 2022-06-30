@@ -5,7 +5,6 @@ import com.ecommerce.springbootecommerce.domain.Product;
 import com.ecommerce.springbootecommerce.repositories.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
 import com.ecommerce.springbootecommerce.web.dto.ProductDTO;
-import com.ecommerce.springbootecommerce.web.dto.ProductsDTO;
 import com.ecommerce.springbootecommerce.web.dto.ProductsResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,11 +64,8 @@ public class ProductServiceImpl implements ProductService {
             productDTOS.add(productDTO);
         }
 
-        ProductsDTO productsDTO = new ProductsDTO();
-        productsDTO.setProductDTOS(productDTOS);
-
         ProductsResponse productsResponse = new ProductsResponse();
-        productsResponse.setProductsDTO(productsDTO);
+        productsResponse.setProductsDTO(productDTOS);
         productsResponse.setCurrentPage(pageProduct.getNumber());
         productsResponse.setSize(pageProduct.getSize());
         productsResponse.setTotalItems(pageProduct.getTotalElements());

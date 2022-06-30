@@ -1,14 +1,17 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-sm-8">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{{ gender }} Apparels</h5>
         <mat-radio-group class="radio-group">
           <mat-radio-button
             class="radio-button"
-            *ngFor="let apparelCategory of apparels_categories"
+            *ngFor="let apparelCategory of apparels_categories$ | async"
             [value]="apparelCategory.id"
+            [checked]="check"
+            (change)="apparelsChanged(apparelCategory.id)"
             >{{ apparelCategory.apparel_category }}
+            {{ apparelCategory.id }}
           </mat-radio-button>
         </mat-radio-group>
       </div>

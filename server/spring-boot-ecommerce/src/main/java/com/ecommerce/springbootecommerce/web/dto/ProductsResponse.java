@@ -3,11 +3,13 @@ package com.ecommerce.springbootecommerce.web.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProductsResponse {
 
     @JsonProperty("products")
-    private ProductsDTO productsDTO;
+    private List<ProductDTO> productsDTO;
 
     @JsonProperty("current_page")
     private int currentPage;
