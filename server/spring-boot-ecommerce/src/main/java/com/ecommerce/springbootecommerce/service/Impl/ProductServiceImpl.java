@@ -44,13 +44,13 @@ public class ProductServiceImpl implements ProductService {
 
         //gender is always != 0
 
-        if(gender != 0 && apparel == 0 && priceRange == 0) {
+        if(gender != 0 && apparel == 9 && priceRange == 5) {
             pageProduct = productRepository.findByGenderCategoryId(gender, pageable);
-        } else if (gender != 0 && apparel != 0 && priceRange == 0) {
+        } else if (gender != 0 && apparel != 9 && priceRange == 5) {
             pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryId(gender, apparel, pageable);
-        } else if (gender != 0 && apparel == 0 && priceRange != 0) {
+        } else if (gender != 0 && apparel == 9 && priceRange != 5) {
             pageProduct = productRepository.findByGenderCategoryIdAndPriceRangeCategoryId(gender, priceRange, pageable);
-        } else if (gender != 0 && apparel != 0 && priceRange != 0) {
+        } else if (gender != 0 && apparel != 9 && priceRange != 5) {
             pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdAndPriceRangeCategoryId(gender, apparel, priceRange, pageable);
         }
 

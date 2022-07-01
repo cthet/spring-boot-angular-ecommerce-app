@@ -72,10 +72,10 @@ AUTO_INCREMENT = 1;
 -- -- CATEGORIES
 -- -- -----------------------------------------------------
 
-INSERT INTO apparel_category(apparel_category_type) VALUES ('T-shirts'),('Jeans'),('Sweats'),('Suits'),('Tops'),('Dresses'),('Jackets'),('Skirts');
+INSERT INTO apparel_category(apparel_category_type) VALUES ('T-shirts'),('Jeans'),('Sweats'),('Suits'),('Tops'),('Dresses'),('Jackets'),('Skirts'),('All Apparels');
 INSERT INTO gender_category(gender_category_type) VALUES ('Men'),('Women');
-INSERT INTO price_range_category(price_range_category_type) VALUES ('< 50€'), ('50€ - 100€'), ('100€-200€'),('>200€');
-INSERT INTO apparel_gender(gender_category_id, apparel_category_id) VALUES ('1','1'),('1','2'),('1','3'),('1','4'),('2','5'),('2','6'),('2','7'),('2','8');
+INSERT INTO price_range_category(price_range_category_type) VALUES ('< 50€'), ('50€ - 100€'), ('100€-200€'),('>200€'), ('All prices');
+INSERT INTO apparel_gender(gender_category_id, apparel_category_id) VALUES ('1','1'),('1','2'),('1','3'),('1','4'),('1','9'),('2','5'),('2','6'),('2','7'),('2','8'),('2','9');
 
 
 -- -- -----------------------------------------------------
@@ -88,36 +88,36 @@ INSERT INTO apparel_gender(gender_category_id, apparel_category_id) VALUES ('1',
 
 -- -- -----------------------------------------------------
 -- -- Tshirts
--- -- -----------------------------------------------------
+-- -- -----------------------------------------------------apparel_genderapparel_genderproduct
 
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_1', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_2', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_3', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_4', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_5', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_6', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_7', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_8', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_9', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_10', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_11', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_12', '45', 'assets/images/apparels/men/tshirts/tshirt_1', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_1', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_2', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_3', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_4', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_5', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_6', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_7', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_8', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_9', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_10', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_11', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Tshirt_12', '45', 'assets/images/apparels/men/tshirts/tshirt_1.jpg', '533','1','1','1');
 
 -- -- -----------------------------------------------------
--- -- Jeans
+-- -- Jeansprice_range_category
 -- -- -----------------------------------------------------
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_1', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_2', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_3', '100', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_4', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_5', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_6', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_7', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_8', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_9', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_10', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_11', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
-INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_12', '80', 'assets/images/apparels/men/jeans/jeans_1', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_1', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_2', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_3', '100', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_4', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_5', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_6', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_7', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_8', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_9', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_10', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_11', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
+INSERT INTO product (product_name, unit_price, image_url, units_in_stock, gender_category_id, apparel_category_id, price_range_category_id) VALUES ('Jeans_12', '80', 'assets/images/apparels/men/jeans/jeans_1.jpg', '320','1','2','2');
 
 
 -- -- -----------------------------------------------------

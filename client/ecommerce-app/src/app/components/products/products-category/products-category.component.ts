@@ -35,6 +35,8 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   check: boolean = false;
 
   @Output() apparelsCategory = new EventEmitter<number>();
+  @Output() priceRangeCategory = new EventEmitter<number>();
+  @Output() genderCategory = new EventEmitter<number>();
 
   constructor(
     private categoriesService: CategoriesService,
@@ -48,24 +50,22 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
 
   fetchApparelCategories(): void {
     this.routes = this.route.params.subscribe((params) => {
-      this.check = false;
-      this.apparelsCategory.emit(0);
-      const gender: string = params['gender'];
+      this.gender = params['gender'];
       //Object Literal lookups
       const getgenderId = (gender: string) =>
         ({
           men: 1,
           women: 2,
         }[gender]);
+      const genderId = getgenderId(this.gender);
+      this.genderCategory.emit(genderId);
 
-      const genderId = getgenderId(gender);
-      const param = {
-        gender: genderId,
-      };
+      this.check = false;
+      this.apparelsCategory.emit(9);
+
       this.apparels = this.categoriesService
-        .fetchApparelCategories(param)
+        .fetchApparelCategories({ gender: genderId })
         .subscribe((response: responseApparels) => {
-          this.gender = response.gender;
           this.apparels_categories$ = of(response.apparel_categories);
         });
     });
@@ -80,8 +80,11 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
   }
 
   apparelsChanged(apparelsId: number): void {
-    this.check = false;
     this.apparelsCategory.emit(apparelsId);
+  }
+
+  priceRangeChanged(priceRangeId: number): void {
+    this.priceRangeCategory.emit(priceRangeId);
   }
 
   ngOnDestroy(): void {

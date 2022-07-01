@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-sm-12 mb-4 me-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{{ gender }} Apparels</h5>
@@ -11,7 +11,6 @@
             [checked]="check"
             (change)="apparelsChanged(apparelCategory.id)"
             >{{ apparelCategory.apparel_category }}
-            {{ apparelCategory.id }}
           </mat-radio-button>
         </mat-radio-group>
       </div>
@@ -24,6 +23,7 @@
             class="radio-button"
             *ngFor="let priceRangeCategory of priceRange_categories"
             [value]="priceRangeCategory.id"
+            (change)="priceRangeChanged(priceRangeCategory.id)"
             >{{ priceRangeCategory.price_range_category }}
           </mat-radio-button>
         </mat-radio-group>

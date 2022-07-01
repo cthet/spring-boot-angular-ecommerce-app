@@ -30,8 +30,8 @@ public class ProductController {
 
     @GetMapping("/search")
     public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "1") int gender,
-                                                        @RequestParam(defaultValue = "0")  int apparel,
-                                                        @RequestParam(defaultValue = "0")  int priceRange,
+                                                        @RequestParam(defaultValue = "9")  int apparel,
+                                                        @RequestParam(defaultValue = "5")  int priceRange,
                                                         @RequestParam(defaultValue = "0")  int page,
                                                         @RequestParam(defaultValue = "10") int size) {
         try {

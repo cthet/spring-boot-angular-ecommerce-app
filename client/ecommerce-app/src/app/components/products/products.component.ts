@@ -9,11 +9,5 @@ import { CategoriesService } from 'src/app/services/categories.service';
 export class ProductsComponent implements OnInit {
   constructor() {}
 
-  ApparelsId: number = 0;
-
   ngOnInit(): void {}
-
-  onapparels(ApparelsId: number) {
-    this.ApparelsId = ApparelsId;
-  }
 }

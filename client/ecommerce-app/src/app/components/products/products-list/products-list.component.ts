@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/models/product';
 import { Subscription } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 
 export interface responseProducts {
   products: Product[];
@@ -16,21 +18,43 @@ export interface responseProducts {
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
-  gender: number = 1;
+  @Input()
+  genderId: number = 1;
   @Input()
   apparelsId: number = 0;
+  @Input()
   priceRangeId: number = 0;
   page: number = 0;
-  size: number = 0;
-  src = 'src/';
+  size: number = 9;
+  total_items!: number;
+  total_pages!: number;
 
   products!: Product[];
+  gender!: string;
 
   private productsList: Subscription = new Subscription();
 
-  constructor(private ProductsService: ProductsService) {}
+  constructor(
+    private ProductsService: ProductsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.fetchProducts();
+  }
+
+  onSelectGender(GenderId: number) {
+    this.genderId = GenderId;
+    this.fetchProducts();
+  }
+
+  onSelectApparels(ApparelsId: number) {
+    this.apparelsId = ApparelsId;
+    this.fetchProducts();
+  }
+
+  onSelectPriceRange(PriceRange: number) {
+    this.priceRangeId = PriceRange;
     this.fetchProducts();
   }
 
@@ -62,19 +86,27 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   fetchProducts(): void {
     const params = this.getRequestParams(
-      this.gender,
+      this.genderId,
       this.apparelsId,
       this.priceRangeId,
       this.page,
       this.size
     );
 
-    this.ProductsService.fetchProducts(params).subscribe(
+    this.productsList = this.ProductsService.fetchProducts(params).subscribe(
       (response: responseProducts) => {
         this.products = response.products;
-        console.log(this.products);
+        this.total_items = response.total_items;
+        this.total_pages = response.total_pages;
+        this.gender = this.route.snapshot.params['gender'];
       }
     );
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.fetchProducts();
   }
 
   ngOnDestroy(): void {

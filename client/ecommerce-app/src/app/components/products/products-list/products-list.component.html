@@ -1,13 +1,37 @@
-<div class="col-md-12">
-  <div class="card" *ngFor="let product of products">
-    <a [routerLink]="[product.id]" routerLinkActive="active">
-      <img [src]="product.image_url" [alt]="product.product_name" />
-      <div class="card-body">
-        <div class="card-text">
-          {{ product.product_name }} |
-          {{ product.unit_price | currency: "EUR" }}
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-sm-3 pt-4">
+      <app-products-category
+        (apparelsCategory)="onSelectApparels($event)"
+        (priceRangeCategory)="onSelectPriceRange($event)"
+        (genderCategory)="onSelectGender($event)"
+      ></app-products-category>
+    </div>
+    <div class="col-sm-9 pt-4">
+      <div class="main">
+        <div class="card" *ngFor="let product of products">
+          <a routerLink="/product/{{ gender }}/{{ product.id }}">
+            <img [src]="product.image_url" [alt]="product.product_name" />
+          </a>
+
+          <div class="card-body">
+            <div class="card-text">
+              <h5>{{ product.product_name }}</h5>
+              <span class="me-4">{{
+                product.unit_price | currency: "EUR"
+              }}</span>
+            </div>
+          </div>
         </div>
       </div>
-    </a>
+      <mat-paginator
+        [pageIndex]="page"
+        [pageSize]="size"
+        [pageSizeOptions]="[12, 24]"
+        [length]="total_items"
+        (page)="handlePageEvent($event)"
+      >
+      </mat-paginator>
+    </div>
   </div>
 </div>

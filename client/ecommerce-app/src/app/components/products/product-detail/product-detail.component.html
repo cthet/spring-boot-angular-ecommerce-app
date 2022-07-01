@@ -1,1 +1,13 @@
-<p>product-detail works!</p>
+<div class="container pt-4">
+  <img src="{{ product.image_url }}" />
+  <hr />
+  <h3>{{ product.product_name }}</h3>
+  <div class="col-md-12">
+    {{ product.unit_price | currency: "EUR" }}
+    <button mat-stroked-button (click)="addToCart()" class="detail-button">
+      Add to Cart
+    </button>
+  </div>
+  <hr />
+  <a routerLink="/products/{{ gender }}">Back to products list</a>
+</div>

@@ -1,5 +1,19 @@
-.card {
+.main {
   display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.card {
   width: 300px;
-  margin: 10px;
+  min-width: 0%;
+  margin: 5px;
+  border: 0;
+}
+
+img {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
 }

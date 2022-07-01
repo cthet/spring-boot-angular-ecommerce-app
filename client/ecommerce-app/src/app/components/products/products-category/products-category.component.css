@@ -1,3 +1,17 @@
+.card {
+  width: 250px;
+  max-width: fit-content;
+  min-width: max-content;
+  border-radius: 5%;
+  margin-left: 0;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
 .radio-group {
   display: flex;
   flex-direction: column;
