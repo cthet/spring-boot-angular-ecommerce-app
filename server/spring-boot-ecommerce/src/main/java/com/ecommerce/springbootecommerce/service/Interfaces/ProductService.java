@@ -1,7 +1,7 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
-import com.ecommerce.springbootecommerce.web.dto.ProductDTO;
-import com.ecommerce.springbootecommerce.web.dto.ProductsResponse;
+import com.ecommerce.springbootecommerce.dto.ProductDTO;
+import com.ecommerce.springbootecommerce.dto.ProductsResponse;
 
 public interface ProductService {
     ProductDTO getProductById(Long productId);

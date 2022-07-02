@@ -1,4 +1,4 @@
-package com.ecommerce.springbootecommerce.web.dto;
+package com.ecommerce.springbootecommerce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

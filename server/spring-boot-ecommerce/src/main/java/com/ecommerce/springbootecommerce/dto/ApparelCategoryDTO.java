@@ -1,15 +1,15 @@
-package com.ecommerce.springbootecommerce.web.dto;
+package com.ecommerce.springbootecommerce.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class PriceRangeCategoryDTO {
+public class ApparelCategoryDTO {
 
     @JsonProperty("id")
     private int id;
 
-    @JsonProperty("price_range_category")
+    @JsonProperty("apparel_category")
     private String category;
 
 }

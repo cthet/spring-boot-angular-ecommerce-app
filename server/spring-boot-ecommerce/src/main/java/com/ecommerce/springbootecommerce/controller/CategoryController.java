@@ -1,9 +1,9 @@
-package com.ecommerce.springbootecommerce.web.controller;
+package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
 import com.ecommerce.springbootecommerce.service.Interfaces.PriceRangeCategoryService;
-import com.ecommerce.springbootecommerce.web.dto.ApparelCategoriesDTO;
-import com.ecommerce.springbootecommerce.web.dto.PriceRangeCategoriesDTO;
+import com.ecommerce.springbootecommerce.dto.ApparelCategoriesDTO;
+import com.ecommerce.springbootecommerce.dto.PriceRangeCategoriesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

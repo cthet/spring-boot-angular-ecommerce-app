@@ -27,13 +27,16 @@ public class Product {
 
     @Column(name = "units_in_stock")
     private int unitsInStocks;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_category_id")
     private GenderCategory genderCategory;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apparel_category_id")
     private ApparelCategory apparelCategory;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_range_category_id")
     private PriceRangeCategory priceRangeCategory;
 

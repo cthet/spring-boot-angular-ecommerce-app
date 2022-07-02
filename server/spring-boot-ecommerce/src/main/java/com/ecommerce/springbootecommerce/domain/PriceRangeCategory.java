@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,7 +22,18 @@ public class PriceRangeCategory {
     @Column(name = "price_range_category_type")
     private String type;
 
-    @OneToMany(mappedBy = "priceRangeCategory")
-    private List<Product> products;
+    @OneToMany(mappedBy = "priceRangeCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Product> products = new HashSet<>();
 
+    public void add(Product product) {
+        if(product != null) {
+
+            if(products == null) {
+                products = new HashSet<>();
+            }
+
+            products.add(product);
+            product.setPriceRangeCategory(this);
+        }
+    }
 }
