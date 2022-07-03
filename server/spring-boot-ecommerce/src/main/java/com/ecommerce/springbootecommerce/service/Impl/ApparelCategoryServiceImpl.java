@@ -2,8 +2,8 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.ApparelCategory;
-import com.ecommerce.springbootecommerce.repositories.ApparelCategoryRepository;
-import com.ecommerce.springbootecommerce.repositories.GenderCategoryRepository;
+import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
+import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
 import com.ecommerce.springbootecommerce.dto.ApparelCategoriesDTO;
 import com.ecommerce.springbootecommerce.dto.ApparelCategoryDTO;

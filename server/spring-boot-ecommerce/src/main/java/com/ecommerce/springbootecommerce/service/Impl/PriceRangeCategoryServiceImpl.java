@@ -2,7 +2,7 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.PriceRangeCategory;
-import com.ecommerce.springbootecommerce.repositories.PriceRangeCategoryRepository;
+import com.ecommerce.springbootecommerce.repository.PriceRangeCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.PriceRangeCategoryService;
 import com.ecommerce.springbootecommerce.dto.PriceRangeCategoriesDTO;
 import com.ecommerce.springbootecommerce.dto.PriceRangeCategoryDTO;

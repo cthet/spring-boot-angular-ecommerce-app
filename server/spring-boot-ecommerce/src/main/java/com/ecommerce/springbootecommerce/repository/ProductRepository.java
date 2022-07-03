@@ -1,4 +1,4 @@
-package com.ecommerce.springbootecommerce.repositories;
+package com.ecommerce.springbootecommerce.repository;
 
 import com.ecommerce.springbootecommerce.domain.Product;
 import org.springframework.data.domain.Page;
