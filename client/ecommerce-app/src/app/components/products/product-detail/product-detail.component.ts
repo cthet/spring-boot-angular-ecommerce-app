@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products.service';
 

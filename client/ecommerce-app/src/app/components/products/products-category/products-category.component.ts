@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Observable, of, Subscription } from 'rxjs';
 import { ApparelCategory } from 'src/app/models/apparelCategory';
 import { PriceRangeCategory } from 'src/app/models/priceRangeCategory';
