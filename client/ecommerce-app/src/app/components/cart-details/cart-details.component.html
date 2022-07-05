@@ -1,0 +1,15 @@
+<div class="col-sm-12 pt-4">
+  <div *ngFor="let cartItem of cartItems">
+    <table mat-table class="mat-elevation-z8">
+      <ng-container>
+        <th mat-header-cell>Product</th>
+        <td mat-cell>
+          <img
+            [src]="cartItem.item.image_url"
+            [alt]="cartItem.item.product_name"
+          />
+        </td>
+      </ng-container>
+    </table>
+  </div>
+</div>

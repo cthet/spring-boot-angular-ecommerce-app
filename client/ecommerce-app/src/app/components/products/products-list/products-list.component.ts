@@ -25,7 +25,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   @Input()
   priceRangeId: number = 0;
   page: number = 0;
-  size: number = 9;
+  size: number = 12;
   total_items!: number;
   total_pages!: number;
 

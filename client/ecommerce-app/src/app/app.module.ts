@@ -12,10 +12,23 @@ import { UserComponent } from './components/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { MatCardModule } from '@angular/material/card';
+import { CartDetailsModule } from './components/cart-details/cart-details.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, UserComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    UserComponent,
+    CartStatusComponent,
+  ],
   imports: [
+    CartDetailsModule,
+    MatCardModule,
+    CommonModule,
     FormsModule,
     AppRoutingModule,
     BrowserModule,

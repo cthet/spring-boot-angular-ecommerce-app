@@ -11,7 +11,7 @@ import java.util.List;
 public class PriceRangeCategoriesDTO {
 
     @JsonProperty("price_range_categories")
-    List<PriceRangeCategoryDTO> priceRangeCategoryDTOS;
+    private List<PriceRangeCategoryDTO> priceRangeCategoryDTOS;
 
 
 }

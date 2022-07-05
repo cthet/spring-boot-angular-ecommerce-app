@@ -10,9 +10,9 @@ import java.util.List;
 public class ApparelCategoriesDTO {
 
     @JsonProperty("gender")
-    String gender;
+    private String gender;
 
     @JsonProperty("apparel_categories")
-    List<ApparelCategoryDTO> apparelCategories;
+    private List<ApparelCategoryDTO> apparelCategories;
 
 }
