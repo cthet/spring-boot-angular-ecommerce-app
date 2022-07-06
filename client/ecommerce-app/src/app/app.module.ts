@@ -8,25 +8,24 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './components/products/products.module';
-import { UserComponent } from './components/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
-import { MatCardModule } from '@angular/material/card';
-import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { MatTableModule } from '@angular/material/table';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CartDetailsModule } from './components/cart-details/cart-details.module';
+import { AuthModule } from './components/auth/auth.module';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    UserComponent,
+    ProfileComponent,
     CartStatusComponent,
+    ProfileComponent,
   ],
   imports: [
     CartDetailsModule,
@@ -36,6 +35,7 @@ import { CartDetailsModule } from './components/cart-details/cart-details.module
     BrowserModule,
     HttpClientModule,
     MatButtonModule,
+    AuthModule,
     ProductsModule,
     BrowserAnimationsModule,
     MatTableModule,

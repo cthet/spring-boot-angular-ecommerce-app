@@ -1,1 +1,69 @@
-<p>auth works!</p>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="signupForm">
+          <div class="form-group">
+            <p>
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="form-control"
+                autocomplete="on"
+              />
+              <span
+                *ngIf="
+                  !signupForm.get('email')?.valid &&
+                  signupForm.get('email')?.touched
+                "
+                >Enter a valid email*</span
+              >
+            </p>
+            <p>
+              <label for="password">Password:</label>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                class="form-control"
+              />
+              <span
+                *ngIf="
+                  !signupForm.get('password')?.valid &&
+                  signupForm.get('password')?.touched
+                "
+                >Enter a valid password* (8 symbols minimum)</span
+              >
+            </p>
+            <br />
+            <div class="pe-sm-5">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="signupForm.invalid"
+                (click)="onLogin()"
+              >
+                Login
+              </button>
+              |
+              <button
+                mat-raised-button
+                color="accent"
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="signupForm.invalid"
+                (click)="onSignup()"
+              >
+                Signup
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
