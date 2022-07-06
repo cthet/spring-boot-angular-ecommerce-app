@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { MatCardModule } from '@angular/material/card';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { MatTableModule } from '@angular/material/table';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CartDetailsModule } from './components/cart-details/cart-details.module';
 
 @NgModule({
@@ -27,7 +30,6 @@ import { CartDetailsModule } from './components/cart-details/cart-details.module
   ],
   imports: [
     CartDetailsModule,
-    MatCardModule,
     CommonModule,
     FormsModule,
     AppRoutingModule,
@@ -36,6 +38,7 @@ import { CartDetailsModule } from './components/cart-details/cart-details.module
     MatButtonModule,
     ProductsModule,
     BrowserAnimationsModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

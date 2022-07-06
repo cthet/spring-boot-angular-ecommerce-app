@@ -1,15 +1,73 @@
 <div class="col-sm-12 pt-4">
-  <div *ngFor="let cartItem of cartItems">
-    <table mat-table class="mat-elevation-z8">
-      <ng-container>
-        <th mat-header-cell>Product</th>
-        <td mat-cell>
-          <img
-            [src]="cartItem.item.image_url"
-            [alt]="cartItem.item.product_name"
-          />
-        </td>
-      </ng-container>
-    </table>
-  </div>
+  <mat-card>
+    <mat-card-title class="mb-4">Shopping Cart</mat-card-title>
+    <mat-card-content *ngIf="cartItems.length != 0">
+      <table class="table fs-6">
+        <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Product</th>
+            <th scope="col"></th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let cartItem of cartItems; index as i">
+          <tr *ngIf="cartItem">
+            <th scope="row">{{ i + 1 }}</th>
+            <th>
+              {{ cartItem.item.product_name }}
+            </th>
+            <td>
+              <div class="card col-sm-4 mt-4 mb-4">
+                <img [src]="cartItem.item.image_url" style="width: 200px" />
+              </div>
+            </td>
+            <td>
+              {{ cartItem.item.unit_price | currency: "EUR" }}
+            </td>
+            <td>
+              {{ cartItem.quantity }}
+              <hr />
+              <p>
+                <button
+                  mat-raised-button
+                  color="accent"
+                  class="me-4"
+                  (click)="removeFromCart(cartItem.item)"
+                >
+                  -
+                </button>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="addToCart(cartItem.item)"
+                >
+                  +
+                </button>
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="cartItems.length != 0">
+        <div class="d-flex justify-content-end fs-5 pt-2">
+          <span>Total Items: {{ order.totalQuantity }}</span>
+        </div>
+        <div class="d-flex justify-content-end fs-5 pt-2">
+          <span>Total Price: {{ order.totalPrice | currency: "EUR" }}</span>
+        </div>
+        <a
+          routerLink="/checkout"
+          routerLinkActive="router-link-active"
+          class="d-flex justify-content-end pt-4"
+        >
+          <button mat-raised-button color="primary">Checkout</button>
+        </a>
+      </div>
+    </mat-card-content>
+    <mat-card-content *ngIf="cartItems.length == 0" class="fs-6">
+      Your shopping list is empty.
+    </mat-card-content>
+  </mat-card>
 </div>
