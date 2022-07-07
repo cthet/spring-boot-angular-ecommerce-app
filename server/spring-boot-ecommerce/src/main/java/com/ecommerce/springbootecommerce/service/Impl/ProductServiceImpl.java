@@ -4,8 +4,8 @@ import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.Product;
 import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
-import com.ecommerce.springbootecommerce.dto.ProductDTO;
-import com.ecommerce.springbootecommerce.dto.ProductsResponse;
+import com.ecommerce.springbootecommerce.dto.product.ProductDTO;
+import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,40 +39,38 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductsResponse getProducts(int gender, int apparel, int priceRange, int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> pageProduct = null;
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Product> pageProduct = null;
 
-        //gender is always != 0
 
-        if(gender != 0 && apparel == 9 && priceRange == 5) {
-            pageProduct = productRepository.findByGenderCategoryId(gender, pageable);
-        } else if (gender != 0 && apparel != 9 && priceRange == 5) {
-            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryId(gender, apparel, pageable);
-        } else if (gender != 0 && apparel == 9 && priceRange != 5) {
-            pageProduct = productRepository.findByGenderCategoryIdAndPriceRangeCategoryId(gender, priceRange, pageable);
-        } else if (gender != 0 && apparel != 9 && priceRange != 5) {
-            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdAndPriceRangeCategoryId(gender, apparel, priceRange, pageable);
-        }
+            if (gender != 0 && apparel == 9 && priceRange == 5) {
+                pageProduct = productRepository.findByGenderCategoryId(gender, pageable);
+            } else if (gender != 0 && apparel != 9 && priceRange == 5) {
+                pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryId(gender, apparel, pageable);
+            } else if (gender != 0 && apparel == 9 && priceRange != 5) {
+                pageProduct = productRepository.findByGenderCategoryIdAndPriceRangeCategoryId(gender, priceRange, pageable);
+            } else if (gender != 0 && apparel != 9 && priceRange != 5) {
+                pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdAndPriceRangeCategoryId(gender, apparel, priceRange, pageable);
+            }
 
-        List<Product> products = pageProduct.getContent();
+            List<Product> products = pageProduct.getContent();
 
-        List<ProductDTO> productDTOS = new ArrayList<ProductDTO>();
+            List<ProductDTO> productDTOS = new ArrayList<ProductDTO>();
 
-        for (Product product: products) {
-            ProductDTO productDTO = new ProductDTO();
-            productDTO = modelMapper.map(product, ProductDTO.class);
-            productDTOS.add(productDTO);
-        }
+            for (Product product : products) {
+                ProductDTO productDTO = new ProductDTO();
+                productDTO = modelMapper.map(product, ProductDTO.class);
+                productDTOS.add(productDTO);
+            }
 
-        ProductsResponse productsResponse = new ProductsResponse();
-        productsResponse.setProductsDTO(productDTOS);
-        productsResponse.setCurrentPage(pageProduct.getNumber());
-        productsResponse.setSize(pageProduct.getSize());
-        productsResponse.setTotalItems(pageProduct.getTotalElements());
-        productsResponse.setTotalPages(pageProduct.getTotalPages());
+            ProductsResponse productsResponse = new ProductsResponse();
+            productsResponse.setProductsDTO(productDTOS);
+            productsResponse.setCurrentPage(pageProduct.getNumber());
+            productsResponse.setSize(pageProduct.getSize());
+            productsResponse.setTotalItems(pageProduct.getTotalElements());
+            productsResponse.setTotalPages(pageProduct.getTotalPages());
 
-        return productsResponse;
-
+            return productsResponse;
     }
 
 

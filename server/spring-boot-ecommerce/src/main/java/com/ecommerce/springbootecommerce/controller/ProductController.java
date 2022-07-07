@@ -1,8 +1,8 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
-import com.ecommerce.springbootecommerce.dto.ProductDTO;
-import com.ecommerce.springbootecommerce.dto.ProductsResponse;
+import com.ecommerce.springbootecommerce.dto.product.ProductDTO;
+import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

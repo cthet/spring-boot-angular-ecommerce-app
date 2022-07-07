@@ -1,5 +1,6 @@
 package com.ecommerce.springbootecommerce.domain;
 
+import com.ecommerce.springbootecommerce.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,8 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="customer")
-public class Customer {
+@Table(name="user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,8 +29,13 @@ public class Customer {
 
     private String password;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
+
+    @ElementCollection(targetClass = Role.class)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Role> roles;
 
     public void addOrder(Order order){
         if(order != null) {
@@ -39,7 +45,7 @@ public class Customer {
             }
 
             orders.add(order);
-            order.setCustomer(this);
+            order.setUser(this);
         }
     }
 

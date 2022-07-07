@@ -1,4 +1,4 @@
-package com.ecommerce.springbootecommerce.dto;
+package com.ecommerce.springbootecommerce.dto.order;
 
 import lombok.Data;
 
