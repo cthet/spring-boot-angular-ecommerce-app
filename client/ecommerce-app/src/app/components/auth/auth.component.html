@@ -5,7 +5,7 @@
         <form [formGroup]="signupForm">
           <div class="form-group">
             <p>
-              <label for="email">Email:</label>
+              <label for="email"><h6>Email:</h6></label>
               <input
                 type="email"
                 id="email"
@@ -22,7 +22,7 @@
               >
             </p>
             <p>
-              <label for="password">Password:</label>
+              <label for="password"><h6>Password:</h6></label>
               <input
                 id="password"
                 type="password"
@@ -34,27 +34,28 @@
                   !signupForm.get('password')?.valid &&
                   signupForm.get('password')?.touched
                 "
-                >Enter a valid password* (8 symbols minimum)</span
-              >
+                >Enter a valid password*
+                <p>(Your password must be 8 characters long at least)</p>
+              </span>
             </p>
-            <br />
             <div class="pe-sm-5">
               <button
                 mat-raised-button
                 color="primary"
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-primary mb-2"
                 [disabled]="signupForm.invalid"
                 (click)="onLogin()"
               >
                 Login
               </button>
-              |
+              <hr />
+              Don't have an account yet?
               <button
                 mat-raised-button
                 color="accent"
                 type="submit"
-                class="btn btn-primary"
+                class="btn btn-primary mt-3"
                 [disabled]="signupForm.invalid"
                 (click)="onSignup()"
               >

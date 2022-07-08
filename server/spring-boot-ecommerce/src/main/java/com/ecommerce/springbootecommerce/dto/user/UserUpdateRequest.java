@@ -1,4 +1,4 @@
-package com.ecommerce.springbootecommerce.dto.User;
+package com.ecommerce.springbootecommerce.dto.user;
 
 import lombok.Data;
 

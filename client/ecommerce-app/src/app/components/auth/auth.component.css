@@ -18,9 +18,17 @@
 }
 
 input {
-  width: 220px;
+  width: 250px;
 }
 
 input.ng-invalid.ng-touched {
   border: 1px solid red;
+}
+
+button {
+  width: 250px;
+}
+
+hr {
+  width: 250px;
 }
