@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AlertComponent } from 'src/app/shared/alert/alert.component';
 
 @NgModule({
-  declarations: [AuthComponent],
+  declarations: [AuthComponent, AlertComponent],
   imports: [
     MatButtonModule,
     CommonModule,
@@ -15,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class AuthModule {}

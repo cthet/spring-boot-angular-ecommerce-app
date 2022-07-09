@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { CartDetailsModule } from './components/cart-details/cart-details.module';
 import { AuthModule } from './components/auth/auth.module';
 import { ProfileComponent } from './components/profile/profile.component';
+import { authInterceptorProviders } from './utility/auth-interceptor';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserAnimationsModule,
     MatTableModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

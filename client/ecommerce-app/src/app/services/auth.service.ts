@@ -50,16 +50,6 @@ export class AuthService {
     return this.http.post<any>('http://localhost:8080/logout', customerId);
   }
 
-  refreshToken(token: string) {
-    return this.http.post(
-      'http://localhost:8080/refreshtoken',
-      {
-        refreshToken: token,
-      },
-      httpOptions
-    );
-  }
-
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       //a client-side or network error occured. Handle it accordingly.

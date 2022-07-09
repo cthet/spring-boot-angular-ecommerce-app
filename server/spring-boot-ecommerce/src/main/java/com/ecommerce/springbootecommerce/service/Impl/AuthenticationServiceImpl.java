@@ -9,6 +9,7 @@ import com.ecommerce.springbootecommerce.enums.Role;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
 import com.ecommerce.springbootecommerce.security.UserPrincipal;
+import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +18,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 @Service
-public class AuthenticationServiceImpl {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -36,7 +39,7 @@ public class AuthenticationServiceImpl {
     JwtUtils jwtUtils;
 
 
-    public AuthResponse login(AuthRequest authRequest) {
+    public AuthResponse login(@Valid @RequestBody AuthRequest authRequest) {
 
         User user = userRepository.findByEmail(authRequest.getEmail()).orElseThrow(() -> new ApiRequestException(("Email not found"), HttpStatus.NOT_FOUND));
 
@@ -56,15 +59,16 @@ public class AuthenticationServiceImpl {
 
     }
 
-    public String signup(AuthRequest authRequest) {
+    public String signup(@Valid @RequestBody AuthRequest authRequest) {
 
         if (userRepository.existsByEmail(authRequest.getEmail())) {
-            throw new RuntimeException("Email is already used.");
+            throw new ApiRequestException(("Email is already used."), HttpStatus.BAD_REQUEST);
         }
 
         User user = new User();
         user.setEmail(authRequest.getEmail());
         user.setRoles(Collections.singleton(Role.USER));
+        user.setPassword(encoder.encode(authRequest.getPassword()));
 
         userRepository.save(user);
 
