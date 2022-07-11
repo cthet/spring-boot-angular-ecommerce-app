@@ -20,8 +20,10 @@ export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading = false;
   isRegistered = false;
-  isSucessful = false;
+  isSignup = false;
   error: string = '';
+  message: string = '';
+  isSuccessful = false;
 
   constructor(
     private authService: AuthService,
@@ -71,9 +73,12 @@ export class AuthComponent implements OnInit {
       this.authService
         .signup(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
-          next: () => {
+          next: (message: { message: string }) => {
             this.isLoading = false;
-            this.isSucessful = true;
+            this.isSignup = true;
+            this.message = message.message;
+            this.isSuccessful = true;
+            this.loginForm.reset();
           },
           error: (err: Error) => {
             this.isLoading = false;
@@ -85,6 +90,6 @@ export class AuthComponent implements OnInit {
 
   onHandleError() {
     this.error = '';
-    this.isSucessful = false;
+    this.isSignup = false;
   }
 }

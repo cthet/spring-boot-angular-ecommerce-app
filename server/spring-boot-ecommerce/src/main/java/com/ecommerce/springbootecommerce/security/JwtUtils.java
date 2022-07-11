@@ -32,7 +32,7 @@ public class JwtUtils {
         Claims claims = Jwts.claims().setSubject(userEmail);
         claims.put("role", role);
         Date DateCreated = new Date();
-        Date validity = new Date(DateCreated.getTime() + jwtExpirationMs * 1000);
+        Date validity = new Date(DateCreated.getTime() + jwtExpirationMs * 1000L);
 
         return Jwts.builder()
                 .setClaims(claims)

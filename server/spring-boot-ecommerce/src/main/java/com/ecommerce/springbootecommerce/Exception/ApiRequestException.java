@@ -1,11 +1,12 @@
 package com.ecommerce.springbootecommerce.Exception;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-@Getter
+@Data
 public class ApiRequestException extends RuntimeException {
     private final HttpStatus status;
+
     public ApiRequestException(String message, HttpStatus status){
         super(message);
         this.status = status;

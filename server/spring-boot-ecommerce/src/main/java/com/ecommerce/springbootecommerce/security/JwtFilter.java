@@ -19,6 +19,9 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -28,13 +31,15 @@ public class JwtFilter extends OncePerRequestFilter {
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 Authentication authentication = jwtUtils.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-        } catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
-            SecurityContextHolder.clearContext();
-            throw new AuthenticationException("JWT token is expired or invalid");
-        }
-        filterChain.doFilter(request, response);
-    }
 
+            }
+
+            } catch(Exception e){
+                logger.error("Cannot set user authentication: {}", e);
+                SecurityContextHolder.clearContext();
+                throw new AuthenticationException("JWT token is expired or invalid");
+            }
+            filterChain.doFilter(request, response);
+
+    }
 }

@@ -6,6 +6,13 @@
 ></app-alert>
 <div class="container">
   <div class="row">
+    <div
+      *ngIf="isSuccessful"
+      class="alert alert-success mx-auto"
+      style="width: max-content"
+    >
+      <p>{{ message }}</p>
+    </div>
     <div class="card">
       <div class="card-body">
         <form [formGroup]="loginForm">

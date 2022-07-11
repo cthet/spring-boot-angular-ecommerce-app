@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,42 +42,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public AuthResponse login(@Valid @RequestBody AuthRequest authRequest) {
 
-        User user = userRepository.findByEmail(authRequest.getEmail()).orElseThrow(() -> new ApiRequestException(("Email not found"), HttpStatus.NOT_FOUND));
+        User user = userRepository.findByEmail(authRequest.getEmail()).orElseThrow(() -> new ApiRequestException("Email not found.", HttpStatus.NOT_FOUND));
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        String userRole = userPrincipal.getAuthorities().toString();
-        String email = userPrincipal.getEmail();
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtUtils.generateToken(email, userRole);
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            String userRole = userPrincipal.getAuthorities().toString();
+            String email = userPrincipal.getEmail();
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtUtils.generateToken(email, userRole);
 
-        UserResponse userResponse = new UserResponse(email,userRole);
+            UserResponse userResponse = new UserResponse(email, userRole);
 
-        return new AuthResponse(jwt, "Bearer", userResponse);
+            return new AuthResponse(jwt, userResponse);
+        } catch(AuthenticationException e) {
+            throw  new ApiRequestException("Password is invalid.", HttpStatus.FORBIDDEN);
+        }
 
     }
 
     public String signup(@Valid @RequestBody AuthRequest authRequest) {
 
-        if (userRepository.existsByEmail(authRequest.getEmail())) {
-            throw new ApiRequestException(("Email is already used."), HttpStatus.BAD_REQUEST);
-        }
+            if (userRepository.existsByEmail(authRequest.getEmail())) {
+                throw new ApiRequestException("Email is already used.", HttpStatus.BAD_REQUEST);
+            }
 
-        User user = new User();
-        user.setEmail(authRequest.getEmail());
-        user.setRoles(Collections.singleton(Role.USER));
-        user.setPassword(encoder.encode(authRequest.getPassword()));
+            User user = new User();
+            user.setEmail(authRequest.getEmail());
+            user.setRoles(Collections.singleton(Role.USER));
+            user.setPassword(encoder.encode(authRequest.getPassword()));
 
-        userRepository.save(user);
+            userRepository.save(user);
 
-        return "User successfully registered!";
+            return "User successfully registered!";
 
     }
-
-
-
 
 }

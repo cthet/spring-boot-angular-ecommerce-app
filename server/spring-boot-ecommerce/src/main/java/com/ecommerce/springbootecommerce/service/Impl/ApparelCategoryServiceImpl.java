@@ -26,7 +26,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
         List<ApparelCategory> apparelCategories = apparelCategoryRepository.findByGenderCategoryId(gender);
 
         ApparelCategoriesDTO apparelCategoriesDTO = new ApparelCategoriesDTO();
-        apparelCategoriesDTO.setGender(genderCategoryRepository.findById(gender).orElseThrow(() -> new ApiRequestException("Apparels categories not found for this gender", HttpStatus.NOT_FOUND)).getType());
+        apparelCategoriesDTO.setGender(genderCategoryRepository.findById(gender).orElseThrow(() -> new ApiRequestException("Apparels categories not found for this gender.", HttpStatus.NOT_FOUND)).getType());
 
         List<ApparelCategoryDTO> apparelCategoryDTOS = new ArrayList<ApparelCategoryDTO>();
 

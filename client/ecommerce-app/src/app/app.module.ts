@@ -14,23 +14,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { MatTableModule } from '@angular/material/table';
-import { CartDetailsModule } from './components/cart-details/cart-details.module';
 import { AuthModule } from './components/auth/auth.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { authInterceptorProviders } from './utility/auth-interceptor';
-import { AlertComponent } from './shared/alert/alert.component';
+import { MatCardModule } from '@angular/material/card';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     HomeComponent,
-    ProfileComponent,
+    NavbarComponent,
     CartStatusComponent,
     ProfileComponent,
+    CartDetailsComponent,
   ],
   imports: [
-    CartDetailsModule,
+    MatCardModule,
     CommonModule,
     FormsModule,
     AppRoutingModule,

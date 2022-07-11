@@ -19,26 +19,26 @@ public class CategoryController {
     PriceRangeCategoryService priceRangeCategoryService;
 
     @GetMapping("/apparels")
-    public ResponseEntity<ApparelCategoriesDTO> getApparelsByGender(@RequestParam(defaultValue = "1") int gender) {
+    public ResponseEntity<?> getApparelsByGender(@RequestParam(defaultValue = "1") int gender) {
         try {
             ApparelCategoriesDTO  apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByGender(gender);
 
             return new ResponseEntity<>(apparelCategoriesDTO, HttpStatus.OK);
 
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/price_range")
-    public ResponseEntity<PriceRangeCategoriesDTO> getAllPriceRange() {
+    public ResponseEntity<?> getAllPriceRange() {
         try {
             PriceRangeCategoriesDTO priceRangeCategoriesDTO = priceRangeCategoryService.getAllPriceRangeCategories();
 
             return new ResponseEntity<>(priceRangeCategoriesDTO, HttpStatus.OK);
 
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

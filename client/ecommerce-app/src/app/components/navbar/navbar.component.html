@@ -26,7 +26,9 @@
       </a>
     </li>
     <li class="nav-item">
-      <button mat-button>Logout</button>
+      <a routerLink="/home">
+        <button mat-button (click)="logout()">Logout</button>
+      </a>
     </li>
   </ul>
 </nav>

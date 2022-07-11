@@ -6,11 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AlertComponent } from 'src/app/shared/alert/alert.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  declarations: [AuthComponent, AlertComponent],
+  declarations: [AuthComponent],
   imports: [
+    SharedModule,
     MatButtonModule,
     CommonModule,
     ReactiveFormsModule,

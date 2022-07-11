@@ -1,5 +1,6 @@
 package com.ecommerce.springbootecommerce.configuration;
 
+import com.ecommerce.springbootecommerce.security.AuthEntryPointJwt;
 import com.ecommerce.springbootecommerce.security.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,9 @@ public class WebSecurityConfig {
             "/signup"
     };
 
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -31,6 +35,7 @@ public class WebSecurityConfig {
 
     @Autowired
     private JwtFilter jwtFilter;
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -43,13 +48,14 @@ public class WebSecurityConfig {
                 .cors()
                 .and()
                 .csrf().disable()
-                .exceptionHandling()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests()
-                .antMatchers(WHITE_LIST_URLS).permitAll()
+                .authorizeRequests()
+                .antMatchers("/home").permitAll()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
