@@ -33,7 +33,6 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.computesloginForm();
-    console.log(this.error);
   }
 
   computesloginForm() {

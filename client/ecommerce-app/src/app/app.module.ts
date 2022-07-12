@@ -8,7 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsModule } from './components/products/products.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
@@ -20,6 +20,7 @@ import { authInterceptorProviders } from './utility/auth-interceptor';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartDetailsModule } from './components/cart-details/cart-details.module';
+import { MembersComponent } from './components/members/members.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,10 @@ import { CartDetailsModule } from './components/cart-details/cart-details.module
     CartStatusComponent,
     ProfileComponent,
     FooterComponent,
+    MembersComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     MatCardModule,
     CommonModule,
     FormsModule,

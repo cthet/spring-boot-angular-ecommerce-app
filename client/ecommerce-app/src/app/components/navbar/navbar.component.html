@@ -27,7 +27,7 @@
       <li class="nav-item">
         <app-cart-status></app-cart-status>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isLoggedIn" routerLink="/profile">
         <button mat-button><i class="fa fa-user"></i></button>
       </li>
       <li

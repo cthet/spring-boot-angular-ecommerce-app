@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class UserUpdateRequest {
 
-    private Long id;
 
     @NotBlank(message = "First name cannot be empty")
     private String firstName;
