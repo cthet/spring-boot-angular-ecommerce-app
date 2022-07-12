@@ -18,7 +18,8 @@ import { AuthModule } from './components/auth/auth.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { authInterceptorProviders } from './utility/auth-interceptor';
 import { MatCardModule } from '@angular/material/card';
-import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CartDetailsModule } from './components/cart-details/cart-details.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     NavbarComponent,
     CartStatusComponent,
     ProfileComponent,
-    CartDetailsComponent,
+    FooterComponent,
   ],
   imports: [
     MatCardModule,
@@ -41,6 +42,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
     ProductsModule,
     BrowserAnimationsModule,
     MatTableModule,
+    CartDetailsModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

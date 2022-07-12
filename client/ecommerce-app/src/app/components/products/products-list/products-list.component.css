@@ -6,13 +6,43 @@
 }
 
 .card {
-  width: 300px;
+  width: 275px;
   min-width: 0%;
+  max-width: max-content;
   margin: 5px;
+  height: 430px;
+  max-height: max-content;
+  min-height: 0%;
 }
 
 img {
-  box-sizing: border-box;
+  padding-top: 0;
+  border: 0;
+  padding: 0;
+  width: fit-content;
   max-width: 100%;
-  width: 100%;
+  min-width: 0%;
+  width: 250px;
+  margin-left: 0%;
+}
+
+.card-text {
+  max-height: fit-content;
+}
+
+.card-body {
+  max-height: max-content;
+  height: max-content;
+}
+
+.title {
+  font-size: 100%;
+  font-weight: 500;
+}
+
+.pice {
+  padding-top: 5px;
+  margin-bottom: 10px;
+  font-size: 60%;
+  font-weight: 300;
 }

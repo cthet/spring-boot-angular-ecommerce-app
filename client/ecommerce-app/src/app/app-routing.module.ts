@@ -7,11 +7,11 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: '/auth', component: AuthComponent },
-  { path: '/products/:gender', component: ProductsListComponent },
-  { path: '/cart', component: CartDetailsComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'products/:gender', component: ProductsListComponent },
+  { path: 'cart', component: CartDetailsComponent },
 ];
 
 @NgModule({

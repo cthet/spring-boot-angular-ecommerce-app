@@ -22,7 +22,10 @@ public class WebSecurityConfig {
     private static final String[] WHITE_LIST_URLS = {
             "/home",
             "/login",
-            "/signup"
+            "/signup",
+            "/products/**",
+            "/category/**"
+
     };
 
     @Autowired
@@ -54,8 +57,7 @@ public class WebSecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/home").permitAll()
-                .antMatchers("/login").permitAll()
+                .antMatchers(WHITE_LIST_URLS).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { CartItem } from 'src/app/models/cart-Item';
 import { Product } from 'src/app/models/product';
-import { Observable, of } from 'rxjs';
 import { Order } from 'src/app/models/order';
 
 @Component({

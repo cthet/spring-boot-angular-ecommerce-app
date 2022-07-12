@@ -1,6 +1,7 @@
 import { NgIfContext } from '@angular/common';
 import { Injectable } from '@angular/core';
 import {
+  BehaviorSubject,
   max,
   Observable,
   reduce,
@@ -11,19 +12,24 @@ import {
 import { CartItem } from '../models/cart-Item';
 import { Product } from '../models/product';
 
+const CART_ITEMS = 'cart-items';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   totalPrice: number = 0.0;
   totalQuantity: number = 0;
-  totalPrice$: Subject<number> = new Subject<number>();
-  totalQuantity$: Subject<number> = new Subject<number>();
+  totalPrice$: Subject<number> = new BehaviorSubject<number>(0);
+  totalQuantity$: Subject<number> = new BehaviorSubject<number>(0);
 
   cartItems: CartItem[] = [];
   cartItems$: Subject<CartItem[]> = new Subject<CartItem[]>();
 
-  constructor() {}
+  constructor() {
+    this.getCart();
+    this.updateCartStatus();
+  }
 
   addToCart(product: Product): void {
     if (product != null && product.units_in_stock > 0) {
@@ -38,7 +44,6 @@ export class CartService {
       } else {
         this.cartItems.push({ item: product, quantity: 1 });
       }
-
       this.updateCartStatus();
     }
   }
@@ -69,6 +74,7 @@ export class CartService {
   }
 
   updateCartStatus(): void {
+    this.saveCart();
     this.totalPrice = 0;
     this.totalQuantity = 0;
 
@@ -78,5 +84,16 @@ export class CartService {
     }
     this.totalPrice$.next(this.totalPrice);
     this.totalQuantity$.next(this.totalQuantity);
+  }
+
+  saveCart() {
+    window.sessionStorage.setItem(CART_ITEMS, JSON.stringify(this.cartItems));
+  }
+  getCart() {
+    let data = window.sessionStorage.getItem(CART_ITEMS);
+
+    if (data != null) {
+      this.cartItems = JSON.parse(data);
+    }
   }
 }

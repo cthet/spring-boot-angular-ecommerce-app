@@ -1,48 +1,43 @@
-<div class="col-sm-12 pt-4">
+<div class="col-sm-12 pt-4 pb-4">
   <mat-card>
     <mat-card-title class="mb-4">Shopping Cart</mat-card-title>
     <mat-card-content *ngIf="cartItems.length != 0">
-      <table class="table fs-6">
-        <thead>
-          <tr>
-            <th scope="col">N°</th>
-            <th scope="col">Product</th>
-            <th scope="col"></th>
-            <th scope="col">Unit Price</th>
-            <th scope="col">Quantity</th>
+      <table class="table">
+        <thead class="medium-important large">
+          <tr class="col-name">
+            <td scope="col">N°</td>
+            <td scope="col">Product</td>
+            <td scope="col"></td>
+            <td scope="col">Unit Price</td>
+            <td scope="col">Quantity</td>
           </tr>
         </thead>
         <tbody *ngFor="let cartItem of cartItems; index as i">
           <tr *ngIf="cartItem">
             <th scope="row">{{ i + 1 }}</th>
-            <th>
+            <td class="fs-6">
               {{ cartItem.item.product_name }}
-            </th>
+            </td>
             <td>
               <div class="card col-sm-4 mt-4 mb-4">
                 <img [src]="cartItem.item.image_url" style="width: 200px" />
               </div>
             </td>
-            <td>
+            <td class="fs-6 important">
               {{ cartItem.item.unit_price | currency: "EUR" }}
             </td>
-            <td>
+            <td class="fs-6 important">
               {{ cartItem.quantity }}
               <hr />
               <p>
                 <button
-                  mat-raised-button
-                  color="accent"
+                  mat-stroked-button
                   class="me-4"
                   (click)="removeFromCart(cartItem.item)"
                 >
                   -
                 </button>
-                <button
-                  mat-raised-button
-                  color="primary"
-                  (click)="addToCart(cartItem.item)"
-                >
+                <button mat-stroked-button (click)="addToCart(cartItem.item)">
                   +
                 </button>
               </p>
@@ -51,18 +46,27 @@
         </tbody>
       </table>
       <div *ngIf="cartItems.length != 0">
-        <div class="d-flex justify-content-end fs-5 pt-2">
-          <span>Total Items: {{ order.totalQuantity }}</span>
+        <div class="d-flex justify-content-end large pt-2">
+          <span
+            >Total Items:
+            <span class="important">{{ order.totalQuantity }}</span></span
+          >
         </div>
-        <div class="d-flex justify-content-end fs-5 pt-2">
-          <span>Total Price: {{ order.totalPrice | currency: "EUR" }}</span>
+        <div class="d-flex justify-content-end large pt-2">
+          <span
+            >Total Price:
+            <span class="important">{{
+              order.totalPrice | currency: "EUR"
+            }}</span></span
+          >
         </div>
         <a
+          class="checkout d-flex justify-content-end font-weight-bold pt-4"
           routerLink="/checkout"
-          routerLinkActive="router-link-active"
-          class="d-flex justify-content-end pt-4"
         >
-          <button mat-raised-button color="primary">Checkout</button>
+          <button mat-raised-button class="text-uppercase font-weight-bold">
+            Checkout
+          </button>
         </a>
       </div>
     </mat-card-content>
