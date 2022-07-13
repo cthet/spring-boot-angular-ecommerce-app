@@ -2,17 +2,19 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.ApparelCategory;
+import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDTO;
+import com.ecommerce.springbootecommerce.dto.category.ApparelCategoryDTO;
 import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
-import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDTO;
-import com.ecommerce.springbootecommerce.dto.category.ApparelCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ApparelCategoryServiceImpl implements ApparelCategoryService {
@@ -28,7 +30,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
         ApparelCategoriesDTO apparelCategoriesDTO = new ApparelCategoriesDTO();
         apparelCategoriesDTO.setGender(genderCategoryRepository.findById(gender).orElseThrow(() -> new ApiRequestException("Apparels categories not found for this gender.", HttpStatus.NOT_FOUND)).getType());
 
-        List<ApparelCategoryDTO> apparelCategoryDTOS = new ArrayList<ApparelCategoryDTO>();
+        Set<ApparelCategoryDTO> apparelCategoryDTOS = new HashSet<>();
 
         for(ApparelCategory apparelCategory: apparelCategories){
             ApparelCategoryDTO apparelCategoryDTO = new ApparelCategoryDTO();

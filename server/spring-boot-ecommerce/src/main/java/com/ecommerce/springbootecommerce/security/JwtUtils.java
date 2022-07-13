@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -26,7 +25,7 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserPrincipalServiceImpl userDetailsService;
 
     public String generateToken(String userEmail, String role) {
         Claims claims = Jwts.claims().setSubject(userEmail);
@@ -42,13 +41,10 @@ public class JwtUtils {
                 .compact();
     }
 
-//    public String generateJwtToken(UserPrincipal userPrincipal) {
-//        return generateToken(userPrincipal.getEmail());
-//    }
     public Authentication getAuthentication(String jwt){
         String username = getUserNameFromJwtToken(jwt);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        UserPrincipal userPrincipal = userDetailsService.loadUserByUsername(username);
+        return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
     }
 
     public String getUserNameFromJwtToken(String token) {

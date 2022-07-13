@@ -1,15 +1,31 @@
 <div class="container pt-4">
-  <img src="{{ product.image_url }}" />
-  <hr />
-  <h3>{{ product.product_name }}</h3>
-  <div class="col-md-12">
-    {{ product.unit_price | currency: "EUR" }}
-    <button mat-raised-button (click)="addToCart()" class="detail-button">
-      Add to Cart
-    </button>
+  <div class="card">
+    <div class="row pb-4">
+      <div class="col-sm-6">
+        <img src="{{ product.image_url }}" />
+      </div>
+      <div class="col-sm-6">
+        <h2 class="pt-4 ms-4">{{ product.product_name }}</h2>
+        <p class="pt-3 ms-4 fs-4">
+          {{ product.unit_price | currency: "EUR" }}
+        </p>
+        <div>
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="addToCart()"
+            class="cart-button mt-4 ms-3 me-4"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="col-sm-12">
+      <a routerLink="/products/{{ gender }}" class="link">
+        <button mat-stroked-button color="warn">Back to products</button></a
+      >
+    </div>
   </div>
-  <hr />
-  <a routerLink="/products/{{ gender }}" class="link">
-    <button mat-stroked-button color="primary">Back to products</button></a
-  >
 </div>

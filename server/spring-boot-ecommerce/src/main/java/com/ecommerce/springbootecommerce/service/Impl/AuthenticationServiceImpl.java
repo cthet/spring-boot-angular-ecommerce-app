@@ -4,7 +4,6 @@ import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
-import com.ecommerce.springbootecommerce.dto.user.UserResponse;
 import com.ecommerce.springbootecommerce.enums.Role;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
@@ -50,14 +49,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-            String userRole = userPrincipal.getAuthorities().toString();
+            String role = userPrincipal.getAuthorities().toString();
             String email = userPrincipal.getEmail();
 
-            String jwt = jwtUtils.generateToken(email, userRole);
+            String jwt = jwtUtils.generateToken(email, role);
 
-            UserResponse userResponse = new UserResponse(email, userRole);
+            return new AuthResponse(jwt, email, role);
 
-            return new AuthResponse(jwt, userResponse);
         } catch(AuthenticationException e) {
             throw  new ApiRequestException("Password is invalid.", HttpStatus.FORBIDDEN);
         }

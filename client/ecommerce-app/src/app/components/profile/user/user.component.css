@@ -1,0 +1,31 @@
+mat-card {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border: 0.1px solid black;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 550;
+  margin: 10px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+input {
+  max-width: 90%;
+  width: 600px;
+}
+
+mat-spinner {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  z-index: 100;
+}

@@ -1,6 +1,5 @@
 package com.ecommerce.springbootecommerce.dto.auth;
 
-import com.ecommerce.springbootecommerce.dto.user.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,6 +9,8 @@ public class AuthResponse {
 
     private String token;
 
-    private UserResponse user;
+    private String email;
+
+    private String role;
 
 }

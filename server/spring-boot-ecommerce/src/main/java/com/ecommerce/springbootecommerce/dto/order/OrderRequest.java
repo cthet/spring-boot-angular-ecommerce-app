@@ -1,9 +1,8 @@
 package com.ecommerce.springbootecommerce.dto.order;
 
-import com.ecommerce.springbootecommerce.domain.Address;
 import com.ecommerce.springbootecommerce.domain.OrderItem;
 import com.ecommerce.springbootecommerce.domain.User;
-import com.ecommerce.springbootecommerce.dto.order.OrderDTO;
+import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -16,7 +15,7 @@ public class OrderRequest {
     private User user;
 
     @NotNull(message = "shipping address cannot be empty")
-    private Address shippingAddress;
+    private AddressDTO shippingAddress;
 
     @NotNull(message = "order cannot be empty")
     private OrderDTO orderDTO;

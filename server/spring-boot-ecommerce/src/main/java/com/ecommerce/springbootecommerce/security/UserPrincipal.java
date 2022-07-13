@@ -14,15 +14,14 @@ import java.util.List;
 public class UserPrincipal implements UserDetails {
 
     private final Long id;
+
     private final String email;
 
     private final String password;
-
     private final Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal build(User user) {
         String userRole = user.getRoles().iterator().next().toString();
-
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
 
         return new UserPrincipal(

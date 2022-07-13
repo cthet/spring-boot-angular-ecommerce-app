@@ -31,6 +31,9 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Address> addresses = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
     @ElementCollection(targetClass = Role.class)
@@ -47,6 +50,18 @@ public class User {
 
             orders.add(order);
             order.setUser(this);
+        }
+    }
+
+    public void addAddress(Address address) {
+        if(address != null) {
+
+            if (addresses == null) {
+                addresses = new HashSet<>();
+            }
+
+            addresses.add(address);
+            address.setUser(this);
         }
     }
 

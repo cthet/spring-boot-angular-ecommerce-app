@@ -1,14 +1,17 @@
 package com.ecommerce.springbootecommerce.dto.user;
 
+import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 public class UserResponse {
 
-    private String email;
+        private UserDTO userDTO;
 
-    private String role;
+        private Set<AddressDTO> addressDTO;
 
 }

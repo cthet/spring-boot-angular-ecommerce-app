@@ -1,9 +1,16 @@
-img {
-  width: 30%;
+.card {
+  border: 1px solid black;
+  padding: 30px 30px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
-.detail-button {
-  margin-left: 10%;
+img {
+  width: 70%;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cart-button {
+  width: 80%;
 }
 
 .link {

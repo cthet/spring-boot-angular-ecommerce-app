@@ -21,6 +21,9 @@ import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartDetailsModule } from './components/cart-details/cart-details.module';
 import { MembersComponent } from './components/members/members.component';
+import { UserComponent } from './components/profile/user/user.component';
+import { AddressComponent } from './components/profile/address/address.component';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,6 @@ import { MembersComponent } from './components/members/members.component';
     HomeComponent,
     NavbarComponent,
     CartStatusComponent,
-    ProfileComponent,
     FooterComponent,
     MembersComponent,
   ],
@@ -43,6 +45,7 @@ import { MembersComponent } from './components/members/members.component';
     MatButtonModule,
     AuthModule,
     ProductsModule,
+    ProfileModule,
     BrowserAnimationsModule,
     MatTableModule,
     CartDetailsModule,

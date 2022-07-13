@@ -6,13 +6,14 @@
 }
 
 .card {
-  width: 275px;
+  width: 300px;
   min-width: 0%;
   max-width: max-content;
   margin: 5px;
   height: 430px;
   max-height: max-content;
   min-height: 0%;
+  border: 1px solid black;
 }
 
 img {

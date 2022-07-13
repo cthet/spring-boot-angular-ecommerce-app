@@ -1,7 +1,8 @@
-.card {
-  width: max-content;
+mat-card {
+  width: 100%;
   min-width: max-content;
-  max-width: max-content;
+  max-width: 100%;
+  border: 1px solid black;
 }
 
 .checkout {

@@ -8,8 +8,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class AlertComponent {
   @Input()
   message!: string;
-  @Input()
-  danger!: boolean;
 
   @Output() close = new EventEmitter<void>();
 

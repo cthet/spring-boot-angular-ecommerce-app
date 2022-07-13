@@ -1,123 +1,25 @@
-<div class="container pt-4">
+<div class="container pt-4 pb-4">
   <div class="row">
-    <div class="col-sm-6 mx-auto">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Edit your profile </mat-card-title>
-        </mat-card-header>
+    <div class="col-sm-4 mx-auto">
+      <mat-card class="pt-4">
+        <div class="title">Edit your profile</div>
         <hr />
-        <mat-card-content class="pb-3 pt-3">
-          <form [formGroup]="profileForm">
-            <div class="form-group">
-              <p>
-                <label for="firstName"><h6>firstName:</h6></label>
-                <input
-                  type="firstName"
-                  id="firstName"
-                  formControlName="firstName"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('firstName')?.valid &&
-                    profileForm.get('firstName')?.touched
-                  "
-                  >Enter a valid firstName*</span
-                >
-              </p>
-              <p>
-                <label for="lastName"><h6>lastName:</h6></label>
-                <input
-                  type="lastName"
-                  id="lastName"
-                  formControlName="lastName"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('lastName')?.valid &&
-                    profileForm.get('lastName')?.touched
-                  "
-                  >Enter a valid lastName*</span
-                >
-              </p>
-              <p>
-                <label for="country"><h6>Country:</h6></label>
-                <input
-                  type="country"
-                  id="country"
-                  formControlName="country"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('country')?.valid &&
-                    profileForm.get('country')?.touched
-                  "
-                  >Enter a valid country*</span
-                >
-              </p>
-              <p>
-                <label for="postcode"><h6>Postcode:</h6></label>
-                <input
-                  type="postcode"
-                  id="postcode"
-                  formControlName="postcode"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('postcode')?.valid &&
-                    profileForm.get('postcode')?.touched
-                  "
-                  >Enter a valid postcode*</span
-                >
-              </p>
-              <p>
-                <label for="city"><h6>City:</h6></label>
-                <input
-                  type="city"
-                  id="city"
-                  formControlName="city"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('city')?.valid &&
-                    profileForm.get('city')?.touched
-                  "
-                  >Enter a valid city*</span
-                >
-              </p>
-              <p>
-                <label for="street"><h6>Street:</h6></label>
-                <input
-                  type="street"
-                  id="street"
-                  formControlName="street"
-                  class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !profileForm.get('street')?.valid &&
-                    profileForm.get('street')?.touched
-                  "
-                  >Enter a valid street*</span
-                >
-              </p>
-            </div>
-          </form>
+        <mat-card-content class="pt-4 pb-4 mx-auto">
+          <div class="pb-4">
+            <a routerLink="/profile/user">
+              <button mat-raised-button color="warn">
+                Update your personal information
+              </button>
+            </a>
+          </div>
+          <div class="pb-4">
+            <a routerLink="/profile/address">
+              <button mat-raised-button color="warn">
+                Add a shipping address
+              </button>
+            </a>
+          </div>
         </mat-card-content>
-        <hr />
-        <div class="d-flex justify-content-end pt-3">
-          <button mat-raised-button>Save Changes</button>
-        </div>
       </mat-card>
     </div>
   </div>

@@ -1,0 +1,109 @@
+<app-alert
+  [message]="error"
+  *ngIf="error != ''"
+  (close)="onHandleError()"
+></app-alert>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container pt-4 pb-4">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <div *ngIf="message != ''" class="alert alert-success mx-auto">
+        {{ message }}
+      </div>
+      <mat-card>
+        <div class="title">Add a shipping adress</div>
+        <hr />
+        <mat-card-content class="pb-4 pt-4 ms-3">
+          <form [formGroup]="addressForm">
+            <div class="form-group">
+              <p>
+                <label for="country"><h6>Country:</h6></label>
+                <input
+                  type="country"
+                  id="country"
+                  formControlName="country"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !addressForm.get('country')?.valid &&
+                    addressForm.get('country')?.touched
+                  "
+                  >Enter a valid country*</span
+                >
+              </p>
+              <p>
+                <label for="postCode"><h6>Postcode:</h6></label>
+                <input
+                  type="postCode"
+                  id="postCode"
+                  formControlName="postCode"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !addressForm.get('postCode')?.valid &&
+                    addressForm.get('postCode')?.touched
+                  "
+                  >Enter a valid Postcode*</span
+                >
+              </p>
+              <p>
+                <label for="city"><h6>City:</h6></label>
+                <input
+                  type="city"
+                  id="city"
+                  formControlName="city"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !addressForm.get('city')?.valid &&
+                    addressForm.get('city')?.touched
+                  "
+                  >Enter a valid city*</span
+                >
+              </p>
+              <p>
+                <label for="street"><h6>Street:</h6></label>
+                <input
+                  type="street"
+                  id="street"
+                  formControlName="street"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !addressForm.get('street')?.valid &&
+                    addressForm.get('street')?.touched
+                  "
+                  >Enter a valid street*</span
+                >
+              </p>
+            </div>
+          </form>
+        </mat-card-content>
+        <hr />
+        <div class="d-flex justify-content-end pt-3">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="updateAddress()"
+            [disabled]="addressForm.invalid"
+          >
+            Add Address
+          </button>
+        </div>
+      </mat-card>
+      <div class="pt-4 pb-4">
+        <a routerLink="/profile">
+          <button mat-stroked-button color="warn">Back</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

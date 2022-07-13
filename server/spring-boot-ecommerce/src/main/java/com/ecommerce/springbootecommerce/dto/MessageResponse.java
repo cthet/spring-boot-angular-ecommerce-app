@@ -1,4 +1,4 @@
-package com.ecommerce.springbootecommerce.dto.auth;
+package com.ecommerce.springbootecommerce.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { Customer } from 'src/app/models/customer';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
-
 export interface AuthResponse {
   token: string;
-  type: string;
-  user: { email: string; role: string };
+  email: string;
+  role: string;
 }
 @Component({
   selector: 'app-auth',
@@ -20,10 +19,8 @@ export class AuthComponent implements OnInit {
   loginForm!: FormGroup;
   isLoading = false;
   isRegistered = false;
-  isSignup = false;
   error: string = '';
   message: string = '';
-  isSuccessful = false;
 
   constructor(
     private authService: AuthService,
@@ -53,7 +50,10 @@ export class AuthComponent implements OnInit {
         .subscribe({
           next: (authresponse: AuthResponse) => {
             this.tokenStorage.saveToken(authresponse.token);
-            this.tokenStorage.saveUser(authresponse.user);
+            this.tokenStorage.saveUser({
+              email: authresponse.email,
+              role: authresponse.role,
+            });
             this.isLoading = false;
             this.authService.isConnected.next(true);
             this.router.navigate(['/home']);
@@ -74,21 +74,19 @@ export class AuthComponent implements OnInit {
         .subscribe({
           next: (message: { message: string }) => {
             this.isLoading = false;
-            this.isSignup = true;
             this.message = message.message;
-            this.isSuccessful = true;
-            this.loginForm.reset();
           },
           error: (err: Error) => {
             this.isLoading = false;
             this.error = err.message;
           },
         });
+      this.loginForm.reset();
     }
   }
 
   onHandleError() {
     this.error = '';
-    this.isSignup = false;
+    this.message = '';
   }
 }

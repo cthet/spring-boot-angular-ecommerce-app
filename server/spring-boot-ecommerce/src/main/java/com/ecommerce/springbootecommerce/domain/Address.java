@@ -15,13 +15,17 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private  String country;
+    private String country;
 
-    private String postCode;
+    private int postCode;
 
     private String city;
 
     private String street;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToOne
     private Order order;

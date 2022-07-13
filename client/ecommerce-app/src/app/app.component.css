@@ -1,7 +1,8 @@
 .body {
-  min-height: 70%;
+  min-height: 68%;
 }
 
 .footer {
-  min-height: 20%;
+  bottom: 0;
+  min-height: 10%;
 }

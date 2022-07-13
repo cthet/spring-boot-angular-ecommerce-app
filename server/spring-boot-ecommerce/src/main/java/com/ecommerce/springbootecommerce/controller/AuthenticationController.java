@@ -1,7 +1,7 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
-import com.ecommerce.springbootecommerce.dto.auth.MessageResponse;
+import com.ecommerce.springbootecommerce.dto.MessageResponse;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

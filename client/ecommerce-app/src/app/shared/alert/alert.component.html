@@ -1,9 +1,6 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="alert-box">
-  <div *ngIf="danger && message != ''" class="alert alert-danger">
-    <p>{{ message }}</p>
-  </div>
-  <div *ngIf="!danger && message != ''" class="alert alert-success">
+  <div *ngIf="message != ''" class="alert alert-danger">
     <p>{{ message }}</p>
   </div>
   <div class="alert-box-actions">

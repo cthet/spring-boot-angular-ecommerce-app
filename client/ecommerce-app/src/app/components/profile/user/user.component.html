@@ -1,0 +1,75 @@
+<app-alert
+  [message]="error"
+  *ngIf="error != ''"
+  (close)="onHandleError()"
+></app-alert>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container pt-4 pb-4">
+  <div class="row">
+    <div class="col-sm-6 mx-auto">
+      <div *ngIf="message != ''" class="alert alert-success mx-auto">
+        {{ message }}
+      </div>
+      <mat-card>
+        <div class="title">Edit your personal information</div>
+        <hr />
+        <mat-card-content class="pb-4 pt-3 ms-3">
+          <form [formGroup]="userForm">
+            <div class="form-group">
+              <p>
+                <label for="firstName"><h6>First Name:</h6></label>
+                <input
+                  type="firstName"
+                  id="firstName"
+                  formControlName="firstName"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !userForm.get('firstName')?.valid &&
+                    userForm.get('firstName')?.touched
+                  "
+                  >Enter a valid First Name*</span
+                >
+              </p>
+              <p>
+                <label for="lastName"><h6>Last Name:</h6></label>
+                <input
+                  type="lastName"
+                  id="lastName"
+                  formControlName="lastName"
+                  class="form-control"
+                  autocomplete="on"
+                />
+                <span
+                  *ngIf="
+                    !userForm.get('lastName')?.valid &&
+                    userForm.get('lastName')?.touched
+                  "
+                  >Enter a valid Last Name*</span
+                >
+              </p>
+            </div>
+          </form>
+        </mat-card-content>
+        <hr />
+        <div class="d-flex justify-content-end pt-3">
+          <button
+            mat-raised-button
+            color="warn"
+            (click)="updateUser()"
+            [disabled]="userForm.invalid"
+          >
+            Save Changes
+          </button>
+        </div>
+      </mat-card>
+      <div class="pt-4 pb-4">
+        <a routerLink="/profile">
+          <button mat-stroked-button color="warn">Back</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
