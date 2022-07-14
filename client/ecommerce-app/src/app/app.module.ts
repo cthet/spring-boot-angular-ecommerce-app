@@ -24,6 +24,7 @@ import { MembersComponent } from './components/members/members.component';
 import { UserComponent } from './components/profile/user/user.component';
 import { AddressComponent } from './components/profile/address/address.component';
 import { ProfileModule } from './components/profile/profile.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ProfileModule } from './components/profile/profile.module';
     BrowserAnimationsModule,
     MatTableModule,
     CartDetailsModule,
+    NgbModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

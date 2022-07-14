@@ -67,4 +67,11 @@ public class UserServiceImpl {
 
     }
 
+    public Set<Address> getUserAddress() {
+        String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
+        User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
+
+        return addressRepository.findByUserId(user.getId());
+    }
+
 }

@@ -7,6 +7,7 @@ import com.ecommerce.springbootecommerce.dto.category.ApparelCategoryDTO;
 import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
     ApparelCategoryRepository apparelCategoryRepository;
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public ApparelCategoriesDTO getApparelCategoriesByGender(int gender) {
 
@@ -34,8 +38,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
 
         for(ApparelCategory apparelCategory: apparelCategories){
             ApparelCategoryDTO apparelCategoryDTO = new ApparelCategoryDTO();
-            apparelCategoryDTO.setId(apparelCategory.getId());
-            apparelCategoryDTO.setCategory(apparelCategory.getType());
+            apparelCategoryDTO = modelMapper.map(apparelCategory, ApparelCategoryDTO.class);
             apparelCategoryDTOS.add(apparelCategoryDTO);
         }
 

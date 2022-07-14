@@ -24,7 +24,10 @@ export class AddressComponent implements OnInit {
   computeAddressForm() {
     this.addressForm = new FormGroup({
       country: new FormControl(null, [Validators.required]),
-      postCode: new FormControl(null, [Validators.required]),
+      postCode: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+      ]),
       city: new FormControl(null, [Validators.required]),
       street: new FormControl(null, [Validators.required]),
     });
