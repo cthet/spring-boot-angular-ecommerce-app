@@ -3,7 +3,7 @@ package com.ecommerce.springbootecommerce.dto.category;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 
 @Data
@@ -13,6 +13,6 @@ public class ApparelCategoriesDTO {
     private String gender;
 
     @JsonProperty("apparel_categories")
-    private Set<ApparelCategoryDTO> apparelCategories;
+    private List<ApparelCategoryDTO> apparelCategories;
 
 }

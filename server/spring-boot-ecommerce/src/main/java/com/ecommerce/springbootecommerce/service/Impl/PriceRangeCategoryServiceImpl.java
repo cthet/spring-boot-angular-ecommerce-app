@@ -30,7 +30,7 @@ public class PriceRangeCategoryServiceImpl implements PriceRangeCategoryService 
             throw new ApiRequestException("Price range categories not found", HttpStatus.NOT_FOUND);
         }
 
-        Set<PriceRangeCategoryDTO> priceRangeCategoriesDTOS = new HashSet<>();
+        List<PriceRangeCategoryDTO> priceRangeCategoriesDTOS = new ArrayList<PriceRangeCategoryDTO>();
 
         for(PriceRangeCategory priceRangeCategory: priceRangeCategories) {
             PriceRangeCategoryDTO priceRangeCategoryDTO = new PriceRangeCategoryDTO();

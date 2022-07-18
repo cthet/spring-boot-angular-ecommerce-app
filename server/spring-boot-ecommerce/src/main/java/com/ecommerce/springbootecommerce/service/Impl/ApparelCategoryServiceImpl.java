@@ -34,11 +34,12 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
         ApparelCategoriesDTO apparelCategoriesDTO = new ApparelCategoriesDTO();
         apparelCategoriesDTO.setGender(genderCategoryRepository.findById(gender).orElseThrow(() -> new ApiRequestException("Apparels categories not found for this gender.", HttpStatus.NOT_FOUND)).getType());
 
-        Set<ApparelCategoryDTO> apparelCategoryDTOS = new HashSet<>();
+        List<ApparelCategoryDTO> apparelCategoryDTOS = new ArrayList<ApparelCategoryDTO>();
 
         for(ApparelCategory apparelCategory: apparelCategories){
             ApparelCategoryDTO apparelCategoryDTO = new ApparelCategoryDTO();
-            apparelCategoryDTO = modelMapper.map(apparelCategory, ApparelCategoryDTO.class);
+            apparelCategoryDTO.setId(apparelCategory.getId());
+            apparelCategoryDTO.setCategory(apparelCategory.getType());
             apparelCategoryDTOS.add(apparelCategoryDTO);
         }
 

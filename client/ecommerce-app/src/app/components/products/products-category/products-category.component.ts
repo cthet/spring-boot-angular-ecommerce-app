@@ -77,6 +77,7 @@ export class ProductsCategoryComponent implements OnInit, OnDestroy {
       .fetchPriceRangeCategories()
       .subscribe((response: responsePriceRange) => {
         this.priceRange_categories = response.price_range_categories;
+        console.log(response);
       });
   }
 
