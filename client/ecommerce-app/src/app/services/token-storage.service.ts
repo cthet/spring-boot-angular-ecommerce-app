@@ -34,8 +34,4 @@ export class TokenStorageService {
     }
     return null;
   }
-
-  public logOut(): void {
-    window.sessionStorage.clear();
-  }
 }

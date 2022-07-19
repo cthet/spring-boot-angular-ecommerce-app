@@ -1,8 +1,9 @@
 <a routerLink="/cart">
   <button mat-button>
+    <span class="me-2">CART</span>
     <i class="fa fa-shopping-cart"></i>
-    <span class="ms-2"
-      >{{ order.totalQuantity }} {{ order.totalPrice | currency: "EUR" }}</span
+    <span class="ms-2">
+      {{ order.totalQuantity }} | {{ order.totalPrice | currency: "EUR" }}</span
     >
   </button>
 </a>

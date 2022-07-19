@@ -53,12 +53,6 @@
       <div *ngIf="cartItems.length != 0">
         <div class="d-flex justify-content-end large pt-2">
           <span
-            >Total Items:
-            <span class="important">{{ order.totalQuantity }}</span></span
-          >
-        </div>
-        <div class="d-flex justify-content-end large pt-2">
-          <span
             >Total Price:
             <span class="important">{{
               order.totalPrice | currency: "EUR"
@@ -74,7 +68,7 @@
             color="warn"
             class="text-uppercase font-weight-bold"
           >
-            Checkout
+            Proceed to checkout
           </button>
         </a>
       </div>

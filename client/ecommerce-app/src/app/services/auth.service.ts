@@ -21,6 +21,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
+    this.isConnected.next(true);
     return this.http
       .post(
         'http://localhost:8080/login',
@@ -46,8 +47,10 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  logout(customerId: number) {
-    return this.http.post<any>('http://localhost:8080/logout', customerId);
+  logout() {
+    this.isConnected.next(false);
+    window.sessionStorage.clear();
+    //return this.http.post<any>('http://localhost:8080/logout', customerId);
   }
 
   private handleError(error: HttpErrorResponse) {

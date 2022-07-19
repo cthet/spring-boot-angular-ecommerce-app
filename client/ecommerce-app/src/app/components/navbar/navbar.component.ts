@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.tokenstorage.logOut();
+    this.authService.logout();
   }
 
   checkLoggedIn() {
@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
 
     this.authService.isConnected.subscribe((subscriber) => {
       this.isLoggedIn = subscriber;
+      console.log(subscriber);
     });
   }
 }
