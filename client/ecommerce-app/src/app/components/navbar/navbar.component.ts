@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
 
     this.authService.isConnected.subscribe((subscriber) => {
       this.isLoggedIn = subscriber;
-      console.log(subscriber);
     });
   }
 }

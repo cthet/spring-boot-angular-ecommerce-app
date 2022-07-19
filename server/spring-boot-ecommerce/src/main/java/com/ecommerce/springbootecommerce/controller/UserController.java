@@ -1,6 +1,7 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.domain.Address;
+import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.MessageResponse;
 import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
 import com.ecommerce.springbootecommerce.dto.user.UserDTO;
@@ -36,6 +37,22 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("")
+    public ResponseEntity<?> getUsername() {
+        try {
+
+            User user = userService.getUser();
+            UserDTO userDTO = new UserDTO();
+            userDTO = modelMapper.map(user, UserDTO.class);
+
+            return ResponseEntity.ok(userDTO);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
     @PostMapping("/address")
     public ResponseEntity<?> addUserAddress(@Valid @RequestBody AddressDTO addressDTO) {

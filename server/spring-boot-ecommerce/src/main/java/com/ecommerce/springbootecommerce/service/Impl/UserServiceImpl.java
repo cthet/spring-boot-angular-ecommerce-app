@@ -26,6 +26,7 @@ public class UserServiceImpl {
 
 
 
+
     public String updateUser(String firstName, String lastName) {
 
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
@@ -72,6 +73,13 @@ public class UserServiceImpl {
         User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
         return addressRepository.findByUserId(user.getId());
+    }
+
+    public User getUser(){
+
+       Long id = userPrincipalService.getUserPrincipalImpl().getId();
+       return userRepository.findById(id).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
+
     }
 
 }

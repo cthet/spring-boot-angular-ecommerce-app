@@ -3,11 +3,11 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css'],
+  selector: 'app-check-id',
+  templateUrl: './check-id.component.html',
+  styleUrls: ['./check-id.component.css'],
 })
-export class CheckoutComponent implements OnInit {
+export class CheckIdComponent implements OnInit {
   user!: User;
 
   constructor(private userService: UserService) {}

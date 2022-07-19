@@ -9,4 +9,6 @@ public interface UserService {
     String updateUser(User user);
     String addUserAddress(Address address);
     Set<Address> getUserAddress();
+
+    User getUser();
 }

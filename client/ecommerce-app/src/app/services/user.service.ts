@@ -16,6 +16,12 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  getUser(): Observable<User> {
+    return this.http
+      .get<User>(`http://localhost:8080/user`)
+      .pipe(catchError(this.handleError));
+  }
+
   updateAddress(address: Address): Observable<any> {
     return this.http
       .post('http://localhost:8080/user/address', address)

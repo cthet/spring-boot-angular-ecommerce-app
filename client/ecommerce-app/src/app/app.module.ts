@@ -15,20 +15,22 @@ import { CommonModule } from '@angular/common';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { MatTableModule } from '@angular/material/table';
 import { AuthModule } from './components/auth/auth.module';
-import { ProfileComponent } from './components/profile/profile.component';
 import { authInterceptorProviders } from './utility/auth-interceptor';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
-import { CartDetailsModule } from './components/cart-details/cart-details.module';
 import { MembersComponent } from './components/members/members.component';
-import { UserComponent } from './components/profile/user/user.component';
-import { AddressComponent } from './components/profile/address/address.component';
 import { ProfileModule } from './components/profile/profile.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CheckIdComponent } from './components/checkout/check-id/check-id.component';
+import { CheckAddressComponent } from './components/checkout/check-address/check-address.component';
+import { CheckPaymentComponent } from './components/checkout/check-payment/check-payment.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutModule } from './components/checkout/checkout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CartDetailsComponent,
     HomeComponent,
     NavbarComponent,
     CartStatusComponent,
@@ -46,10 +48,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatButtonModule,
     AuthModule,
     ProductsModule,
+    CheckoutModule,
     ProfileModule,
     BrowserAnimationsModule,
     MatTableModule,
-    CartDetailsModule,
     NgbModule,
   ],
   providers: [authInterceptorProviders],
