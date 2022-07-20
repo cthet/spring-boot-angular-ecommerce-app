@@ -10,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 export class CheckoutComponent implements OnInit {
   user!: User;
 
+  checkid = true;
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {

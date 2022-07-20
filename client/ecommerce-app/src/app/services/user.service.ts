@@ -8,16 +8,7 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  private previousUrl: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
-  );
-  public previousUrl$: Observable<string> = this.previousUrl.asObservable();
-
   constructor(private http: HttpClient) {}
-
-  setPreviousUrl(previousUrl: string) {
-    this.previousUrl.next(previousUrl);
-  }
 
   updateUser(user: User): Observable<any> {
     return this.http
@@ -27,13 +18,19 @@ export class UserService {
 
   getUser(): Observable<User> {
     return this.http
-      .get<User>(`http://localhost:8080/user`)
+      .get<User>(`http://localhost:8080/user/name`)
       .pipe(catchError(this.handleError));
   }
 
   updateAddress(address: Address): Observable<any> {
     return this.http
       .post('http://localhost:8080/user/address', address)
+      .pipe(catchError(this.handleError));
+  }
+
+  getListAddress(): Observable<Address[]> {
+    return this.http
+      .get<Address[]>('http://localhost:8080/user/address')
       .pipe(catchError(this.handleError));
   }
 

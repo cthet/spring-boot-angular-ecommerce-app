@@ -18,14 +18,11 @@ import { AuthModule } from './components/auth/auth.module';
 import { authInterceptorProviders } from './utility/auth-interceptor';
 import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './components/footer/footer.component';
-import { MembersComponent } from './components/members/members.component';
 import { ProfileModule } from './components/profile/profile.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CheckIdComponent } from './components/checkout/check-id/check-id.component';
-import { CheckAddressComponent } from './components/checkout/check-address/check-address.component';
-import { CheckPaymentComponent } from './components/checkout/check-payment/check-payment.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutModule } from './components/checkout/checkout.module';
+import { CheckoutRoutingModule } from './components/checkout/checkout-routing.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +32,6 @@ import { CheckoutModule } from './components/checkout/checkout.module';
     NavbarComponent,
     CartStatusComponent,
     FooterComponent,
-    MembersComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -53,6 +49,7 @@ import { CheckoutModule } from './components/checkout/checkout.module';
     BrowserAnimationsModule,
     MatTableModule,
     NgbModule,
+    CheckoutRoutingModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

@@ -33,7 +33,7 @@ export class AddressComponent implements OnInit {
     });
   }
 
-  updateAddress() {
+  addAddress() {
     this.isLoading = true;
 
     let address = new Address();

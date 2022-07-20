@@ -1,5 +1,9 @@
-mat-card {
-  border: 1px solid black;
+.first {
+  margin-left: 0%;
+}
+
+.card {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 input.ng-invalid.ng-touched {

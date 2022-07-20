@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -38,7 +40,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/name")
     public ResponseEntity<?> getUsername() {
         try {
 
@@ -52,8 +54,6 @@ public class UserController {
         }
     }
 
-
-
     @PostMapping("/address")
     public ResponseEntity<?> addUserAddress(@Valid @RequestBody AddressDTO addressDTO) {
         try {
@@ -65,31 +65,29 @@ public class UserController {
         }
     }
 
-//    @GetMapping("/address")
-//    public ResponseEntity<?> getUserAddresses() {
-//        try {
-//            Set<Address> addresses = userService.getUserAddress();
-//
-//            if(addresses.isEmpty()) {
-//                return new ResponseEntity<>("Addresses not found !", HttpStatus.NOT_FOUND);
-//            }
-//
-//            Set<AddressDTO> addressDTOS = new HashSet<>();
-//
-//            for(Address address: addresses){
-//                AddressDTO addressDTO = new AddressDTO();
-//                addressDTO = modelMapper.map(address, AddressDTO.class);
-//                addressDTOS.add(addressDTO);
-//            }
-//
-//            modelMapper.map(addresses, Set<AddressDTO>.class);
-//
-//            return new ResponseEntity<>(addresses, HttpStatus.OK);
-//
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @GetMapping("/address")
+    public ResponseEntity<?> getUserAddresses() {
+        try {
+            List<Address> addresses = userService.getUserAddress();
+
+            if(addresses.isEmpty()) {
+                return new ResponseEntity<>("Addresses not found !", HttpStatus.NOT_FOUND);
+            }
+
+            List<AddressDTO> addressDTOS = new ArrayList<AddressDTO>();
+
+            for(Address address: addresses){
+                AddressDTO addressDTO = new AddressDTO();
+                addressDTO = modelMapper.map(address, AddressDTO.class);
+                addressDTOS.add(addressDTO);
+            }
+
+            return new ResponseEntity<>(addressDTOS, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 

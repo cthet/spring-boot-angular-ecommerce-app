@@ -3,12 +3,11 @@ package com.ecommerce.springbootecommerce.service.Interfaces;
 import com.ecommerce.springbootecommerce.domain.User;
 import org.apache.tomcat.jni.Address;
 
-import java.util.Set;
+import java.util.List;
 
 public interface UserService {
     String updateUser(User user);
     String addUserAddress(Address address);
-    Set<Address> getUserAddress();
-
+    List<Address> getUserAddress();
     User getUser();
 }

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class UserServiceImpl {
@@ -24,9 +24,12 @@ public class UserServiceImpl {
     @Autowired
     AddressRepository addressRepository;
 
+    public User getUser(){
 
+        Long id = userPrincipalService.getUserPrincipalImpl().getId();
+        return userRepository.findById(id).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
-
+    }
     public String updateUser(String firstName, String lastName) {
 
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
@@ -40,13 +43,21 @@ public class UserServiceImpl {
 
     }
 
+    public List<Address> getUserAddress() {
+        String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
+        User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
+
+        return addressRepository.findByUserId(user.getId());
+
+    }
+
     public String addUserAddress(Address address) {
 
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
         User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
 
-        Set<Address> addresses = addressRepository.findByUserId(user.getId());
+        List<Address> addresses = addressRepository.findByUserId(user.getId());
 
         if(addresses != null) {
             for(Address _address: addresses) {
@@ -65,20 +76,6 @@ public class UserServiceImpl {
         addressRepository.save(address);
 
         return "Address successfully added !";
-
-    }
-
-    public Set<Address> getUserAddress() {
-        String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
-        User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
-
-        return addressRepository.findByUserId(user.getId());
-    }
-
-    public User getUser(){
-
-       Long id = userPrincipalService.getUserPrincipalImpl().getId();
-       return userRepository.findById(id).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
     }
 

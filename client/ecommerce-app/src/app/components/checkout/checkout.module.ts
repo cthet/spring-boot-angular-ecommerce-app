@@ -11,6 +11,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProfileModule } from '../profile/profile.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { CheckListAddressComponent } from './check-list-address/check-list-address.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     CheckIdComponent,
     CheckAddressComponent,
     CheckPaymentComponent,
+    CheckListAddressComponent,
   ],
   imports: [
+    BrowserModule,
     ReactiveFormsModule,
     ProfileModule,
     MatProgressSpinnerModule,
@@ -29,5 +34,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CheckoutRoutingModule,
   ],
+  bootstrap: [CheckIdComponent],
 })
 export class CheckoutModule {}
