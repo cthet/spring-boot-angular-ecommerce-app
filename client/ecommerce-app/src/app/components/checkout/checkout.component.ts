@@ -18,7 +18,6 @@ export class CheckoutComponent implements OnInit {
 
   fetchUser() {
     this.userService.getUser().subscribe((data) => {
-      console.log(data);
       this.user = data;
     });
   }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { Address } from '../models/address';
 import { User } from '../models/user';
 
@@ -8,7 +8,16 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 export class UserService {
+  private previousUrl: BehaviorSubject<string> = new BehaviorSubject<string>(
+    ''
+  );
+  public previousUrl$: Observable<string> = this.previousUrl.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  setPreviousUrl(previousUrl: string) {
+    this.previousUrl.next(previousUrl);
+  }
 
   updateUser(user: User): Observable<any> {
     return this.http
