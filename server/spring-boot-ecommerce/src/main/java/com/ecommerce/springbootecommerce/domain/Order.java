@@ -28,13 +28,13 @@ public class Order {
     @Column(name = "total_quantity")
     private int totalQuantity;
 
+    private String firstName;
+
+    private String lastName;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private Address shippingAddress;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
@@ -46,6 +46,10 @@ public class Order {
     @Column(name="last_updated")
     @UpdateTimestamp
     private Date lastupdated;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public void add(OrderItem item) {
         if(item != null) {
