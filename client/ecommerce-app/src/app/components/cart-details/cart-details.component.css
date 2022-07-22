@@ -20,3 +20,8 @@ mat-card {
 .important {
   font-weight: 600;
 }
+
+img {
+  width: 70%;
+  height: 70%;
+}

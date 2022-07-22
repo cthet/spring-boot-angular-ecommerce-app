@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <h3>Checkout review</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 pt-4">
+      <div class="card">
+        <div class="card-header fs-5 fw-bold">Cart Items</div>
+        <div class="table">
+          <thead>
+            <tr>
+              <th class="col-sm-2">Quantity</th>
+              <th class="col-sm-2">Total price</th>
+              <th class="col-sm-4 ps-4">Item</th>
+            </tr>
+          </thead>
+          <div *ngFor="let orderItem of orderItems">
+            <tbody>
+              <tr>
+                <td class="col-sm-3 ps-4">
+                  {{ orderItem.quantity }}
+                </td>
+                <td class="col-sm-3">
+                  {{ orderItem.amount | currency: "EUR" }}
+                </td>
+                <td class="col-sm-6">
+                  <span class="pe-4">{{ orderItem.product.product_name }}</span>
+                  <img
+                    class="pt-3 pb-3"
+                    [src]="orderItem.product.image_url"
+                    [alt]="orderItem.product.product_name"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end fw-bold pe-4">
+          Quantity: {{ order.totalQuantity }}
+        </div>
+        <div class="d-flex justify-content-end fw-bold pe-4 pb-2">
+          Total Price: {{ order.totalPrice | currency: "EUR" }}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 pt-4">
+      <div class="card">
+        <div class="card-header">Receiver info</div>
+        First Name: {{ user.firstName }}
+      </div>
+      <div class="card">
+        <div class="card-header">Shipping Address</div>
+        Country: {{ shippingAddress.country }}
+      </div>
+    </div>
+  </div>
+</div>

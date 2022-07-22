@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CheckoutComponent } from './checkout.component';
 import { CheckIdComponent } from './check-id/check-id.component';
-import { CheckAddressComponent } from './check-address/check-address.component';
 import { CheckPaymentComponent } from './check-payment/check-payment.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,18 +11,20 @@ import { ProfileModule } from '../profile/profile.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { CheckListAddressComponent } from './check-list-address/check-list-address.component';
+import { CheckReviewComponent } from './check-review/check-review.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
     CheckoutComponent,
     CheckIdComponent,
-    CheckAddressComponent,
     CheckPaymentComponent,
     CheckListAddressComponent,
+    CheckReviewComponent,
   ],
   imports: [
+    MatStepperModule,
     BrowserModule,
     ReactiveFormsModule,
     ProfileModule,

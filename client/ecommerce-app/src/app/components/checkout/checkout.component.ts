@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-checkout',
@@ -8,19 +6,25 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-  user!: User;
+  @Input()
+  checkId: boolean = false;
+  @Input()
+  checkAddress: boolean = false;
+  @Input()
+  checkReview: boolean = false;
 
-  checkid = true;
+  constructor() {}
 
-  constructor(private userService: UserService) {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.fetchUser();
+  @Output() nextStep = new EventEmitter<boolean>();
+
+  onCheckId(checkId: boolean) {
+    this.checkId = checkId;
+    this.nextStep.emit(true);
   }
 
-  fetchUser() {
-    this.userService.getUser().subscribe((data) => {
-      this.user = data;
-    });
+  onCheckAddress(checkAddress: boolean) {
+    this.checkAddress = checkAddress;
   }
 }

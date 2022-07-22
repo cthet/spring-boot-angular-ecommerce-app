@@ -24,12 +24,13 @@ public class UserServiceImpl {
     @Autowired
     AddressRepository addressRepository;
 
-    public User getUser(){
+    public User getUser() {
 
         Long id = userPrincipalService.getUserPrincipalImpl().getId();
         return userRepository.findById(id).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
     }
+
     public String updateUser(String firstName, String lastName) {
 
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
@@ -59,24 +60,26 @@ public class UserServiceImpl {
 
         List<Address> addresses = addressRepository.findByUserId(user.getId());
 
-        if(addresses != null) {
-            for(Address _address: addresses) {
+        if (addresses != null) {
+            for (Address _address : addresses) {
                 //_address has a non null id
 
-                if(     _address.getCountry().equals(address.getCountry())
+                if (_address.getCountry().equals(address.getCountry())
                         && _address.getPostCode() == address.getPostCode()
                         && _address.getCity().equals(address.getCity())
                         && _address.getStreet().equals(address.getStreet())) {
-                    return "Address already exists !";
+                    throw new ApiRequestException("Address already exists !", HttpStatus.BAD_REQUEST);
                 }
+
             }
         }
 
-        user.addAddress(address);;
-        addressRepository.save(address);
+            user.addAddress(address);
 
-        return "Address successfully added !";
+            addressRepository.save(address);
 
+            return "Address successfully added !";
+
+        }
     }
 
-}

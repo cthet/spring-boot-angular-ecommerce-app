@@ -1,122 +1,119 @@
-<div class="container">
+<div class="container pt-4">
   <div class="row">
-    <div class="first">
-      <h2>1</h2>
+    <div class="col-sm-4 mx-auto pb-4">
+      <h3>Select the receiver identity</h3>
     </div>
     <div class="row">
-      <div class="col-sm-4 mx-auto">
-        <h3>Confirm your identity</h3>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 pt-4 mx-auto">
-          <mat-spinner *ngIf="isLoading"></mat-spinner>
-          <div *ngIf="firstName != null && lastName != null && !onEdit">
-            <div class="card">
-              <div class="card-header">
-                <mat-card-title>Personal Information</mat-card-title>
+      <div class="col-sm-6 pt-4 mx-auto">
+        <!--User information-->
+        <div *ngIf="firstName != null && lastName != null && !onEdit">
+          <div class="card">
+            <div class="card-header fw-bold"><h5>User Information</h5></div>
+            <div class="card-content pt-4 ms-3">
+              <div class="pb-4">
+                <div class="fs-5">First Name: {{ firstName }}</div>
+                <div class="fs-5">Last Name: {{ lastName }}</div>
               </div>
-              <div class="card-content pt-4 ms-3">
-                <div>
-                  <p class="fs-6">
-                    <span class="fw-bold">First Name: </span> {{ firstName }}
-                  </p>
-                  <p class="fs-6">
-                    <span class="fw-bold">Last Name: </span> {{ lastName }}
-                  </p>
-                </div>
-                <div
-                  class="d-flex justify-content-end me-4"
-                  routerLink="/checkout/listAddress"
+              <div
+                class="d-flex justify-content-end me-4"
+                (click)="onSelectUser()"
+              >
+                <button mat-raised-button color="warn">
+                  Select user information
+                </button>
+              </div>
+              <div class="mt-4 d-flex justify-content-end me-4 pb-3">
+                <button
+                  mat-stroked-button
+                  color="warn"
+                  (click)="changeEditMode()"
                 >
-                  <button mat-raised-button color="warn">
-                    Confirm Information
-                  </button>
-                </div>
-                <div class="mt-4 d-flex justify-content-end me-4 pb-3">
-                  <button
-                    mat-stroked-button
-                    color="warn"
-                    (click)="changeEditMode()"
-                  >
-                    Change Information
-                  </button>
-                </div>
+                  Select an other receiver
+                </button>
               </div>
             </div>
           </div>
-
-          <div *ngIf="firstName == null || lastName == null || onEdit">
-            <mat-card>
-              <mat-card-header>
-                <mat-card-title>Enter your personal information</mat-card-title>
-              </mat-card-header>
-              <hr />
-              <mat-card-content class="pt-4 ms-3">
-                <form [formGroup]="userForm">
-                  <div class="form-group">
-                    <p>
-                      <label for="firstName"><h6>First Name:</h6></label>
-                      <input
-                        type="firstName"
-                        id="firstName"
-                        formControlName="firstName"
-                        class="form-control"
-                        autocomplete="on"
-                      />
-                      <span
-                        *ngIf="
-                          !userForm.get('firstName')?.valid &&
-                          userForm.get('firstName')?.touched
-                        "
-                        >Enter a valid First Name*</span
-                      >
-                    </p>
-                    <p>
-                      <label for="lastName"><h6>Last Name:</h6></label>
-                      <input
-                        type="lastName"
-                        id="lastName"
-                        formControlName="lastName"
-                        class="form-control"
-                        autocomplete="on"
-                      />
-                      <span
-                        *ngIf="
-                          !userForm.get('lastName')?.valid &&
-                          userForm.get('lastName')?.touched
-                        "
-                        >Enter a valid Last Name*</span
-                      >
-                    </p>
-                    <div class="d-flex justify-content-end">
-                      <button
-                        mat-raised-button
-                        color="warn"
-                        (click)="updateUser()"
-                      >
-                        Confirm Information
-                      </button>
-                    </div>
+        </div>
+        <!--Receiver information form-->
+        <div *ngIf="firstName == null || lastName == null || onEdit">
+          <div class="card">
+            <div class="card-header fw-bold">
+              <h5>Receiver information</h5>
+            </div>
+            <div class="card-content pt-4 ms-3">
+              <form [formGroup]="userForm">
+                <div class="form-group">
+                  <p>
+                    <label for="firstName"><h5>First Name:</h5></label>
+                    <input
+                      type="firstName"
+                      id="firstName"
+                      formControlName="firstName"
+                      class="form-control"
+                      autocomplete="on"
+                    />
+                    <span
+                      *ngIf="
+                        !userForm.get('firstName')?.valid &&
+                        userForm.get('firstName')?.touched
+                      "
+                      >Enter a valid First Name*</span
+                    >
+                  </p>
+                  <p>
+                    <label for="lastName"><h5>Last Name:</h5></label>
+                    <input
+                      type="lastName"
+                      id="lastName"
+                      formControlName="lastName"
+                      class="form-control"
+                      autocomplete="on"
+                    />
+                    <span
+                      *ngIf="
+                        !userForm.get('lastName')?.valid &&
+                        userForm.get('lastName')?.touched
+                      "
+                      >Enter a valid Last Name*</span
+                    >
+                  </p>
+                  <div class="d-flex justify-content-end">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="onSelectReceiver()"
+                      [disabled]="userForm.invalid"
+                    >
+                      Confirm Information
+                    </button>
                   </div>
-                </form>
-              </mat-card-content>
-            </mat-card>
-            <app-alert
-              [message]="error"
-              *ngIf="error != ''"
-              (close)="onHandleError()"
-            ></app-alert>
+                </div>
+              </form>
+            </div>
           </div>
-          <div
-            *ngIf="firstName != null && lastName != null && onEdit"
-            class="pt-4"
-          >
-            <button mat-stroked-button color="warn" (click)="changeEditMode()">
-              Cancel
-            </button>
-          </div>
+        </div>
+        <div
+          *ngIf="firstName != null && lastName != null && onEdit"
+          class="pt-4"
+        >
+          <button mat-stroked-button color="warn" (click)="changeEditMode()">
+            Return to user info
+          </button>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-10 mx-auto message">
+        <div *ngIf="message != ''" class="alert alert-success">
+          <p>{{ message }}</p>
+        </div>
+      </div>
+    </div>
+    <app-alert
+      [message]="error"
+      *ngIf="error != ''"
+      (close)="onHandleError()"
+    ></app-alert>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </div>
 </div>

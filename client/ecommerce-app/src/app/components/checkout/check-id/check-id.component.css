@@ -1,9 +1,6 @@
-.first {
-  margin-left: 0%;
-}
-
 .card {
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 0%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 input.ng-invalid.ng-touched {
@@ -25,4 +22,9 @@ mat-spinner {
 input {
   max-width: 90%;
   width: 600px;
+}
+
+.message {
+  padding-top: 10%;
+  width: max-content;
 }

@@ -1,7 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { UserService } from 'src/app/services/user.service';
@@ -20,22 +18,17 @@ export class CheckIdComponent implements OnInit {
   message: string = '';
   error: string = '';
 
+  @Output() next = new EventEmitter<boolean>();
+
   constructor(
     private userService: UserService,
-    private router: Router,
     private checkoutService: CheckoutService
   ) {}
 
   ngOnInit(): void {
+    this.message = '';
     this.fetchUser();
     this.computesUserForm();
-  }
-
-  computesUserForm() {
-    this.userForm = new FormGroup({
-      firstName: new FormControl(null, [Validators.required]),
-      lastName: new FormControl(null, [Validators.required]),
-    });
   }
 
   fetchUser() {
@@ -45,29 +38,45 @@ export class CheckIdComponent implements OnInit {
     });
   }
 
-  changeEditMode() {
-    this.onEdit = !this.onEdit;
-  }
-
-  updateUser() {
-    let user = new User();
-    user[`firstName`] = this.userForm.value.firstName;
-    user[`lastName`] = this.userForm.value.lastName;
-
+  onSelectUser() {
     this.isLoading = true;
-
-    console.log(user);
-    this.userService.updateUser(user).subscribe({
-      next: () => {
+    this.userService.getUser().subscribe({
+      next: (user: User) => {
+        this.checkoutService.user$.next(user);
+        this.message = 'Receiver identity successfully selected !';
         this.isLoading = false;
-        this.checkoutService.user.next(user);
-        this.router.navigate(['checkout/listAddress']);
+        this.next.emit(true);
       },
       error: (err: Error) => {
         this.isLoading = false;
         this.error = err.message;
       },
     });
+  }
+
+  changeEditMode() {
+    this.onEdit = !this.onEdit;
+    this.message = '';
+    this.next.emit(false);
+  }
+
+  computesUserForm() {
+    this.userForm = new FormGroup({
+      firstName: new FormControl(null, [Validators.required]),
+      lastName: new FormControl(null, [Validators.required]),
+    });
+  }
+
+  onSelectReceiver() {
+    let user = new User();
+    user[`firstName`] = this.userForm.value.firstName;
+    user[`lastName`] = this.userForm.value.lastName;
+    if (this.userForm.valid) {
+      this.checkoutService.user$.next(user);
+      this.message = 'Receiver address successfully registered !';
+      this.next.emit(true);
+    }
+    return;
   }
 
   onHandleError() {

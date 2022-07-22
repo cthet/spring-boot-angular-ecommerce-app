@@ -72,7 +72,7 @@ export class AuthComponent implements OnInit {
       this.authService
         .signup(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
-          next: (message: { message: string }) => {
+          next: (message: any) => {
             this.isLoading = false;
             this.message = message.message;
           },

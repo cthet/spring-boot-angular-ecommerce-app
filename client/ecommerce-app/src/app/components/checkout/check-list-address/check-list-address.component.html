@@ -1,40 +1,147 @@
-<div class="container">
+<div class="container pt-4">
   <div class="row">
-    <div class="second">
-      <h2>2</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4 mx-auto">
-      <h3>Select a Shipping Address</h3>
-    </div>
-    <div class="col-sm-12">
+    <!--List of user's shipping addresses-->
+    <div *ngIf="!addressFormEdit && addresses != null">
+      <div class="col-sm-4 pb-4 mx-auto">
+        <h3>Select a Shipping Address</h3>
+      </div>
       <div class="row">
-        <div *ngFor="let address of addresses" class="main">
-          <div class="card address" (click)="selectAddress(address)">
-            <div class="card-header">
-              <span class="fw-bold">Country: {{ address.country }}</span>
+        <div class="col-sm-12">
+          <div class="main">
+            <div *ngFor="let address of addresses">
+              <div class="card cardlist" (click)="selectAddress(address)">
+                <div class="card-header">
+                  <span class="fw-bold">Country: {{ address.country }}</span>
+                </div>
+                <div class="card-body">
+                  <span class="fs-6">City:</span> {{ address.city }}
+                  <hr />
+                  <span class="fs-6">PostCode:</span> {{ address.postCode }}
+                  <hr />
+                  <span class="fs-6">Street:</span> {{ address.street }}
+                </div>
+              </div>
             </div>
-            <div class="card-body">
-              <span class="fw-bold">City:</span> {{ address.city }}
-              <hr />
-              <span class="fw-bold">PostCode:</span> {{ address.postCode }}
-              <hr />
-              <span class="fw-bold">Street:</span> {{ address.street }}
-            </div>
+          </div>
+          <div class="d-flex justify-content-end pt-4">
+            <button mat-raised-button color="warn" (click)="onAddAddress()">
+              Add a Shipping Address
+            </button>
           </div>
         </div>
       </div>
-
-      <div *ngIf="addresses == null" class="col-sm-4 pt-4 mx-auto">
-        <mat-card>
-          <mat-card-content> You have no address registered. </mat-card-content>
-        </mat-card>
+    </div>
+    <!--Shipping address form-->
+    <div *ngIf="addressFormEdit || addresses == null">
+      <div class="col-sm-6 pb-4 mx-auto">
+        <h3>Fill out the shipping address form</h3>
       </div>
-      <div class="d-flex justify-content-end pt-4">
-        <button mat-raised-button color="warn" routerLink="/checkout/address">
-          Add a Shipping Address
-        </button>
+      <div class="row">
+        <div class="col-sm-8 pt-4 mx-auto">
+          <div class="card">
+            <div class="card-header fw-bold">Add a shipping adress</div>
+            <form [formGroup]="addressForm">
+              <div class="ms-3 pt-3 form-group">
+                <p>
+                  <label for="country"><h6>Country:</h6></label>
+                  <input
+                    type="country"
+                    id="country"
+                    formControlName="country"
+                    class="form-control"
+                    autocomplete="on"
+                  />
+                  <span
+                    *ngIf="
+                      !addressForm.get('country')?.valid &&
+                      addressForm.get('country')?.touched
+                    "
+                    >Enter a valid country*</span
+                  >
+                </p>
+                <p>
+                  <label for="postCode"><h6>Postcode:</h6></label>
+                  <input
+                    type="postCode"
+                    id="postCode"
+                    formControlName="postCode"
+                    class="form-control"
+                    autocomplete="on"
+                  />
+                  <span
+                    *ngIf="
+                      !addressForm.get('postCode')?.valid &&
+                      addressForm.get('postCode')?.touched
+                    "
+                    >Enter a valid Postcode* (only numeric values)</span
+                  >
+                </p>
+                <p>
+                  <label for="city"><h6>City:</h6></label>
+                  <input
+                    type="city"
+                    id="city"
+                    formControlName="city"
+                    class="form-control"
+                    autocomplete="on"
+                  />
+                  <span
+                    *ngIf="
+                      !addressForm.get('city')?.valid &&
+                      addressForm.get('city')?.touched
+                    "
+                    >Enter a valid city*</span
+                  >
+                </p>
+                <p>
+                  <label for="street"><h6>Street:</h6></label>
+                  <input
+                    type="street"
+                    id="street"
+                    formControlName="street"
+                    class="form-control"
+                    autocomplete="on"
+                  />
+                  <span
+                    *ngIf="
+                      !addressForm.get('street')?.valid &&
+                      addressForm.get('street')?.touched
+                    "
+                    >Enter a valid street*</span
+                  >
+                </p>
+              </div>
+            </form>
+            <div class="d-flex justify-content-end me-3 pt-3 pb-4">
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="addAddress()"
+                [disabled]="addressForm.invalid"
+              >
+                Select Address
+              </button>
+            </div>
+          </div>
+          <div class="pt-4">
+            <button mat-stroked-button color="warn" (click)="onAddAddress()">
+              Return to address list
+            </button>
+          </div>
+        </div>
+        <app-alert
+          [message]="error"
+          *ngIf="error != ''"
+          (close)="onHandleError()"
+        ></app-alert>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-10 mx-auto message">
+        <div *ngIf="message != ''" class="alert alert-success">
+          <p>{{ message }}</p>
+        </div>
       </div>
     </div>
   </div>

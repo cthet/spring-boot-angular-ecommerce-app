@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CheckAddressComponent } from './check-address.component';
+import { CheckReviewComponent } from './check-review.component';
 
-describe('CheckAddressComponent', () => {
-  let component: CheckAddressComponent;
-  let fixture: ComponentFixture<CheckAddressComponent>;
+describe('CheckReviewComponent', () => {
+  let component: CheckReviewComponent;
+  let fixture: ComponentFixture<CheckReviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckAddressComponent ]
+      declarations: [ CheckReviewComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CheckAddressComponent);
+    fixture = TestBed.createComponent(CheckReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

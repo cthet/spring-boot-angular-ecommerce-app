@@ -11,13 +11,13 @@ import java.util.List;
 public class OrderRequest {
 
     @NotNull(message = "user cannot be empty")
-    private UserDTO userDTO;
+    private UserDTO user;
 
     @NotNull(message = "shipping address cannot be empty")
-    private AddressDTO shippingAddressDTO;
+    private AddressDTO shippingAddress;
 
     @NotNull(message = "order cannot be empty")
-    private OrderDTO orderDTO;
+    private OrderDTO order;
 
     @NotNull(message = "order items cannot be empty")
     private List<OrderItemDTO> orderItems;

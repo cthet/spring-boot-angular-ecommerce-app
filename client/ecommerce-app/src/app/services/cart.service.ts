@@ -1,14 +1,5 @@
-import { NgIfContext } from '@angular/common';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  max,
-  Observable,
-  reduce,
-  Subject,
-  Subscriber,
-  Subscription,
-} from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { CartItem } from '../models/cart-Item';
 import { Product } from '../models/product';
 
@@ -24,7 +15,6 @@ export class CartService {
   totalQuantity$: Subject<number> = new BehaviorSubject<number>(0);
 
   cartItems: CartItem[] = [];
-  cartItems$: Subject<CartItem[]> = new Subject<CartItem[]>();
 
   constructor() {
     this.getCart();

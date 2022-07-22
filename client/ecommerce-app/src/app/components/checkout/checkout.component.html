@@ -1,5 +1,59 @@
 <div class="container">
   <div class="row">
-    <app-check-id></app-check-id>
+    <mat-stepper linear animationDuration="2000" color="warn" #stepper>
+      <mat-step
+        [completed]="checkId"
+        editable="false"
+        (nextStep)="stepper.next()"
+      >
+        <ng-template matStepLabel>Fill out the receiver name</ng-template>
+        <app-check-id (next)="onCheckId($event)"></app-check-id>
+        <div class="d-flex justify-content-end">
+          <button
+            mat-raised-button
+            color="warn"
+            matStepperNext
+            [hidden]="!checkId"
+            (nextStep)="stepper.next()"
+          >
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step [completed]="checkAddress" editable="false">
+        <ng-template matStepLabel>Fill out the shipping address</ng-template>
+        <app-check-list-address
+          (next)="onCheckAddress($event)"
+        ></app-check-list-address>
+        <div class="d-flex justify-content-end">
+          <button
+            mat-raised-button
+            color="warn"
+            matStepperNext
+            [hidden]="!checkAddress"
+          >
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step [completed]="false" editable="false">
+        <ng-template matStepLabel>Review checkout information</ng-template>
+        <app-check-review (next)="onCheckAddress($event)"></app-check-review>
+        <div class="d-flex justify-content-end">
+          <button
+            mat-raised-button
+            color="warn"
+            matStepperNext
+            [hidden]="!checkAddress"
+          >
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <mat-step completed="false" editable="false">
+        <ng-template matStepLabel>Payment process</ng-template>
+        <button mat-button matStepperPrevious>Previous</button>
+      </mat-step>
+    </mat-stepper>
   </div>
 </div>

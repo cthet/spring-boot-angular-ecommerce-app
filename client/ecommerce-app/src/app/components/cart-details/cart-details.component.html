@@ -5,20 +5,17 @@
       <table class="table">
         <thead class="medium-important large">
           <tr class="col-name">
-            <td scope="col">N°</td>
-            <td scope="col">Product</td>
-            <td scope="col"></td>
-            <td scope="col">Unit Price</td>
-            <td scope="col">Quantity</td>
+            <td scope="col-sm-2">N°</td>
+            <td scope="col-sm-6">Product</td>
+            <td scope="col-sm-2">Unit Price</td>
+            <td scope="col-sm-4">Quantity</td>
           </tr>
         </thead>
         <tbody *ngFor="let cartItem of cartItems; index as i">
           <tr *ngIf="cartItem">
-            <th scope="row">{{ i + 1 }}</th>
-            <td class="fs-6">
+            <th scope="row col-sm-2">{{ i + 1 }}</th>
+            <td class="fs-6 col-sm-6">
               {{ cartItem.item.product_name }}
-            </td>
-            <td>
               <div class="card col-sm-4 mt-4 mb-4">
                 <img [src]="cartItem.item.image_url" style="width: 200px" />
               </div>
