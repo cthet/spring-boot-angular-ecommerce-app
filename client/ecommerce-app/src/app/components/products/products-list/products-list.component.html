@@ -11,7 +11,15 @@
       <div class="main">
         <div class="card" *ngFor="let product of products">
           <a routerLink="/product/{{ gender }}/{{ product.id }}">
-            <img [src]="product.image_url" [alt]="product.product_name" />
+            <img
+              class="image"
+              [src]="product.image_url"
+              [alt]="product.product_name"
+            />
+
+            <div class="middle">
+              <div class="text">View Details</div>
+            </div>
           </a>
           <div class="card-body">
             <div class="card-text">

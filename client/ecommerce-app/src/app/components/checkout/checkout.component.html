@@ -10,6 +10,7 @@
         <app-check-id (next)="onCheckId($event)"></app-check-id>
         <div class="d-flex justify-content-end">
           <button
+            class="next"
             mat-raised-button
             color="warn"
             matStepperNext
@@ -38,8 +39,8 @@
       </mat-step>
       <mat-step [completed]="false" editable="false">
         <ng-template matStepLabel>Review checkout information</ng-template>
-        <app-check-review (next)="onCheckAddress($event)"></app-check-review>
-        <div class="d-flex justify-content-end">
+        <app-check-review></app-check-review>
+        <div class="d-flex justify-content-end mt-4">
           <button
             mat-raised-button
             color="warn"
@@ -50,7 +51,7 @@
           </button>
         </div>
       </mat-step>
-      <mat-step completed="false" editable="false">
+      <mat-step completed="true" editable="false">
         <ng-template matStepLabel>Payment process</ng-template>
         <button mat-button matStepperPrevious>Previous</button>
       </mat-step>

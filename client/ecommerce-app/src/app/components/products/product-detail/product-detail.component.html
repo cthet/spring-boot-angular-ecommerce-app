@@ -1,31 +1,35 @@
 <div class="container pt-4">
-  <div class="card col-sm-8 mx-auto">
-    <div class="row pb-4">
-      <div class="col-sm-6">
-        <img src="{{ product.image_url }}" />
-      </div>
-      <div class="col-sm-6">
-        <h2 class="pt-4 ms-4">{{ product.product_name }}</h2>
-        <p class="pt-3 ms-4 fs-4">
-          {{ product.unit_price | currency: "EUR" }}
-        </p>
-        <div>
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="addToCart()"
-            class="cart-button mt-4 ms-3 me-4"
-          >
-            Add to Cart
-          </button>
+  <div class="col-sm-12">
+    <div class="main col-sm-8 mx-auto">
+      <div class="row">
+        <div class="col-sm-6">
+          <img class="image" src="{{ product.image_url }}" />
+        </div>
+        <div class="col-sm-6">
+          <div class="mt-3 fw-bold fs-4">{{ product.product_name }}</div>
+          <div class="mt-3 fs-4">
+            {{ product.unit_price | currency: "EUR" }}
+          </div>
+          <div class="card mt-3">In Stock</div>
+          <div>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="addToCart()"
+              class="cart-button mt-4"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <hr />
-    <div class="col-sm-12">
-      <a routerLink="/products/{{ gender }}" class="link">
-        <button mat-stroked-button color="warn">Back to products</button></a
-      >
+    <div class="row">
+      <div class="col-sm-12">
+        <a routerLink="/products/{{ gender }}" class="link">
+          <button mat-stroked-button color="warn">Back to products</button></a
+        >
+      </div>
     </div>
   </div>
 </div>

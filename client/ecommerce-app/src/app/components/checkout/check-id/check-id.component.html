@@ -8,12 +8,10 @@
         <!--User information-->
         <div *ngIf="firstName != null && lastName != null && !onEdit">
           <div class="card">
-            <div class="card-header fw-bold"><h5>User Information</h5></div>
-            <div class="card-content pt-4 ms-3">
-              <div class="pb-4">
-                <div class="fs-5">First Name: {{ firstName }}</div>
-                <div class="fs-5">Last Name: {{ lastName }}</div>
-              </div>
+            <div class="card-header fw-bold"><h4>User Information</h4></div>
+            <div class="card-content pt-4 pb-4 ms-3">
+              <h5>First Name: {{ firstName }}</h5>
+              <h5>Last Name: {{ lastName }}</h5>
               <div
                 class="d-flex justify-content-end me-4"
                 (click)="onSelectUser()"
@@ -38,7 +36,7 @@
         <div *ngIf="firstName == null || lastName == null || onEdit">
           <div class="card">
             <div class="card-header fw-bold">
-              <h5>Receiver information</h5>
+              <h4>Receiver information</h4>
             </div>
             <div class="card-content pt-4 ms-3">
               <form [formGroup]="userForm">
@@ -77,7 +75,7 @@
                       >Enter a valid Last Name*</span
                     >
                   </p>
-                  <div class="d-flex justify-content-end">
+                  <div class="d-flex justify-content-end me-3 mb-3">
                     <button
                       mat-raised-button
                       color="warn"

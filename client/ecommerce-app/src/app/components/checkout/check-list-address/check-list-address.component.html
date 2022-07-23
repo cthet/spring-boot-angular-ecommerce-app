@@ -8,17 +8,26 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="main">
-            <div *ngFor="let address of addresses">
+            <div *ngFor="let address of addresses; let index = index">
               <div class="card cardlist" (click)="selectAddress(address)">
                 <div class="card-header">
-                  <span class="fw-bold">Country: {{ address.country }}</span>
+                  <span class="fw-bold">Address n°{{ index + 1 }}</span>
                 </div>
                 <div class="card-body">
-                  <span class="fs-6">City:</span> {{ address.city }}
+                  <p class="fs-6">
+                    <span class="fw-bold">Country:</span> {{ address.country }}
+                  </p>
                   <hr />
-                  <span class="fs-6">PostCode:</span> {{ address.postCode }}
-                  <hr />
-                  <span class="fs-6">Street:</span> {{ address.street }}
+                  <p class="fs-6">
+                    <span class="fw-bold">City:</span> {{ address.city }}
+                  </p>
+                  <p class="fs-6">
+                    <span class="fw-bold">PostCode:</span>
+                    {{ address.postCode }}
+                  </p>
+                  <p class="fs-6">
+                    <span class="fw-bold">Street:</span> {{ address.street }}
+                  </p>
                 </div>
               </div>
             </div>
