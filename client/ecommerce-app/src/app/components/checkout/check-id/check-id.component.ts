@@ -26,7 +26,6 @@ export class CheckIdComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.message = '';
     this.fetchUser();
     this.computesUserForm();
   }
@@ -54,8 +53,14 @@ export class CheckIdComponent implements OnInit {
     });
   }
 
-  changeEditMode() {
-    this.onEdit = !this.onEdit;
+  onEditMode() {
+    this.onEdit = true;
+    this.message = '';
+    this.next.emit(false);
+  }
+
+  onUserInfo() {
+    this.onEdit = false;
     this.message = '';
     this.next.emit(false);
   }

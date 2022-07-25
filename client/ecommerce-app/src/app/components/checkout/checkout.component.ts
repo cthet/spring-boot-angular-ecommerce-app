@@ -10,7 +10,6 @@ export class CheckoutComponent implements OnInit {
   checkId: boolean = false;
   @Input()
   checkAddress: boolean = false;
-  @Input()
   checkReview: boolean = false;
 
   constructor() {}
@@ -21,10 +20,14 @@ export class CheckoutComponent implements OnInit {
 
   onCheckId(checkId: boolean) {
     this.checkId = checkId;
-    this.nextStep.emit(true);
   }
 
   onCheckAddress(checkAddress: boolean) {
     this.checkAddress = checkAddress;
+  }
+
+  completeReview() {
+    this.checkReview = true;
+    //add event to go to next stepper
   }
 }

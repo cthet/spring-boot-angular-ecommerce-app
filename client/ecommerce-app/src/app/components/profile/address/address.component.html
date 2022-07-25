@@ -18,20 +18,19 @@
             <div class="form-group">
               <p>
                 <label for="country"><h6>Country:</h6></label>
-                <input
+                <select
                   type="country"
                   id="country"
                   formControlName="country"
                   class="form-control"
-                  autocomplete="on"
-                />
-                <span
-                  *ngIf="
-                    !addressForm.get('country')?.valid &&
-                    addressForm.get('country')?.touched
-                  "
-                  >Enter a valid country*</span
                 >
+                  <option
+                    *ngFor="let country of countries | async"
+                    [value]="country.name"
+                  >
+                    {{ country.name }}
+                  </option>
+                </select>
               </p>
               <p>
                 <label for="postCode"><h6>Postcode:</h6></label>
@@ -40,7 +39,6 @@
                   id="postCode"
                   formControlName="postCode"
                   class="form-control"
-                  autocomplete="on"
                 />
                 <span
                   *ngIf="

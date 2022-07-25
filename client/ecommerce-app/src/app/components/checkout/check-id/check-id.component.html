@@ -21,11 +21,7 @@
                 </button>
               </div>
               <div class="mt-4 d-flex justify-content-end me-4 pb-3">
-                <button
-                  mat-stroked-button
-                  color="warn"
-                  (click)="changeEditMode()"
-                >
+                <button mat-stroked-button color="warn" (click)="onEditMode()">
                   Select an other receiver
                 </button>
               </div>
@@ -94,7 +90,7 @@
           *ngIf="firstName != null && lastName != null && onEdit"
           class="pt-4"
         >
-          <button mat-stroked-button color="warn" (click)="changeEditMode()">
+          <button mat-stroked-button color="warn" (click)="onUserInfo()">
             Return to user info
           </button>
         </div>

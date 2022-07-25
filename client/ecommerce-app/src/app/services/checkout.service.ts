@@ -1,13 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  catchError,
-  Observable,
-  Subject,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { Address } from '../models/address';
+import { Country } from '../models/country';
 import { OrderRequest } from '../models/orderRequest';
 import { PaymentInfo } from '../models/payment-info';
 import { User } from '../models/user';
@@ -28,6 +23,12 @@ export class CheckoutService {
   });
 
   constructor(private http: HttpClient) {}
+
+  getCountries(): Observable<any> {
+    return this.http
+      .get<Country[]>(`http://localhost:8080/countries/all`)
+      .pipe(catchError(this.handleError));
+  }
 
   saveOrder(order: OrderRequest): Observable<any> {
     return this.http

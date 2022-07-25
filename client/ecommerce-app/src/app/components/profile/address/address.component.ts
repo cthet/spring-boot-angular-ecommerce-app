@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Address } from 'src/app/models/address';
+import { Country } from 'src/app/models/country';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,9 +18,16 @@ export class AddressComponent implements OnInit {
   message: string = '';
   error: string = '';
 
-  constructor(private userService: UserService) {}
+  countries =  new Observable<Country[]>;
+  code!: string;
+
+  constructor(
+    private userService: UserService,
+    private checkoutService: CheckoutService
+  ) {}
 
   ngOnInit(): void {
+    this.fetchCountries();
     this.computeAddressForm();
   }
 
@@ -33,11 +43,18 @@ export class AddressComponent implements OnInit {
     });
   }
 
+  fetchCountries() {
+    this.countries = this.checkoutService.getCountries();
+  }
+
   addAddress() {
     this.isLoading = true;
-
+    console.log(this.addressForm.value.country);
+    let countryName = this.addressForm.value.country;
+    const country: Country['name'] = countryName;
+   
     let address = new Address();
-    address[`country`] = this.addressForm.value.country;
+    address[`country`] = country;
     address[`postCode`] = this.addressForm.value.postCode;
     address[`city`] = this.addressForm.value.city;
     address[`street`] = this.addressForm.value.street;

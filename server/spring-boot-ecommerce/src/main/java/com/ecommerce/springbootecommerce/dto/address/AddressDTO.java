@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class AddressDTO {
 
     @NotBlank(message = "Country cannot be empty")
-    private  String country;
+    private  CountryDTO country;
 
     @NotNull(message = "Post Code cannot be empty")
     private int postCode;

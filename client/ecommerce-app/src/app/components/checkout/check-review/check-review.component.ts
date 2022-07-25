@@ -14,17 +14,14 @@ import { CheckoutService } from 'src/app/services/checkout.service';
   styleUrls: ['./check-review.component.css'],
 })
 export class CheckReviewComponent implements OnInit {
-  orderRequest!: OrderRequest;
   user!: User;
   shippingAddress!: Address;
-  order: Order = { totalPrice: 0, totalQuantity: 0 };
   orderItems!: OrderItem[];
-
-  @Output() next= new EventEmitter<boolean>;
+  order: Order = { totalPrice: 0, totalQuantity: 0 };
 
   constructor(
     private checkoutService: CheckoutService,
-    private CartService: CartService
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +36,7 @@ export class CheckReviewComponent implements OnInit {
       this.shippingAddress = address;
     });
 
-    this.orderItems = this.CartService.cartItems.map(
+    this.orderItems = this.cartService.cartItems.map(
       (cartItem) =>
         new OrderItem(
           cartItem.quantity,
@@ -47,15 +44,11 @@ export class CheckReviewComponent implements OnInit {
           cartItem.item
         )
     );
-    this.CartService.totalPrice$.subscribe((data) => {
+    this.cartService.totalPrice$.subscribe((data) => {
       this.order.totalPrice = data;
     });
-    this.CartService.totalQuantity$.subscribe((data) => {
+    this.cartService.totalQuantity$.subscribe((data) => {
       this.order.totalQuantity = data;
     });
-  }
-
-  onConfirmCheckout() {
-    this.next.emit(true);
   }
 }
