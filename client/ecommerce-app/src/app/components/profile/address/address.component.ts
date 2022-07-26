@@ -48,18 +48,14 @@ export class AddressComponent implements OnInit {
   }
 
   addAddress() {
-    this.isLoading = true;
-    console.log(this.addressForm.value.country);
-    let countryName = this.addressForm.value.country;
-    const country: Country['name'] = countryName;
-   
+    this.isLoading = true;   
     let address = new Address();
-    address[`country`] = country;
+    address[`country`] = this.addressForm.value.country;
     address[`postCode`] = this.addressForm.value.postCode;
     address[`city`] = this.addressForm.value.city;
     address[`street`] = this.addressForm.value.street;
 
-    this.userService.updateAddress(address).subscribe({
+    this.userService.addAddress(address).subscribe({
       next: (response: { message: string }) => {
         this.isLoading = false;
         this.message = response.message;

@@ -15,9 +15,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
+    private String country;
 
     private int postCode;
 

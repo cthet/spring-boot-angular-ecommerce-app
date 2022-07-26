@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Address } from 'src/app/models/address';
+import { Country } from 'src/app/models/country';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,11 +14,11 @@ import { UserService } from 'src/app/services/user.service';
 export class CheckListAddressComponent implements OnInit {
   addresses!: Address[];
   addressFormEdit: boolean = false;
-  message: string = '';
-
+    
   addressForm!: FormGroup;
-  userForm: any;
+  countries =  new Observable<Country[]>;
   isLoading = false;
+  message: string = '';
   error: string = '';
 
   constructor(
@@ -28,25 +30,29 @@ export class CheckListAddressComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchAddresses();
+    this.fetchCountries();
     this.computeAddressForm();
   }
 
   fetchAddresses() {
-    this.userService.getListAddress().subscribe((response: Address[]) => {
-      this.addresses = response;
+    this.userService.getListAddress().subscribe({
+      next: (addresses: Address[]) => {
+        this.addresses = addresses;
+      },
+      error: () => {
+        const address = { country: '', postCode: 0, city: '', street: '' };
+        this.addresses = [address];
+      },
     });
   }
 
-  selectAddress(address: Address) {
-    this.checkoutService.address$.next(address);
-    this.next.emit(true);
-    this.message = 'Shipping address successfully added !';
+  emptyAddressList() {
+    const emptyAdress = [{ country: '', postCode: 0, city: '', street: '' }];
+    return this.addresses === emptyAdress;
   }
 
-  onAddAddress() {
-    this.addressFormEdit = !this.addressFormEdit;
-    this.message = '';
-    this.next.emit(false);
+  fetchCountries() {
+    this.countries = this.checkoutService.getCountries();
   }
 
   computeAddressForm() {
@@ -61,7 +67,18 @@ export class CheckListAddressComponent implements OnInit {
     });
   }
 
-  addAddress() {
+  onSelectAddress(address: Address) {
+    this.checkoutService.address$.next(address);    
+    this.message = 'Shipping address successfully added !';
+    this.next.emit(true);
+  }
+
+  onAddAddress() {
+    this.addressFormEdit = !this.addressFormEdit;
+    this.message = '';
+  }
+
+  onSelectAddressForm() {
     this.isLoading = true;
 
     let address = new Address();
@@ -72,7 +89,7 @@ export class CheckListAddressComponent implements OnInit {
 
     this.checkoutService.address$.next(address);
 
-    this.userService.updateAddress(address).subscribe({
+    this.userService.addAddress(address).subscribe({
       next: (message: any) => {
         this.isLoading = false;
         this.next.emit(true);
@@ -91,4 +108,6 @@ export class CheckListAddressComponent implements OnInit {
   onHandleError() {
     this.error = '';
   }
+
+
 }

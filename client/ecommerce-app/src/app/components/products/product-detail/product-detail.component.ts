@@ -26,6 +26,7 @@ export class ProductDetailComponent implements OnInit {
 
   fetchProduct(): void {
     this.gender = this.route.snapshot.params['gender'];
+    
     const productId = this.route.snapshot.params['id'];
     this.productService
       .fetchProduct(productId)

@@ -21,7 +21,8 @@ mat-card {
   font-weight: 600;
 }
 
-img {
-  width: 70%;
+.image {
+  width: 200px;
+  min-width: 30%;
   height: 70%;
 }

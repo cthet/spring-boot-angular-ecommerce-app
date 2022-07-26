@@ -1,7 +1,7 @@
 <div class="container pt-4">
   <div class="row">
     <!--List of user's shipping addresses-->
-    <div *ngIf="!addressFormEdit && addresses != null">
+    <div *ngIf="!emptyAddressList() && !addressFormEdit">
       <div class="col-sm-4 pb-4 mx-auto">
         <h3>Select a Shipping Address</h3>
       </div>
@@ -9,7 +9,7 @@
         <div class="col-sm-12">
           <div class="main">
             <div *ngFor="let address of addresses; let index = index">
-              <div class="card cardlist" (click)="selectAddress(address)">
+              <div class="card cardlist" (click)="onSelectAddress(address)">
                 <div class="card-header">
                   <span class="fw-bold">Address n°{{ index + 1 }}</span>
                 </div>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <!--Shipping address form-->
-    <div *ngIf="addressFormEdit || addresses == null">
+    <div *ngIf="emptyAddressList() || addressFormEdit">
       <div class="col-sm-6 pb-4 mx-auto">
         <h3>Fill out the shipping address form</h3>
       </div>
@@ -53,20 +53,19 @@
               <div class="ms-3 pt-3 form-group">
                 <p>
                   <label for="country"><h6>Country:</h6></label>
-                  <input
+                  <select
                     type="country"
                     id="country"
                     formControlName="country"
                     class="form-control"
-                    autocomplete="on"
-                  />
-                  <span
-                    *ngIf="
-                      !addressForm.get('country')?.valid &&
-                      addressForm.get('country')?.touched
-                    "
-                    >Enter a valid country*</span
                   >
+                    <option
+                      *ngFor="let country of countries | async"
+                      [value]="country.name"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
                 </p>
                 <p>
                   <label for="postCode"><h6>Postcode:</h6></label>
@@ -125,7 +124,7 @@
               <button
                 mat-raised-button
                 color="warn"
-                (click)="addAddress()"
+                (click)="onSelectAddressForm()"
                 [disabled]="addressForm.invalid"
               >
                 Select Address
@@ -133,8 +132,13 @@
             </div>
           </div>
           <div class="pt-4">
-            <button mat-stroked-button color="warn" (click)="onAddAddress()">
-              Return to address list
+            <button
+              mat-stroked-button
+              color="warn"
+              (click)="onAddAddress()"
+              [disabled]="emptyAddressList()"
+            >
+              Go to address list
             </button>
           </div>
         </div>

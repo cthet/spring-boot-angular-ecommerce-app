@@ -22,7 +22,7 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  updateAddress(address: Address): Observable<any> {
+  addAddress(address: Address): Observable<any> {
     return this.http
       .post<any>('http://localhost:8080/user/address', address)
       .pipe(catchError(this.handleError));

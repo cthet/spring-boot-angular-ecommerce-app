@@ -1,9 +1,9 @@
 -- -----------------------------------------------------
 -- Schema ecommerce
 -- -----------------------------------------------------
--- DROP SCHEMA IF EXISTS `ecommerce`;
+--  DROP SCHEMA IF EXISTS `ecommerce`;
 
--- CREATE SCHEMA `ecommerce`;
+--  CREATE SCHEMA `ecommerce`;
 USE `ecommerce` ;
 
 -- -- -- -----------------------------------------------------
@@ -16,9 +16,9 @@ USE `ecommerce` ;
 -- ENGINE=InnoDB
 -- AUTO_INCREMENT = 1;
 
--- -- -----------------------------------------------------
--- -- Table `ecommerce`.`apparel_category`
--- -- -----------------------------------------------------
+-- -- -- -----------------------------------------------------
+-- -- -- Table `ecommerce`.`apparel_category`
+-- -- -- -----------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `ecommerce`.`apparel_category` (
 --   `id` INT(20) NOT NULL AUTO_INCREMENT,
 --   `apparel_category_type` VARCHAR(255) NULL DEFAULT NULL,
@@ -26,9 +26,9 @@ USE `ecommerce` ;
 -- ENGINE=InnoDB
 -- AUTO_INCREMENT = 1;
 
--- -- -----------------------------------------------------
--- -- Table `ecommerce`.`apparel_gender`
--- -- -----------------------------------------------------
+-- -- -- -----------------------------------------------------
+-- -- -- Table `ecommerce`.`apparel_gender`
+-- -- -- -----------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `ecommerce`.`apparel_gender` (
 --   `gender_category_id` INT(20) NOT NULL,
 --   `apparel_category_id` INT(20) NOT NULL,
@@ -38,9 +38,9 @@ USE `ecommerce` ;
 --   ENGINE=InnoDB
 -- AUTO_INCREMENT = 1;
 
--- -- -----------------------------------------------------
--- -- Table `ecommerce`.`price_range_category`
--- -- -----------------------------------------------------
+-- -- -- -----------------------------------------------------
+-- -- -- Table `ecommerce`.`price_range_category`
+-- -- -- -----------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `ecommerce`.`price_range_category` (
 --   `id` INT(20) NOT NULL AUTO_INCREMENT,
 --   `price_range_category_type` VARCHAR(255) NULL DEFAULT NULL,
@@ -48,9 +48,9 @@ USE `ecommerce` ;
 -- ENGINE=InnoDB
 -- AUTO_INCREMENT = 1;
 
--- -- -----------------------------------------------------
--- -- Table `ecommerce`.`product`
--- -- -----------------------------------------------------
+-- -- -- -----------------------------------------------------
+-- -- -- Table `ecommerce`.`product`
+-- -- -- -----------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `ecommerce`.`product` (
 --   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
 --   `product_name` VARCHAR(255) DEFAULT NULL,
@@ -72,13 +72,13 @@ USE `ecommerce` ;
 -- -- -----------------------------------------------------
 -- -- COUNTRIES
 -- -- -----------------------------------------------------
--- apparel_categoryapparel_categoryINSERT INTO country(id, code, name) VALUES ('1','FR','France'),('2','US','United State of America'),('3','GB','United Kingdom of Great Britain'),('4','BE','Belgium'),('5','IT','Italy'),('6','ES','Spain'),('7','DE','Germany');
+INSERT INTO country(id, code, name) VALUES ('1','FR','France'),('2','US','United State of America'),('3','GB','United Kingdom of Great Britain'),('4','BE','Belgium'),('5','IT','Italy'),('6','ES','Spain'),('7','DE','Germany');
 
 -- -- -----------------------------------------------------
 -- -- CATEGORIES
 -- -- -----------------------------------------------------
 
--- INSERT INTO apparel_category(id, apparel_category_type) VALUES ('1','T-shirts'),('2','Jeans'),('3','Sweats'),('4','Suits'),('5','Tops'),('6','Dresses'),('7','Jackets'),('8','Skirts'),('9','Any');
+INSERT INTO apparel_category(id, apparel_category_type) VALUES ('1','T-shirts'),('2','Jeans'),('3','Sweats'),('4','Suits'),('5','Tops'),('6','Dresses'),('7','Jackets'),('8','Skirts'),('9','Any');
 INSERT INTO gender_category(id, gender_category_type) VALUES ('1','Men'),('2','Women');
 INSERT INTO price_range_category(id, price_range_category_type) VALUES ('1','< 50€'), ('2','50€ - 100€'), ('3','100€-200€'),('4','>200€'), ('5','Any');
 INSERT INTO apparel_gender(gender_category_id, apparel_category_id) VALUES ('1','1'),('1','2'),('1','3'),('1','4'),('1','9'),('2','5'),('2','6'),('2','7'),('2','8'),('2','9');

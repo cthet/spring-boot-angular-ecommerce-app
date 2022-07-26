@@ -1,9 +1,9 @@
 <div class="container pt-4">
   <div class="col-sm-12">
     <div class="main col-sm-8 mx-auto">
-      <div class="row">
+      <div *ngIf="product" class="row">
         <div class="col-sm-6">
-          <img class="image" src="{{ product.image_url }}" />
+          <img class="image" [src]="product.image_url" />
         </div>
         <div class="col-sm-6">
           <div class="mt-3 fw-bold fs-4">{{ product.product_name }}</div>

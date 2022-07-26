@@ -1,4 +1,4 @@
-<div class="col-sm-10 mx-auto pt-4 pb-4">
+<div class="col-sm-12 mx-auto pt-4 pb-4">
   <mat-card class="pb-4">
     <mat-card-title class="mb-4">Shopping Cart</mat-card-title>
     <mat-card-content *ngIf="cartItems.length != 0">
@@ -17,32 +17,38 @@
             <td class="fs-6 col-sm-6">
               {{ cartItem.item.product_name }}
               <div class="card col-sm-4 mt-4 mb-4">
-                <img [src]="cartItem.item.image_url" style="width: 200px" />
+                <img class="image" src="{{ cartItem.item.image_url }}" />
               </div>
             </td>
             <td class="fs-6 important">
               {{ cartItem.item.unit_price | currency: "EUR" }}
             </td>
             <td class="fs-6 important">
-              {{ cartItem.quantity }}
-              <hr />
-              <p>
-                <button
-                  mat-stroked-button
-                  color="warn"
-                  class="me-4"
-                  (click)="removeFromCart(cartItem.item)"
-                >
-                  -
-                </button>
-                <button
-                  mat-raised-button
-                  color="warn"
-                  (click)="addToCart(cartItem.item)"
-                >
-                  +
-                </button>
-              </p>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="col-sm-5">
+                    <button
+                      mat-stroked-button
+                      color="warn"
+                      (click)="removeFromCart(cartItem.item)"
+                    >
+                      -
+                    </button>
+                  </div>
+                  <div class="col-sm-2 justify-content-center">
+                    {{ cartItem.quantity }}
+                  </div>
+                  <div class="col-sm-5">
+                    <button
+                      mat-raised-button
+                      color="warn"
+                      (click)="addToCart(cartItem.item)"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
