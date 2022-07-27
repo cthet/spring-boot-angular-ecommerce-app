@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatStepperNext } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-checkout',
@@ -16,18 +17,11 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  @Output() nextStep = new EventEmitter<boolean>();
-
   onCheckId(checkId: boolean) {
     this.checkId = checkId;
   }
 
   onCheckAddress(checkAddress: boolean) {
     this.checkAddress = checkAddress;
-  }
-
-  completeReview() {
-    this.checkReview = true;
-    //add event to go to next stepper
   }
 }

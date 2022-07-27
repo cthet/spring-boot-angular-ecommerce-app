@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AddressDTO {
 
+    @NotBlank
+    private Long id;
+
     @NotBlank(message = "Country cannot be empty")
     private  String country;
 

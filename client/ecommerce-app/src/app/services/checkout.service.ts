@@ -16,6 +16,7 @@ export class CheckoutService {
     lastName: '',
   });
   address$: BehaviorSubject<Address> = new BehaviorSubject<Address>({
+    id: 0,
     country: '',
     postCode: 0,
     city: '',

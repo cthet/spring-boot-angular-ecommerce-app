@@ -34,21 +34,18 @@ export class CheckListAddressComponent implements OnInit {
     this.computeAddressForm();
   }
 
+  //fetch user's addresslist
   fetchAddresses() {
     this.userService.getListAddress().subscribe({
       next: (addresses: Address[]) => {
         this.addresses = addresses;
+        console.log(addresses);
       },
       error: () => {
-        const address = { country: '', postCode: 0, city: '', street: '' };
+        const address = { id: 0, country: '', postCode: 0, city: '', street: '' };
         this.addresses = [address];
       },
     });
-  }
-
-  emptyAddressList() {
-    const emptyAdress = [{ country: '', postCode: 0, city: '', street: '' }];
-    return this.addresses === emptyAdress;
   }
 
   fetchCountries() {
@@ -67,9 +64,17 @@ export class CheckListAddressComponent implements OnInit {
     });
   }
 
+  //allow to check if user's addresslist is empty
+  emptyAddressList() {
+    const emptyAdress = [{ id: 0, country: '', postCode: 0, city: '', street: '' }];
+    return this.addresses === emptyAdress;
+  }
+
+  //when user select a known address
   onSelectAddress(address: Address) {
     this.checkoutService.address$.next(address);    
     this.message = 'Shipping address successfully added !';
+    
     this.next.emit(true);
   }
 
@@ -78,10 +83,12 @@ export class CheckListAddressComponent implements OnInit {
     this.message = '';
   }
 
+  //when user valid the address form
   onSelectAddressForm() {
     this.isLoading = true;
 
     let address = new Address();
+    address[`id`] = 0;
     address[`country`] = this.addressForm.value.country;
     address[`postCode`] = this.addressForm.value.postCode;
     address[`city`] = this.addressForm.value.city;
@@ -98,7 +105,6 @@ export class CheckListAddressComponent implements OnInit {
       error: (err: Error) => {
         this.isLoading = false;
         this.error = err.message;
-        this.next.emit(false);
       },
     });
 

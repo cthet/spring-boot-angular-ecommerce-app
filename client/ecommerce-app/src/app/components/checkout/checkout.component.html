@@ -32,18 +32,11 @@
             </button>
           </div>
         </mat-step>
-        <mat-step [completed]="checkReview" editable="false">
+        <mat-step editable="false">
           <ng-template matStepLabel>Review checkout information</ng-template>
           <app-check-review></app-check-review>
           <div class="d-flex justify-content-end mt-4">
-            <button
-              mat-raised-button
-              color="warn"
-              matStepperNext
-              (click)="completeReview()"
-            >
-              Next
-            </button>
+            <button mat-raised-button color="warn" matStepperNext>Next</button>
           </div>
         </mat-step>
         <mat-step [completed]="false" editable="false">

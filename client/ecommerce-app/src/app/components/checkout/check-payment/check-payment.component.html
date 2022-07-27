@@ -2,27 +2,27 @@
 
 <div class="container pt-4">
   <div class="row">
-    <div class="col-sm-10 mx-auto">
+    <div class="col-sm-12">
       <h3>Debit Card</h3>
 
-      <div id="card-element">
+      <div class="card mb-4">
+        <div id="card-element"></div>
+
         <!-- a Stripe element will be inserted here -->
+
+        <!-- Used to display form errors -->
+      </div>
+
+      <div *ngIf="error != ''" class="alert alert-danger message pt-4 mx-auto'">
+        {{ error }}
       </div>
     </div>
   </div>
-  <button
-    mat-raised-button
-    color="primary"
-    class="d-flex justify-content-end pt-4"
-    (click)="onSubmit()"
-  >
-    Confirm Payment
-  </button>
-  <button (click)="test()">see info</button>
+  <div class="row">
+    <div class="d-flex justify-content-end mt-4">
+      <button mat-raised-button color="warn" (click)="onSubmit()">
+        Confirm Payment
+      </button>
+    </div>
+  </div>
 </div>
-
-<!-- Used to display form errors -->
-<div
-  id="card-errors"
-  class="displayError.textContent!=='': 'alert alert-danger mt-1'"
-></div>
