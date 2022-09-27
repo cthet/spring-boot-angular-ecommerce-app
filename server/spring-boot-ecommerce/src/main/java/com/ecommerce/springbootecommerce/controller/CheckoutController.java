@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/api/order")
 public class CheckoutController {
 
     @Autowired

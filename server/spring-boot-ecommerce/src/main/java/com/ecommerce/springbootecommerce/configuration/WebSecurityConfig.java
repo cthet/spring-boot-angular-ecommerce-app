@@ -20,12 +20,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private static final String[] WHITE_LIST_URLS = {
-            "/home",
-            "/login",
-            "/signup",
-            "/products/**",
-            "/category/**"
-
+            "/api/home",
+            "/api/auth/login",
+            "/api/auth/signup",
+            "/api/products/**",
+            "/api/category/**"
     };
 
     @Autowired
@@ -39,7 +38,6 @@ public class WebSecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -48,16 +46,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
+                .cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
-                .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(WHITE_LIST_URLS).permitAll()
+                .authorizeRequests().antMatchers(WHITE_LIST_URLS).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
