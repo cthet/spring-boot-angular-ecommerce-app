@@ -35,6 +35,10 @@ public class UserPrincipal implements UserDetails {
         return authorities;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public String getUsername() {
         return null;

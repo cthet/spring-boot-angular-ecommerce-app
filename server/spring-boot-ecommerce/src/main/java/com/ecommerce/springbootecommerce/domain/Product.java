@@ -33,12 +33,16 @@ public class Product {
     private GenderCategory genderCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "price_range_category_id")
+    private ProductBrandCategory productBrandCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apparel_category_id")
     private ApparelCategory apparelCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "price_range_category_id")
     private PriceRangeCategory priceRangeCategory;
+
 
 
 }

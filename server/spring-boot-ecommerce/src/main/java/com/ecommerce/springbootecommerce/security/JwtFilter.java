@@ -1,10 +1,9 @@
 package com.ecommerce.springbootecommerce.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.security.sasl.AuthenticationException;
@@ -20,44 +19,26 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     JwtUtils jwtUtils;
 
-    @Autowired
-    UserPrincipalServiceImpl userPrincipalService;
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         try {
+            String token = jwtUtils.resolveToken(request);
 
-            String jwt = parseJwt(request);
+            if (token != null && jwtUtils.validateJwtToken(token)) {
 
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+                Authentication authentication = jwtUtils.getAuthentication(token);
 
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
-
-                UserPrincipal userPrincipal = userPrincipalService.loadUserByUsername(username);
-
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
-
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-
+                if(authentication!=null){
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
             }
-
-            } catch(Exception e){
+        } catch(Exception e){
                 logger.error("Cannot set user authentication: {}", e);
                 SecurityContextHolder.clearContext();
                 throw new AuthenticationException("JWT token is expired or invalid");
-            }
-            filterChain.doFilter(request, response);
-    }
-
-    public String parseJwt(HttpServletRequest request) {
-
-        String headerAuth = request.getHeader("Authorization");
-
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7, headerAuth.length());
         }
-        return null;
+        filterChain.doFilter(request, response);
     }
 }
