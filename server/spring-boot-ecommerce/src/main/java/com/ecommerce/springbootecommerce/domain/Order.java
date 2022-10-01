@@ -28,9 +28,13 @@ public class Order {
     @Column(name = "total_quantity")
     private int totalQuantity;
 
-    private String firstName;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    private String lastName;
+    @ManyToOne
+    @JoinColumn(name = "recipient_id")
+    private Recipient recipient;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
@@ -47,9 +51,7 @@ public class Order {
     @UpdateTimestamp
     private Date lastupdated;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+
 
     public void add(OrderItem item) {
         if(item != null) {

@@ -20,13 +20,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
     @Autowired
     UserServiceImpl userService;
-
     @Autowired
     private ModelMapper modelMapper;
-
     @PostMapping("/name")
     public ResponseEntity<?> updateUser(@Valid @RequestBody UserDTO userDTO) {
         try {
@@ -39,7 +36,6 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
     @GetMapping("/name")
     public ResponseEntity<?> getUsername() {
         try {
@@ -53,7 +49,6 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
     @PostMapping("/address")
     public ResponseEntity<?> addUserAddress(@Valid @RequestBody AddressDTO addressDTO) {
         try {
@@ -64,7 +59,6 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
     @GetMapping("/address")
     public ResponseEntity<?> getUserAddresses() {
         try {
@@ -88,9 +82,5 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
-
-
-
 
 }

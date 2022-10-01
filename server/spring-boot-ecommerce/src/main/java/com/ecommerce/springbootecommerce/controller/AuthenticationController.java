@@ -14,11 +14,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
-
     @Autowired
     AuthenticationService authenticationService;
-
-
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthRequest authRequest) {
         try {
@@ -27,7 +24,6 @@ public class AuthenticationController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
     @PostMapping("/signup")
     public ResponseEntity<?> signupUser(@Valid @RequestBody AuthRequest authRequest) {
         try {
@@ -37,6 +33,4 @@ public class AuthenticationController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-
-
 }

@@ -25,23 +25,19 @@ import java.util.Collections;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-
     @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     PasswordEncoder encoder;
-
     @Autowired
     JwtUtils jwtUtils;
 
-
     public AuthResponse login(@Valid @RequestBody AuthRequest authRequest) {
 
-        User user = userRepository.findByEmail(authRequest.getEmail()).orElseThrow(() -> new ApiRequestException("Email not found.", HttpStatus.NOT_FOUND));
+        User user = userRepository.findByEmail(authRequest.getEmail())
+                .orElseThrow(() -> new ApiRequestException("Email not found in database!", HttpStatus.NOT_FOUND));
 
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
@@ -59,9 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch(AuthenticationException e) {
             throw  new ApiRequestException("Password is invalid.", HttpStatus.FORBIDDEN);
         }
-
     }
-
     public String signup(@Valid @RequestBody AuthRequest authRequest) {
 
             if (userRepository.existsByEmail(authRequest.getEmail())) {
@@ -70,13 +64,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             User user = new User();
             user.setEmail(authRequest.getEmail());
-            user.setRoles(Collections.singleton(Role.USER));
+            user.setRole(Collections.singleton(Role.USER));
             user.setPassword(encoder.encode(authRequest.getPassword()));
 
             userRepository.save(user);
 
             return "User successfully registered!";
-
     }
-
 }

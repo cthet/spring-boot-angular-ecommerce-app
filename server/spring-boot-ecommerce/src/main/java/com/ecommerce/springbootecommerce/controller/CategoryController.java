@@ -1,9 +1,9 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
-import com.ecommerce.springbootecommerce.service.Interfaces.PriceRangeCategoryService;
 import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDTO;
-import com.ecommerce.springbootecommerce.dto.category.PriceRangeCategoriesDTO;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDTO;
+import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
+import com.ecommerce.springbootecommerce.service.Interfaces.BrandCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +16,24 @@ public class CategoryController {
     @Autowired
     ApparelCategoryService apparelCategoryService;
     @Autowired
-    PriceRangeCategoryService priceRangeCategoryService;
+    BrandCategoryService brandCategoryService;
+    @GetMapping("/brands")
+    public ResponseEntity<?> getBrandsByGenderId(@RequestParam(required = true) int genderId) {
+        try {
+             BrandCategoriesDTO brandCategoriesDTO = brandCategoryService.getBrandCategoriesByGender(genderId);
+
+            return new ResponseEntity<>(brandCategoriesDTO, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/apparels")
-    public ResponseEntity<?> getApparelsByGender(@RequestParam(defaultValue = "1") int gender) {
+    public ResponseEntity<?> getApparelsCategoryByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
+                                                                 @RequestParam int brandId) {
         try {
-            ApparelCategoriesDTO  apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByGender(gender);
+            ApparelCategoriesDTO apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(brandId, genderId);
 
             return new ResponseEntity<>(apparelCategoriesDTO, HttpStatus.OK);
 
@@ -30,16 +42,4 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/price_range")
-    public ResponseEntity<?> getAllPriceRange() {
-        try {
-            PriceRangeCategoriesDTO priceRangeCategoriesDTO = priceRangeCategoryService.getAllPriceRangeCategories();
-
-            return new ResponseEntity<>(priceRangeCategoriesDTO, HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
 }

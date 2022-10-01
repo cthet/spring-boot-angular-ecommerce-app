@@ -5,5 +5,5 @@ import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 
 public interface ProductService {
     ProductDTO getProductById(Long productId);
-    ProductsResponse getProducts(int gender, int apparel, int priceRange, int page, int size);
+    ProductsResponse getProducts(int gender, int apparel, int priceRange, int page, int size, String[] sort);
 }

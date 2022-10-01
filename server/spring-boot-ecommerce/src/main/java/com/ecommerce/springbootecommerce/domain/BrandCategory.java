@@ -11,28 +11,32 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "gender_category")
-public class GenderCategory {
+@Table(name = "brand_category")
+public class BrandCategory {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @NotNull
-    @Column(name = "gender_category_type")
+    @Column(name = "brand_category_type")
     private String type;
 
-    @OneToMany(mappedBy = "genderCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column
+    private String description;
+
+    @OneToMany(mappedBy = "brandCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 
     @OneToMany(mappedBy = "brandCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BrandCategoryImage> brandCategoryImages = new HashSet<>();
 
-    @ManyToMany(mappedBy = "genderCategories")
-    private Set<ApparelCategory> apparelCategories = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "brand_category_gender", joinColumns = @JoinColumn(name = "brand_category_id"), inverseJoinColumns = @JoinColumn(name = "gender_category_id"))
+    private Set<GenderCategory> genderCategories = new HashSet<>();
 
-    @ManyToMany(mappedBy = "genderCategories")
-    private Set<BrandCategory> brandCategories = new HashSet<>();
+    @ManyToMany(mappedBy = "brandCategories")
+    private Set<ApparelCategory> apparelCategories = new HashSet<>();
 
     public void add(Product product){
         if(product != null) {
@@ -41,10 +45,9 @@ public class GenderCategory {
             }
 
             products.add(product);
-            product.setGenderCategory(this);
+            product.setBrandCategory(this);
         }
     }
-
     public void add(BrandCategoryImage brandCategoryImage){
         if(brandCategoryImage != null) {
             if(brandCategoryImages == null) {
@@ -52,8 +55,7 @@ public class GenderCategory {
             }
 
             brandCategoryImages.add(brandCategoryImage);
-            brandCategoryImage.setGenderCategory(this);
+            brandCategoryImage.setBrandCategory(this);
         }
     }
-
 }

@@ -3,11 +3,9 @@ package com.ecommerce.springbootecommerce.domain;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -27,9 +25,14 @@ public class ApparelCategory {
     @OneToMany(mappedBy = "apparelCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "apparel_gender", joinColumns = @JoinColumn(name = "apparel_category_id"), inverseJoinColumns = @JoinColumn(name = "gender_category_id"))
+    @JoinTable(name = "apparel_category_gender", joinColumns = @JoinColumn(name = "apparel_category_id"), inverseJoinColumns = @JoinColumn(name = "gender_category_id"))
     private Set<GenderCategory> genderCategories = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "apparel_category_brand", joinColumns = @JoinColumn(name = "apparel_category_id"), inverseJoinColumns = @JoinColumn(name = "brand_category_id"))
+    private Set<BrandCategory> brandCategories = new HashSet<>();
 
     public void addProduct(Product product) {
         if( product != null) {

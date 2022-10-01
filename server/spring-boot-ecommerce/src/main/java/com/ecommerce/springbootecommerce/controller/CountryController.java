@@ -19,12 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/countries")
 public class CountryController {
-
     @Autowired
     ModelMapper modelMapper;
     @Autowired
     CountryRepository countryRepository;
-
     @GetMapping("/all")
     public ResponseEntity<?> getCountries(){
 

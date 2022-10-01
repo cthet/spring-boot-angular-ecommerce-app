@@ -1,9 +1,9 @@
 package com.ecommerce.springbootecommerce.domain;
 
+import com.ecommerce.springbootecommerce.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +39,7 @@ public class User {
     @ElementCollection(targetClass = Role.class)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Set<Role> role;
 
     public void addOrder(Order order){
         if(order != null) {
