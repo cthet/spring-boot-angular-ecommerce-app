@@ -1,0 +1,32 @@
+.container {
+  margin-top: 150px;
+}
+
+mat-card {
+  width: 100%;
+  min-width: max-content;
+  max-width: 100%;
+  border: 1px solid black;
+}
+
+.checkout {
+  text-decoration: none;
+}
+
+.large {
+  font-size: large;
+}
+
+.medium-important {
+  font-weight: 500;
+}
+
+.important {
+  font-weight: 600;
+}
+
+.image {
+  width: 200px;
+  min-width: 30%;
+  height: 70%;
+}

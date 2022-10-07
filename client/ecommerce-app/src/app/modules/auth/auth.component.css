@@ -1,0 +1,46 @@
+.container {
+  padding-top: 150px;
+}
+
+.card {
+  position: relative;
+  top: 150px;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: max-content;
+  padding: 10px;
+  z-index: 0;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 3%;
+}
+
+input {
+  width: 250px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+button {
+  width: 250px;
+}
+
+hr {
+  width: 250px;
+}
+
+mat-spinner {
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  height: max-content;
+  padding: 10px;
+  z-index: 100;
+}

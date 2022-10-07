@@ -1,0 +1,26 @@
+.cart {
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: #000;
+}
+
+.text-quantity {
+  margin-left: 0.5rem;
+  color: #000;
+}
+
+/* .active .mat-button {
+  color: white;
+  background-color: black;
+}
+
+.mat-button {
+  color: black;
+}
+
+.cart-status {
+  font-size: 16px;
+  float: left;
+  margin-top: 16px;
+  margin-left: 15px;
+} */

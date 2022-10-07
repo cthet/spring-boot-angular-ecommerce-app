@@ -1,0 +1,70 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  font-size: 62.5%;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: clamp(200px, 20vw, 2000px);
+  padding-right: clamp(200px, 20vw, 2000px);
+  background-color: rgba(0, 0, 0, 0);
+  background: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 100%, 0.8) 0,
+    hsla(0, 0%, 100%, 0.45) 70%,
+    hsla(0, 0%, 100%, 0)
+  );
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+}
+
+.gender-links {
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+.fa-grip-lines-vertical {
+  margin: 1rem;
+}
+
+.brand {
+  width: 100px;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.cart {
+  display: flex;
+  margin-right: 2rem;
+}
+
+.right-links {
+  display: flex;
+  justify-content: flex-end;
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .gender-links {
+    display: none;
+  }
+  .right-links {
+    display: none;
+  }
+}

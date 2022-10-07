@@ -1,22 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthComponent } from './components/auth/auth.component';
-import { AuthGuard } from './components/auth/auth.guard';
-import { CartDetailsComponent } from './components/cart-details/cart-details.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomeComponent } from './components/home/home.component';
-import { ProductsListComponent } from './components/products/products-list/products-list.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: 'products/:gender', component: ProductsListComponent },
-  { path: 'cart', component: CartDetailsComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('./modules/cart/cart.module').then((mod) => mod.CartModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then((mod) => mod.AuthModule),
+  },
+  {
+    path: ':gender',
+    loadChildren: () =>
+      import('./modules/gender/gender.module').then((mod) => mod.GenderModule),
+  },
+  // {
+  //   path: 'profile',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./modules/profile/profile.module').then(
+  //       (mod) => mod.ProfileModule
+  //     ),
+  // },
+  { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
