@@ -1,3 +1,115 @@
-* {
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+footer {
+  background-color: rgb(194, 194, 194);
+  color: #000;
   bottom: 0;
+  font-size: 62.5%;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 0;
+  padding: 10px 20px;
+}
+
+.brand-footer,
+.customer-service-footer,
+.payment-methods,
+.about-footer,
+.medias-footer {
+  width: 20%;
+  padding: 50px 0px;
+  min-height: 250px;
+}
+
+.customer-service-footer,
+.about-footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name-title {
+  font-size: 2rem;
+}
+
+.footer-txt {
+  padding-top: 1rem;
+  line-height: 1.4;
+  margin-right: 3rem;
+}
+
+.customer-service-title,
+.payment-methods-title,
+.brand-name,
+.medias-title {
+  font-size: 1rem;
+}
+
+.customer-service-footer ul,
+.about-footer ul {
+  padding-top: 1rem;
+  margin-left: 15px;
+}
+
+.customer-service-footer ul li,
+.about-footer ul li {
+  font-size: 0.8rem;
+}
+
+.payment-methods ul,
+.medias-footer ul {
+  padding-top: 1rem;
+}
+
+.payment-methods img {
+  width: 30px;
+}
+
+.payment-methods img{
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.medias-footer a { 
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+.medias-footer img {
+  width: 30px;
+}
+
+.copyright {
+  font-size: 1rem;
+  margin: 30px auto;
+}
+
+@media screen and (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .brand-footer,
+  .customer-service-footer,
+  .payment-methods,
+  .about-footer,
+  .medias-footer {
+    min-height: auto;
+    width: 50%;
+  }
+  .footer-about {
+    padding: 40px 0 0;
+  }
 }

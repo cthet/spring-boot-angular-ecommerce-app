@@ -1,43 +1,43 @@
 <nav class="navbar-container">
-    <!--gender-->
-    <div class="gender-links">
-      <a routerLink="/homme" routerLinkActive="active" class="men">homme</a>
-      <i class="fas fa-grip-lines-vertical"></i>
-      <a routerLink="/femme" routerLinkActive="active" class="women">femme</a>
-    </div>
+  <!--gender-->
+  <div class="gender-links">
+    <a routerLink="/homme" routerLinkActive="active" class="men">homme</a>
+    <i class="fas fa-grip-lines-vertical"></i>
+    <a routerLink="/femme" routerLinkActive="active" class="women">femme</a>
+  </div>
 
-    <!--E-commerce Brand-->
-    <a routerLink="/" class="brand">Shop</a>
+  <!--E-commerce Brand-->
+  <a routerLink="/" class="brand">Shop</a>
 
-    <div class="right-links">
-      <!--Cart-->
-      <app-cart-status class="cart"></app-cart-status>
-      <!--authentication-->
-      <a
-        *ngIf="!isLoggedIn"
-        routerLink="/auth"
-        routerLinkActive="active"
-        class="fa fa-user auth"
-      >
-      </a>
+  <div class="right-links">
+    <!--Cart-->
+    <app-cart-status class="cart"></app-cart-status>
+    <!--authentication-->
+    <a
+      *ngIf="!isLoggedIn"
+      routerLink="/auth"
+      routerLinkActive="active"
+      class="fa fa-user auth"
+    >
+    </a>
 
-      <!--logout-->
-      <a
-        *ngIf="isLoggedIn"
-        class="nav-item"
-        routerLink="/home"
-        (click)="logout()"
-      >
-        Logout
-      </a>
+    <!--logout-->
+    <a
+      *ngIf="isLoggedIn"
+      class="nav-item"
+      routerLink="/home"
+      (click)="logout()"
+    >
+      Logout
+    </a>
 
-      <!--profile-->
-      <a
-        *ngIf="isLoggedIn"
-        routerLink="/profile"
-        routerLinkActive="active"
-        class="fa fa-user"
-      >
-      </a>
+    <!--profile-->
+    <a
+      *ngIf="isLoggedIn"
+      routerLink="/profile"
+      routerLinkActive="active"
+      class="fa fa-user"
+    >
+    </a>
   </div>
 </nav>

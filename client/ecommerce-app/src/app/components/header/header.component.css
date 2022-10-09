@@ -10,15 +10,15 @@
   display: flex;
   align-items: center;
   position: absolute;
-  z-index: 1;
-  font-size: 62.5%;
   top: 0;
   left: 0;
   right: 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: clamp(200px, 20vw, 2000px);
-  padding-right: clamp(200px, 20vw, 2000px);
+  max-width: 1320px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  z-index: 1;
+  font-size: 62.5%;
   background-color: rgba(0, 0, 0, 0);
   background: linear-gradient(
     to bottom,
