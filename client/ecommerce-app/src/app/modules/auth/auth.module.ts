@@ -10,6 +10,7 @@ import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AuthComponent, LoginComponent, SignupComponent],
@@ -22,7 +23,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    StoreModule.forFeature('auth', fromAuth.reducers, {metaReducers: fromAuth.metaReducers})
   ],
 })
 export class AuthModule {}
