@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/modules/models/user';
+import { User } from 'src/app/modules/interfaces/models/user';
 import { CheckoutService } from 'src/app/modules/services/checkout.service';
 import { UserService } from 'src/app/modules/services/user.service';
 

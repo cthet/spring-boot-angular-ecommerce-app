@@ -8,8 +8,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable, of, Subscription } from 'rxjs';
-import { ApparelCategory } from 'src/app/modules/models/apparelCategory';
-import { PriceRangeCategory } from 'src/app/modules/models/priceRangeCategory';
+import { ApparelCategory } from 'src/app/modules/interfaces/models/apparelCategory';
+import { PriceRangeCategory } from 'src/app/modules/interfaces/models/priceRangeCategory';
 import { CategoriesService } from 'src/app/modules/services/categories.service';
 
 export interface responseApparels {

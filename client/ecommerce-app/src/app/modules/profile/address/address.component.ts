@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Address } from 'src/app/modules/models/address';
-import { Country } from 'src/app/modules/models/country';
+import { Address } from 'src/app/modules/interfaces/models/address';
+import { Country } from 'src/app/modules/interfaces/models/country';
 import { CheckoutService } from 'src/app/modules/services/checkout.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
@@ -18,7 +18,7 @@ export class AddressComponent implements OnInit {
   message: string = '';
   error: string = '';
 
-  countries =  new Observable<Country[]>;
+  countries = new Observable<Country[]>();
   code!: string;
 
   constructor(
@@ -48,7 +48,7 @@ export class AddressComponent implements OnInit {
   }
 
   addAddress() {
-    this.isLoading = true;   
+    this.isLoading = true;
     let address = new Address();
     address[`country`] = this.addressForm.value.country;
     address[`postCode`] = this.addressForm.value.postCode;

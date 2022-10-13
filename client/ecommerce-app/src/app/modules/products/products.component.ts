@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CategoriesService } from 'src/app/modules/services/categories.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-products',

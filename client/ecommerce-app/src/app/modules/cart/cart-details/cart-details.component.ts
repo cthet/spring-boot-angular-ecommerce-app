@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/modules/services/cart.service';
-import { CartItem } from 'src/app/modules/models/cart-Item';
-import { Product } from 'src/app/modules/models/product';
-import { Order } from 'src/app/modules/models/order';
+import { CartItem } from 'src/app/modules/interfaces/models/cart-Item';
+import { Product } from 'src/app/modules/interfaces/models/product';
+import { Order } from 'src/app/modules/interfaces/models/order';
 
 @Component({
   selector: 'app-cart-details',
@@ -10,7 +10,6 @@ import { Order } from 'src/app/modules/models/order';
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent implements OnInit {
-  
   cartItems: CartItem[] = [];
   order: Order = {
     totalPrice: this.cartService.totalPrice,

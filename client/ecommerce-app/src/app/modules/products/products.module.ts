@@ -1,34 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsListComponent } from './products-list/products-list.component';
-
-import { ProductsCategoryComponent } from './products-category/products-category.component';
-
-import { MatRadioModule } from '@angular/material/radio';
-
+import { BrandsComponent } from './brands/brands.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ReadyToWearComponent } from './ready-to-wear/ready-to-wear.component';
 import { ProductsRoutingModule } from './products-routing.module';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { CartComponent } from './modules/cart/cart/cart.component';
+import { ProductsComponent } from './products.component';
+import { productsReducer } from './home/store/home.reducer';
+import { StoreModule } from '@ngrx/store';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    ProductsListComponent,
-    ProductDetailComponent,
-    ProductsCategoryComponent,
-    CartComponent,
+    ProductsComponent,
+    HomeComponent,
+    ReadyToWearComponent,
+    BrandsComponent,
+    NavbarComponent,
   ],
   imports: [
-    MatPaginatorModule,
-    FormsModule,
     CommonModule,
-    MatRadioModule,
-    RouterModule,
     ProductsRoutingModule,
-    MatButtonModule,
+    StoreModule.forFeature('homeImage', productsReducer),
   ],
 })
 export class ProductsModule {}

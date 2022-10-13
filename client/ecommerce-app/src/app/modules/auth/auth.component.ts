@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Customer } from 'src/app/modules/models/customer';
+import { Customer } from 'src/app/modules/interfaces/models/customer';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { TokenStorageService } from 'src/app/modules/services/token-storage.service';
 export interface AuthResponse {

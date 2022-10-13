@@ -1,11 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
-import { Address } from '../models/address';
-import { Country } from '../models/country';
-import { OrderRequest } from '../models/orderRequest';
-import { PaymentInfo } from '../models/payment-info';
-import { User } from '../models/user';
+import { Address } from '../interfaces/models/address';
+import { Country } from '../interfaces/models/country';
+import { OrderRequest } from '../interfaces/models/orderRequest';
+import { PaymentInfo } from '../interfaces/models/payment-info';
+import { User } from '../interfaces/models/user';
 
 @Injectable({
   providedIn: 'root',

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Address } from 'src/app/modules/models/address';
-import { CartItem } from 'src/app/modules/models/cart-Item';
-import { Order } from 'src/app/modules/models/order';
-import { OrderItem } from 'src/app/modules/models/orderItem';
-import { OrderRequest } from 'src/app/modules/models/orderRequest';
-import { User } from 'src/app/modules/models/user';
+import { Address } from 'src/app/modules/interfaces/models/address';
+import { CartItem } from 'src/app/modules/interfaces/models/cart-Item';
+import { Order } from 'src/app/modules/interfaces/models/order';
+import { OrderItem } from 'src/app/modules/interfaces/models/orderItem';
+import { OrderRequest } from 'src/app/modules/interfaces/models/orderRequest';
+import { User } from 'src/app/modules/interfaces/models/user';
 import { CartService } from 'src/app/modules/services/cart.service';
 import { CheckoutService } from 'src/app/modules/services/checkout.service';
 

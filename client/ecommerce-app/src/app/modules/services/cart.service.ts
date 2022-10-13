@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { CartItem } from '../models/cart-Item';
-import { Product } from '../models/product';
+import { CartItem } from '../interfaces/models/cart-Item';
+import { Product } from '../interfaces/models/product';
 
 const CART_ITEMS = 'cart-items';
 

@@ -1,0 +1,13 @@
+.container {
+  height: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+}

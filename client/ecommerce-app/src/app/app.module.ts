@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NotfoundComponent } from './modules/products/notfound/notfound.component';
 import { CartStatusComponent } from './components/header/cart-status/cart-status.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,7 +27,7 @@ import { environment } from '../environments/environment';
     CartStatusComponent,
     FooterComponent,
     NotfoundComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
@@ -39,8 +39,11 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     MatTableModule,
     NgbModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

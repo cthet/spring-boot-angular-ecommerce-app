@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Product } from 'src/app/modules/models/product';
+import { Product } from 'src/app/modules/interfaces/models/product';
 import { CartService } from 'src/app/modules/services/cart.service';
 import { ProductsService } from 'src/app/modules/services/products.service';
 
@@ -26,7 +26,7 @@ export class ProductDetailComponent implements OnInit {
 
   fetchProduct(): void {
     this.gender = this.route.snapshot.params['gender'];
-    
+
     const productId = this.route.snapshot.params['id'];
     this.productService
       .fetchProduct(productId)

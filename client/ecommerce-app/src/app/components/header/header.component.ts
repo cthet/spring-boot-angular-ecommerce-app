@@ -8,11 +8,12 @@ import { TokenStorageService } from 'src/app/modules/services/token-storage.serv
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn = false;
+  isLoggedIn = false;  
+
   constructor(
     private tokenstorage: TokenStorageService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    ) {}
 
   ngOnInit(): void {
     this.checkLoggedIn();
@@ -33,5 +34,8 @@ export class HeaderComponent implements OnInit {
     this.authService.isConnected.subscribe((subscriber) => {
       this.isLoggedIn = subscriber;
     });
+  }
+
+  loadMenImages() {
   }
 }

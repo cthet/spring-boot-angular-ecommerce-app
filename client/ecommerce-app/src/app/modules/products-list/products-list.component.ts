@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/modules/services/products.service';
-import { Product } from 'src/app/modules/models/product';
+import { Product } from 'src/app/modules/interfaces/models/product';
 import { Subscription } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';

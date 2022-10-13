@@ -23,8 +23,7 @@ import { StoreModule } from '@ngrx/store';
     MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    AuthRoutingModule,
-    StoreModule.forFeature('auth', fromAuth.reducers, {metaReducers: fromAuth.metaReducers})
+    AuthRoutingModule
   ],
 })
 export class AuthModule {}

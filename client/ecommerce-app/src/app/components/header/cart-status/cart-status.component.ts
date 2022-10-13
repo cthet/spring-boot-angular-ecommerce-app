@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/modules/models/order';
+import { Order } from 'src/app/modules/interfaces/models/order';
 import { CartService } from 'src/app/modules/services/cart.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { CartService } from 'src/app/modules/services/cart.service';
 })
 export class CartStatusComponent implements OnInit {
   totalQuantity!: number;
-  
+
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {

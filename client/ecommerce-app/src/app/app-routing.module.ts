@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NotfoundComponent } from './modules/products/notfound/notfound.component';
+import { GenderGuard } from './modules/utility/gender.guards';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,8 +19,11 @@ const routes: Routes = [
   },
   {
     path: ':gender',
+    canActivate: [GenderGuard],
     loadChildren: () =>
-      import('./modules/gender/gender.module').then((mod) => mod.GenderModule),
+      import('./modules/products/products.module').then(
+        (mod) => mod.ProductsModule
+      ),
   },
   // {
   //   path: 'profile',

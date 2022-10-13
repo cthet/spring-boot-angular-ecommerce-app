@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Address } from 'src/app/modules/models/address';
-import { Country } from 'src/app/modules/models/country';
+import { Address } from 'src/app/modules/interfaces/models/address';
+import { Country } from 'src/app/modules/interfaces/models/country';
 import { CheckoutService } from 'src/app/modules/services/checkout.service';
 import { UserService } from 'src/app/modules/services/user.service';
 
@@ -14,9 +14,9 @@ import { UserService } from 'src/app/modules/services/user.service';
 export class CheckListAddressComponent implements OnInit {
   addresses!: Address[];
   addressFormEdit: boolean = false;
-    
+
   addressForm!: FormGroup;
-  countries =  new Observable<Country[]>;
+  countries = new Observable<Country[]>();
   isLoading = false;
   message: string = '';
   error: string = '';
@@ -42,7 +42,13 @@ export class CheckListAddressComponent implements OnInit {
         console.log(addresses);
       },
       error: () => {
-        const address = { id: 0, country: '', postCode: 0, city: '', street: '' };
+        const address = {
+          id: 0,
+          country: '',
+          postCode: 0,
+          city: '',
+          street: '',
+        };
         this.addresses = [address];
       },
     });
@@ -66,15 +72,17 @@ export class CheckListAddressComponent implements OnInit {
 
   //allow to check if user's addresslist is empty
   emptyAddressList() {
-    const emptyAdress = [{ id: 0, country: '', postCode: 0, city: '', street: '' }];
+    const emptyAdress = [
+      { id: 0, country: '', postCode: 0, city: '', street: '' },
+    ];
     return this.addresses === emptyAdress;
   }
 
   //when user select a known address
   onSelectAddress(address: Address) {
-    this.checkoutService.address$.next(address);    
+    this.checkoutService.address$.next(address);
     this.message = 'Shipping address successfully added !';
-    
+
     this.next.emit(true);
   }
 
@@ -114,6 +122,4 @@ export class CheckListAddressComponent implements OnInit {
   onHandleError() {
     this.error = '';
   }
-
-
 }
