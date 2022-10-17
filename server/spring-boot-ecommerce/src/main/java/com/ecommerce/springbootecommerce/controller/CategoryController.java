@@ -20,7 +20,7 @@ public class CategoryController {
     @GetMapping("/brands")
     public ResponseEntity<?> getBrandsByGenderId(@RequestParam(required = true) int genderId) {
         try {
-             BrandCategoriesDTO brandCategoriesDTO = brandCategoryService.getBrandCategoriesByGender(genderId);
+             BrandCategoriesDTO brandCategoriesDTO = brandCategoryService.getBrandCategoriesByGenderId(genderId);
 
             return new ResponseEntity<>(brandCategoriesDTO, HttpStatus.OK);
 
@@ -31,9 +31,9 @@ public class CategoryController {
 
     @GetMapping("/apparels")
     public ResponseEntity<?> getApparelsCategoryByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
-                                                                 @RequestParam int brandId) {
+                                                                 @RequestParam(defaultValue = "0") int brandId) {
         try {
-            ApparelCategoriesDTO apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(brandId, genderId);
+            ApparelCategoriesDTO apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(genderId, brandId);
 
             return new ResponseEntity<>(apparelCategoriesDTO, HttpStatus.OK);
 

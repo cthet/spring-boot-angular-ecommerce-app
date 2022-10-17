@@ -1,28 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BrandsComponent } from './brands/brands.component';
-import { ReadyToWearComponent } from './ready-to-wear/ready-to-wear.component';
 import { ProductsComponent } from './products.component';
 import { HomeComponent } from './home/home.component';
-import { GenderGuard } from '../utility/gender.guards';
+import { BrandsComponent } from './brands/brands.component';
+import { ApparelCategoriesComponent } from './apparel-categories/apparel-categories.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ProductsComponent,
-    canActivate: [GenderGuard],
     children: [
       {
         path: '',
         component: HomeComponent,
       },
       {
-        path: 'brands',
+        path: 'marques/:brand',
         component: BrandsComponent,
       },
       {
-        path: 'ready-to-wear',
-        component: ReadyToWearComponent,
+        path: 'pret-a-porter/:category',
+        component: ApparelCategoriesComponent,
       },
     ],
   },

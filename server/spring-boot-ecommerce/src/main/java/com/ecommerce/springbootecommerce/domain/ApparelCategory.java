@@ -25,7 +25,6 @@ public class ApparelCategory {
     @OneToMany(mappedBy = "apparelCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();
 
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "apparel_category_gender", joinColumns = @JoinColumn(name = "apparel_category_id"), inverseJoinColumns = @JoinColumn(name = "gender_category_id"))
     private Set<GenderCategory> genderCategories = new HashSet<>();

@@ -24,10 +24,11 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
 
     @Autowired
     BrandCategoryImageRepository brandCategoryImageRepository;
+
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
     @Override
-    public BrandCategoriesDTO getBrandCategoriesByGender(int gender) {
+    public BrandCategoriesDTO getBrandCategoriesByGenderId(int gender) {
 
         List<BrandCategory> brandCategories = brandCategoryRepository.findByGenderCategoryId(gender);
 

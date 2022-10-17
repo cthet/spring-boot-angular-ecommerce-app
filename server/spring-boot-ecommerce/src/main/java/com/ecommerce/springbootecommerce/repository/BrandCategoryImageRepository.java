@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface BrandCategoryImageRepository extends JpaRepository<BrandCategoryImage, Integer> {
 
-    Optional<BrandCategoryImage> findByBrandCategoryIdAndGenderCategoryId(int brandId, int genderId);
+    Optional<BrandCategoryImage> findByBrandCategoryIdAndGenderCategoryId(int brandId, int gender);
 }

@@ -21,7 +21,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
     @Override
-    public ApparelCategoriesDTO getApparelCategoriesByBrandIdAndGenderId(int brand, int gender) {
+    public ApparelCategoriesDTO getApparelCategoriesByBrandIdAndGenderId(int gender, int brand) {
 
         List<ApparelCategory> apparelCategories;
 

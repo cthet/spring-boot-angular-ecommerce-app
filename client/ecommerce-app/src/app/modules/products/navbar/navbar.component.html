@@ -1,14 +1,56 @@
-<nav class="navbar">
-  <div class="container">
+<video loop autoplay muted>
+  <source
+    src="https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/videos/btw_window_h_1900x851_fr-1080.mp4"
+    type="video/mp4"
+  />
+</video>
 
-    <a  class="button" 
-    [routerLink]=[brands]
-    routerLinkActive="active" > Marques </a>
-    <a
-      class="button"
-      routerLinkActive="active"
-    >
-      Prêt à porter
-    </a>
-  </div>
+<nav class="navbar">
+  <ul>
+    <li class="brands-dropdown">
+      <a [routerLink]="['./marques']" routerLinkActive="active" class="col-12">
+        <span class="mx-auto">Marques</span>
+      </a>
+
+      <ul class="brands-dropdown-content">
+        <ng-container *ngFor="let brand of brands$ | async">
+          <li>
+            <a
+              [routerLink]="[brand.brand_category | BrandCase | HyphenateCase]"
+              routerLinkActive="active"
+              class="item-txt"
+            >
+              {{ brand.brand_category }}
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+
+    <li class="apparel-categories-dropdown">
+      <a
+        [routerLink]="['./pret-a-porter']"
+        routerLinkActive="active"
+        class="readytowear-drop"
+      >
+        Prêt à porter
+      </a>
+
+      <ul class="apparel-categories-dropdown-content">
+        <ng-container *ngFor="let category of apparelCategories$ | async">
+          <li>
+            <a
+              [routerLink]="[
+                category.apparel_category | ApparelCategoryCase | HyphenateCase
+              ]"
+              routerLinkActive="active"
+              class="item-txt"
+            >
+              {{ category.apparel_category }}
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </li>
+  </ul>
 </nav>

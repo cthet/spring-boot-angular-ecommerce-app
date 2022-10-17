@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { loadHomeImages } from '../home/store/home.actions';
+import { setHomeImages } from '../home/store/home.actions';
 import {
   selectfooterHomeImage,
   selectheaderHomeImage,
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       this.gender = item['gender'];
       if (item['gender'] == 'femme') {
         this.store.dispatch(
-          loadHomeImages({
+          setHomeImages({
             headerImage:
               'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/landingpage/Big_desktop-exquisite-gucci_2x_20220930164026.jpg',
             footerImage:
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
         );
       } else {
         this.store.dispatch(
-          loadHomeImages({
+          setHomeImages({
             headerImage:
               'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/d0c53a9f01a948849467309582c85dce.jpg',
             footerImage:
