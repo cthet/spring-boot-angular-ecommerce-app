@@ -63,6 +63,11 @@ nav a {
   font-size: 1.2rem;
 }
 
+.gender-links a:hover {
+  color: rgb(179, 117, 60);
+}
+
+
 @media screen and (max-width: 768px) {
   .gender-links {
     display: none;

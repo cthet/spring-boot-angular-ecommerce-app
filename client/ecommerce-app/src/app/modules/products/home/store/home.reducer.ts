@@ -11,7 +11,7 @@ export const initialState: HomeImageState = {
   footerImage: '',
 };
 
-export const productsReducer = createReducer<HomeImageState>(
+export const homeReducer = createReducer<HomeImageState>(
   initialState,
 
   on(setHomeImages, (state, { headerImage, footerImage }) => ({

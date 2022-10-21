@@ -1,16 +1,17 @@
-<video loop autoplay muted>
-  <source
-    src="https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/videos/btw_window_h_1900x851_fr-1080.mp4"
-    type="video/mp4"
-  />
-</video>
+<img *ngIf="brand$ | async" [src]="(brand$ | async)?.image_url" />
+<video
+  *ngIf="(video$ | async) && !(brand$ | async)"
+  [src]="video$ | async"
+  type="video/mp4"
+  loop
+  autoplay
+  muted
+></video>
 
 <nav class="navbar">
   <ul>
     <li class="brands-dropdown">
-      <a [routerLink]="['./marques']" routerLinkActive="active" class="col-12">
-        <span class="mx-auto">Marques</span>
-      </a>
+      <a [routerLink]="['./marques']"> Marques </a>
 
       <ul class="brands-dropdown-content">
         <ng-container *ngFor="let brand of brands$ | async">
@@ -18,7 +19,7 @@
             <a
               [routerLink]="[brand.brand_category | BrandCase | HyphenateCase]"
               routerLinkActive="active"
-              class="item-txt"
+              (click)="fetchBrandDatas(brand.id)"
             >
               {{ brand.brand_category }}
             </a>
@@ -28,13 +29,7 @@
     </li>
 
     <li class="apparel-categories-dropdown">
-      <a
-        [routerLink]="['./pret-a-porter']"
-        routerLinkActive="active"
-        class="readytowear-drop"
-      >
-        Prêt à porter
-      </a>
+      <a [routerLink]="['./pret-a-porter']"> Prêt à porter </a>
 
       <ul class="apparel-categories-dropdown-content">
         <ng-container *ngFor="let category of apparelCategories$ | async">

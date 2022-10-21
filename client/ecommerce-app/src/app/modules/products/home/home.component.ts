@@ -14,7 +14,6 @@ import {
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  gender!: string;
   headerImage$ = this.store.select(selectheaderHomeImage);
   footerImage$ = this.store.select(selectfooterHomeImage);
 
@@ -22,7 +21,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((item) => {
-      this.gender = item['gender'];
       if (item['gender'] == 'femme') {
         this.store.dispatch(
           setHomeImages({

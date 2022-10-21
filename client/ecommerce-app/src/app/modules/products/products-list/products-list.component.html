@@ -1,5 +1,12 @@
 <div class="container">
-  <div class="row">
+  <div class="brand-container">
+    <h1>{{ (brand$ | async)?.brand_category }}</h1>
+    <p>{{ (brand$ | async)?.description }}</p>
+    <app-products-category></app-products-category>
+  </div>
+</div>
+
+<!-- <div class="row">
     <div class="col-sm-3">
       <app-products-category
         (apparelsCategory)="onSelectApparels($event)"
@@ -41,5 +48,4 @@
       (page)="handlePageEvent($event)"
     >
     </mat-paginator>
-  </div>
-</div>
+  </div> -->

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from './products.component';
 import { HomeComponent } from './home/home.component';
 import { BrandsComponent } from './brands/brands.component';
-import { ApparelCategoriesComponent } from './apparel-categories/apparel-categories.component';
+import { ProductsListComponent } from './products-list/products-list.component';
 
 const routes: Routes = [
   {
@@ -15,12 +15,20 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'marques/:brand',
+        path: 'marques',
         component: BrandsComponent,
       },
       {
+        path: 'marques/:brand',
+        component: ProductsListComponent,
+      },
+      {
+        path: 'pret-a-porter',
+        component: ProductsListComponent,
+      },
+      {
         path: 'pret-a-porter/:category',
-        component: ApparelCategoriesComponent,
+        component: ProductsListComponent,
       },
     ],
   },

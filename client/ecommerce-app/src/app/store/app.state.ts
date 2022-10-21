@@ -1,9 +1,9 @@
-import { ApparelCategoriesState } from '../modules/products/apparel-categories/store/apparel-categories.reducer';
-import { BrandState } from '../modules/products/brands/store/brands.reducer';
+import { ProductsState } from '../modules/products/products-list/store/product-list.reducer';
 import { HomeImageState } from '../modules/products/home/store/home.reducer';
+import { NavbarState } from '../modules/products/navbar/store/navbar.reducer';
 
 export interface AppState {
-  homeImage: HomeImageState;
-  brands: BrandState;
-  apparelCategories: ApparelCategoriesState;
+  home: HomeImageState;
+  navbar: NavbarState;
+  products: ProductsState;
 }

@@ -6,6 +6,13 @@
   padding: 0;
 }
 
+img {
+  width: 100%;
+  max-height: 550px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
 video {
   width: 100%;
 }
@@ -30,7 +37,6 @@ video {
   min-width: 500px;
 }
 
-
 ul {
   padding: 0;
   list-style: none;
@@ -49,6 +55,7 @@ ul li a {
   color: rgb(0, 0, 0);
   text-decoration: none;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 ul li ul.brands-dropdown-content,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { TokenStorageService } from 'src/app/modules/services/token-storage.service';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,13 @@ import { TokenStorageService } from 'src/app/modules/services/token-storage.serv
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn = false;  
+  isLoggedIn = false;
 
   constructor(
     private tokenstorage: TokenStorageService,
     private authService: AuthService,
-    ) {}
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.checkLoggedIn();
@@ -36,6 +39,4 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  loadMenImages() {
-  }
 }

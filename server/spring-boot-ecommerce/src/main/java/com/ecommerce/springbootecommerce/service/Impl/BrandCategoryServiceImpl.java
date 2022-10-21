@@ -27,6 +27,8 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
 
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
+
+
     @Override
     public BrandCategoriesDTO getBrandCategoriesByGenderId(int gender) {
 
@@ -58,5 +60,22 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
 
         return brandCategoriesDTO;
 
+    }
+
+    @Override
+    public BrandCategoryDTO getBrandCategoryByIdAndGenderId(int id, int gender) {
+        BrandCategory brandCategory = brandCategoryRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("No Brand found in database!", HttpStatus.NOT_FOUND));
+
+        BrandCategoryImage brandCategoryImage = brandCategoryImageRepository.findByBrandCategoryIdAndGenderCategoryId(id, gender)
+                .orElseThrow(() -> new ApiRequestException("No Brand image found in database!", HttpStatus.NOT_FOUND));
+
+        BrandCategoryDTO brandCategoryDTO = new BrandCategoryDTO();
+        brandCategoryDTO.setId(brandCategory.getId());
+        brandCategoryDTO.setBrand(brandCategory.getType());
+        brandCategoryDTO.setDescription(brandCategory.getDescription());
+        brandCategoryDTO.setImageUrl(brandCategoryImage.getImage_url());
+
+        return brandCategoryDTO;
     }
 }

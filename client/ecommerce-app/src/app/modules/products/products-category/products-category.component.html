@@ -1,4 +1,10 @@
-<div class="row">
+<ul>
+  <li *ngFor="let category of apparelcategories$ | async">
+    <mat-checkbox>{{ category.apparel_category }}</mat-checkbox>
+  </li>
+</ul>
+
+<!-- <div class="row">
   <div class="col-sm-12 mb-4 me-4">
     <div class="card">
       <div class="card-body">
@@ -32,4 +38,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
