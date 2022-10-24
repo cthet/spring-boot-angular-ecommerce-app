@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
@@ -28,14 +30,14 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "1") int gender,
-                                                        @RequestParam(defaultValue = "1")  int apparel,
-                                                        @RequestParam(defaultValue = "1") int brand,
+    public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "2") int gender,
+                                                        @RequestParam(defaultValue = "0") int brand,
+                                                        @RequestParam("category") List<Integer> category,
                                                         @RequestParam(defaultValue = "0")  int page,
                                                         @RequestParam(defaultValue = "10") int size,
-                                                        @RequestParam(defaultValue = "id,desc") String[] sort) {
+                                                        @RequestParam(defaultValue = "id,asc") String[] sort) {
         try {
-            return new ResponseEntity<>(productService.getProducts(gender, apparel, brand, page, size, sort), HttpStatus.OK);
+            return new ResponseEntity<>(productService.getProducts(gender, brand, category, page, size, sort), HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

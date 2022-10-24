@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map, catchError, of } from 'rxjs';
-import { ApparelCategoriesService } from 'src/app/modules/services/apparel-categories.service';
 import { BrandsService } from 'src/app/modules/services/brands.service';
-import { loadApparelCategoriesByGenderIdAndBrandId, loadApparelCategoriesByGenderIdAndBrandIdFailure, loadApparelCategoriesByGenderIdAndBrandIdSuccess, loadBrandByGenderIdAndBrandId, loadBrandByGenderIdAndBrandIdFailure, loadBrandByGenderIdAndBrandIdSuccess } from './product-list.action';
+import { ProductsService } from 'src/app/modules/services/products.service';
+import { loadBrandByGenderIdAndBrandId, loadBrandByGenderIdAndBrandIdFailure, loadBrandByGenderIdAndBrandIdSuccess, loadProductsByGenderIdAndBrandIdAndCategoryId, loadProductsByGenderIdAndBrandIdAndCategoryIdFailure, loadProductsByGenderIdAndBrandIdAndCategoryIdSuccess } from './product-list.action';
 
 @Injectable()
 export class ProductsEffects {
   constructor(
     private actions$: Actions,
     private brandService: BrandsService,
-    private apparelCategoriesService: ApparelCategoriesService
+    private productsService: ProductsService
   ) {}
 
   loadBrand$ = createEffect(() =>
@@ -27,26 +27,17 @@ export class ProductsEffects {
     )
   );
 
-  loadApparelCategories$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(loadApparelCategoriesByGenderIdAndBrandId),
-      exhaustMap((action) =>
-        this.apparelCategoriesService
-          .fetchApparelCategoriesByGenderIdAndBrandId(
-            action.genderId,
-            action.brandId
-          )
-          .pipe(
-            map((ResponseApparelCategories) =>
-            loadApparelCategoriesByGenderIdAndBrandIdSuccess({
-                apparelCategories: ResponseApparelCategories.apparel_categories,
-              })
-            ),
-            catchError((error) =>
-              of(loadApparelCategoriesByGenderIdAndBrandIdFailure({ error: error }))
-            )
-          )
-      )
+  loadProducts$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(loadProductsByGenderIdAndBrandIdAndCategoryId),
+    exhaustMap((action) =>
+      this.productsService.fetchProducts({gender: action.genderId, category: action.categoryId, brand:action.brandId})
+        .pipe(
+          map((ResponseProducts) => loadProductsByGenderIdAndBrandIdAndCategoryIdSuccess({ products: ResponseProducts.products })),
+          catchError((error) => of(loadProductsByGenderIdAndBrandIdAndCategoryIdFailure({ error: error })))
+        )
     )
-  );
+  )
+);
+
 }

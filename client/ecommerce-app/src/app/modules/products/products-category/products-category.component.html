@@ -1,9 +1,17 @@
-<ul>
-  <li *ngFor="let category of apparelcategories$ | async">
-    <mat-checkbox>{{ category.apparel_category }}</mat-checkbox>
-  </li>
-</ul>
-
+<div class="container">
+  <h2>Catégories</h2>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel title="Prêt à porter">
+      <ng-template ngbPanelContent>
+        <ul>
+          <li *ngFor="let category of apparelcategories$ | async">
+            <mat-checkbox>{{ category.apparel_category }}</mat-checkbox>
+          </li>
+        </ul>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>
 <!-- <div class="row">
   <div class="col-sm-12 mb-4 me-4">
     <div class="card">

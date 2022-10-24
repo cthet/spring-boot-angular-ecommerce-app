@@ -5,7 +5,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { selectApparelCategories } from '../products-list/store/product-list.selector';
+import { selectApparelCategories } from './store/product-category.selector';
 
 // export interface responseApparels {
 //   gender: string;

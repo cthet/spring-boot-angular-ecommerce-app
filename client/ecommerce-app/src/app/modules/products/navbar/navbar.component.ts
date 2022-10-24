@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
+import { loadApparelCategoriesByGenderIdAndBrandId } from '../products-category/store/product-category.action';
 import {
-  loadApparelCategoriesByGenderIdAndBrandId,
   loadBrandByGenderIdAndBrandId,
+  loadProductsByGenderIdAndBrandIdAndCategoryId,
   RemoveBrand,
 } from '../products-list/store/product-list.action';
 import { selectBrand } from '../products-list/store/product-list.selector';
@@ -87,6 +88,14 @@ export class NavbarComponent implements OnInit {
       loadApparelCategoriesByGenderIdAndBrandId({
         genderId: this.genderId,
         brandId: brandId,
+      })
+    );
+    this.store.dispatch(
+      loadProductsByGenderIdAndBrandIdAndCategoryId({
+        genderId: this.genderId,
+        categoryId: 0,
+        brandId: brandId,
+
       })
     );
   }

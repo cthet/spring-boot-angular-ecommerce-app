@@ -1,17 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { selectBrand, selectApparelCategories } from './store/product-list.selector';
+import { selectBrand, selectProducts} from './store/product-list.selector';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ProductsListComponent implements OnInit {
   brand$ = this.store.select(selectBrand);
+  products$ = this.store.select(selectProducts);
   
 
   // @Input()

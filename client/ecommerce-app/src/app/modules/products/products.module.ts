@@ -8,8 +8,7 @@ import { homeReducer } from './home/store/home.reducer';
 import { StoreModule } from '@ngrx/store';
 import { HomeComponent } from './home/home.component';
 import { EffectsModule } from '@ngrx/effects';
-import { ApparelCategoriesComponent } from './apparel-categories/apparel-categories.component';
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { BrandPipe } from '../utility/brandsPipe';
 import { HyphenPipe } from '../utility/hyphenPipe';
@@ -21,13 +20,16 @@ import { productsReducer } from './products-list/store/product-list.reducer';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsEffects } from './products-list/store/product-list.effects';
 import { ProductsCategoryComponent } from './products-category/products-category.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsCategoryEffects } from './products-category/store/product-category.effect';
+import { productsCategoryReducer } from './products-category/store/product-category.reducer';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     NavbarComponent,
     HomeComponent,
-    ApparelCategoriesComponent,
     BrandsComponent,
     ProductsListComponent,
     ProductsCategoryComponent,
@@ -36,13 +38,20 @@ import { ProductsCategoryComponent } from './products-category/products-category
     ApparelCategoryPipe,
   ],
   imports: [
-    MatCheckboxModule,
     CommonModule,
     ProductsRoutingModule,
+    NgbModule,
+    MatCheckboxModule,
+    MatCardModule,
     StoreModule.forFeature('navbar', navbarReducer),
     StoreModule.forFeature('home', homeReducer),
     StoreModule.forFeature('products', productsReducer),
-    EffectsModule.forFeature([NavbarEffects, ProductsEffects]),
+    StoreModule.forFeature('categories', productsCategoryReducer),
+    EffectsModule.forFeature([
+      NavbarEffects,
+      ProductsEffects,
+      ProductsCategoryEffects,
+    ]),
   ],
 })
 export class ProductsModule {}

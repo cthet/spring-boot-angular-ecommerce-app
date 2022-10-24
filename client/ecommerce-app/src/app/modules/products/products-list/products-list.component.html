@@ -1,8 +1,35 @@
-<div class="container">
-  <div class="brand-container">
+<div class="brand-container">
+  <div class="container">
     <h1>{{ (brand$ | async)?.brand_category }}</h1>
     <p>{{ (brand$ | async)?.description }}</p>
-    <app-products-category></app-products-category>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <app-products-category></app-products-category>
+    </div>
+    <div class="col-sm-9 pt-4 pb-4">
+      <div class="main">
+        <mat-card class="custom" *ngFor="let product of products$ | async">
+          <img
+            mat-card-image
+            [src]="[product.image_url]"
+            [alt]="[product.product_name]"
+          />
+          <div class="middle">
+            <div class="text-middle">Voir détails</div>
+          </div>
+          <mat-card-content>
+            <h6 class="title">{{ (brand$ | async)?.brand_category }}</h6>
+            <p class="price">
+              {{ product.unit_price | currency: "EUR" }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </div>
 </div>
 

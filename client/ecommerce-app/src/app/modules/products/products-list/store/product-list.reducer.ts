@@ -1,26 +1,26 @@
 import { createReducer, on } from '@ngrx/store';
-import { ApparelCategory } from 'src/app/modules/interfaces/models/apparelCategory';
 import { Brand } from 'src/app/modules/interfaces/models/brand';
+import { Product } from 'src/app/modules/interfaces/models/product';
 import {
   RemoveBrand,
   loadBrandByGenderIdAndBrandId,
   loadBrandByGenderIdAndBrandIdSuccess,
   loadBrandByGenderIdAndBrandIdFailure,
-  loadApparelCategoriesByGenderIdAndBrandId,
-  loadApparelCategoriesByGenderIdAndBrandIdSuccess,
-  loadApparelCategoriesByGenderIdAndBrandIdFailure,
+  loadProductsByGenderIdAndBrandIdAndCategoryId,
+  loadProductsByGenderIdAndBrandIdAndCategoryIdSuccess,
+  loadProductsByGenderIdAndBrandIdAndCategoryIdFailure,
 } from './product-list.action';
 
 export interface ProductsState {
   brand: Brand | null;
-  apparelCategories: ApparelCategory[];
+  products: Product[];
   error: string | null;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const initialState: ProductsState = {
   brand: null,
-  apparelCategories: [],
+  products: [],
   error: null,
   status: 'pending',
 };
@@ -53,19 +53,19 @@ export const productsReducer = createReducer<ProductsState>(
     status: 'error',
   })),
 
-  on(loadApparelCategoriesByGenderIdAndBrandId, (state) => ({
+  on(loadProductsByGenderIdAndBrandIdAndCategoryId, (state) => ({
     ...state,
     status: 'loading',
   })),
 
-  on(loadApparelCategoriesByGenderIdAndBrandIdSuccess, (state, { apparelCategories }) => ({
+  on(loadProductsByGenderIdAndBrandIdAndCategoryIdSuccess, (state, { products }) => ({
     ...state,
-    apparelCategories: apparelCategories,
+    products: [...state.products, ...products],
     error: null,
     status: 'success',
   })),
 
-  on(loadApparelCategoriesByGenderIdAndBrandIdFailure, (state, { error }) => ({
+  on(loadProductsByGenderIdAndBrandIdAndCategoryIdFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',

@@ -4,6 +4,7 @@ import { ProductsComponent } from './products.component';
 import { HomeComponent } from './home/home.component';
 import { BrandsComponent } from './brands/brands.component';
 import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductComponent } from '../product/product.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,16 @@ const routes: Routes = [
         component: ProductsListComponent,
       },
     ],
+  },
+  {
+    path: 'cart',
+    loadChildren: () =>
+      import('../../modules/cart/cart.module').then((mod) => mod.CartModule),
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('../../modules/auth/auth.module').then((mod) => mod.AuthModule),
   },
 ];
 

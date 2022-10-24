@@ -7,16 +7,14 @@ import { GenderGuard } from './modules/utility/gender.guards';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  {
-    path: 'cart',
-    loadChildren: () =>
-      import('./modules/cart/cart.module').then((mod) => mod.CartModule),
-  },
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((mod) => mod.AuthModule),
-  },
+
+  // {
+  //   path: 'product',
+  //   loadChildren: () =>
+  //   import('./modules/product/product.module').then(
+  //     (mod) => mod.ProductModule
+  //   ),
+  // },
   {
     path: ':gender',
     canActivate: [GenderGuard],
@@ -24,7 +22,8 @@ const routes: Routes = [
       import('./modules/products/products.module').then(
         (mod) => mod.ProductsModule
       ),
-  },
+  },  
+
   // {
   //   path: 'profile',
   //   canActivate: [AuthGuard],

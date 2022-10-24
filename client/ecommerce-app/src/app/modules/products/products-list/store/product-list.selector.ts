@@ -9,7 +9,7 @@ export const selectBrand = createSelector(
   (state: ProductsState) => state.brand
 );
 
-export const selectApparelCategories = createSelector(
+export const selectProducts = createSelector(
   selectProductsState,
-  (state: ProductsState) => state.apparelCategories
+  (state: ProductsState) => state.products
 );

@@ -22,7 +22,7 @@ public class BrandCategory {
     @Column(name = "brand_category_type")
     private String type;
 
-    @Column
+    @Column(columnDefinition = "TEXT", length = 2048)
     private String description;
 
     @OneToMany(mappedBy = "brandCategory", cascade = CascadeType.ALL, orphanRemoval = true)

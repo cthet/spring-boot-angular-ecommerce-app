@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { ApparelCategory } from 'src/app/modules/interfaces/models/apparelCategory';
 import { Brand } from 'src/app/modules/interfaces/models/brand';
+import { Product } from 'src/app/modules/interfaces/models/product';
 
 export const loadBrandByGenderIdAndBrandId = createAction(
   '[Products Component] Load Brand',
@@ -9,7 +9,7 @@ export const loadBrandByGenderIdAndBrandId = createAction(
 
 export const loadBrandByGenderIdAndBrandIdSuccess = createAction(
   '[Products Component] Load Brand Success',
-  props<{ brand: Brand}>()
+  props<{ brand: Brand }>()
 );
 
 export const loadBrandByGenderIdAndBrandIdFailure = createAction(
@@ -17,22 +17,27 @@ export const loadBrandByGenderIdAndBrandIdFailure = createAction(
   props<{ error: string }>()
 );
 
-export const RemoveBrand = createAction(
-  '[Products Image] Remove Brand',
-  props
-);
+export const RemoveBrand = createAction('[Products Image] Remove Brand', props);
 
-export const loadApparelCategoriesByGenderIdAndBrandId = createAction(
+
+export const loadProductsByGenderIdAndBrandIdAndCategoryId = createAction(
   '[Products Component] Load ApparelCategories',
-  props<{ genderId: number; brandId: number }>()
+  props<{ genderId: number; brandId: number; categoryId: number }>()
 );
 
-export const loadApparelCategoriesByGenderIdAndBrandIdSuccess = createAction(
-  '[Products Component] Load ApparelCategories Success',
-  props<{ apparelCategories: ApparelCategory[] }>()
-);
+export const loadProductsByGenderIdAndBrandIdAndCategoryIdSuccess =
+  createAction(
+    '[Products Component] Load ApparelCategories Success',
+    props<{ products: Product[] }>()
+  );
 
-export const loadApparelCategoriesByGenderIdAndBrandIdFailure = createAction(
-  '[Products Component] Load ApparelCategories Failure',
-  props<{ error: string }>()
+export const loadProductsByGenderIdAndBrandIdAndCategoryIdFailure =
+  createAction(
+    '[Products Component] Load ApparelCategories Failure',
+    props<{ error: string }>()
+  );
+
+export const RemoveProductsByGenderIdAndBrandIdAndCategoryId = createAction(
+  '[Products Component] Load ApparelCategories',
+  props<{ genderId: number; brandId: number; categoryId: number }>()
 );

@@ -12,14 +12,14 @@ export class ProductsService {
 
   fetchProducts(params: any): Observable<ResponseProducts> {
     return this.http.get<ResponseProducts>(
-      `http://localhost:8080/products/search`,
+      `http://localhost:8080/api/products`,
       { params }
     );
   }
 
   fetchProduct(productId: number): Observable<Product> {
     return this.http.get<Product>(
-      `http://localhost:8080/products/${productId}`
+      `http://localhost:8080/api/product/${productId}`
     );
   }
 }
