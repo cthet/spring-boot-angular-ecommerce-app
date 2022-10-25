@@ -9,6 +9,7 @@ import {
   loadBrandsByGenderIdFailure,
   loadApparelCategoriesBygenderIdFailure,
   loadApparelCategoriesBygenderIdSuccess,
+  setVideoSuccess,
 } from './navbar.actions';
 
 export interface NavbarState {
@@ -66,9 +67,13 @@ export const navbarReducer = createReducer<NavbarState>(
     status: 'error',
   })),
 
-  on(setVideo, (state, { video }) => ({
+  on(setVideo, (state) => ({
     ...state,
-    video: video,
+  })),
+
+  on(setVideoSuccess, (state, {video}) => ({
+    ...state,
+    video: video
   })),
 
 

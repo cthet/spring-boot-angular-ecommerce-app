@@ -5,7 +5,7 @@
       <ng-template ngbPanelContent>
         <ul>
           <li *ngFor="let category of apparelcategories$ | async">
-            <mat-checkbox>{{ category.apparel_category }}</mat-checkbox>
+            <mat-checkbox (change)="fetchApparelsByCategory(category.id)">{{ category.apparel_category }}</mat-checkbox>
           </li>
         </ul>
       </ng-template>

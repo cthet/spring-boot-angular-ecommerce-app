@@ -1,38 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, catchError, of } from 'rxjs';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { map, catchError, of, mergeMap } from 'rxjs';
+import { selectGenderId } from 'src/app/components/header/store/header.selector';
 import { ApparelCategoriesService } from 'src/app/modules/services/apparel-categories.service';
+import { AppState } from 'src/app/store/app.state';
 import {
-  loadApparelCategoriesByGenderIdAndBrandId,
-  loadApparelCategoriesByGenderIdAndBrandIdSuccess,
-  loadApparelCategoriesByGenderIdAndBrandIdFailure,
+  loadApparelCategoriesByBrandId,
+  loadApparelCategoriesByBrandIdSuccess,
+  loadApparelCategoriesByBrandIdFailure,
 } from './product-category.action';
 
 @Injectable()
 export class ProductsCategoryEffects {
   constructor(
     private actions$: Actions,
-    private apparelCategoriesService: ApparelCategoriesService
+    private apparelCategoriesService: ApparelCategoriesService,
+    private store: Store<AppState>
   ) {}
 
   loadApparelCategories$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(loadApparelCategoriesByGenderIdAndBrandId),
-      exhaustMap((action) =>
+      ofType(loadApparelCategoriesByBrandId),
+      concatLatestFrom(action => this.store.select(selectGenderId)),
+      mergeMap(([action, genderId]) =>
         this.apparelCategoriesService
           .fetchApparelCategoriesByGenderIdAndBrandId(
-            action.genderId,
+            genderId,
             action.brandId
           )
           .pipe(
             map((ResponseApparelCategories) =>
-            loadApparelCategoriesByGenderIdAndBrandIdSuccess({
+            loadApparelCategoriesByBrandIdSuccess({
                 apparelCategories: ResponseApparelCategories.apparel_categories,
               })
             ),
             catchError((error) =>
               of(
-                loadApparelCategoriesByGenderIdAndBrandIdFailure({
+                loadApparelCategoriesByBrandIdFailure({
                   error: error,
                 })
               )

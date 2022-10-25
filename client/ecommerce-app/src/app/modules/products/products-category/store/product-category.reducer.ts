@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 import { ApparelCategory } from 'src/app/modules/interfaces/models/apparelCategory';
 import {
-  loadApparelCategoriesByGenderIdAndBrandId,
-  loadApparelCategoriesByGenderIdAndBrandIdSuccess,
-  loadApparelCategoriesByGenderIdAndBrandIdFailure,
+  loadApparelCategoriesByBrandId,
+  loadApparelCategoriesByBrandIdSuccess,
+  loadApparelCategoriesByBrandIdFailure,
 } from './product-category.action';
 
 export interface ProductsCategoryState {
@@ -21,13 +21,13 @@ export const initialState: ProductsCategoryState = {
 export const productsCategoryReducer = createReducer<ProductsCategoryState>(
   initialState,
 
-  on(loadApparelCategoriesByGenderIdAndBrandId, (state) => ({
+  on(loadApparelCategoriesByBrandId, (state) => ({
     ...state,
     status: 'loading',
   })),
 
   on(
-    loadApparelCategoriesByGenderIdAndBrandIdSuccess,
+    loadApparelCategoriesByBrandIdSuccess,
     (state, { apparelCategories }) => ({
       ...state,
       apparelCategories: apparelCategories,
@@ -36,7 +36,7 @@ export const productsCategoryReducer = createReducer<ProductsCategoryState>(
     })
   ),
 
-  on(loadApparelCategoriesByGenderIdAndBrandIdFailure, (state, { error }) => ({
+  on(loadApparelCategoriesByBrandIdFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',

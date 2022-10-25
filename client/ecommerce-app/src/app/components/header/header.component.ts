@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { TokenStorageService } from 'src/app/modules/services/token-storage.service';
 import { AppState } from 'src/app/store/app.state';
+import { setGender } from './store/header.actions';
 
 @Component({
   selector: 'app-header',
@@ -37,6 +38,10 @@ export class HeaderComponent implements OnInit {
     this.authService.isConnected.subscribe((subscriber) => {
       this.isLoggedIn = subscriber;
     });
+  }
+
+  setGender(genderId: number){
+    this.store.dispatch(setGender({genderId: genderId}));
   }
 
 }

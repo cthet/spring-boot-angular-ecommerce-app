@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { setGender } from '../header/store/header.actions';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +11,13 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
   }
 
+  setGender(genderId: number){
+    this.store.dispatch(setGender({genderId: genderId}));
+  }
 
 }

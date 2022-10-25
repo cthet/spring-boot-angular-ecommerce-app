@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { selectBrand, selectProducts} from './store/product-list.selector';
+import { selectProducts} from './store/product-list.selector';
+import { selectBrand } from '../brand/store/brand.selector';
 
 @Component({
   selector: 'app-products-list',

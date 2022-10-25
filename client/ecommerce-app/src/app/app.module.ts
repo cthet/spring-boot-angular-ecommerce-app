@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { headerReducer } from './components/header/store/header.reducer';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { EffectsModule } from '@ngrx/effects';
     FooterComponent,
     NotfoundComponent,
     HomeComponent,
+   
   ],
   imports: [
     CommonModule,
@@ -42,11 +44,11 @@ import { EffectsModule } from '@ngrx/effects';
     NgbModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    StoreModule.forFeature('header', headerReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],

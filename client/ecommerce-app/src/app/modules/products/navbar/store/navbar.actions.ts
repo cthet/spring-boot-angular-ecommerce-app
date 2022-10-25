@@ -3,34 +3,37 @@ import { ApparelCategory } from 'src/app/modules/interfaces/models/apparelCatego
 import { Brand } from 'src/app/modules/interfaces/models/brand';
 
 export const setVideo = createAction(
-  '[Video Navbar component] Set Video',
-  props<{ video: string }>()
+  '[Video Navbar] Set Video',
+  props);
+
+export const setVideoSuccess = createAction(
+  '[Video Navbar] Set Video Success',
+  props<{video: string}>()
 );
 
-export const loadBrandsByGenderId = createAction('[Brands Navbar component] Load Brands', props<{ genderId: number }>());
+export const loadBrandsByGenderId = createAction('[Brands Navbar] Load Brands', props);
 
 export const loadBrandsByGenderIdSuccess = createAction(
-  '[Brands Navbar component] Load Brands Success',
+  '[Brands Navbar] Load Brands Success',
   props<{ brands: Brand[] }>()
 );
 
 export const loadBrandsByGenderIdFailure = createAction(
-  '[Brands Navbar component] Load Brands Failure',
+  '[Brands Navbar] Load Brands Failure',
   props<{ error: string }>()
 );
 
 export const loadApparelCategoriesBygenderId = createAction(
-  '[ApparelCategories Navbar component] Load ApparelCategories',
-  props<{ genderId: number }>()
-);
+  '[ApparelCategories Navbar] Load ApparelCategories',
+  props);
 
 export const loadApparelCategoriesBygenderIdSuccess = createAction(
-  '[ApparelCategories Navbar component] Load ApparelCategories Success',
+  '[ApparelCategories Navbar] Load ApparelCategories Success',
   props<{ apparelCategories: ApparelCategory[] }>()
 );
 
 export const loadApparelCategoriesBygenderIdFailure = createAction(
-  '[ApparelCategories Navbar component] Load ApparelCategories Failure',
+  '[ApparelCategories Navbar] Load ApparelCategories Failure',
   props<{ error: string }>()
 );
 

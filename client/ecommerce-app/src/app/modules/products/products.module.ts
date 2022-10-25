@@ -24,6 +24,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsCategoryEffects } from './products-category/store/product-category.effect';
 import { productsCategoryReducer } from './products-category/store/product-category.reducer';
 import { MatCardModule } from '@angular/material/card';
+import { headerReducer } from 'src/app/components/header/store/header.reducer';
+import { BrandComponent } from './brand/brand.component';
+import { brandReducer } from './brand/store/brand.reducer';
+import { BrandEffects } from './brand/store/brand.effects';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { MatCardModule } from '@angular/material/card';
     BrandsComponent,
     ProductsListComponent,
     ProductsCategoryComponent,
+    BrandComponent,
     HyphenPipe,
     BrandPipe,
     ApparelCategoryPipe,
@@ -42,14 +47,17 @@ import { MatCardModule } from '@angular/material/card';
     ProductsRoutingModule,
     NgbModule,
     MatCheckboxModule,
-    MatCardModule,
+    MatCardModule,    
+    StoreModule.forFeature('header', headerReducer),
     StoreModule.forFeature('navbar', navbarReducer),
     StoreModule.forFeature('home', homeReducer),
-    StoreModule.forFeature('products', productsReducer),
     StoreModule.forFeature('categories', productsCategoryReducer),
+    StoreModule.forFeature('brand', brandReducer),
+    StoreModule.forFeature('products', productsReducer), 
     EffectsModule.forFeature([
       NavbarEffects,
       ProductsEffects,
+      BrandEffects,
       ProductsCategoryEffects,
     ]),
   ],

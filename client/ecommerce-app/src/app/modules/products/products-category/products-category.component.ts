@@ -20,6 +20,7 @@ import { selectApparelCategories } from './store/product-category.selector';
   styleUrls: ['./products-category.component.css'],
 })
 export class ProductsCategoryComponent implements OnInit {
+  genderId!: number;
   apparelcategories$ = this.store.select(selectApparelCategories);
 
   // private routes: Subscription = new Subscription();
@@ -42,8 +43,18 @@ export class ProductsCategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // this.route.params.subscribe((item) => {
+    //   if (item['gender'] == 'homme') this.fetchMenDatas();
+    //   else this.fetchWomenDatas();
+    //});
     // this.fetchApparelCategories();
     // this.fetchPriceRangeCategories();
+  }
+
+  fetchApparelsByCategory(categoryId: number){
+    // this.store.dispatch(loadProductsByGenderIdAndBrandIdAndCategoryId({genderId: this.genderId,
+    //   categoryId: 0,
+    //   brandId: brandId,))
   }
 
   // fetchApparelCategories(): void {
