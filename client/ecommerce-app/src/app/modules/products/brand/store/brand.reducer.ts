@@ -1,15 +1,20 @@
-import { createReducer, on } from "@ngrx/store";
-import { Brand } from "src/app/modules/interfaces/models/brand";
-import { loadBrandByBrandId, loadBrandByBrandIdSuccess, loadBrandByBrandIdFailure, RemoveBrand } from "./brand.actions";
+import { createReducer, on } from '@ngrx/store';
+import { Brand } from 'src/app/modules/interfaces/models/brand';
+import {
+  loadBrandByBrandId,
+  loadBrandByBrandIdSuccess,
+  loadBrandByBrandIdFailure,
+  RemoveBrand,
+} from './brand.actions';
 
 export interface BrandState {
-  brand: Brand | null;
+  brand: Brand;
   error: string | null;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const initialState: BrandState = {
-  brand: null,
+  brand: { id: 0, brand_category: '', image_url: '', description: '' },
   error: null,
   status: 'pending',
 };
@@ -37,8 +42,8 @@ export const brandReducer = createReducer<BrandState>(
 
   on(RemoveBrand, (state) => ({
     ...state,
-    brand: null,
+    brand: { id: 0, brand_category: '', image_url: '', description: '' },
     error: null,
     status: 'error',
-  })),
-)
+  }))
+);

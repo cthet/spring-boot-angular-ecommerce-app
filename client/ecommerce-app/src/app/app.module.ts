@@ -30,7 +30,6 @@ import { headerReducer } from './components/header/store/header.reducer';
     FooterComponent,
     NotfoundComponent,
     HomeComponent,
-   
   ],
   imports: [
     CommonModule,

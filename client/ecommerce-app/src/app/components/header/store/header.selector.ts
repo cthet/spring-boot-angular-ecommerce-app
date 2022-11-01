@@ -4,7 +4,7 @@ import { HeaderState } from "./header.reducer";
 
 export const selectHeaderState = (state: AppState) => state.header;
 
-export const selectGenderId = createSelector(
+export const selectGender = createSelector(
   selectHeaderState,
-  (state: HeaderState) => state.genderId
+  (state: HeaderState) => state.gender
 );

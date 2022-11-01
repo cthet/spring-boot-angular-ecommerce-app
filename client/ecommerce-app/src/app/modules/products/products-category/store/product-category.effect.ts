@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, catchError, of, mergeMap } from 'rxjs';
-import { selectGenderId } from 'src/app/components/header/store/header.selector';
+import { selectGender } from 'src/app/components/header/store/header.selector';
 import { ApparelCategoriesService } from 'src/app/modules/services/apparel-categories.service';
 import { AppState } from 'src/app/store/app.state';
 import {
   loadApparelCategoriesByBrandId,
-  loadApparelCategoriesByBrandIdSuccess,
   loadApparelCategoriesByBrandIdFailure,
+  loadApparelCategoriesByBrandIdSuccess,
 } from './product-category.action';
 
 @Injectable()
@@ -22,16 +22,13 @@ export class ProductsCategoryEffects {
   loadApparelCategories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadApparelCategoriesByBrandId),
-      concatLatestFrom(action => this.store.select(selectGenderId)),
-      mergeMap(([action, genderId]) =>
+      concatLatestFrom((action) => this.store.select(selectGender)),
+      mergeMap(([action, gender]) =>
         this.apparelCategoriesService
-          .fetchApparelCategoriesByGenderIdAndBrandId(
-            genderId,
-            action.brandId
-          )
+          .fetchApparelCategoriesByGenderIdAndBrandId(gender.id, action.brandId)
           .pipe(
             map((ResponseApparelCategories) =>
-            loadApparelCategoriesByBrandIdSuccess({
+              loadApparelCategoriesByBrandIdSuccess({
                 apparelCategories: ResponseApparelCategories.apparel_categories,
               })
             ),

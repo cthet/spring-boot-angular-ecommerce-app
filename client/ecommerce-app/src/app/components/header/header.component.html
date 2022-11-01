@@ -6,7 +6,7 @@
         routerLink="/homme"
         routerLinkActive="active"
         class="men"
-        (click)="setGender(1)"
+        (click)="setGender('M')"
         >homme</a
       >
       <i class="fas fa-grip-lines-vertical"></i>
@@ -14,7 +14,7 @@
         routerLink="/femme"
         routerLinkActive="active"
         class="women"
-        (click)="setGender(2)"
+        (click)="setGender('F')"
         >femme</a
       >
     </div>
@@ -23,12 +23,10 @@
     <a routerLink="/" class="brand">Shop</a>
 
     <div class="right-links">
-      <!--Cart-->
-      <app-cart-status class="cart"></app-cart-status>
       <!--authentication-->
       <a
         *ngIf="!isLoggedIn"
-        routerLink="/auth"
+        routerLink="/connexion"
         routerLinkActive="active"
         class="fa fa-user auth"
       >
@@ -52,6 +50,9 @@
         class="fa fa-user"
       >
       </a>
+
+      <!--Cart-->
+      <app-cart-status class="cart"></app-cart-status>
     </div>
   </div>
 </nav>

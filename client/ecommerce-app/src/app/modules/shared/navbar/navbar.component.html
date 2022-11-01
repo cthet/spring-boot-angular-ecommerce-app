@@ -1,12 +1,14 @@
-<img *ngIf="brand$ | async" [src]="(brand$ | async)?.image_url" />
 <video
-  *ngIf="(video$ | async) && !(brand$ | async)"
+  *ngIf="(video$ | async) && (brand$ | async)?.image_url == ''"
   [src]="video$ | async"
   type="video/mp4"
   loop
   autoplay
   muted
 ></video>
+
+
+<img *ngIf="brand$ | async" [src]="(brand$ | async)?.image_url" />
 
 <nav class="navbar">
   <ul>
@@ -19,7 +21,7 @@
             <a
               [routerLink]="[brand.brand_category | BrandCase | HyphenateCase]"
               routerLinkActive="active"
-              (click)="fetchBrandDatas(brand.id)"
+              (click)="onSelectBrand(brand.id)"
             >
               {{ brand.brand_category }}
             </a>

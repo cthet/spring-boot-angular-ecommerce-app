@@ -27,7 +27,7 @@ public class Product {
 
     @Column(name="description")
     private String description;
-
+//=> supprimer description
     @Column(name="active")
     private Boolean active;
 

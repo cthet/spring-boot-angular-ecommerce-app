@@ -32,7 +32,7 @@ public class ProductController {
     @GetMapping("/products")
     public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "2") int gender,
                                                         @RequestParam(defaultValue = "0") int brand,
-                                                        @RequestParam("category") List<Integer> category,
+                                                        @RequestParam(value = "category" , defaultValue = "0"  ) List<Integer> category,
                                                         @RequestParam(defaultValue = "0")  int page,
                                                         @RequestParam(defaultValue = "10") int size,
                                                         @RequestParam(defaultValue = "id,asc") String[] sort) {

@@ -6,12 +6,9 @@ import {
   catchError,
   of,
   mergeMap,
-  switchMap,
-  tap,
   withLatestFrom,
-  filter,
 } from 'rxjs';
-import { selectGenderId } from 'src/app/components/header/store/header.selector';
+import { selectGender } from 'src/app/components/header/store/header.selector';
 import { ApparelCategoriesService } from 'src/app/modules/services/apparel-categories.service';
 import { BrandsService } from 'src/app/modules/services/brands.service';
 import { AppState } from 'src/app/store/app.state';
@@ -38,9 +35,9 @@ export class NavbarEffects {
   setVideo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(setVideo),
-      withLatestFrom(this.store.select(selectGenderId)),
-      map(([action, genderId]) => {
-        if (genderId === 1) {
+      withLatestFrom(this.store.select(selectGender)),
+      map(([action, gender]) => {
+        if (gender.id === 1) {
           return setVideoSuccess({
             video:
               'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/videos/btw_window_h_1900x851_fr-1080.mp4',
@@ -58,9 +55,9 @@ export class NavbarEffects {
   loadBrands$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadBrandsByGenderId),
-      concatLatestFrom((action) => this.store.select(selectGenderId)),
-      mergeMap(([action, genderId]) =>
-        this.brandService.fetchBrandsByGenderId(genderId).pipe(
+      concatLatestFrom((action) => this.store.select(selectGender)),
+      mergeMap(([action, gender]) =>
+        this.brandService.fetchBrandsByGenderId(gender.id).pipe(
           map((responseBrands) =>
             loadBrandsByGenderIdSuccess({
               brands: responseBrands.brand_categories,
@@ -77,10 +74,10 @@ export class NavbarEffects {
   loadApparelCategories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadApparelCategoriesBygenderId),
-      concatLatestFrom((action) => this.store.select(selectGenderId)),
-      mergeMap(([action, genderId]) =>
+      concatLatestFrom((action) => this.store.select(selectGender)),
+      mergeMap(([action, gender]) =>
         this.apparelCategoriesService
-          .fetchApparelCategoriesByGenderId(genderId)
+          .fetchApparelCategoriesByGenderId(gender.id)
           .pipe(
             map((responseApparelCategories) =>
               loadApparelCategoriesBygenderIdSuccess({

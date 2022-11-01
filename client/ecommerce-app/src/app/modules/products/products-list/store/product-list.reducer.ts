@@ -1,22 +1,28 @@
 import { createReducer, on } from '@ngrx/store';
-import { Brand } from 'src/app/modules/interfaces/models/brand';
 import { Product } from 'src/app/modules/interfaces/models/product';
 import {
-  loadProductsByBrandIdAndCategoryId,
-  loadProductsByBrandIdAndCategoryIdSuccess,
-  loadProductsByBrandIdAndCategoryIdFailure,
+  loadProducts,
+  loadProductsByBrandId,
+  loadProductsByBrandIdFailure,
+  loadProductsByBrandIdSuccess,
+  loadProductsFailure,
+  loadProductsSuccess,
+  loadSortedProducts,
+  loadSortedProductsFailure,
+  loadSortedProductsSuccess,
 } from './product-list.action';
 
 export interface ProductsState {
-  brand: Brand | null;
   products: Product[];
+  sort: string[];
   error: string | null;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
+
 export const initialState: ProductsState = {
-  brand: null,
   products: [],
+  sort: [],
   error: null,
   status: 'pending',
 };
@@ -24,21 +30,59 @@ export const initialState: ProductsState = {
 export const productsReducer = createReducer<ProductsState>(
   initialState,
 
-  on(loadProductsByBrandIdAndCategoryId, (state) => ({
+  on(loadProductsByBrandId, (state) => ({
     ...state,
     status: 'loading',
   })),
 
-  on(loadProductsByBrandIdAndCategoryIdSuccess, (state, { products }) => ({
+  on(loadProductsByBrandIdSuccess, (state, { products }) => ({
     ...state,
-    products: [...state.products, ...products],
+    products: products,
     error: null,
     status: 'success',
   })),
 
-  on(loadProductsByBrandIdAndCategoryIdFailure, (state, { error }) => ({
+  on(loadProductsByBrandIdFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',
-  }))
+  })),
+
+  on(loadProducts, (state) => ({
+    ...state,
+    status: 'loading',
+  })),
+
+  on(loadProductsSuccess, (state, { products }) => ({
+    ...state,
+    products: products,
+    error: null,
+    status: 'success',
+  })),
+
+  on(loadProductsFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error',
+  })),
+
+  on(loadSortedProducts, (state, {sort}) => ({
+    ...state,
+    sort: sort,
+    status: 'loading',
+  })),
+
+  on(loadSortedProductsSuccess, (state, { products }) => ({
+    ...state,
+    products: products,
+    error: null,
+    status: 'success',
+  })),
+
+  on(loadSortedProductsFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error',
+  })),
+
 );

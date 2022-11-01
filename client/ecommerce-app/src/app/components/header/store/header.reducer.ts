@@ -1,20 +1,21 @@
 import { createReducer, on } from '@ngrx/store';
+import { Gender } from 'src/app/modules/interfaces/models/gender';
 import { setGender } from './header.actions';
 
 
 export interface HeaderState {
-  genderId: number;
+  gender: Gender,
 }
 
 export const initialState: HeaderState = {
-  genderId: 2,
+  gender: {id: 2, type: "femme"},
 };
 
 export const headerReducer = createReducer<HeaderState>(
   initialState,
 
-  on(setGender, (state, { genderId }) => ({
+  on(setGender, (state, { gender }) => ({
     ...state,
-    genderId: genderId,
+    gender: gender,
   }))
 );

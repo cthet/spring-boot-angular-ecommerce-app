@@ -23,6 +23,7 @@
     "@angular/router": "^14.2.3",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0-beta.1",
     "@ngrx/effects": "^14.3.2",
+    "@ngrx/entity": "^14.3.2",
     "@ngrx/store": "^14.3.2",
     "@ngrx/store-devtools": "^14.3.2",
     "@popperjs/core": "^2.10.2",

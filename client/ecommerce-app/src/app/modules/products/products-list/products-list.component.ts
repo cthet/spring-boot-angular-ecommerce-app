@@ -1,21 +1,44 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from 'src/app/store/app.state';
 import { Store } from '@ngrx/store';
-import { selectProducts} from './store/product-list.selector';
+import { selectProducts } from './store/product-list.selector';
 import { selectBrand } from '../brand/store/brand.selector';
+import { selectApparelCategories } from '../products-category/store/product-category.selector';
+import {
+  loadProducts,
+  loadSortedProducts,
+} from './store/product-list.action';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductsListComponent implements OnInit {
   brand$ = this.store.select(selectBrand);
   products$ = this.store.select(selectProducts);
-  
+  apparelcategories$ = this.store.select(selectApparelCategories);
 
+
+  constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
+
+  ngOnInit(): void {}
+
+  filterProductsByCategory(){
+    this.store.dispatch(loadProducts());
+  }
+
+  sortProducts(sort : string[]){
+    this.store.dispatch(loadSortedProducts({sort: sort}));
+  }
+
+}
   // @Input()
   // genderId: number = 1;
   // @Input()
@@ -30,84 +53,82 @@ export class ProductsListComponent implements OnInit {
   // products!: Product[];
   // gender!: string;
 
- // private productsList: Subscription = new Subscription();
+  // private productsList: Subscription = new Subscription();
 
-  constructor(
-    private route: ActivatedRoute,
-    private store: Store<AppState>
-  ) {}
 
-  ngOnInit(): void {
-    //  this.fetchProducts();
-  }
+// this.brand$.subscribe((brand) => {
+//   if(brand.id != 0) this.store.dispatch(loadProductsByBrandId({
+//     brandId: brand.id
+//   }))}
+//   );
+//  this.fetchProducts();
 
-  // onSelectGender(GenderId: number) {
-  //   this.genderId = GenderId;
-  //   this.fetchProducts();
-  // }
+// onSelectGender(GenderId: number) {
+//   this.genderId = GenderId;
+//   this.fetchProducts();
+// }
 
-  // onSelectApparels(ApparelsId: number) {
-  //   this.apparelsId = ApparelsId;
-  //   this.fetchProducts();
-  // }
+// onSelectApparels(ApparelsId: number) {
+//   this.apparelsId = ApparelsId;
+//   this.fetchProducts();
+// }
 
-  // onSelectPriceRange(PriceRange: number) {
-  //   this.priceRangeId = PriceRange;
-  //   this.fetchProducts();
-  // }
+// onSelectPriceRange(PriceRange: number) {
+//   this.priceRangeId = PriceRange;
+//   this.fetchProducts();
+// }
 
-  // getRequestParams(
-  //   gender: number,
-  //   apparel: number,
-  //   priceRange: number,
-  //   page: number,
-  //   size: number
-  // ): any {
-  //   let params: any = {};
-  //   if (gender) {
-  //     params[`gender`] = gender;
-  //   }
-  //   if (apparel) {
-  //     params[`apparel`] = apparel;
-  //   }
-  //   if (priceRange) {
-  //     params[`priceRange`] = priceRange;
-  //   }
-  //   if (page) {
-  //     params[`page`] = page;
-  //   }
-  //   if (size) {
-  //     params[`size`] = size;
-  //   }
-  //   return params;
-  // }
+// getRequestParams(
+//   gender: number,
+//   apparel: number,
+//   priceRange: number,
+//   page: number,
+//   size: number
+// ): any {
+//   let params: any = {};
+//   if (gender) {
+//     params[`gender`] = gender;
+//   }
+//   if (apparel) {
+//     params[`apparel`] = apparel;
+//   }
+//   if (priceRange) {
+//     params[`priceRange`] = priceRange;
+//   }
+//   if (page) {
+//     params[`page`] = page;
+//   }
+//   if (size) {
+//     params[`size`] = size;
+//   }
+//   return params;
+// }
 
-  // fetchProducts(): void {
-  //   const params = this.getRequestParams(
-  //     this.genderId,
-  //     this.apparelsId,
-  //     this.priceRangeId,
-  //     this.page,
-  //     this.size
-  //   );
+// fetchProducts(): void {
+//   const params = this.getRequestParams(
+//     this.genderId,
+//     this.apparelsId,
+//     this.priceRangeId,
+//     this.page,
+//     this.size
+//   );
 
-  //   this.productsList = this.ProductsService.fetchProducts(params).subscribe(
-  //     (response: responseProducts) => {
-  //       this.products = response.products;
-  //       this.total_items = response.total_items;
-  //       this.total_pages = response.total_pages;
-  //       this.gender = this.route.snapshot.params['gender'];
-  //     }
-  //   );
-  // }
+//   this.productsList = this.ProductsService.fetchProducts(params).subscribe(
+//     (response: responseProducts) => {
+//       this.products = response.products;
+//       this.total_items = response.total_items;
+//       this.total_pages = response.total_pages;
+//       this.gender = this.route.snapshot.params['gender'];
+//     }
+//   );
+// }
 
-  // handlePageEvent(event: PageEvent) {
-  //   this.page = event.pageIndex;
-  //   this.size = event.pageSize;
-  //   this.fetchProducts();
-  // }
+// handlePageEvent(event: PageEvent) {
+//   this.page = event.pageIndex;
+//   this.size = event.pageSize;
+//   this.fetchProducts();
+// }
 
-  // ngOnDestroy(): void {
-  //   this.productsList.unsubscribe();
-  // }
-}
+// ngOnDestroy(): void {
+//   this.productsList.unsubscribe();
+// }

@@ -5,8 +5,24 @@
       <ng-template ngbPanelContent>
         <ul>
           <li *ngFor="let category of apparelcategories$ | async">
-            <mat-checkbox (change)="fetchApparelsByCategory(category.id)">{{ category.apparel_category }}</mat-checkbox>
+            <mat-checkbox
+              [checked]="category.checked"
+              (change)="onFilterApparelsCategory($event.checked, category.id)"
+              >{{ category.apparel_category }}</mat-checkbox
+            >
           </li>
+        </ul>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel title="Trier par">
+      <ng-template ngbPanelContent>
+        <ul>
+          <mat-radio-group (change)="onSortProducts($event)">
+            <li><mat-radio-button value="unitPrice, desc">Prix Décroissant</mat-radio-button></li>
+            <li><mat-radio-button value="unitPrice, asc">Prix Croissant</mat-radio-button></li>
+          </mat-radio-group>
         </ul>
       </ng-template>
     </ngb-panel>

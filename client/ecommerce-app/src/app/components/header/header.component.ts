@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import { AuthService } from 'src/app/modules/services/auth.service';
 import { TokenStorageService } from 'src/app/modules/services/token-storage.service';
 import { AppState } from 'src/app/store/app.state';
@@ -40,8 +41,12 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  setGender(genderId: number){
-    this.store.dispatch(setGender({genderId: genderId}));
+  setGender(gender: string){
+    if(gender === "M"){
+      this.store.dispatch(setGender({gender :{id: 1, type: "homme"}}));    
+    } else {
+      this.store.dispatch(setGender({gender :{id: 2, type: "femme"}}));
+    }      
   }
 
 }

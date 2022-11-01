@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
-      <app-products-category></app-products-category>
+      <app-products-category (filterCategory)="filterProductsByCategory()" (sortProduct)="sortProducts($event)"></app-products-category>
     </div>
     <div class="col-sm-9 pt-4 pb-4">
       <div class="main">

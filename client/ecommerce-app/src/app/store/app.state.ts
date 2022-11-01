@@ -1,7 +1,7 @@
 import { ProductsState } from '../modules/products/products-list/store/product-list.reducer';
 import { HomeState } from '../modules/products/home/store/home.reducer';
 import { ProductsCategoryState } from '../modules/products/products-category/store/product-category.reducer';
-import { NavbarState } from '../modules/products/navbar/store/navbar.reducer';
+import { NavbarState } from '../modules/shared/navbar/store/navbar.reducer';
 import { HeaderState } from '../components/header/store/header.reducer';
 import { BrandState } from '../modules/products/brand/store/brand.reducer';
 
@@ -11,5 +11,5 @@ export interface AppState {
   home: HomeState;
   brand: BrandState;
   categories: ProductsCategoryState;
-  products: ProductsState; 
+  products: ProductsState;
 }
