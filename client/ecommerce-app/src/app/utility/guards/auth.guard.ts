@@ -7,8 +7,8 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/modules/services/auth.service';
 import { map, take } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
         if (!isConnected) {
           return this.router.createUrlTree(['/auth']);
         }
-        route.params['']
+        route.params[''];
         return isConnected;
       })
     );

@@ -4,11 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'HyphenateCase',
 })
 export class HyphenPipe implements PipeTransform {
-
-  transform(value: string): string {
-    while (value.includes(' ')){
-      value = value.replace(' ', '-');
-    }
+  transform(value: string | undefined): string | undefined {
+    if (value != undefined)
+      while (value.includes(' ')) {
+        value = value.replace(' ', '-');
+      }
     return value;
   }
 }

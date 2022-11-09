@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-  ActivatedRoute,
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
@@ -26,7 +25,7 @@ export class GenderGuard implements CanActivate {
     if (this.authorized.includes(state.url)) {
       return true;
     } else {
-      this.router.navigateByUrl('/femme');
+      this.router.navigateByUrl('/vêtements/femme');
       return false;
     }
   }

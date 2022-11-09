@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './core/containers/app.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,28 +10,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NotfoundComponent } from './modules/products/notfound/notfound.component';
-import { CartStatusComponent } from './components/header/cart-status/cart-status.component';
-import { HeaderComponent } from './components/header/header.component';
-import { HomeComponent } from './components/home/home.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { headerReducer } from './components/header/store/header.reducer';
+import { CoreModule } from './core/core.module';
+import * as fromHeader from './core/reducers/header.reducer' 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    CartStatusComponent,
-    FooterComponent,
-    NotfoundComponent,
-    HomeComponent,
-  ],
   imports: [
+    CoreModule,
     CommonModule,
     FormsModule,
     AppRoutingModule,
@@ -43,13 +32,12 @@ import { headerReducer } from './components/header/store/header.reducer';
     NgbModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature('header', headerReducer),
+    StoreModule.forFeature(fromHeader.HeaderFeatureKey, fromHeader.reducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

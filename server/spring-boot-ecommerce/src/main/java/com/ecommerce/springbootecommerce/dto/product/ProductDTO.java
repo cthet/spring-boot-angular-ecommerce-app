@@ -24,10 +24,16 @@ public class ProductDTO {
     @JsonProperty("units_in_stock")
     private int unitsInStocks;
 
-    @JsonProperty("description")
-    private String description;
-
     @JsonProperty("active")
     private Boolean active;
+
+    @JsonProperty("gender_category")
+    private String gender_category;
+
+    @JsonProperty("product_category")
+    private String product_category;
+
+    @JsonProperty("brand_category")
+    private String brand_category;
 
 }

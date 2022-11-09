@@ -4,6 +4,8 @@ import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.Product;
 import com.ecommerce.springbootecommerce.dto.product.ProductDTO;
 import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
+import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
+import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
 import org.modelmapper.ModelMapper;
@@ -22,6 +24,12 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    ApparelCategoryRepository apparelCategoryRepository;
+
+    @Autowired
+    GenderCategoryRepository genderCategoryRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -29,8 +37,16 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ApiRequestException("Product not found in database!", HttpStatus.NOT_FOUND));
+        String apparel_category = product.getApparelCategory().getType();
+        String gender_category = product.getGenderCategory().getType();
+        String brand_category = product.getBrandCategory().getType();
+
         ProductDTO productDTO = new ProductDTO();
         productDTO = modelMapper.map(product, ProductDTO.class);
+
+        productDTO.setGender_category(gender_category);
+        productDTO.setProduct_category(apparel_category);
+        productDTO.setBrand_category(brand_category);
 
         return productDTO;
 
@@ -65,8 +81,19 @@ public class ProductServiceImpl implements ProductService {
             List<ProductDTO> productDTOS = new ArrayList<ProductDTO>();
 
             for (Product product : products) {
+
                 ProductDTO productDTO = new ProductDTO();
+
                 productDTO = modelMapper.map(product, ProductDTO.class);
+
+                String apparel_category = product.getApparelCategory().getType();
+                String gender_category = product.getGenderCategory().getType();
+                String brand_category = product.getBrandCategory().getType();
+
+                productDTO.setGender_category(gender_category);
+                productDTO.setProduct_category(apparel_category);
+                productDTO.setBrand_category(brand_category);
+
                 productDTOS.add(productDTO);
             }
 

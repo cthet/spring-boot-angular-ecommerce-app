@@ -1,0 +1,99 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+video {
+  width: 100%;
+}
+
+.navbar {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 91.2px;
+  font-size: 62.5%;
+  width: 100%;
+  background: hsla(0, 0%, 100%, 0.6);
+}
+
+.brands-dropdown,
+.apparel-categories-dropdown {
+  width: 50%;
+  min-width: 500px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  display: inline-block;
+  position: relative;
+  line-height: 1rem;
+  text-align: center;
+}
+
+ul li a {
+  display: inline-block;
+  padding: 8px 25px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+ul li ul.brands-dropdown-content,
+ul li ul.apparel-categories-dropdown-content {
+  min-width: 100%; /* Set width of the dropdown */
+  height: 300px;
+  display: none;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  font-size: 1rem;
+  z-index: 101;
+  left: 0;
+}
+
+ul li:hover ul.brands-dropdown-content,
+ul li:hover ul.apparel-categories-dropdown-content {
+  display: flex; /* Display the dropdown */
+}
+
+ul li ul.brands-dropdown-content li,
+ul li ul.apparel-categories-dropdown-content li {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+ul li a:hover {
+  color: rgb(179, 117, 60);
+}
+
+ul:hover .dropdown-background{
+  z-index: 0;
+  position: absolute;
+  top: -91.2px;
+  left: 0;
+  right: 0;
+  height: 420px;
+  width: 100%;
+  background: hsla(0, 0%, 95%, 0.93);
+}

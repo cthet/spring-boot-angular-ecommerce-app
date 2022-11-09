@@ -25,8 +25,8 @@ public class Product {
     @Column(name="image_url")
     private String imageUrl;
 
-    @Column(name="description")
-    private String description;
+//    @Column(name="description")
+//    private String description;
 //=> supprimer description
     @Column(name="active")
     private Boolean active;
