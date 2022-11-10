@@ -1,11 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from '../app-routing.module';
@@ -21,18 +17,12 @@ export const COMPONENTS = [
   FooterComponent,
 ];
 
-export const CONTAINERS = [];
-
 @NgModule({
-  declarations: [COMPONENTS, CONTAINERS],
+  declarations: [COMPONENTS],
   imports: [
     CommonModule,
-    FormsModule,
     AppRoutingModule,
-    BrowserModule,
-    HttpClientModule,
     MatButtonModule,
-    BrowserAnimationsModule,
     MatTableModule,
     NgbModule,
   ],

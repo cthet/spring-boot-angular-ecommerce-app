@@ -1,6 +1,6 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { CartItem } from '../models/cart-Item';
+import { CartItem } from '../../cart/models/cart-Item';
 
 export const addCartItem = createAction(
   '[Cart] add Cart Item',

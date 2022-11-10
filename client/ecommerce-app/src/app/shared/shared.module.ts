@@ -7,7 +7,9 @@ import { HyphenPipe } from 'src/app/utility/pipes/hyphenPipe';
 import { NavbarComponent } from './components/navbar.component';
 import { NavbarPageComponent } from './containers/navbar-page.components';
 import { StoreModule } from '@ngrx/store';
-import * as fromNavbar from './reducers/index'
+import * as fromNavbar from './reducers/navbar.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { NavbarEffects } from './effects/navbar.effects';
 
 export const COMPONENTS = [
   NavbarComponent,
@@ -23,10 +25,8 @@ export const CONTAINERS = [NavbarPageComponent];
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    StoreModule.forFeature(
-      fromNavbar.NavbarFeatureKey,
-      fromNavbar.reducers
-    ),
+    StoreModule.forFeature(fromNavbar.NavbarFeatureKey, fromNavbar.reducer),
+    EffectsModule.forFeature([NavbarEffects]),
   ],
   exports: [COMPONENTS, CONTAINERS],
 })

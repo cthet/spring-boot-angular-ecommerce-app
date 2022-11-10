@@ -13,7 +13,6 @@ import { BrandComponent } from './components/brand.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedModule } from '../shared/shared.module';
-import { NavbarEffects } from '../shared/effects/navbar.effects';
 import { BrandEffects } from './effects/brand.effects';
 import { ProductsCategoryEffects } from './effects/product-category.effect';
 import { ProductsEffects } from './effects/product-list.effects';
@@ -53,19 +52,7 @@ export const CONTAINERS = [
       fromProducts.ProductsFeatureKey,
       fromProducts.reducers,      
     ),
-    // StoreModule.forFeature('header', headerReducer),
-    // StoreModule.forFeature('navbar', navbarReducer),
-    // StoreModule.forFeature('home', homeReducer),
-    // StoreModule.forFeature('categories', productsCategoryReducer),
-    // StoreModule.forFeature('brand', brandReducer),
-    // StoreModule.forFeature('products', productsReducer),
-    // StoreModule.forFeature('product', productReducer),
-    // StoreModule.forFeature(
-    //   fromCartItems.cartItemsFeatureKey,
-    //   fromCartItems.cartItemsReducer
-    // ),
     EffectsModule.forFeature([
-      NavbarEffects,
       ProductsEffects,
       BrandEffects,
       ProductsCategoryEffects,

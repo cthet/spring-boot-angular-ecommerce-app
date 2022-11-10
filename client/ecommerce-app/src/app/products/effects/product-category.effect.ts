@@ -8,7 +8,7 @@ import {
   loadApparelCategoriesByBrandIdSuccess,
 } from '../actions/product-category.action';
 import { ApparelCategoriesService } from '../services/apparel-categories.service';
-import * as fromProducts from '../reducers'
+import * as fromHeader from '../../reducers/index';
 
 @Injectable()
 export class ProductsCategoryEffects {
@@ -21,7 +21,7 @@ export class ProductsCategoryEffects {
   loadApparelCategories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadApparelCategoriesByBrandId),
-      concatLatestFrom((action) => this.store.select(fromProducts.selectGender)),
+      concatLatestFrom((action) => this.store.select(fromHeader.selectGender)),
       mergeMap(([action, gender]) =>
         this.apparelCategoriesService
           .fetchApparelCategoriesByGenderIdAndBrandId(gender.id, action.brandId)

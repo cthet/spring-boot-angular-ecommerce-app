@@ -8,7 +8,7 @@ import {
   loadBrandByBrandIdFailure,
 } from '../actions/brand.actions';
 import { BrandService } from '../services/brand.service';
-import * as fromProducts from '../reducers/index'
+import * as fromHeader from '../../reducers/index';
 
 @Injectable()
 export class BrandEffects {
@@ -21,7 +21,7 @@ export class BrandEffects {
   loadBrand$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadBrandByBrandId),
-      concatLatestFrom((action) => this.store.select(fromProducts.selectGender)),
+      concatLatestFrom((action) => this.store.select(fromHeader.selectGender)),
       mergeMap(([action, gender]) =>
         this.brandService
           .fetchBrandByGenderIdAndBrandId(gender.id, action.brandId)

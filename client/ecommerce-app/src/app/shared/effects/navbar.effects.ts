@@ -14,8 +14,7 @@ import {
 } from '../actions/navbar.actions';
 import { ApparelCategoriesService } from '../services/apparel-categories.service';
 import { BrandsService } from '../services/brands.service';
-import * as fromNavbar from '../reducers/index'
-
+import * as fromHeader from '../../reducers/index';
 @Injectable()
 export class NavbarEffects {
   constructor(
@@ -28,7 +27,7 @@ export class NavbarEffects {
   setVideo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(setVideo),
-      withLatestFrom(this.store.select(fromNavbar.selectGender)),
+      withLatestFrom(this.store.select(fromHeader.selectGender)),
       map(([action, gender]) => {
         if (gender.id === 1) {
           return setVideoSuccess({
@@ -48,7 +47,7 @@ export class NavbarEffects {
   loadBrands$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadBrandsByGenderId),
-      concatLatestFrom((action) => this.store.select(fromNavbar.selectGender)),
+      concatLatestFrom((action) => this.store.select(fromHeader.selectGender)),
       mergeMap(([action, gender]) =>
         this.brandService.fetchBrandsByGenderId(gender.id).pipe(
           map((responseBrands) =>
@@ -67,7 +66,7 @@ export class NavbarEffects {
   loadApparelCategories$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadApparelCategoriesBygenderId),
-      concatLatestFrom((action) => this.store.select(fromNavbar.selectGender)),
+      concatLatestFrom((action) => this.store.select(fromHeader.selectGender)),
       mergeMap(([action, gender]) =>
         this.apparelCategoriesService
           .fetchApparelCategoriesByGenderId(gender.id)

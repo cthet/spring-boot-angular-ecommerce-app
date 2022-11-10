@@ -1,9 +1,9 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { CartItem } from '../models/cart-Item';
+import { CartItem } from '../../cart/models/cart-Item';
 import { addCartItem, updateCartItem } from '../actions/cart.action';
 
-export const cartItemsFeatureKey = 'cartItems';
+export const cartFeaturesKey = 'cart';
 
 export interface State extends EntityState<CartItem> {
   selectedCartItemId: number | null;
@@ -29,8 +29,8 @@ export const reducer = createReducer<State>(
   on(updateCartItem, (state, { update }) => adapter.updateOne(update, state))
 );
 
-export const getSelectedCartItemId = (state: State) =>
-  state.selectedCartItemId;
+
+export const getSelectedCartItemId = (state: State) => state.selectedCartItemId;
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
@@ -42,3 +42,4 @@ export const selectCartItemEntities = selectEntities;
 export const selectAllCartItems = selectAll;
 
 export const selectCartItemTotal = selectTotal;
+

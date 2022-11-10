@@ -14,6 +14,8 @@ import { Gender } from 'src/app/core/models/gender';
 import * as fromNavbar from '../reducers';
 import { NavbarActions } from '../actions';
 import { BrandActions } from 'src/app/products/actions';
+import * as fromHeader from '../../reducers/index';
+import * as fromProducts from '../../products/reducers/index';
 
 @Component({
   selector: 'app-navbar-page',
@@ -39,9 +41,9 @@ export class NavbarPageComponent implements OnInit, OnDestroy {
   @Output() brandId = new EventEmitter<number>();
 
   constructor(private store: Store<Store>) {
-    this.gender$ = this.store.select(fromNavbar.selectGender);
+    this.gender$ = this.store.select(fromHeader.selectGender);
     this.video$ = this.store.select(fromNavbar.selectHomeVideo);
-    this.brand$ = this.store.select(fromNavbar.selectBrand);
+    this.brand$ = this.store.select(fromProducts.selectBrand);
     this.brands$ = this.store.select(fromNavbar.selectAllBrand);
     this.apparelCategories$ = this.store.select(
       fromNavbar.selectAllApparelCategories

@@ -16,8 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { CoreModule } from './core/core.module';
-import * as fromHeader from './core/reducers/header.reducer' 
-
+import * as fromCore from './reducers/';
 @NgModule({
   imports: [
     CoreModule,
@@ -32,7 +31,7 @@ import * as fromHeader from './core/reducers/header.reducer'
     NgbModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature(fromHeader.HeaderFeatureKey, fromHeader.reducer),
+    StoreModule.forFeature(fromCore.CoreFeatureKey, fromCore.reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

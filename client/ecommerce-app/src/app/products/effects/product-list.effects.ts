@@ -14,7 +14,8 @@ import {
   loadSortedProductsSuccess,
 } from '../actions/product-list.action';
 import { ProductsService } from '../services/products.service';
-import * as fromProducts from '../reducers'
+import * as fromProducts from '../reducers';
+import * as fromHeader from '../../reducers/index';
 
 @Injectable()
 export class ProductsEffects {
@@ -27,7 +28,7 @@ export class ProductsEffects {
   loadProductsByBrand$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProductsByBrandId),
-      concatLatestFrom((action) => this.store.select(fromProducts.selectGender)),
+      concatLatestFrom((action) => this.store.select(fromHeader.selectGender)),
       mergeMap(([action, gender]) =>
         this.productsService
           .fetchProducts({
@@ -52,13 +53,14 @@ export class ProductsEffects {
   loadProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadProducts),
-      concatLatestFrom((action) =>
-        this.store.select(fromProducts.selectGenderAndBrandAndCategoryAndSort)
-      ),
-      mergeMap(([action, params]) =>
+      concatLatestFrom((action) => [
+        this.store.select(fromHeader.selectGender),
+        this.store.select(fromProducts.selectBrandAndCategoryAndSort),
+      ]),
+      mergeMap(([action, gender, params]) =>
         this.productsService
           .fetchProducts({
-            gender: params.gender.id,
+            gender: gender.id,
             brand: params.brand.id,
             category: params.category
               .filter((category) => category.checked == true)
@@ -80,15 +82,16 @@ export class ProductsEffects {
   loadSortedProducts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadSortedProducts),
-      concatLatestFrom((action) =>
-        this.store.select(fromProducts.selectGenderAndBrandAndCategory)
-      ),
-      mergeMap(([action, params]) =>
+      concatLatestFrom((action) => [
+      this.store.select(fromHeader.selectGender),
+      this.store.select(fromProducts.selectBrandAndCategoryAndSort),
+    ]),
+      mergeMap(([action, gender, params]) =>
         this.productsService
           .fetchProducts({
-            gender: params.gender.id,
+            gender: gender.id,
             brand: params.brand.id,
-            category: params.apparelCategories
+            category: params.category
               .filter((category) => category.checked == true)
               .map((category) => category.id),
             sort: action.sort,
