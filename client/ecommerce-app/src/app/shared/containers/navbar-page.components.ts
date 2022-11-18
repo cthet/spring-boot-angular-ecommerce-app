@@ -11,9 +11,15 @@ import { Observable, Subscription } from 'rxjs';
 import { ApparelCategory } from 'src/app/products/models/apparelCategory';
 import { Brand } from 'src/app/products/models/brand';
 import { Gender } from 'src/app/core/models/gender';
-import * as fromNavbar from '../reducers';
+
+import {
+  BrandActions,
+  ProductCategoryActions,
+  ProductsListActions,
+} from '../../products/actions';
 import { NavbarActions } from '../actions';
-import { BrandActions } from 'src/app/products/actions';
+
+import * as fromNavbar from '../reducers';
 import * as fromHeader from '../../reducers/index';
 import * as fromProducts from '../../products/reducers/index';
 
@@ -21,11 +27,12 @@ import * as fromProducts from '../../products/reducers/index';
   selector: 'app-navbar-page',
   template: `
     <app-navbar
-      [video]="video$ | async"
-      [brand]="brand$ | async"
+      [gender]="gender$ | async"
+      [video_url]="video$ | async"
+      [image_url]="image$ | async"
       [brands]="brands$ | async"
       [apparelCategories]="apparelCategories$ | async"
-      (select)="onSelectBrand($event)"
+      (select)="loadBrandDatas($event)"
     ></app-navbar>
   `,
 })
@@ -34,20 +41,22 @@ export class NavbarPageComponent implements OnInit, OnDestroy {
 
   gender$: Observable<Gender>;
   video$: Observable<string>;
-  brand$: Observable<Brand>;
+  image$: Observable<string>;
   brands$: Observable<Brand[]>;
   apparelCategories$: Observable<ApparelCategory[]>;
+  brand$: Observable<Brand>;
 
   @Output() brandId = new EventEmitter<number>();
 
   constructor(private store: Store<Store>) {
     this.gender$ = this.store.select(fromHeader.selectGender);
-    this.video$ = this.store.select(fromNavbar.selectHomeVideo);
-    this.brand$ = this.store.select(fromProducts.selectBrand);
+    this.video$ = this.store.select(fromNavbar.selectVideo);
+    this.image$ = this.store.select(fromNavbar.selectImage);
     this.brands$ = this.store.select(fromNavbar.selectAllBrand);
     this.apparelCategories$ = this.store.select(
       fromNavbar.selectAllApparelCategories
     );
+    this.brand$ = this.store.select(fromProducts.selectBrand);
   }
 
   ngOnInit(): void {
@@ -63,8 +72,22 @@ export class NavbarPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(BrandActions.removeBrand());
   }
 
-  onSelectBrand(brandId: number) {
-    this.brandId.emit(brandId);
+  loadBrandDatas(brandId: number) {
+    this.store.dispatch(
+      BrandActions.loadBrandByBrandId({
+        brandId: brandId,
+      })
+    );
+    this.store.dispatch(
+      ProductCategoryActions.loadApparelCategoriesByBrandId({
+        brandId: brandId,
+      })
+    );
+    this.store.dispatch(
+      ProductsListActions.loadProductsByBrandId({
+        brandId: brandId,
+      })
+    );
   }
 
   ngOnDestroy(): void {

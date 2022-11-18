@@ -9,6 +9,11 @@ export const setVideoSuccess = createAction(
   props<{ video: string }>()
 );
 
+export const setImageSuccess = createAction(
+  '[Image Navbar] Set Image Success',
+  props<{ image: string }>()
+);
+
 export const removeVideo = createAction('[Video Navbar] Remove Video', props);
 
 export const loadBrandsByGenderId = createAction(

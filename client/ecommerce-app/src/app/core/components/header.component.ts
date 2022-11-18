@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { User } from 'src/app/auth/interfaces/User';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { TokenStorageService } from 'src/app/auth/services/token-storage.service';
 import { CartService } from 'src/app/cart/services/cart.service';
@@ -16,7 +17,7 @@ import { HeaderActions } from '../actions';
             routerLink="/homme"
             routerLinkActive="active"
             class="men"
-            (click)="setGender('M')"
+            (click)="gender.emit('M')"
             >homme</a
           >
           <i class="fas fa-grip-lines-vertical"></i>
@@ -24,7 +25,7 @@ import { HeaderActions } from '../actions';
             routerLink="/femme"
             routerLinkActive="active"
             class="women"
-            (click)="setGender('F')"
+            (click)="gender.emit('F')"
             >femme</a
           >
         </div>
@@ -35,7 +36,7 @@ import { HeaderActions } from '../actions';
         <div class="right-links">
           <!--authentication-->
           <a
-            *ngIf="!isLoggedIn"
+            *ngIf="id == null"
             routerLink="/connexion"
             routerLinkActive="active"
             class="fa fa-user auth"
@@ -44,17 +45,17 @@ import { HeaderActions } from '../actions';
 
           <!--logout-->
           <a
-            *ngIf="isLoggedIn"
+            *ngIf="id != null"
             class="nav-item"
             routerLink="/home"
-            (click)="logout()"
+            (click)="logout.emit()"
           >
             Logout
           </a>
 
           <!--profile-->
           <a
-            *ngIf="isLoggedIn"
+            *ngIf="id != null"
             routerLink="/profile"
             routerLinkActive="active"
             class="fa fa-user"
@@ -75,52 +76,16 @@ import { HeaderActions } from '../actions';
   `,
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
-  isLoggedIn = false;
-  totalQuantity!: number;
+export class HeaderComponent {
+  @Input() user!: User | null;
+  @Input() totalQuantity!: number | null;
 
-  constructor(
-    private tokenstorage: TokenStorageService,
-    private authService: AuthService,
-    private store: Store<Store>,
-    private cartService: CartService
-  ) {}
+  @Output() gender = new EventEmitter<string>();
+  @Output() logout = new EventEmitter<void>();
 
-  ngOnInit(): void {
-    this.checkLoggedIn();
-    this.getCartStatus();
+  get id(){
+    if(this.user != null) return this.user.id;
+    return;
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
-  getCartStatus() {
-    this.cartService.totalQuantity$.subscribe((data: number) => {
-      this.totalQuantity = data;
-    });
-  }
-
-  checkLoggedIn() {
-    const token = this.tokenstorage.getToken();
-    if (token) {
-      this.authService.isConnected.next(true);
-    } else {
-      this.authService.isConnected.next(false);
-    }
-
-    this.authService.isConnected.subscribe((subscriber) => {
-      this.isLoggedIn = subscriber;
-    });
-  }
-
-  setGender(gender: string) {
-    if (gender === 'M') {
-      this.store.dispatch(
-        HeaderActions.setGender({ gender: { id: 1, type: 'homme' } })
-      );
-    } else {
-      this.store.dispatch(HeaderActions.setGender({ gender: { id: 2, type: 'femme' } }));
-    }
-  }
 }

@@ -29,7 +29,9 @@ export const ROOT_REDUCERS = new InjectionToken<
   }),
 });
 
-export function logger(reducer: ActionReducer<coreState>): ActionReducer<coreState> {
+export function logger(
+  reducer: ActionReducer<coreState>
+): ActionReducer<coreState> {
   return (state, action) => {
     const result = reducer(state, action);
     console.groupCollapsed(action.type);
@@ -69,11 +71,11 @@ export function reducers(state: coreState | undefined, action: Action) {
 //   [fromCart.cartFeaturesKey]: fromCart.reducer,
 // };
 
-export const selectCoreState = createFeatureSelector<coreState>(CoreFeatureKey)
+export const selectCoreState = createFeatureSelector<coreState>(CoreFeatureKey);
 
 export const selectHeaderState = createSelector(
   selectCoreState,
-  (state) =>  state.header
+  (state) => state.header
 );
 
 export const selectGender = createSelector(
@@ -136,4 +138,10 @@ export const selectCartItemEntityById = createSelector(
 export const selectCartItemsIds = createSelector(
   selectCartItemState,
   fromCart.getSelectedCartItemId
+);
+
+export const selectCartItemsQuantity = createSelector(
+  selectAllCartItems,
+  (cartItems) =>
+    cartItems.map((cartItem) => cartItem.quantity).reduce((a, b) => a + b)
 );

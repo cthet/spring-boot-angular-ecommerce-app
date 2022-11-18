@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HeaderActions } from '../actions';
 
-import { setGender } from '../actions/header.actions';
 
 @Component({
   selector: 'app-home',

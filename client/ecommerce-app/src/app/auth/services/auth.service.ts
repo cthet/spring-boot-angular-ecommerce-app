@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,15 +16,14 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  isConnected = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    this.isConnected.next(true);
+
     return this.http
       .post(
-        'http://localhost:8080/login',
+        'http://localhost:8080/api/auth/login',
         {
           email,
           password,
@@ -34,11 +33,18 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-  signup(email: string, password: string): Observable<any> {
+  signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ): Observable<any> {
     return this.http
       .post<any>(
-        'http://localhost:8080/signup',
+        'http://localhost:8080/api/auth/signup',
         {
+          firstName,
+          lastName,
           email,
           password,
         },
@@ -48,7 +54,6 @@ export class AuthService {
   }
 
   logout() {
-    this.isConnected.next(false);
     window.sessionStorage.clear();
     //return this.http.post<any>('http://localhost:8080/logout', customerId);
   }
@@ -57,7 +62,7 @@ export class AuthService {
     if (error.status === 0) {
       //a client-side or network error occured. Handle it accordingly.
       console.log('An error occured:', error.error);
-      return throwError(() => new Error(error.error.message));
+      return throwError(() => error.error.message);
     } else {
       // the backend returned an unsuccesful response code.
       // the response body may contain clues as to what went wrong.
@@ -65,7 +70,7 @@ export class AuthService {
         'Backend returned code ${error.status}, body was:',
         error.error
       );
-      return throwError(() => new Error(error.error.message));
+      return throwError(() => error.error.message);
     }
   }
 }

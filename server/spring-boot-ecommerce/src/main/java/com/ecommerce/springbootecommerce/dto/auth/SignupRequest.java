@@ -10,13 +10,20 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
-public class AuthRequest {
+public class SignupRequest {
+
+    @NotBlank(message = "firstName cannot be blank")
+    @NotEmpty(message = "firstName cannot be empty")
+    private String firstName;
+
+    @NotBlank(message = "lastName cannot be blank")
+    @NotEmpty(message = "lastName cannot be empty")
+    private String lastName;
 
     @NotBlank(message = "email cannot be blank")
     @NotEmpty(message = "email cannot be empty")
-    @Email
+    @Email(message = "email is not valid")
     private String email;
-
 
     @NotBlank(message = "email cannot be blank")
     @Length(min = 8, max = 40)

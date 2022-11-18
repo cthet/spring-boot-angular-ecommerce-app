@@ -27,7 +27,7 @@ const routes: Routes = [
     path: ':gender',
     canActivate: [GenderGuard],
     loadChildren: () =>
-      import('./products/products.module').then((mod) => mod.ProductsModule),
+     import('./products/products.module').then((mod) => mod.ProductsModule),
   },
 ];
 

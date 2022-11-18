@@ -25,7 +25,7 @@ export class GenderGuard implements CanActivate {
     if (this.authorized.includes(state.url)) {
       return true;
     } else {
-      this.router.navigateByUrl('/femme');
+      //this.router.navigateByUrl('/femme');
       return false;
     }
   }

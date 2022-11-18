@@ -4,6 +4,8 @@ import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
+import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
+import com.ecommerce.springbootecommerce.dto.auth.UserDTO;
 import com.ecommerce.springbootecommerce.enums.Role;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
@@ -45,30 +47,35 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            Long id = userPrincipal.getId();
             String role = userPrincipal.getAuthorities().toString();
             String email = userPrincipal.getEmail();
 
+            UserDTO userDTO = new UserDTO(id, email, role);
+
             String jwt = jwtUtils.generateToken(email, role);
 
-            return new AuthResponse(jwt, email, role);
+            return new AuthResponse(userDTO, jwt);
 
         } catch(AuthenticationException e) {
-            throw  new ApiRequestException("Password is invalid.", HttpStatus.FORBIDDEN);
+            throw  new ApiRequestException("Credentials are uncorrect.", HttpStatus.FORBIDDEN);
         }
     }
-    public String signup(@Valid @RequestBody AuthRequest authRequest) {
+    public String signup(@Valid @RequestBody SignupRequest signupRequest) {
 
-            if (userRepository.existsByEmail(authRequest.getEmail())) {
-                throw new ApiRequestException("Email is already used.", HttpStatus.BAD_REQUEST);
+            if (userRepository.existsByEmail(signupRequest.getEmail())) {
+                throw new ApiRequestException("Email already exists in database.", HttpStatus.BAD_REQUEST);
             }
 
             User user = new User();
-            user.setEmail(authRequest.getEmail());
+            user.setFirstName(signupRequest.getFirstName());
+            user.setLastName(signupRequest.getLastName());
+            user.setEmail(signupRequest.getEmail());
             user.setRole(Collections.singleton(Role.USER));
-            user.setPassword(encoder.encode(authRequest.getPassword()));
+            user.setPassword(encoder.encode(signupRequest.getPassword()));
 
             userRepository.save(user);
 
-            return "User successfully registered!";
+            return "User registered successfully.";
     }
 }

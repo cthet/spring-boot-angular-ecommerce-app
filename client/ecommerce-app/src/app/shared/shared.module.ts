@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromNavbar from './reducers/navbar.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { NavbarEffects } from './effects/navbar.effects';
+import { AppRoutingModule } from '../app-routing.module';
 
 export const COMPONENTS = [
   NavbarComponent,
@@ -24,7 +25,6 @@ export const CONTAINERS = [NavbarPageComponent];
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
-    ProductsRoutingModule,
     StoreModule.forFeature(fromNavbar.NavbarFeatureKey, fromNavbar.reducer),
     EffectsModule.forFeature([NavbarEffects]),
   ],

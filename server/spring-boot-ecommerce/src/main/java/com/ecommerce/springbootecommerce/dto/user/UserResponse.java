@@ -10,7 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserResponse {
 
-        private UserDTO userDTO;
+        private ProfileDTO profileDTO;
 
         private Set<AddressDTO> addressDTO;
 

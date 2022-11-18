@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './core/containers/app.component';
+import { CoreComponent } from './core/containers/core.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +37,6 @@ import * as fromCore from './reducers/';
       logOnly: environment.production,
     }),
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [CoreComponent],
 })
 export class AppModule {}

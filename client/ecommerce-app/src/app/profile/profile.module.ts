@@ -8,12 +8,14 @@ import { authInterceptorProviders } from 'src/app/utility/interceptors/auth-inte
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ProfileComponent } from './components/profile.component';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 export const COMPONENTS = [ProfileComponent];
 
 @NgModule({
   declarations: [COMPONENTS],
   imports: [
+    ProfileRoutingModule,
     SharedModule,
     MatProgressSpinnerModule,
     HttpClientModule,

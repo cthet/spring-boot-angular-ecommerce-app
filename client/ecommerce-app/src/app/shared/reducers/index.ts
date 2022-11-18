@@ -13,9 +13,14 @@ export interface NavbarState {
 export const selectNavbarState =
   createFeatureSelector<fromNavbar.State>(NavbarFeatureKey);
 
-export const selectHomeVideo = createSelector(
+export const selectVideo = createSelector(
   selectNavbarState,
   fromNavbar.getVideo
+);
+
+export const selectImage = createSelector(
+  selectNavbarState,
+  fromNavbar.getImage
 );
 
 export const selectAllBrand = createSelector(

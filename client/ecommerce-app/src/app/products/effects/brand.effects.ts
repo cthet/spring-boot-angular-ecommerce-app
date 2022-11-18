@@ -9,6 +9,7 @@ import {
 } from '../actions/brand.actions';
 import { BrandService } from '../services/brand.service';
 import * as fromHeader from '../../reducers/index';
+import { setImageSuccess } from 'src/app/shared/actions/navbar.actions';
 
 @Injectable()
 export class BrandEffects {
@@ -27,6 +28,7 @@ export class BrandEffects {
           .fetchBrandByGenderIdAndBrandId(gender.id, action.brandId)
           .pipe(
             map((Brand) => loadBrandByBrandIdSuccess({ brand: Brand })),
+            map((Brand) => setImageSuccess({ image: Brand.brand.image_url })),
             catchError((error) =>
               of(loadBrandByBrandIdFailure({ error: error }))
             )

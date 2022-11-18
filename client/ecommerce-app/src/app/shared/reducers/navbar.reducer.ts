@@ -11,12 +11,14 @@ import {
   loadApparelCategoriesBygenderIdSuccess,
   setVideoSuccess,
   removeVideo,
+  setImageSuccess,
 } from '../actions/navbar.actions';
 
 export const NavbarFeatureKey = 'navbar';
 
 export interface State {
   video: string;
+  image: string;
   brands: Brand[];
   apparelCategories: ApparelCategory[];
   error: string | null;
@@ -25,6 +27,7 @@ export interface State {
 
 export const initialState: State = {
   video: '',
+  image: '',
   brands: [],
   apparelCategories: [],
   error: null,
@@ -85,10 +88,17 @@ export const reducer = createReducer<State>(
   on(removeVideo, (state) => ({
     ...state,
     video: '',
+  })),
+
+  on(setImageSuccess, (state, { image }) => ({
+    ...state,
+    image: image,
   }))
 );
 
 export const getVideo = (state: State) => state.video;
+
+export const getImage = (state: State) => state.image;
 
 export const getBrands = (state: State) => state.brands;
 

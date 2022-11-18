@@ -5,10 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AuthResponse {
+public class UserDTO {
 
-    private UserDTO user;
+    private Long id;
 
-    private String token;
+    private String email;
 
+    private String role;
 }

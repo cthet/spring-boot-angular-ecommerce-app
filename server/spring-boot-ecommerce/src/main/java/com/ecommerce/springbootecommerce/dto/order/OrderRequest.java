@@ -1,7 +1,7 @@
 package com.ecommerce.springbootecommerce.dto.order;
 
 import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
-import com.ecommerce.springbootecommerce.dto.user.UserDTO;
+import com.ecommerce.springbootecommerce.dto.auth.UserDTO;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;

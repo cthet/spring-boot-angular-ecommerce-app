@@ -1,7 +1,8 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.MessageResponse;
+import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
+import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins ="*", maxAge = 3600)
+@CrossOrigin(origins ="*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
@@ -25,9 +26,9 @@ public class AuthenticationController {
         }
     }
     @PostMapping("/signup")
-    public ResponseEntity<?> signupUser(@Valid @RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
         try {
-            return ResponseEntity.ok(new MessageResponse(authenticationService.signup(authRequest)));
+            return ResponseEntity.ok(new MessageResponse(authenticationService.signup(signupRequest)));
 
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);

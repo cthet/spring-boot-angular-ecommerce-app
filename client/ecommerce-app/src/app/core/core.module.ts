@@ -8,10 +8,10 @@ import { AppRoutingModule } from '../app-routing.module';
 import { FooterComponent } from './components/footer.component';
 import { HeaderComponent } from './components/header.component';
 import { HomeComponent } from './components/home.component';
-import { AppComponent } from './containers/app.component';
+import { CoreComponent } from './containers/core.component';
 
 export const COMPONENTS = [
-  AppComponent,
+  CoreComponent,
   HomeComponent,
   HeaderComponent,
   FooterComponent,
@@ -27,6 +27,6 @@ export const COMPONENTS = [
     NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [CoreComponent],
 })
 export class CoreModule {}
