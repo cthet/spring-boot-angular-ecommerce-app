@@ -1,42 +1,49 @@
 import { NgModule } from '@angular/core';
-
-import { CoreComponent } from './core/containers/core.component';
-
-import { MatButtonModule } from '@angular/material/button';
-import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CoreModule } from './core/core.module';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { CoreModule } from './core/core.module';
-import * as fromCore from './reducers/';
+import { metaReducers, reducers } from './store';
+import { AppRoutingModule } from './app-routing.module';
+import { ApparelCategoriesEffects } from './store/effects/apparel-categories.effects';
+import { BrandsEffects } from './store/effects/brands.effects';
+import { ImageEffects } from './store/effects/image.effects';
+import { ProductsEffects } from './store/effects/products.effects';
+import { VideoEffects } from './store/effects/video.effects';
+import { AppComponent } from './core/containers/core.component';
+import { GenderEffects } from './store/effects/gender-effects';
+import { CartEffects } from './store/effects/cart.effects';
+import { authInterceptorProviders } from './utility/interceptors/auth-interceptor';
+import { ProductEffects } from './store/effects/product.effects';
 @NgModule({
   imports: [
-    CoreModule,
-    CommonModule,
-    FormsModule,
-    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    MatButtonModule,
     BrowserAnimationsModule,
-    MatTableModule,
-    NgbModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    StoreModule.forFeature(fromCore.CoreFeatureKey, fromCore.reducers),
+    AppRoutingModule,
+    CoreModule,    
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+      strictStateImmutability: true,
+      strictActionImmutability: true,
+      strictStateSerializability: true,
+      strictActionSerializability: true,
+      strictActionWithinNgZone: true,
+      strictActionTypeUniqueness: true,
+    },
+  }),
+    EffectsModule.forRoot([GenderEffects, CartEffects, ApparelCategoriesEffects, BrandsEffects, ImageEffects, ProductsEffects, ProductEffects, VideoEffects]), 
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
   ],
-  bootstrap: [CoreComponent],
+  providers: [authInterceptorProviders],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

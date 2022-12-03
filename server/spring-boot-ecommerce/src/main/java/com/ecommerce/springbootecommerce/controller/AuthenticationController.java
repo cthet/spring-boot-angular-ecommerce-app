@@ -17,10 +17,10 @@ import javax.validation.Valid;
 public class AuthenticationController {
     @Autowired
     AuthenticationService authenticationService;
-    @PostMapping("/login")
+    @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthRequest authRequest) {
         try {
-            return ResponseEntity.ok(authenticationService.login(authRequest));
+            return ResponseEntity.ok(authenticationService.signin(authRequest));
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

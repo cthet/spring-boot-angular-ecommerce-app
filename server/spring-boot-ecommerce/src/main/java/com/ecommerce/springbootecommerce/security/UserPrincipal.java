@@ -1,7 +1,9 @@
 package com.ecommerce.springbootecommerce.security;
 
 import com.ecommerce.springbootecommerce.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +13,18 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserPrincipal implements UserDetails {
 
-    private final Long id;
+    private Long id;
 
-    private final String email;
+    private String email;
 
-    private final String password;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
+
+
 
     public static UserPrincipal build(User user) {
         String userRole = user.getRole().iterator().next().toString();

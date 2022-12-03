@@ -22,10 +22,9 @@ export class GenderGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if (this.authorized.includes(state.url)) {
+    if (this.authorized.indexOf(state.url)>-1) {
       return true;
     } else {
-      //this.router.navigateByUrl('/femme');
       return false;
     }
   }

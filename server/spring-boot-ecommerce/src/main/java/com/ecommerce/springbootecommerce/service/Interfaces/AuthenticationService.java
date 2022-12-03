@@ -8,7 +8,7 @@ import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
 
 public interface AuthenticationService {
 
-    AuthResponse login(AuthRequest authRequest);
+    AuthResponse signin(AuthRequest authRequest);
 
     String signup(SignupRequest signupRequest);
 }

@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     JwtUtils jwtUtils;
 
-    public AuthResponse login(@Valid @RequestBody AuthRequest authRequest) {
+    public AuthResponse signin(@Valid @RequestBody AuthRequest authRequest) {
 
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new ApiRequestException("Email not found in database!", HttpStatus.NOT_FOUND));

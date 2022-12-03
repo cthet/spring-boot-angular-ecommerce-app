@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Gender } from 'src/app/core/models/gender';
-import { ApparelCategory } from 'src/app/products/models/apparelCategory';
-import { Brand } from 'src/app/products/models/brand';
+import { ApparelCategory } from '../../models/apparelCategory';
+import { Brand } from '../../models/brand';
 
 @Component({
   selector: 'app-navbar',
   template: `
     <video
-      *ngIf="video_url && image_url == ''"
+      *ngIf="video_url != null && image_url == null"
       [src]="video_url"
       type="video/mp4"
       loop
@@ -15,7 +14,7 @@ import { Brand } from 'src/app/products/models/brand';
       muted
     ></video>
 
-    <img *ngIf="image_url" [src]="image_url" />
+    <img *ngIf="image_url != null" [src]="image_url" />
 
     <nav class="navbar">
       <ul>
@@ -26,9 +25,7 @@ import { Brand } from 'src/app/products/models/brand';
           <ul class="brands-dropdown-content">
             <ng-container *ngFor="let brand of brands">
               <li>
-                <a                 
-
-                  (click)="select.emit(brand.id)"
+                <a (click)="selectBrand.emit(brand)"
                 >
                   {{ brand.brand_category }}
                 </a>
@@ -38,12 +35,12 @@ import { Brand } from 'src/app/products/models/brand';
         </li>
 
         <li class="apparel-categories-dropdown">
-          <a > Prêt à porter </a>
+          <a> Prêt à porter </a>
 
           <ul class="apparel-categories-dropdown-content">
             <ng-container *ngFor="let apparelCategory of apparelCategories">
               <li>
-                <a
+                <a 
                 >
                   {{ apparelCategory.apparel_category }}
                 </a>
@@ -57,48 +54,10 @@ import { Brand } from 'src/app/products/models/brand';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  @Input() gender!: Gender | null;
   @Input() video_url!: string | null;
   @Input() image_url!: string | null;
   @Input() brands!: Brand[] | null;
   @Input() apparelCategories!: ApparelCategory[] | null;
 
-
-  @Output() select = new EventEmitter<number>();
-
-  get genderType() {
-    if (this.gender != null) return this.gender.type;
-    return;
-  }
-
-  // get brandId() {
-  //   if (this.brand != null) return this.brand.id;
-  //   return;
-  // }
-
-  // get brandImageUrl() {
-  //   if (this.brand != null) return this.brand.image_url;
-  //   return;
-  // }
-
-  // get brandCategory() {
-  //   if (this.brand != null) return this.brand.brand_category;
-  //   return;
-  // }
-
-//   routerLink="[
-//     apparelCategory.apparel_category
-//       | ApparelCategoryCase
-//       | HyphenateCase
-//   ]"
-//   routerLinkActive="active"
-   
-
-//   routerLink="[genderType/pret-a-porter]"
-//   routerLink="../genderType/marques"
-
-//   routerLink="
-//   /genderType/brand.brand_category | BrandCase | HyphenateCase
-// "
-// routerLinkActive="active" 
+  @Output() selectBrand = new EventEmitter<Brand>();
 }

@@ -19,7 +19,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@RequestParam("id") Long id) {
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
 
         try {
             return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);

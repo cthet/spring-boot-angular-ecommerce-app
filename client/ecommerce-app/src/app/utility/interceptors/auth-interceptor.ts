@@ -7,13 +7,13 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '../../auth/services/token-storage.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private tokenService: TokenStorageService) {}
+  constructor(private localStorageService: LocalStorageService) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<Object>> {
     let authReq = req;
 
-    const token = this.tokenService.getToken();
+    const token = this.localStorageService.getToken();
 
     if (token != null) {
       authReq = req.clone({

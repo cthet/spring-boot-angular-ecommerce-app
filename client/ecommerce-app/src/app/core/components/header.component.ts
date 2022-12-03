@@ -1,71 +1,62 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { User } from 'src/app/auth/interfaces/User';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { TokenStorageService } from 'src/app/auth/services/token-storage.service';
-import { CartService } from 'src/app/cart/services/cart.service';
-import { HeaderActions } from '../actions';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Gender } from '../../models/gender';
 
 @Component({
   selector: 'app-header',
   template: `
+  <header>
     <nav class="header-container">
       <div class="navbar-container">
         <!--gender-->
-        <div class="gender-links">
+        <div class="gender-links col-xs-5">
           <a
+            [ngStyle]="gender?.id == 1? {'color':  'rgb(179, 117, 60)' } : null"
             routerLink="/homme"
-            routerLinkActive="active"
             class="men"
-            (click)="gender.emit('M')"
+            (click)="selectGender.emit('men')"
             >homme</a
           >
           <i class="fas fa-grip-lines-vertical"></i>
           <a
+          [ngStyle]="gender?.id == 2? {'color':  'rgb(179, 117, 60)' } : null"
             routerLink="/femme"
-            routerLinkActive="active"
             class="women"
-            (click)="gender.emit('F')"
+            (click)="selectGender.emit('women')"
             >femme</a
           >
         </div>
 
         <!--E-commerce Brand-->
-        <a routerLink="/" class="brand">Shop</a>
+        <a routerLink="/" class="brand col-xs-2 justify-content-center">Shop</a>
 
-        <div class="right-links">
+        <div class="right-links col-xs-5">
           <!--authentication-->
           <a
-            *ngIf="id == null"
+            *ngIf="!isLoggedIn"
             routerLink="/connexion"
-            routerLinkActive="active"
             class="fa fa-user auth"
           >
           </a>
 
           <!--logout-->
           <a
-            *ngIf="id != null"
-            class="nav-item"
-            routerLink="/home"
+            *ngIf="isLoggedIn"
+            class="fa fa-user nav-item"
             (click)="logout.emit()"
           >
-            Logout
           </a>
 
           <!--profile-->
           <a
-            *ngIf="id != null"
+            *ngIf="isLoggedIn"
             routerLink="/profile"
-            routerLinkActive="active"
             class="fa fa-user"
           >
           </a>
 
           <!--Cart-->
           <a
-            routerLink="/cart"
-            routerLinkActive="active"
+            routerLink="/panier"
             class="fa fa-shopping-bag cart"
           >
             <span class="text-quantity">{{ totalQuantity }} </span>
@@ -73,19 +64,15 @@ import { HeaderActions } from '../actions';
         </div>
       </div>
     </nav>
+</header>
   `,
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  @Input() user!: User | null;
+  @Input() gender!: Gender | null;
+  @Input() isLoggedIn!: Boolean | null;
   @Input() totalQuantity!: number | null;
 
-  @Output() gender = new EventEmitter<string>();
+  @Output() selectGender = new EventEmitter<string>();
   @Output() logout = new EventEmitter<void>();
-
-  get id(){
-    if(this.user != null) return this.user.id;
-    return;
-  }
-
 }

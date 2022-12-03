@@ -1,0 +1,66 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { CartItem } from '../../models/cart-Item';
+import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCartFailure, loadCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.action';
+
+export const cartFeaturesKey = 'cart';
+
+export interface State extends EntityState<CartItem> {
+  selectedCartItemId: number | null;
+  error: string | null;
+  status: 'pending' | 'loading' | 'error' | 'success';
+}
+
+export const adapter: EntityAdapter<CartItem> = createEntityAdapter<CartItem>({
+  selectId: selectCartItemId,
+});
+
+export const initialState: State = adapter.getInitialState({
+  selectedCartItemId: null,
+  error: null,
+  status: 'pending',
+});
+
+export function selectCartItemId(cartItem: CartItem): number {
+  return cartItem.item.id;
+}
+
+export const reducer = createReducer<State>(
+  initialState,
+
+  on(addCartItem, (state, { cartItem }) => adapter.addOne(cartItem, state)),
+
+  on(updateCartItem, (state, { update }) => adapter.updateOne(update, state)),
+
+  on(deleteCartItem, (state, { id }) => adapter.removeOne(id, state)),
+
+  on(loadCartSuccess, (state, { cart }) => adapter.upsertMany(cart.cartItems, {...state, status: 'success', error: null})),
+
+  on(loadCartFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error',
+  })),
+
+  on(browserReload, (state, { cart }) => adapter.setAll(cart.cartItems, state)),
+
+  //on(upsertCartItems, (state, {cartItems}) => { return adapter.upsertMany(cartItems, state)}),
+
+  on(clearAllCartItems, (state) => adapter.removeAll({...state, selectedCartItemId: null}))
+
+);
+
+
+export const getSelectedCartItemId = (state: State) => state.selectedCartItemId;
+
+const { selectIds, selectEntities, selectAll, selectTotal } =
+  adapter.getSelectors();
+
+export const selectCartItemIds = selectIds;
+
+export const selectCartItemEntities = selectEntities;
+
+export const selectAllCartItems = selectAll;
+
+export const selectCartItemTotal = selectTotal;
+

@@ -1,32 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '../app-routing.module';
 import { FooterComponent } from './components/footer.component';
 import { HeaderComponent } from './components/header.component';
-import { HomeComponent } from './components/home.component';
-import { CoreComponent } from './containers/core.component';
+import { HeaderPageComponent } from './containers/header-page.component';
 
-export const COMPONENTS = [
-  CoreComponent,
-  HomeComponent,
-  HeaderComponent,
-  FooterComponent,
-];
+import { AppComponent } from './containers/core.component';
+import { PagenotfoundComponent } from './components/pagenotfound.component';
+
+export const COMPONENTS = [FooterComponent, HeaderComponent, PagenotfoundComponent];
+
+export const CONTAINERS = [AppComponent, HeaderPageComponent];
 
 @NgModule({
-  declarations: [COMPONENTS],
+  declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
-    AppRoutingModule,
-    MatButtonModule,
-    MatTableModule,
-    NgbModule,
+    RouterModule,
+    AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [CoreComponent],
 })
 export class CoreModule {}

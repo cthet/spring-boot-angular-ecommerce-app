@@ -1,32 +1,45 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsRoutingModule } from '../products/products-routing.module';
-import { ApparelCategoryPipe } from 'src/app/utility/pipes/apparelCategoryPipe';
-import { BrandPipe } from 'src/app/utility/pipes/brandsPipe';
-import { HyphenPipe } from 'src/app/utility/pipes/hyphenPipe';
+import { ApparelCategoryPipe } from './pipes/apparelCategoryPipe';
+import { BrandPipe } from './pipes/brandsPipe';
+import { HyphenPipe } from './pipes/hyphenPipe';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './components/navbar.component';
-import { NavbarPageComponent } from './containers/navbar-page.components';
-import { StoreModule } from '@ngrx/store';
-import * as fromNavbar from './reducers/navbar.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { NavbarEffects } from './effects/navbar.effects';
-import { AppRoutingModule } from '../app-routing.module';
+import { ProductComponent } from './components/product.component';
+import { ProductsCategoryComponent } from './components/products-category.component';
+import { ProductsListComponent } from './components/products-list.component';
+import { SortProductsComponent } from './components/sort-products.component';
+import { NavbarPageComponent } from './containers/navbar-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { ProductPageComponent } from './containers/product-page.component';
 
 export const COMPONENTS = [
   NavbarComponent,
+  ProductComponent,
+  ProductsCategoryComponent,
+  ProductsListComponent,
+  SortProductsComponent,
   HyphenPipe,
   BrandPipe,
-  ApparelCategoryPipe,
+  ApparelCategoryPipe,  
 ];
 
-export const CONTAINERS = [NavbarPageComponent];
+export const CONTAINERS = [NavbarPageComponent, ProductPageComponent];
 
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
     CommonModule,
-    StoreModule.forFeature(fromNavbar.NavbarFeatureKey, fromNavbar.reducer),
-    EffectsModule.forFeature([NavbarEffects]),
+    RouterModule,
+    MatCardModule, 
+    NgbModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatRadioModule
   ],
   exports: [COMPONENTS, CONTAINERS],
 })

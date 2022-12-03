@@ -6,6 +6,7 @@ import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.repository.AddressRepository;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.UserPrincipalServiceImpl;
+import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -24,15 +25,14 @@ public class UserServiceImpl {
     @Autowired
     AddressRepository addressRepository;
 
+    @Override
     public User getUser() {
-
         Long id = userPrincipalService.getUserPrincipalImpl().getId();
         return userRepository.findById(id).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
-
     }
 
+    @Override
     public String updateUser(String firstName, String lastName) {
-
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
         User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
 
@@ -41,9 +41,10 @@ public class UserServiceImpl {
         userRepository.save(user);
 
         return "User successfully updated !";
-
     }
 
+
+    @Override
     public List<Address> getUserAddress() {
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();
         User user = userRepository.findByEmail(emailPrincipal).orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
@@ -51,7 +52,7 @@ public class UserServiceImpl {
         return addressRepository.findByUserId(user.getId());
 
     }
-
+    @Override
     public String addUserAddress(Address address) {
 
         String emailPrincipal = userPrincipalService.getUserPrincipalImpl().getEmail();

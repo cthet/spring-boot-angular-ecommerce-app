@@ -1,0 +1,107 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.product-container {
+  height: 100%;
+  margin-top: 150px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  position: relative;
+  max-width: 80rem;
+  padding-left: 0.95rem;
+  padding-right: 0.95rem;
+}
+
+.links{
+  display: block;
+  padding: 1rem 0;
+}
+
+ul {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.links li {
+  display: inline-block;
+  margin-right: 1.25rem;
+  position: relative;
+  list-style: none;
+}
+
+.links li:after{
+  background: url(https://static-z.zolaprod.babsta.net/green/_next/static/media/arrow.d7f61428.svg) 50% no-repeat;
+    content: "";
+    height: 1rem;
+    position: absolute;
+    right: -1rem;
+    top: 0.25rem;
+    width: 0.625rem;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: rgb(179, 117, 60);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  padding: 20px;  
+  margin: 0 auto;
+  display: block;
+}
+
+.mat-card {
+  display: inline-block;
+  width: 100%;
+  max-height: 500px;
+  padding: 0.9rem;
+  max-width: 500px;
+  text-align: left;
+  align-items: center;
+  background-color: #faf8f6; 
+  border: none;
+}
+.cart-button {
+  display: inline-block;
+  border: none;
+  position: relative;
+  margin:0;
+  width: 100%;
+  color: #f1f1f1;
+  vertical-align: middle;
+  padding: 10px;
+  background-color: #000;
+}
+
+.item-info{
+  color: #666;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+.item-info ul{
+  background: url(https://static-z.zolaprod.babsta.net/green/_next/static/media/check-grey.821a387b.svg) left 0 no-repeat;
+  background-size: 0.875rem;
+}
+.item-info li {
+  display: inline-block;  
+  width: 100%;
+  text-align: left;
+}
