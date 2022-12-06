@@ -1,0 +1,44 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-details-container {
+  margin-top: 140px;
+  height: 100vh;
+  background-color: #faf8f6;  
+}
+
+.cart-details-wrapper{
+  padding-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 67rem;
+}
+
+.mat-card {
+  padding: 1rem;
+  margin-top: 0px;
+  width: 100%;
+  border: none;
+  border-radius: 0%;
+}
+
+.cart-content{
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.btn-continue{
+  padding: 0.625rem 1.875rem;
+  background: #333;
+  color: #fff;
+  font-family: function-bold, Arial, sans-serif;
+  text-decoration: none;
+  border-radius: 5%;
+  border: none;
+}

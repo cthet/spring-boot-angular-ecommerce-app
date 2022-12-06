@@ -37,9 +37,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {    
     this.genderSubscription = this.gender$.subscribe(() => {
-      this.dispatchGenderData()}
-      
-    );
+      this.dispatchGenderData()
+      });
   }
 
   dispatchGenderData(){

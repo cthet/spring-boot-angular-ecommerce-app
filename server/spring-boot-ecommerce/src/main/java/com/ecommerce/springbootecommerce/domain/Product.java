@@ -36,10 +36,10 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_category_id")
     private GenderCategory genderCategory;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_category_id")
     private BrandCategory brandCategory;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apparel_category_id")
     private ApparelCategory apparelCategory;

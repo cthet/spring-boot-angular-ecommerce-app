@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-profile',
   template: `
+  <div class="profile-container">
   <div class="container pt-4 pb-4">
   <div class="row">
     <div class="col-sm-4 mx-auto">
@@ -28,6 +29,7 @@ import { Component, OnInit } from '@angular/core';
       </mat-card>
     </div>
   </div>
+</div>
 </div>`,
   styleUrls: ['./profile.component.css'],
 })

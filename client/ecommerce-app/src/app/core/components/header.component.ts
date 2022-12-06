@@ -56,7 +56,7 @@ import { Gender } from '../../models/gender';
 
           <!--Cart-->
           <a
-            routerLink="/panier"
+            [routerLink]="['panier']"
             class="fa fa-shopping-bag cart"
           >
             <span class="text-quantity">{{ totalQuantity }} </span>

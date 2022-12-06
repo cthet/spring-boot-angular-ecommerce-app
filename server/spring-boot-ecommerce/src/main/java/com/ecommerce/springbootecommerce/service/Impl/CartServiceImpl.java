@@ -45,22 +45,31 @@ public class CartServiceImpl implements CartService {
         Cart cart = cartRepository.findCartByUserId(id).orElseThrow(() -> new ApiRequestException("No cart found in database!", HttpStatus.NOT_FOUND));
 
         CartDTO cartDTO = new CartDTO();
+        cartDTO.setTotalPrice(cart.getTotalPrice());
+        cartDTO.setTotalQuantity(cart.getTotalQuantity());
 
         List<CartItemDTO> cartItemsDTO = new ArrayList<CartItemDTO>();
 
         cart.getCartItems().forEach(cartItem -> {
             CartItemDTO cartItemDTO = new CartItemDTO();
-            cartItemDTO = modelMapper.map(cartItem, CartItemDTO.class);
+
+            cartItemDTO.setAmount(cartItem.getAmount());
+            cartItemDTO.setQuantity(cartItem.getQuantity());
 
             ProductDTO productDTO = new ProductDTO();
-            productDTO = modelMapper.map(cartItem.getProduct(), ProductDTO.class);
+
+            Product product = cartItem.getProduct();
+            productDTO = modelMapper.map(product, ProductDTO.class);
+            productDTO.setGender_category(product.getGenderCategory().getType());
+            productDTO.setBrand_category(product.getBrandCategory().getType());
+            productDTO.setProduct_category(product.getApparelCategory().getType());
+
             cartItemDTO.setProductDTO(productDTO);
 
             cartItemsDTO.add(cartItemDTO);
         });
         cartDTO.setCartItems(cartItemsDTO);
-        cartDTO.setTotalPrice(cart.getTotalPrice());
-        cartDTO.setTotalQuantity(cart.getTotalQuantity());
+
 
         return cartDTO;
 

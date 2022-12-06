@@ -5,96 +5,64 @@ import { CartItem } from '../../../models/cart-Item';
 @Component({
   selector: 'app-cart-details',
   template: `
-  <div class="container">
-    <div class="col-sm-12 mx-auto pt-4 pb-4">
-      <mat-card class="pb-4">
-        <mat-card-title class="mb-4">Votre Panier</mat-card-title>
-        <mat-card-content *ngIf="cart!.totalQuantity > 0">
-          <table class="table">
-            <thead class="medium-important large">
-              <tr class="col-name">
-                <td scope="col-sm-6">Product</td>
-                <td scope="col-sm-4">Unit Price</td>
-                <td scope="col-sm-4">Quantity</td>
-              </tr>
-            </thead>
-            <tbody *ngFor="let cartItem of cart!.cartItems; index as i">
-              <tr *ngIf="cartItem">
-                <th scope="row col-sm-2">{{ i + 1 }}</th>
-                <td class="fs-6 col-sm-6">
-                  {{ cartItem.item.product_name }}
-                  <div class="card col-sm-4 mt-4 mb-4">
-                    <img class="image" src="{{ cartItem.item.image_url }}" />
-                  </div>
-                </td>
-                <td class="fs-6 important">
-                  {{ cartItem.item.unit_price | currency: 'EUR' }}
-                </td>
-                <td class="fs-6 important">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="col-sm-5">
-                        <button
-                          mat-stroked-button
-                          color="warn"
-                          (click)="removeOne.emit(cartItem)"
-                        >
-                          -
-                        </button>
-                      </div>
-                      <div class="col-sm-2 justify-content-center">
-                        {{ cartItem.quantity }}
-                      </div>
-                      <div class="col-sm-5">
-                        <button
-                          mat-raised-button
-                          color="warn"
-                          (click)="addOne.emit(cartItem)"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div *ngIf="cart!.totalQuantity != 0">
-            <div class="d-flex justify-content-end large pt-2">
-              <span
-                >Total Items:
-                <span class="important">{{ cart!.totalQuantity }}</span></span
-              >
-            </div>
-            <div class="d-flex justify-content-end large pt-2">
-              <span
-                >Total Price:
-                <span class="important">{{
-                  cart!.totalPrice | currency: 'EUR'
-                }}</span></span
-              >
-            </div>
-            <a
-              class="checkout d-flex justify-content-end font-weight-bold pt-4"
-              routerLink="/checkout"
-            >
-              <button
-                mat-raised-button
-                color="warn"
-                class="text-uppercase font-weight-bold"
-              >
-                Proceed to checkout
-              </button>
+  <mat-card class="mat-card">
+    <mat-card-title>
+      <h3 class="h-3">Votre Livraison</h3>          
+    </mat-card-title>
+    <hr>
+    <article *ngFor="let cartItem of cart?.cartItems">
+      <mat-card-content class="cart-content" >
+        <div class="d-f">     
+            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+              <img class="image" src="{{ cartItem.item.image_url }}" />              
             </a>
-          </div>
-        </mat-card-content>
-        <mat-card-content *ngIf="cart!.totalQuantity === 0" class="fs-6">
-          Your shopping list is empty.
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div> `,
+          <div class="item-info">  
+              <div class="d-f j-c-sb">
+                <div class="p-r">
+                  <div class="d-f m-b">
+                    <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+                      <p class="brand-name">{{cartItem.item.brand_category}}</p> 
+                    </a>                      
+                  </div>
+                  <a class="d-f" [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+                    <div class="f-d item-description">
+                      <p>{{cartItem.item.product_category}} / {{cartItem.item.product_name}}</p>
+                    </div>
+                  </a>    
+                  <div class="d-f actions">
+                    <button type="button" mat-icon-button class="d-f a-i-c j-c-c" (click)="removeOne.emit(cartItem)">
+                      <mat-icon>remove</mat-icon>                   
+                    </button>
+                    <button type="button" mat-icon-button class="d-f a-i-c j-c-c" (click)="addOne.emit(cartItem)">
+                      <mat-icon>add</mat-icon>                 
+                    </button>
+                  </div>
+                  <div class="d-f actions">
+                    <button type="button" mat-raised-button class="d-f j-c-c del-btn" (click)="remove.emit(cartItem)">
+                      <span>Supprimer</span>
+                    </button>
+                  <button type="button" mat-icon-button class="d-f a-i-c j-c-c favorite-btn">
+                    <mat-icon>favorite</mat-icon>
+                    <span>Déplacer vers mes envies</span>   
+                  </button>                    
+                </div>
+              </div>
+              <div class="item-price t-a-r">
+                <p class="t-t-u">Prix: {{cartItem.item.unit_price}}</p>
+              </div>   
+              <div class="item-price t-a-r">
+                <p class="t-t-u">Quantité: {{cartItem.quantity}}</p>
+              </div>   
+              <div class="item-price t-a-r">
+                <p class="t-t-u">Prix total: {{cartItem.amount}}&nbsp;€</p>
+              </div>   
+            </div>              
+            </div>
+            </div>
+      </mat-card-content>
+    </article>
+  </mat-card>
+`,
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent {
@@ -102,5 +70,6 @@ export class CartDetailsComponent {
 
   @Output() addOne = new EventEmitter<CartItem>();
   @Output() removeOne = new EventEmitter<CartItem>();
+  @Output() remove = new EventEmitter<CartItem>();
 
 }

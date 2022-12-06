@@ -1,0 +1,73 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mat-card {
+  padding: 1rem;
+  margin-top: 0px;
+  width: 100%;
+  border: none;
+  border-radius: 0%;
+}
+
+.d-f{
+  display: flex;
+}
+
+.t-a-r{
+  text-align: right;
+}
+
+.delivery-cost {
+  font-size: 0.85rem;
+  align-items: center;
+}
+
+.delivery-cost span{
+  text-align: end;
+  margin-left: auto;
+}
+
+.cart-total{
+  margin-top: 100px;
+}
+
+.cart-total .h-3{
+  font-size: 1rem;
+}
+
+.total{
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.h-4{
+  color: #1d2424;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-end: 0.5rem;
+}
+
+.total-price{
+  margin-left: auto;
+}
+
+.btn-cmd{
+  background: #333;
+  color: #fff;
+  font-family: function-bold,Arial,sans-serif;
+  text-decoration: none;
+  padding: 10px;
+  border: none;
+  margin-left: auto;
+}

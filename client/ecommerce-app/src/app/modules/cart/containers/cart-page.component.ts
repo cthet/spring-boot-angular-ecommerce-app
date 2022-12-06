@@ -1,65 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { Update } from '@ngrx/entity';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router, } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { Cart } from '../../../models/cart';
-import { CartItem } from '../../../models/cart-Item';
-import { cartActions, imageActions, videoActions } from '../../../store/actions';
+import { imageActions, videoActions } from '../../../store/actions';
 import { cartSelectors } from '../../../store/selectors';
-import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
   template: `
   <app-navbar-page></app-navbar-page>
-  <app-cart-details 
-  [cart]="cart$ | async"
-  (addOne)="addOne($event)"
-  (removeOne)="removeOne($event)"></app-cart-details>
+  <router-outlet></router-outlet>
   `,
 })
-export class CartPageComponent implements OnInit {
+export class CartPageComponent implements OnInit, OnDestroy {
   cart$!: Observable<Cart | null>;
+  cartSub: Subscription = new Subscription;
+  routerSub: Subscription = new Subscription;
 
-  constructor(private store: Store<Store>) {
+  constructor(private store: Store<Store>, private router: Router) {
     this.cart$ = this.store.select(cartSelectors.selectCart);
   }
 
   ngOnInit(): void {
     this.store.dispatch(imageActions.removeImage());
     this.store.dispatch(videoActions.removeVideo());
-  }
 
-  addOne(cartItem: CartItem) {    
-    const cartItemUpdated: Update<CartItem> = {
-      id: cartItem?.item.id!,
-      changes: {
-        item: cartItem.item,
-        quantity: cartItem.quantity! + 1,
-        amount: cartItem.amount + cartItem.item.unit_price
-      },
-    };
-    this.store.dispatch(cartActions.updateCartItem({update: cartItemUpdated}));
-  };
+    this.cartSub = this.cart$.subscribe(cart =>  {
+        if(cart?.cartItems.length === 0){
+          this.router.navigate(['panier/vide'])
+          } else {
+          this.router.navigate(['panier/details'])
+        }
+      }
+    )  
 
-  removeOne(cartItem: CartItem) {    
-    if(cartItem.quantity>1){
-      const cartItemUpdated: Update<CartItem> = {
-        id: cartItem?.item.id!,
-        changes: {
-          item: cartItem?.item,
-          quantity: cartItem?.quantity! - 1,
-          amount: cartItem.amount - cartItem.item.unit_price
-        },
-      };
-      this.store.dispatch(cartActions.updateCartItem({update: cartItemUpdated}));
+    this.routerSub = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd && event.url === '/panier'){
+      this.cart$.pipe(take(1)).subscribe(cart =>  {
+      if(cart?.cartItems.length === 0){
+        this.router.navigate(['panier/vide'])
     } else {
-      this.store.dispatch(cartActions.deleteCartItem({id: cartItem.item.id}));
+      this.router.navigate(['panier/details'])
     }
+    })
+      }
+    })
   }
 
-  // removeFromCart(product: Product) {
-  //   this.cartService.removeFromCart(product);
-  //   this.cartItems = this.cartService.cartItems;
-  // }
+  ngOnDestroy(): void {
+    this.cartSub.unsubscribe();
+    this.routerSub.unsubscribe();
+  }
 }
