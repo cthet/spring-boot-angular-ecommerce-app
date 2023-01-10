@@ -1,0 +1,61 @@
+<div>  
+
+  <div class="cart-title">
+    <h3 class="h-3">Votre panier</h3>
+    <p>{{totalQuantity}} article(s)</p>
+  </div>
+
+  <mat-card class="card-details">
+    <mat-card-content class="card-content">
+      <div class="cost-details">
+        <p>Sous-total TTC</p>
+        <p class="m-l-a">{{TTC | currency: 'EUR'}}</p>        
+      </div>
+      <div class="cost-details">
+        <p>Frais de livraison</p>
+        <p class="m-l-a">Offert</p>        
+      </div>
+      <div class="cost-details">
+        <p>Dont TVA</p>
+        <p class="m-l-a">{{TVA |currency: 'EUR'}}</p>        
+      </div>
+      <div class="cost-details total-details">
+        <p class="total">Total</p><span>(taxes locales et livraison incluses)</span>
+        <p class="m-l-a total-price">{{TTC | currency: 'EUR'}}</p>        
+      </div>
+      <hr>
+      <div>
+        <p class="cart-delivery">Votre livraison</p>
+      </div>    
+      <article *ngFor="let cartItem of cart?.cartItems">
+        <div class="cart-item">     
+          <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+            <img class="image" src="{{ cartItem.item.image_url }}" />              
+          </a>
+          <div class="item-info">
+            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+              <p class="brand-name">{{cartItem.item.brand_category}}</p> 
+            </a>                      
+            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+              <div class="f-d item-description">
+                <p>{{cartItem.item.product_category}} / {{cartItem.item.product_name}}</p>
+              </div>
+            </a>    
+          </div>
+          <div class="item-cost">
+            <div>
+              <p>{{cartItem.item.unit_price |currency: 'EUR'}}</p>
+            </div>   
+            <div>
+              <p>x {{cartItem.quantity}}</p>
+            </div>
+            <div>
+              <p>Total {{cartItem.amount | currency: 'EUR'}}</p>
+            </div>
+          </div>
+        </div>
+      </article>  
+  </mat-card-content>
+  </mat-card>
+  
+</div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cart } from '../../../models/cart';
 
 @Component({
@@ -12,9 +12,9 @@ import { Cart } from '../../../models/cart';
       <div class= "d-f total">
       <h4 class= "h-4">Total</h4>
       <span>(taxes locales et livraison incluses)</span>
-      <span class="t-a-r total-price">{{cart?.totalPrice}}&nbsp;€</span>
+      <span class="t-a-r total-price">{{cart?.totalPrice | currency: 'EUR'}}</span>
       </div>
-      <button type="button" class="d-f btn-cmd" mat-raised-button>
+      <button type="button" class="d-f btn-cmd" mat-raised-button (click)="checkout.emit()">
         Commander    
       </button>
     </mat-card-content>
@@ -23,6 +23,7 @@ import { Cart } from '../../../models/cart';
   styleUrls: ['./cart-price.component.css'],
 })
 export class CartPriceComponent {
-  @Input() cart!: Cart | null;
+  @Input() cart!: Cart | null;  
 
+  @Output() checkout = new EventEmitter();
 }

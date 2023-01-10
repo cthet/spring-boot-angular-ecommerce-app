@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Cart } from 'src/app/models/cart';
-import { CartItem } from 'src/app/models/cart-Item';
+import { CartItem } from 'src/app/models/cartItem';
 import { cartActions } from 'src/app/store/actions';
 import { cartSelectors } from 'src/app/store/selectors';
 
@@ -11,14 +12,18 @@ import { cartSelectors } from 'src/app/store/selectors';
   selector: 'app-cart-details-page',
   template: `
   <div class="cart-details-container">  
-  <div class="cart-details-wrapper">
-  <app-cart-details
-  [cart]="cart$ | async"
-  (addOne)="addOne($event)"
-  (removeOne)="removeOne($event)"
-  (remove)="remove($event)"></app-cart-details>
-  <app-cart-price [cart] = "cart$ | async"></app-cart-price>
-  </div>
+    <div class="cart-details-wrapper">
+      <app-cart-details
+        [cart]="cart$ | async"
+        (addOne)="addOne($event)"
+        (removeOne)="removeOne($event)"
+        (remove)="remove($event)">
+      </app-cart-details>
+      <app-cart-price
+       [cart] = "cart$ | async"
+       (checkout) = "checkout()">        
+      </app-cart-price>
+    </div>
   </div>
   `,
   styles: [`
@@ -38,7 +43,7 @@ import { cartSelectors } from 'src/app/store/selectors';
 export class CartDetailsPageComponent implements OnInit {
   cart$!: Observable<Cart | null>;
 
-  constructor(private store: Store<Store>) {
+  constructor(private store: Store<Store>, private router: Router) {
     this.cart$ = this.store.select(cartSelectors.selectCart);
   }
 
@@ -74,5 +79,9 @@ export class CartDetailsPageComponent implements OnInit {
 
   remove(cartItem: CartItem) {
     this.store.dispatch(cartActions.deleteCartItem({id: cartItem.item.id}));
+  }
+
+  checkout() {
+    this.router.navigate(['/commande']);
   }
 }

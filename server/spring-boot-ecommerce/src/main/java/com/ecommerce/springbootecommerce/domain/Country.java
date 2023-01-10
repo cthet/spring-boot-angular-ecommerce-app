@@ -15,7 +15,8 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    private String code;
-
     private String name;
+
+    @OneToOne(mappedBy = "country")
+    private Address address;
 }

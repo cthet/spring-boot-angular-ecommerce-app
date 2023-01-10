@@ -1,12 +1,14 @@
 package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
+import com.ecommerce.springbootecommerce.domain.Civility;
 import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
 import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
 import com.ecommerce.springbootecommerce.dto.auth.UserDTO;
 import com.ecommerce.springbootecommerce.enums.Role;
+import com.ecommerce.springbootecommerce.repository.CivilityRepository;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
 import com.ecommerce.springbootecommerce.security.UserPrincipal;
@@ -32,6 +34,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    CivilityRepository civilityRepository;
+    @Autowired
     PasswordEncoder encoder;
     @Autowired
     JwtUtils jwtUtils;
@@ -48,10 +52,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             Long id = userPrincipal.getId();
-            String role = userPrincipal.getAuthorities().toString();
             String email = userPrincipal.getEmail();
+            String role = userPrincipal.getAuthorities().toString();
 
-            UserDTO userDTO = new UserDTO(id, email, role);
+            UserDTO userDTO = new UserDTO(id, role);
 
             String jwt = jwtUtils.generateToken(email, role);
 
@@ -68,6 +72,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             }
 
             User user = new User();
+
+            Civility civility = civilityRepository.findCivilityById(signupRequest.getCivility()).orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
+
+            user.setCivility(civility);
             user.setFirstName(signupRequest.getFirstName());
             user.setLastName(signupRequest.getLastName());
             user.setEmail(signupRequest.getEmail());

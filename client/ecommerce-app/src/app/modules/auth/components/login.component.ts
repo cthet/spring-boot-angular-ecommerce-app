@@ -121,5 +121,5 @@ export class LoginComponent {
   @Input() error!: string | null;
 
   @Output() loginAction = new EventEmitter();
-  @Output() continue = new EventEmitter<string>();
+  @Output() continue = new EventEmitter();
 }

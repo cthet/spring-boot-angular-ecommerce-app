@@ -8,6 +8,7 @@ export const setSignupEmail = createAction(
 export const signup = createAction(
   '[Signup Page] Signup User',
   props<{
+    civility: number;
     firstName: string;
     lastName: string;
     email: string;

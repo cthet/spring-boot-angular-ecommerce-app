@@ -1,6 +1,5 @@
 package com.ecommerce.springbootecommerce.domain;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,6 @@ public class GenderCategory {
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @NotNull
     @Column(name = "gender_category_type")
     private String type;
 
@@ -34,26 +32,5 @@ public class GenderCategory {
     @ManyToMany(mappedBy = "genderCategories")
     private Set<BrandCategory> brandCategories = new HashSet<>();
 
-    public void add(Product product){
-        if(product != null) {
-            if(products == null) {
-                products = new HashSet<>();
-            }
-
-            products.add(product);
-            product.setGenderCategory(this);
-        }
-    }
-
-    public void add(BrandCategoryImage brandCategoryImage){
-        if(brandCategoryImage != null) {
-            if(brandCategoryImages == null) {
-                brandCategoryImages = new HashSet<>();
-            }
-
-            brandCategoryImages.add(brandCategoryImage);
-            brandCategoryImage.setGenderCategory(this);
-        }
-    }
 
 }

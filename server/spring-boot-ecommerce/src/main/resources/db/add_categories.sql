@@ -1,3 +1,50 @@
+-----------------------------------------------------
+--------------COUNTRIES-------------------------------
+-----------------------------------------------------
+
+INSERT INTO ecommerce.country(id, name) VALUES ('1', 'Afrique du Sud');
+INSERT INTO ecommerce.country(id, name) VALUES ('2', 'Algérie');
+INSERT INTO ecommerce.country(id, name) VALUES ('3', 'Allemagne');
+INSERT INTO ecommerce.country(id, name) VALUES ('4', 'Arabie Saoudite');
+INSERT INTO ecommerce.country(id, name) VALUES ('5', 'Argentine');
+INSERT INTO ecommerce.country(id, name) VALUES ('6', 'Arménie');
+INSERT INTO ecommerce.country(id, name) VALUES ('7', 'Australie');
+INSERT INTO ecommerce.country(id, name) VALUES ('8', 'Autriche');
+INSERT INTO ecommerce.country(id, name) VALUES ('9', 'Belgique');
+INSERT INTO ecommerce.country(id, name) VALUES ('10', 'Brésil');
+INSERT INTO ecommerce.country(id, name) VALUES ('11', 'Canada');
+INSERT INTO ecommerce.country(id, name) VALUES ('12', 'Chine');
+INSERT INTO ecommerce.country(id, name) VALUES ('13', 'Colombie');
+INSERT INTO ecommerce.country(id, name) VALUES ('14', 'Corée du Sud');
+INSERT INTO ecommerce.country(id, name) VALUES ('15', 'Croatie');
+INSERT INTO ecommerce.country(id, name) VALUES ('16', 'Danemark');
+INSERT INTO ecommerce.country(id, name) VALUES ('17', 'Emirats arabe unis');
+INSERT INTO ecommerce.country(id, name) VALUES ('18', 'Espagne');
+INSERT INTO ecommerce.country(id, name) VALUES ('19', 'Etats-Unis');
+INSERT INTO ecommerce.country(id, name) VALUES ('20', 'France');
+INSERT INTO ecommerce.country(id, name) VALUES ('21', 'Inde');
+INSERT INTO ecommerce.country(id, name) VALUES ('22', 'Indonésie');
+INSERT INTO ecommerce.country(id, name) VALUES ('23', 'Irlande');
+INSERT INTO ecommerce.country(id, name) VALUES ('24', 'Italie');
+INSERT INTO ecommerce.country(id, name) VALUES ('25', 'Japon');
+INSERT INTO ecommerce.country(id, name) VALUES ('26', 'Luxembourg');
+INSERT INTO ecommerce.country(id, name) VALUES ('27', 'Maroc');
+INSERT INTO ecommerce.country(id, name) VALUES ('28', 'Monaco');
+INSERT INTO ecommerce.country(id, name) VALUES ('29', 'Norvège');
+INSERT INTO ecommerce.country(id, name) VALUES ('30', 'Qatar');
+INSERT INTO ecommerce.country(id, name) VALUES ('31', 'Royaume-uni');
+INSERT INTO ecommerce.country(id, name) VALUES ('32', 'Singapour');
+INSERT INTO ecommerce.country(id, name) VALUES ('33', 'Suède');
+INSERT INTO ecommerce.country(id, name) VALUES ('34', 'Suisse');
+INSERT INTO ecommerce.country(id, name) VALUES ('35', 'Taïwan');
+INSERT INTO ecommerce.country(id, name) VALUES ('36', 'Tunisie');
+
+-----------------------------------------------------
+--------------CIVILITY-------------------------------
+-----------------------------------------------------
+
+INSERT INTO ecommerce.civility(id, name) VALUES ('1', 'Monsieur');
+INSERT INTO ecommerce.civility(id, name) VALUES ('2', 'Madame');
 
 --------------------------------------------------------
 --------------CATEGORIES--------------------------------
@@ -5,6 +52,7 @@
 
 INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('1', 'Men');
 INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('2', 'Women');
+
 
 --Apparel Categories--
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('1', 'Manteaux');
@@ -217,15 +265,8 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '11');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('13', '11');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '11');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('19', '11');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '11');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('18', '11');
 
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('19', '12');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '12');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('17', '12');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '12');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('18', '12');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '12');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('5', '12');
 
@@ -235,7 +276,6 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('9', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('10', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('12', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('8', '13');
 
@@ -246,45 +286,28 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '14');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('16', '15');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '15');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '15');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('24', '15');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '16');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '16');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('16', '16');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '16');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('24', '16');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '16');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('14', '17');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('16', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('17', '17');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '17');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('24', '17');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '18');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('16', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('17', '18');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('24', '18');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '18');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '19');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '19');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('16', '19');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '19');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '19');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('22', '19');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('24', '19');
 
 
 

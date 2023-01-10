@@ -1,5 +1,6 @@
-import { Address } from "src/app/cart/models/address";
-import { Order } from "src/app/cart/models/order";
+import { Address } from "../../../models/address";
+import { Order } from "../../cart/models/order";
+
 
 export class Profile {
   firstName!: string;

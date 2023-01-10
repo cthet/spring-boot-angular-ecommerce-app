@@ -7,5 +7,6 @@ import * as imageActions from './image.actions'
 import * as videoActions from './video.actions'
 import * as productsActions from './products.actions'
 import * as productActions from './product.actions'
+import * as countriesActions from '../../modules/checkout/store/actions/country.actions'
 
-export { authActions, genderActions, cartActions, apparelCategoriesActions, brandsActions, imageActions, videoActions, productsActions, productActions };
+export { authActions, genderActions, cartActions, apparelCategoriesActions, brandsActions, imageActions, videoActions, productsActions, productActions, countriesActions };

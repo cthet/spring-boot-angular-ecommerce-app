@@ -18,7 +18,7 @@ public class UserPrincipalServiceImpl implements UserDetailsService {
     UserRepository userRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+    ModelMapper modelMapper;
 
     @Override
     @Transactional

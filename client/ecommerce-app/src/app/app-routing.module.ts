@@ -30,6 +30,12 @@ const routes: Routes = [
           import('./modules/cart/cart.module').then((mod) => mod.CartModule),
       },
       {
+        path: 'commande',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+        import('./modules/checkout/checkout.module').then((mod) => mod.CheckoutModule),
+      },  
+      {
         path: ':gender',
         canActivate: [GenderGuard],
         loadChildren: () =>

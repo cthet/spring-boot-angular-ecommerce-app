@@ -13,7 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/api/**")
                 .allowedOrigins("*")
                 .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
-                .allowedHeaders("Origin, X-Requested-With, Content-Type, Accept, Authorization")
+                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
                 .exposedHeaders("Access-Control-Allow-Credentials","true");
+
+
+
     }
 }

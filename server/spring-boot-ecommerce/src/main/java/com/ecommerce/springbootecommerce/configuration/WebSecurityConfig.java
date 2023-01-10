@@ -25,7 +25,8 @@ public class WebSecurityConfig {
             "/api/home",
             "/api/auth/**",
             "/api/products/**",
-            "/api/category/**"
+            "/api/category/**",
+            "/api/countries"
     };
 
     @Autowired

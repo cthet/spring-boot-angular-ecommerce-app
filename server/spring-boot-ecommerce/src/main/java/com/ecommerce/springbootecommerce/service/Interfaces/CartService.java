@@ -4,7 +4,8 @@ import com.ecommerce.springbootecommerce.dto.cart.CartDTO;
 
 public interface CartService {
 
-    CartDTO getCartFromUser();
+    CartDTO getCartDTO();
 
-    String saveCartUser(CartDTO cartDTO);
+    String saveCart(CartDTO cartDTO);
+
 }

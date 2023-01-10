@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ResponseApparelCategories } from '../../models/responseApparelCategories';
+import { responseApparelCategories } from '../../models/responseApparelCategories';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,8 @@ export class ApparelCategoryService {
 
   fetchApparelCategoriesByGenderId(
     genderId: number
-  ): Observable<ResponseApparelCategories> {
-    return this.http.get<ResponseApparelCategories>(
+  ): Observable<responseApparelCategories> {
+    return this.http.get<responseApparelCategories>(
       `http://localhost:8080/api/category/apparels?genderId=${genderId}`
     );
   }
@@ -20,8 +20,8 @@ export class ApparelCategoryService {
   fetchApparelCategoriesByGenderIdAndBrandId(
     genderId: number,
     brandId: number
-  ): Observable<ResponseApparelCategories> {
-    return this.http.get<ResponseApparelCategories>(
+  ): Observable<responseApparelCategories> {
+    return this.http.get<responseApparelCategories>(
       `http://localhost:8080/api/category/apparels?genderId=${genderId}&brandId=${brandId}`
     );
   }

@@ -4,7 +4,7 @@ import { Observable, take } from 'rxjs';
 import { Update } from '@ngrx/entity';
 
 import { Product } from '../../models/product';
-import { CartItem } from '../../models/cart-Item';
+import { CartItem } from '../../models/cartItem';
 
 import { cartActions, imageActions, productActions, videoActions } from '../../store/actions';
 import { cartSelectors, productSelectors,  } from '../../store/selectors';

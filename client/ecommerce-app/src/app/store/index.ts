@@ -36,7 +36,7 @@ export const reducers = new InjectionToken<ActionReducerMap<AppState, Action>>('
     [fromImage.ImageFeatureKey]: fromImage.reducer,
     [fromVideo.VideoFeatureKey]: fromVideo.reducer,
     [fromProducts.ProductsFeatureKey]: fromProducts.reducer,
-    [fromProduct.ProductFeatureKey]: fromProduct.reducer  
+    [fromProduct.ProductFeatureKey]: fromProduct.reducer,
   }),
 });
 

@@ -37,11 +37,12 @@ export class NavbarPageComponent implements OnInit{
     this.image$ = this.store.select(imageSelectors.selectImage);
     this.brands$ = this.store.select(brandsSelectors.selectBrands);
     this.apparelCategories$ = this.store.select(apparelCategoriesSelectors.selectApparelCategories);
-    this.gender$ = this.store.select(genderSelectors.selectGender)
+    this.gender$ = this.store.select(genderSelectors.selectGender);
+    this.genderSubscription = new Subscription;
   }
 
   ngOnInit(): void {
-    this.genderSubscription = this.gender$.subscribe((gender) => {
+    this.genderSubscription = this.gender$.subscribe(() => {
       this.dispatchGenderData()}
     );
   }

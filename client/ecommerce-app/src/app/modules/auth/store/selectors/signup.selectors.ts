@@ -1,5 +1,3 @@
-
-
 import { createSelector } from '@ngrx/store';
 import * as fromSignup from '../reducers/signup.reducer'
 import { selectSignupState } from './login.selectors';

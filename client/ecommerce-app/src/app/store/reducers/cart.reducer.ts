@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { CartItem } from '../../models/cart-Item';
-import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCartFailure, loadCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.action';
+import { CartItem } from '../../models/cartItem';
+import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCart, loadCartFailure, loadCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.action';
 
 export const cartFeaturesKey = 'cart';
 
@@ -34,6 +34,12 @@ export const reducer = createReducer<State>(
 
   on(deleteCartItem, (state, { id }) => adapter.removeOne(id, state)),
 
+  on(loadCart, (state) => ({
+    ...state,
+    status: 'loading',
+    error: null,
+  })),
+
   on(loadCartSuccess, (state, { cart }) => adapter.upsertMany(cart.cartItems, {...state, status: 'success', error: null})),
 
   on(loadCartFailure, (state, { error }) => ({
@@ -43,8 +49,6 @@ export const reducer = createReducer<State>(
   })),
 
   on(browserReload, (state, { cart }) => adapter.setAll(cart.cartItems, state)),
-
-  //on(upsertCartItems, (state, {cartItems}) => { return adapter.upsertMany(cartItems, state)}),
 
   on(clearAllCartItems, (state) => adapter.removeAll({...state, selectedCartItemId: null}))
 
@@ -57,10 +61,10 @@ const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
 
 export const selectCartItemIds = selectIds;
-
 export const selectCartItemEntities = selectEntities;
-
 export const selectAllCartItems = selectAll;
-
 export const selectCartItemTotal = selectTotal;
+
+export const getError = (state: State) => state.error;
+export const getStatus = (state: State) => state.status;
 

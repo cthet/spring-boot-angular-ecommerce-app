@@ -36,19 +36,19 @@ import { Product } from '../../models/product';
   </div>
 
   <div class="row">
-  <div class="col-sm-6">     
+  <div class="col-sm-8">     
       <img class="image" src="{{ image_url }}" />
   </div>  
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <mat-card>
               <div class="mt-3 fw-bold">
-                {{ brand_category }}
+                <h2>{{ brand_category }}</h2>
               </div>
               <div class="mt-3 fw-semibold">
                 {{ product_name }}
               </div>
               <div class="mt-3 fw-light">
-                {{ unit_price | currency: 'EUR' }}
+                {{ unit_price | currency: 'EUR'}}
               </div>
               <div class="mt-3 fw-light" *ngIf="units_in_stock != 0">
                 En Stock

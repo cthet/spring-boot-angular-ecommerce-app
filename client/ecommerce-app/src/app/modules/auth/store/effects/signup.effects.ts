@@ -18,7 +18,7 @@ export class SignupEffects {
     () =>
       this.actions$.pipe(
         ofType(signupActions.setSignupEmail),
-        tap(() => this.router.navigate(['/signup']))
+        tap(() => this.router.navigate(['/connexion/signup']))
       ),
     { dispatch: false }
   );
@@ -29,6 +29,7 @@ export class SignupEffects {
       concatMap((action) =>
         this.authService
           .signup(
+            action.civility,
             action.firstName,
             action.lastName,
             action.email,

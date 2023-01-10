@@ -19,7 +19,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name="first_name")
+    @OneToOne
+    @JoinColumn(name = "civility_id", referencedColumnName = "id")
+    private Civility civility;
+
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -30,9 +34,6 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Address> addresses = new HashSet<>();
-
     @OneToOne(mappedBy = "user")
     private Cart cart;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -42,6 +43,9 @@ public class User {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Address> addresses = new HashSet<>();
 
     public void addOrder(Order order){
         if(order != null) {

@@ -21,10 +21,7 @@ public class CartController {
     @GetMapping("/user")
     public ResponseEntity<?> getCartByUser() {
         try {
-            CartDTO cartDTO = cartService.getCartFromUser();
-
-            return new ResponseEntity<>(cartDTO, HttpStatus.OK);
-
+            return new ResponseEntity<>(cartService.getCartDTO(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -33,9 +30,7 @@ public class CartController {
     @PostMapping("/user")
     public ResponseEntity<?> saveUserCart(@Valid @RequestBody CartDTO cartDTO) {
         try {
-
-            return new ResponseEntity<>(new MessageResponse(cartService.saveCartUser(cartDTO)), HttpStatus.OK);
-
+            return new ResponseEntity<>(new MessageResponse(cartService.saveCart(cartDTO)), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }

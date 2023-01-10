@@ -1,9 +1,4 @@
 export interface User {
-  id: number | null;
-  email: string;
+  id: number;
   role: string;
-}
-export interface Credentials {
-  email: string;
-  password: string;
 }

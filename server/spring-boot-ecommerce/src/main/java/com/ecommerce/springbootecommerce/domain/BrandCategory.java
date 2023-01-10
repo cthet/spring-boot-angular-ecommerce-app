@@ -1,6 +1,5 @@
 package com.ecommerce.springbootecommerce.domain;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +17,6 @@ public class BrandCategory {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @NotNull
     @Column(name = "brand_category_type")
     private String type;
 

@@ -1,6 +1,6 @@
 import { ApparelCategory } from './apparelCategory';
 
-export interface ResponseApparelCategories {
+export interface responseApparelCategories {
   gender: string;
   apparel_categories: ApparelCategory[];
 }

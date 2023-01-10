@@ -31,7 +31,7 @@ import { Product } from '../../models/product';
             </p>
           </mat-card-content>
         </mat-card>
-      </div>
+        </div>
     </div>
   `,
   styleUrls: ['./products-list.component.css'],

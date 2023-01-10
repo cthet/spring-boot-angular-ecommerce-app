@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Credentials } from '../interfaces/Credentials';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,21 +20,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
+  login(credentials: Credentials): Observable<any> {
 
     return this.http
       .post(
         'http://localhost:8080/api/auth/signin',
-        {
-          email,
-          password,
-        },
+        credentials,
         httpOptions
       )
       .pipe(catchError(this.handleError));
   }
 
   signup(
+    civility: number,
     firstName: string,
     lastName: string,
     email: string,
@@ -43,6 +42,7 @@ export class AuthService {
       .post<any>(
         'http://localhost:8080/api/auth/signup',
         {
+          civility,
           firstName,
           lastName,
           email,

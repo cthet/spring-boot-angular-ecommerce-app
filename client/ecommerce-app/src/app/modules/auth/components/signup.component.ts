@@ -17,10 +17,10 @@ import { FormGroup } from '@angular/forms';
                 <label>Civilité *</label>
                 <div>
                   <mat-radio-group formControlName="civility" required>
-                    <mat-radio-button value="Madame" [checked]="true"
+                    <mat-radio-button value="2" [checked]="true"
                       >Mme</mat-radio-button
                     >
-                    <mat-radio-button value="Monsieur">M.</mat-radio-button>
+                    <mat-radio-button value="1">M.</mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
@@ -40,7 +40,7 @@ import { FormGroup } from '@angular/forms';
                       *ngIf="
                         signup.pristine ||
                         (signup.dirty &&
-                          signup.value.firstName.length == 0)
+                          signup.value.firstName.length === 0)
                       "
                       >Ce champ est requis.
                     </mat-error>
@@ -65,7 +65,7 @@ import { FormGroup } from '@angular/forms';
                       *ngIf="
                         signup.pristine ||
                         (signup.dirty &&
-                          signup.value.lastName.length == 0)
+                          signup.value.lastName.length === 0)
                       "
                       >Ce champ est requis.
                     </mat-error>
@@ -87,9 +87,7 @@ import { FormGroup } from '@angular/forms';
                       required
                       type="email"
                       email="true"
-                      formControlName="email"
-                      placeholder="{{ email }}"
-                      
+                      formControlName="email"                  
                     />
                     <mat-error
                       *ngIf="
@@ -149,7 +147,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class SignupComponent {
   @Input() signup!: FormGroup;
-  @Input() email!: string | null;
   @Input() error!: string | null;
 
   @Output() signupAction = new EventEmitter();

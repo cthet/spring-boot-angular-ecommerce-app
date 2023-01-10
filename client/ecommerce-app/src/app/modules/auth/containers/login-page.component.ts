@@ -56,8 +56,9 @@ export class LoginPageComponent implements OnInit {
 
   continueSignup() {
     if (this.emailFormControl.valid) {
+      const signupEmail = this.emailFormControl.value;
       this.store.dispatch(
-        signupActions.setSignupEmail({ email: this.emailFormControl.value })
+        signupActions.setSignupEmail({ email: signupEmail })
       );
     }
   }

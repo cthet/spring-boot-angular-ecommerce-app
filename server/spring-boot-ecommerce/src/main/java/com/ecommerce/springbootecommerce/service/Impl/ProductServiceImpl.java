@@ -31,7 +31,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
     @Autowired
-    private ModelMapper modelMapper;
+    ModelMapper modelMapper;
+
     @Override
     public ProductDTO getProductById(Long productId) {
 

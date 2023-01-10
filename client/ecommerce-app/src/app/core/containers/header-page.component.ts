@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
+import { CartService } from 'src/app/modules/services/cart.service';
 import { Gender } from '../../models/gender';
-import { CartService } from '../../modules/cart/services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { authActions, cartActions, genderActions } from '../../store/actions';
 import { authSelectors, cartSelectors, genderSelectors } from '../../store/selectors';
@@ -52,7 +52,6 @@ export class HeaderPageComponent {
   logout() {          
     this.store.select(cartSelectors.selectCart).pipe(
       take(1)).subscribe(cart => {
-        console.log(cart);
       this.cartService.saveCart(cart.cartItems, cart.totalQuantity, cart.totalPrice).subscribe()
     });
     this.store.dispatch(authActions.clearUser());

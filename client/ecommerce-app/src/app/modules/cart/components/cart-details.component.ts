@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cart } from '../../../models/cart';
-import { CartItem } from '../../../models/cart-Item';
+import { CartItem } from '../../../models/cartItem';
 
 @Component({
   selector: 'app-cart-details',
@@ -48,13 +48,13 @@ import { CartItem } from '../../../models/cart-Item';
                 </div>
               </div>
               <div class="item-price t-a-r">
-                <p class="t-t-u">Prix: {{cartItem.item.unit_price}}</p>
+                <p class="t-t-u">Prix: {{cartItem.item.unit_price |currency: 'EUR'}}</p>
               </div>   
               <div class="item-price t-a-r">
                 <p class="t-t-u">Quantité: {{cartItem.quantity}}</p>
               </div>   
               <div class="item-price t-a-r">
-                <p class="t-t-u">Prix total: {{cartItem.amount}}&nbsp;€</p>
+                <p class="t-t-u">Prix total: {{cartItem.amount | currency: 'EUR'}}</p>
               </div>   
             </div>              
             </div>

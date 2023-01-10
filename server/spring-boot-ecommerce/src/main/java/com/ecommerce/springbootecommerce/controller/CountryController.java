@@ -1,6 +1,7 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.domain.Country;
+import com.ecommerce.springbootecommerce.dto.address.CountriesResponse;
 import com.ecommerce.springbootecommerce.dto.address.CountryDTO;
 import com.ecommerce.springbootecommerce.repository.CountryRepository;
 import org.modelmapper.ModelMapper;
@@ -17,26 +18,28 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/api/countries")
+@RequestMapping("/api")
 public class CountryController {
+
     @Autowired
     ModelMapper modelMapper;
     @Autowired
     CountryRepository countryRepository;
-    @GetMapping("/all")
+    @GetMapping("/countries")
     public ResponseEntity<?> getCountries(){
 
         try {
             List<Country> countries = countryRepository.findAll();
             List<CountryDTO> countriesDTO = new ArrayList<CountryDTO>();
 
-            for(Country country: countries) {
+            countries.forEach(country -> {
                 CountryDTO countryDTO = new CountryDTO();
-                countryDTO = modelMapper.map(country, CountryDTO.class);
+                countryDTO.setId(country.getId());
+                countryDTO.setCountry(country.getName());
                 countriesDTO.add(countryDTO);
-            }
+            });
 
-            return new ResponseEntity<>(countriesDTO, HttpStatus.OK);
+            return ResponseEntity.ok(new CountriesResponse(countriesDTO));
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

@@ -1,6 +1,6 @@
 import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { CartItem } from '../../models/cart-Item';
+import { CartItem } from '../../models/cartItem';
 import { Cart } from '../../models/cart';
 
 export const addCartItem = createAction(
@@ -18,23 +18,18 @@ export const deleteCartItem = createAction(
   props<{ id: number }>()
 );
 
-
 export const clearAllCartItems = createAction('[Header Page Component] Clear all CartItems');
-
  
 export const loadCart = createAction('[Login Effects Component] Load cart');
-
 
 export const loadCartSuccess = createAction(
   '[Core Component] Load Cart Success',
   props<{ cart: Cart }>()
 );
 
-
-
 export const loadCartFailure = createAction(
   '[Core Component] Load cart Failure',
-  props<{ error: any }>()
+  props<{ error: string }>()
 );
 
 export const browserReload = createAction(

@@ -13,29 +13,14 @@ const routes: Routes = [
         path:'vide',
         component: EmptyCartPageComponent
       },
+
       {
         path:'details',
         component: CartDetailsPageComponent,
-      },
-    ]
-  }
-  //  children: [{ path: '', component: CartDetailsComponent },
-  //{
-    // path:'checkout',
-    // canActivate: [AuthGuard],
-    // loadChildren: () =>
-    // import('') 
-  //}],
-    // {
-    //   path: 'checkout',
-    //   canActivate: [AuthGuard],
-    //   loadChildren: () =>
-    //     import('../checkout/checkout.module').then(
-    //       (mod) => mod.CheckoutModule
-    //     ),
-    // },
+      },      
+    ],
+  },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

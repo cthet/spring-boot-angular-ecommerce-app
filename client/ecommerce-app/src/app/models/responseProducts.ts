@@ -1,7 +1,7 @@
 import { Product } from "./product";
 
 
-export interface ResponseProducts {
+export interface responseProducts {
   products: Product[];
   current_page: number;
   size: number;

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, merge, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { CartService } from 'src/app/modules/services/cart.service';
 import { Cart } from '../../models/cart';
-import { CartService } from '../../modules/cart/services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { cartActions } from '../actions';
 import { cartSelectors } from '../selectors';
@@ -24,10 +24,9 @@ export class CartEffects {
       mergeMap((action) =>        
         this.cartService.fetchCart()
           .pipe(
-            map((responseCart) => 
-            cartActions.loadCartSuccess({cart: responseCart}),          
-            ),
-           
+            map((cart: Cart) => 
+            cartActions.loadCartSuccess({cart}),          
+            ),           
             catchError((error) =>
               of(cartActions.loadCartFailure({ error: error }))        
             )

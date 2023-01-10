@@ -1,4 +1,4 @@
-import { CartItem } from "./cart-Item";
+import { CartItem } from "./cartItem";
 
 export class Cart {
   cartItems: CartItem[];

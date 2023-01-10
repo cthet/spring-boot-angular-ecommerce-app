@@ -27,9 +27,8 @@ public class CartServiceImpl implements CartService {
     @Autowired
     UserServiceImpl userService;
 
-
     @Autowired
-    private ModelMapper modelMapper;
+    ModelMapper modelMapper;
 
     @Autowired
     CartRepository cartRepository;
@@ -38,13 +37,20 @@ public class CartServiceImpl implements CartService {
     CartItemRepository cartItemRepository;
 
     @Override
-    public CartDTO getCartFromUser() {
-
-        Long id = userService.getUser().getId();
-
-        Cart cart = cartRepository.findCartByUserId(id).orElseThrow(() -> new ApiRequestException("No cart found in database!", HttpStatus.NOT_FOUND));
+    public CartDTO getCartDTO() {
 
         CartDTO cartDTO = new CartDTO();
+
+        User user = userService.getUser();
+        Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
+
+        if(optionalCart.isEmpty()){
+            cartDTO.setCartItems(List.of());
+            return cartDTO;
+        }
+
+        Cart cart = optionalCart.get();
+
         cartDTO.setTotalPrice(cart.getTotalPrice());
         cartDTO.setTotalQuantity(cart.getTotalQuantity());
 
@@ -75,12 +81,8 @@ public class CartServiceImpl implements CartService {
 
     }
 
-    private void  deleteCartItemsNotPresentInCart(Cart cart, CartDTO cartDTO){
-
-    }
-
     @Override
-    public String saveCartUser(CartDTO cartDTO) {
+    public String saveCart(CartDTO cartDTO) {
 
         User user = userService.getUser();
         Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
@@ -144,8 +146,5 @@ public class CartServiceImpl implements CartService {
 
         return "cart saved successfully";
     }
-
-
-
 
 }

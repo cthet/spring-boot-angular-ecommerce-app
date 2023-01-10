@@ -1,0 +1,186 @@
+<div class="global-container">
+  <h1>Saisissez votre adresse de livraison</h1>
+
+  <div class="container address-container">
+    
+      <div class="address-form">
+        <form [formGroup]="address">
+
+          <div class="address-form-civility">
+              <mat-radio-group formControlName="civility" required>
+                <mat-radio-button value="2" [checked]="address.value.civility==2">Mme</mat-radio-button>
+                <mat-radio-button value="1" [checked]="address.value.civility===1">M.</mat-radio-button>
+              </mat-radio-group>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Prénom</mat-label>
+                <input
+                  matInput
+                  required
+                  type="text"
+                  formControlName="firstName"                 
+                />
+                <mat-error
+                  *ngIf="
+                    address.pristine ||
+                    (address.dirty &&
+                    address.value.firstName.length === 0)
+                  "
+                  >Ce champ est requis.
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                  address.dirty &&
+                  address.value.firstName.length > 0
+                  "
+                  >Ce champ ne peut contenir de caractères spéciaux.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input
+                  matInput
+                  required
+                  type="text"
+                  formControlName="lastName"                      
+                />
+                <mat-error
+                  *ngIf="
+                    address.pristine ||
+                    (address.dirty &&
+                    address.value.lastName.length === 0)
+                  "
+                  >Ce champ est requis.
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                  address.dirty &&
+                  address.value.lastName.invalid
+                  "
+                  >Ce champ ne peut contenir de caractères spéciaux.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Adresse</mat-label>
+                <input
+                  matInput
+                  required
+                  type="text"
+                  formControlName="street"                  
+                />
+                <mat-error
+                  *ngIf="
+                  address.pristine ||
+                    (address.dirty &&
+                    address.value.street.length == 0)
+                  "
+                  >Ce champ est requis.
+                </mat-error>
+                <mat-error
+                  *ngIf="
+                  address.dirty &&
+                  address.value.street.length > 0
+                  "
+                  >Renseignez une adresse valide.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Complément d'adresse (optionnel)</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="addressComplement"                      
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Code Postal</mat-label>
+                <input
+                  matInput
+                  required
+                  type="number"
+                  formControlName="postCode"                      
+                />
+                <mat-error
+                  *ngIf="
+                    address.pristine ||
+                    (address.dirty &&
+                    address.value.postCode.length === 0)
+                  "
+                  >Ce champ est requis.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Ville</mat-label>
+                <input
+                  matInput
+                  required
+                  type="text"
+                  formControlName="city"                      
+                />
+                <mat-error
+                  *ngIf="
+                    address.pristine ||
+                    (address.dirty &&
+                    address.value.city.length === 0)
+                  "
+                  >Ce champ est requis.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6" >
+              <mat-form-field appearance="outline">
+                <mat-label>Pays</mat-label>
+                <mat-select [compareWith]="compare" formControlName="country" required>
+                  <mat-option *ngFor="let country of countries" [value]="country">{{country?.country}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Numéro de téléphone</mat-label>
+                  <input
+                    matInput
+                    required
+                    type="tel"
+                    formControlName="phoneNumber"    
+                    length="10"                  
+                  />
+                  <mat-error
+                    *ngIf="
+                      address.pristine ||
+                      (address.dirty &&
+                      address.value.phoneNumber.length === 0)
+                    "
+                    >Ce champ est requis.
+                  </mat-error>
+                  <mat-error
+                  *ngIf="
+                  address.dirty &&
+                  (address.value.street.length < 10 ||
+                  address.value.street.length > 10)
+                  "
+                  >Renseignez un numéro de téléphone à 10 chiffres.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>          
+        </form>
+        <button *ngIf="edit" mat-button (click)="cancel.emit()">Annuler</button>
+        <button *ngIf="edit && editAddress" mat-button [disabled]="!address.valid" (click)="update.emit()">Modifier</button>
+        <button *ngIf="edit && !editAddress" [disabled]="!address.valid" mat-button (click)="save.emit()">Ajouter</button>
+        <button *ngIf="!edit" mat-button [disabled]="!address.valid" (click)="save.emit()">Continuer vers la livraison</button>
+      </div>
+    </div>
+</div>

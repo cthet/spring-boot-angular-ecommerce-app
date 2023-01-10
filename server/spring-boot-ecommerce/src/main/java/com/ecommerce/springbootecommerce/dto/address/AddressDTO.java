@@ -1,25 +1,49 @@
 package com.ecommerce.springbootecommerce.dto.address;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 public class AddressDTO {
 
-    @NotBlank
-    private Long id;
+    private long id;
 
-    @NotBlank(message = "Country cannot be empty")
-    private  String country;
+    @JsonProperty("civility")
+    private int civility;
 
-    @NotNull(message = "Post Code cannot be empty")
+    @NotBlank(message = "firstName cannot be blank")
+    @JsonProperty("firstName")
+    private String firstName;
+
+    @NotBlank(message = "lastName cannot be blank")
+    @JsonProperty("lastName")
+    private String lastName;
+
+    @NotBlank(message = "Street cannot be blank")
+    @JsonProperty("street")
+    private String street;
+
+    @JsonProperty("addressComplement")
+    private String addressComplement;
+
+    @JsonProperty("postCode")
     private int postCode;
 
-    @NotBlank(message = "City cannot be empty")
+    @NotBlank(message = "City cannot be blank")
+    @JsonProperty("city")
     private String city;
 
-    @NotBlank(message = "Street cannot be empty")
-    private String street;
+    @JsonProperty("country")
+    private CountryDTO countryDTO;
+
+    //regex to match 10digit with whitespace, hyphens or no space
+    @NotBlank(message = "Phone number cannot be blank")
+    @Pattern(regexp =  "^(\\d{2}[- ]?){5}$")
+    @JsonProperty("phoneNumber")
+    private String phoneNumber;
+
+
 }

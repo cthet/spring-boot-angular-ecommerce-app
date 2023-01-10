@@ -26,9 +26,7 @@ export const reducer = createReducer<State>(
     status: 'loading',
   })),
 
-  on(
-    loadApparelCategoriesSuccess,
-    (state, { apparelCategories }) => ({
+  on(loadApparelCategoriesSuccess,(state, { apparelCategories }) => ({
       ...state,
       apparelCategories: apparelCategories,
       error: null,
