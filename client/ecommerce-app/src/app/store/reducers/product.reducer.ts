@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Product } from '../../models/product';
+import { Product } from '../../models/Product';
 import { loadProduct, loadProductFailure, loadProductSuccess } from '../actions/product.actions';
 
 export const ProductFeatureKey = 'product';

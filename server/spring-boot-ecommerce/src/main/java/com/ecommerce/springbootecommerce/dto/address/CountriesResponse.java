@@ -11,5 +11,5 @@ import java.util.List;
 public class CountriesResponse {
 
     @NotNull
-    private List<CountryDTO> countries;
+    private List<CountryDto> countries;
 }

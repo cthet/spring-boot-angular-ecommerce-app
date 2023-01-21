@@ -19,6 +19,8 @@ import { GenderEffects } from './store/effects/gender-effects';
 import { CartEffects } from './store/effects/cart.effects';
 import { authInterceptorProviders } from './utility/interceptors/auth-interceptor';
 import { ProductEffects } from './store/effects/product.effects';
+import { OrderEffects } from './store/effects/order.effects';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { ProductEffects } from './store/effects/product.effects';
       strictActionTypeUniqueness: true,
     },
   }),
-    EffectsModule.forRoot([GenderEffects, CartEffects, ApparelCategoriesEffects, BrandsEffects, ImageEffects, ProductsEffects, ProductEffects, VideoEffects]), 
+    EffectsModule.forRoot([GenderEffects, CartEffects, ApparelCategoriesEffects, BrandsEffects, ImageEffects, ProductsEffects, ProductEffects, VideoEffects, OrderEffects]), 
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

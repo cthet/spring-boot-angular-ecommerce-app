@@ -1,6 +1,6 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
+import com.ecommerce.springbootecommerce.dto.address.AddressDto;
 import com.ecommerce.springbootecommerce.dto.address.AddressResponse;
 import com.ecommerce.springbootecommerce.service.Interfaces.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class AddressController {
     AddressService addressService;
 
     @PostMapping("/address")
-    public ResponseEntity<?> createNewAddress(@Valid @RequestBody AddressDTO addressDTO) {
+    public ResponseEntity<?> createNewAddress(@Valid @RequestBody AddressDto addressDTO) {
         try {
             return ResponseEntity.ok(addressService.createAddress(addressDTO));
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class AddressController {
     }
 
     @PutMapping("/address/{id}")
-    public ResponseEntity<?> updateAddress(@Valid @RequestBody AddressDTO addressDTO, @PathVariable("id") Long id) {
+    public ResponseEntity<?> updateAddress(@Valid @RequestBody AddressDto addressDTO, @PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok(addressService.updateAddress(addressDTO));
         } catch (Exception e) {

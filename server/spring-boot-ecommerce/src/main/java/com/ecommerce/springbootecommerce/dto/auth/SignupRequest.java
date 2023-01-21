@@ -1,5 +1,6 @@
 package com.ecommerce.springbootecommerce.dto.auth;
 
+import com.ecommerce.springbootecommerce.dto.profile.CivilityDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class SignupRequest {
 
     @NotNull(message = "civility cannot be null")
-    private int civility;
+    private CivilityDto civility;
 
     @NotBlank(message = "firstName cannot be blank")
     private String firstName;

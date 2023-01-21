@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Gender } from '../../../models/gender';
+import { Gender } from '../../../models/Gender';
 import { imageActions, videoActions } from '../../../store/actions';
 import { genderSelectors } from '../../../store/selectors';
 

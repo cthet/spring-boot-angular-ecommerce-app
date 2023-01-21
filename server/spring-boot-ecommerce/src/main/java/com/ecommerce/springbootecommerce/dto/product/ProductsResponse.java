@@ -11,7 +11,7 @@ public class ProductsResponse {
 
     @JsonProperty("products")
     @NotNull(message = "products cannot be null")
-    private List<ProductDTO> productsDTO;
+    private List<ProductDto> productsDTO;
 
     @JsonProperty("current_page")
     @NotNull

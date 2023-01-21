@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Gender } from '../../models/gender';
+import { Gender } from '../../models/Gender';
 import { genderActions } from '../../store/actions';
 import { genderSelectors } from '../../store/selectors';
 

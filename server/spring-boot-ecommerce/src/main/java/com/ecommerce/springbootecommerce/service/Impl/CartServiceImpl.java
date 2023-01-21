@@ -1,19 +1,18 @@
 package com.ecommerce.springbootecommerce.service.Impl;
 
-import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.Cart;
 import com.ecommerce.springbootecommerce.domain.CartItem;
 import com.ecommerce.springbootecommerce.domain.Product;
 import com.ecommerce.springbootecommerce.domain.User;
-import com.ecommerce.springbootecommerce.dto.cart.CartDTO;
-import com.ecommerce.springbootecommerce.dto.cart.CartItemDTO;
-import com.ecommerce.springbootecommerce.dto.product.ProductDTO;
+import com.ecommerce.springbootecommerce.dto.cart.CartDto;
+import com.ecommerce.springbootecommerce.dto.cart.CartItemDto;
+import com.ecommerce.springbootecommerce.dto.product.ProductDto;
 import com.ecommerce.springbootecommerce.repository.CartItemRepository;
 import com.ecommerce.springbootecommerce.repository.CartRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
     @Autowired
@@ -37,9 +37,9 @@ public class CartServiceImpl implements CartService {
     CartItemRepository cartItemRepository;
 
     @Override
-    public CartDTO getCartDTO() {
+    public CartDto getCartDTO() {
 
-        CartDTO cartDTO = new CartDTO();
+        CartDto cartDTO = new CartDto();
 
         User user = userService.getUser();
         Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
@@ -54,21 +54,21 @@ public class CartServiceImpl implements CartService {
         cartDTO.setTotalPrice(cart.getTotalPrice());
         cartDTO.setTotalQuantity(cart.getTotalQuantity());
 
-        List<CartItemDTO> cartItemsDTO = new ArrayList<CartItemDTO>();
+        List<CartItemDto> cartItemsDTO = new ArrayList<CartItemDto>();
 
         cart.getCartItems().forEach(cartItem -> {
-            CartItemDTO cartItemDTO = new CartItemDTO();
+            CartItemDto cartItemDTO = new CartItemDto();
 
             cartItemDTO.setAmount(cartItem.getAmount());
             cartItemDTO.setQuantity(cartItem.getQuantity());
 
-            ProductDTO productDTO = new ProductDTO();
+            ProductDto productDTO = new ProductDto();
 
             Product product = cartItem.getProduct();
-            productDTO = modelMapper.map(product, ProductDTO.class);
-            productDTO.setGender_category(product.getGenderCategory().getType());
-            productDTO.setBrand_category(product.getBrandCategory().getType());
-            productDTO.setProduct_category(product.getApparelCategory().getType());
+            productDTO = modelMapper.map(product, ProductDto.class);
+            productDTO.setGender_category(product.getGenderCategory().getName());
+            productDTO.setBrand_category(product.getBrandCategory().getName());
+            productDTO.setProduct_category(product.getApparelCategory().getName());
 
             cartItemDTO.setProductDTO(productDTO);
 
@@ -82,7 +82,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String saveCart(CartDTO cartDTO) {
+    public String saveCart(CartDto cartDTO) {
 
         User user = userService.getUser();
         Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
@@ -92,13 +92,13 @@ public class CartServiceImpl implements CartService {
             cart = new Cart();
             cart.setUser(user);
 
-            cartDTO.getCartItems().forEach(cartItemDTO -> {
+            cartDTO.getCartItems().forEach(cartItemDto -> {
                 Product product = new Product();
-                product = modelMapper.map(cartItemDTO.getProductDTO(), Product.class);
+                product = modelMapper.map(cartItemDto.getProductDTO(), Product.class);
 
                 CartItem cartItem = new CartItem();
-                cartItem.setQuantity(cartItemDTO.getQuantity());
-                cartItem.setAmount(cartItemDTO.getAmount());
+                cartItem.setQuantity(cartItemDto.getQuantity());
+                cartItem.setAmount(cartItemDto.getAmount());
                 cartItem.setProduct(product);
 
                 cart.addCartItem(cartItem);
@@ -116,25 +116,25 @@ public class CartServiceImpl implements CartService {
                     cart.deleteCartItem(cartItem);
                 }
             });
-            cartDTO.getCartItems().forEach(cartItemDTO -> {
+            cartDTO.getCartItems().forEach(cartItemDto -> {
 
                 List<CartItem> _cartItems = cartItems.stream().filter(_cartItem ->
-                    _cartItem.getProduct().getId().equals(cartItemDTO.getProductDTO().getId())).collect(Collectors.toList());
+                    _cartItem.getProduct().getId().equals(cartItemDto.getProductDTO().getId())).collect(Collectors.toList());
 
                     CartItem _cartItem;
                     if(_cartItems.isEmpty())
                     {
                     _cartItem = new CartItem();
                     Product product = new Product();
-                    product = modelMapper.map(cartItemDTO.getProductDTO(), Product.class);
+                    product = modelMapper.map(cartItemDto.getProductDTO(), Product.class);
                     _cartItem.setProduct(product);
-                    _cartItem.setQuantity(cartItemDTO.getQuantity());
-                    _cartItem.setAmount(cartItemDTO.getAmount());
+                    _cartItem.setQuantity(cartItemDto.getQuantity());
+                    _cartItem.setAmount(cartItemDto.getAmount());
                     cart.addCartItem(_cartItem);
                 } else {
                      _cartItem = _cartItems.get(0);
-                     _cartItem.setAmount(cartItemDTO.getAmount());
-                     _cartItem.setQuantity(cartItemDTO.getQuantity());
+                     _cartItem.setAmount(cartItemDto.getAmount());
+                     _cartItem.setQuantity(cartItemDto.getQuantity());
                      cart.addCartItem(_cartItem);
                     }
                 });

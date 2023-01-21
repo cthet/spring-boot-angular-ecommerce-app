@@ -1,16 +1,17 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Address } from 'src/app/cart/models/address';
-import { OrderItem } from 'src/app/cart/models/orderItem';
-import { OrderRequest } from 'src/app/cart/models/orderRequest';
-import { PaymentInfo } from 'src/app/cart/models/payment-info';
-import { User } from 'src/app/profile/models/user';
-import { Country } from 'src/app/cart/models/country';
+import { Address } from 'src/app/models/Address';
+import { Country } from 'src/app/models/Country';
+import { Order } from 'src/app/models/Order';
+import { OrderItem } from 'src/app/models/orderItem';
+import { PaymentInfo } from 'src/app/models/Payment-info';
+import { User } from 'src/app/modules/auth/interfaces/User';
+
 import { CartService } from 'src/app/modules/services/cart.service';
 import { CheckoutService } from 'src/app/modules/services/checkout.service';
-import { TokenStorageService } from 'src/app/modules/services/token-storage.service';
+
 import { environment } from 'src/environments/environment';
-import { Order } from 'src/app/cart/models/order';
+
 
 @Component({
   selector: 'app-check-payment',

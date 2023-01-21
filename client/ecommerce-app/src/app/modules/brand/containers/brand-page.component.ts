@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { Brand } from '../../../models/brand';
+import { Brand } from '../../../models/Brand';
 import { imageActions, productsActions } from '../../../store/actions';
 import { brandsSelectors } from '../../../store/selectors';
 import { apparelCategoriesBrandActions } from '../store/actions';

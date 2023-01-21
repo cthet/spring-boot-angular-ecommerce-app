@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Brand } from '../../models/brand';
+import { Brand } from '../../models/Brand';
 import { loadBrands, loadBrandsSuccess, loadBrandsFailure, setBrand, browserReload } from '../actions/brands.actions';
 
 export const BrandsFeatureKey = 'brands';

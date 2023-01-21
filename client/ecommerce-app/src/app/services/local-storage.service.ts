@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Brand } from '../models/brand';
-import { Cart } from '../models/cart';
-import { Gender } from '../models/gender';
+import { Brand } from '../models/Brand';
+import { Cart } from '../models/Cart';
+import { Gender } from '../models/Gender';
 import { User } from '../modules/auth/interfaces/User';
 
 const TOKEN_KEY = 'auth-token';

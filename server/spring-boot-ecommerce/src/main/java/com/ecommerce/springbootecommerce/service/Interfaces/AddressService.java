@@ -1,17 +1,20 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
-import com.ecommerce.springbootecommerce.dto.address.AddressDTO;
+import com.ecommerce.springbootecommerce.domain.Civility;
+import com.ecommerce.springbootecommerce.dto.address.AddressDto;
 
 import java.util.List;
 
 public interface AddressService {
 
-    AddressDTO createAddress(AddressDTO addressDTO);
-    AddressDTO updateAddress(AddressDTO addressDTO);
+    AddressDto createAddress(AddressDto addressDTO);
+    AddressDto updateAddress(AddressDto addressDTO);
 
-    AddressDTO fetchAddressDTO(Long id);
-    List<AddressDTO> getUserAddress();
+    AddressDto fetchAddressDTO(Long id);
+    List<AddressDto> getUserAddress();
 
     Long deleteAddress(Long id);
+
+    Civility fetchCivility(int id);
 
 }

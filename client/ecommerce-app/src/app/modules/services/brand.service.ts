@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Brand } from '../../models/brand';
-import { responseBrands } from '../../models/responseBrands';
+import { BrandsResponse } from 'src/app/models/BrandsResponse';
+import { Brand } from '../../models/Brand';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { responseBrands } from '../../models/responseBrands';
 export class BrandService {
   constructor(private http: HttpClient) {}
 
-  fetchBrandsByGenderId(genderId: number): Observable<responseBrands> {
-    return this.http.get<responseBrands>(
+  fetchBrandsByGenderId(genderId: number): Observable<BrandsResponse> {
+    return this.http.get<BrandsResponse>(
       `http://localhost:8080/api/category/brands?genderId=${genderId}`
     );
   }

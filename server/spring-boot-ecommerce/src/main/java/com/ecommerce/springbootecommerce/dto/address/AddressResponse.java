@@ -11,5 +11,5 @@ import java.util.List;
 public class AddressResponse {
 
     @JsonProperty("addresses")
-    List<AddressDTO> addresses;
+    List<AddressDto> addresses;
 }

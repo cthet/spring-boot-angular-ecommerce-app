@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { responseCountries } from 'src/app/models/responseCountries';
+import { CountriesResponse } from 'src/app/models/CountriesResponse';
 
 
 @Injectable({
@@ -11,9 +11,9 @@ export class CountryService {
 
   constructor(private http: HttpClient) {}
 
-  fetchCountries(): Observable<responseCountries> {
+  fetchCountries(): Observable<CountriesResponse> {
     return this.http
-      .get<responseCountries>('http://localhost:8080/api/countries')
+      .get<CountriesResponse>('http://localhost:8080/api/countries')
       .pipe(catchError(this.handleError));
   }
 

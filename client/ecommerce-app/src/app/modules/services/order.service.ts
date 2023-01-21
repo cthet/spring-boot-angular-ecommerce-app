@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Order } from 'src/app/models/order';
+import { Order } from 'src/app/models/Order';
+import { OrdersResponse } from 'src/app/models/OrdersResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -9,22 +10,18 @@ import { Order } from 'src/app/models/order';
 export class OrderService {
 
   constructor(private http: HttpClient) {}
-
-  fetchOrders(): Observable<Order> {
-    return this.http.get<Order>(
-      `http://localhost:8080/api/user/order`
-    ).pipe(catchError(this.handleError));
+  
+  saveOrder(order: Order): Observable<Order> {
+    return this.http
+      .post<Order>(
+        `http://localhost:8080/api/order/register`, order)
+      .pipe(catchError(this.handleError));
   }
 
-  saveOrder(order: Order): Observable<any> {
-    return this.http
-      .post(
-        `http://localhost:8080/api/user/order`,
-        {
-          order,
-        },
-      )
-      .pipe(catchError(this.handleError));
+  fetchOrders(): Observable<OrdersResponse> {
+    return this.http.get<OrdersResponse>(
+      `http://localhost:8080/api/order/fetch`
+    ).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

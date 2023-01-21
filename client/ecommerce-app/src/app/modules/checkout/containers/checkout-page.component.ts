@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { Address } from 'src/app/models/address';
+import { Subscription } from 'rxjs';
+import { addressActions } from '../store/actions';
 import { addressSelectors } from '../store/selectors';
 
 @Component({
@@ -13,14 +14,14 @@ import { addressSelectors } from '../store/selectors';
       <div class="row">
         <div class="col-lg-8">
           <mat-stepper linear>
-            <mat-step [completed]="completed">
+            <mat-step [stepControl]="addressValid">
               <ng-template matStepLabel>ADRESSE</ng-template>
               <app-checkout-address-page></app-checkout-address-page>           
             </mat-step>
-            <mat-step>
+             <mat-step >
               <ng-template matStepLabel>PAIEMENT</ng-template>
-              <app-checkout-delivery-page></app-checkout-delivery-page>
-            </mat-step>        
+              <app-typing-checkout-payment-page></app-typing-checkout-payment-page>
+            </mat-step>         
           </mat-stepper>
         </div>
         <div class="col-lg-4">
@@ -47,29 +48,28 @@ import { addressSelectors } from '../store/selectors';
   `]
 })
 export class CheckoutPageComponent implements OnInit, OnDestroy {
-  completed = false;
+  addressValid = new FormControl('');
   subscription!: Subscription;
-
-  constructor(private router: Router, private store: Store<Store>) {    
-    this.router.navigate(['/commande/addresse']);
-   }
+  
+  constructor(private store: Store<Store>) {}
 
   ngOnInit(): void {
-    this.isAddressStepperCompleted();
+    this.setAddressState(this.addressValid);
   }
   
-  isAddressStepperCompleted() {
-    this.subscription = this.store.select(addressSelectors.selectAddress).subscribe((address) => {
-        if(address){
-          this.completed === true;
-        } else {
-          this.completed === false;
-        }
-    })    
+  setAddressState(control: FormControl) {
+    this.subscription = this.store.select(addressSelectors.selectShippingAddress).subscribe((address) => {
+      if(address){
+        control.reset()
+      } else {
+        control.setErrors({"required": true });        
+      }
+ })    
   }
-  
+
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+      this.subscription.unsubscribe();
+      this.store.dispatch(addressActions.unsetAddress());
   }
 
 }

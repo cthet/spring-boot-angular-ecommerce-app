@@ -24,7 +24,7 @@ export class AddressEffects {
               })
             ),
             catchError((error) =>
-              of(addressActions.loadAddressesFailure({ error: error }))
+              of(addressActions.loadAddressesFailure({ error }))
             )
           )
       )
@@ -81,7 +81,6 @@ export class AddressEffects {
       )
     )
   );
-
 
 }
 

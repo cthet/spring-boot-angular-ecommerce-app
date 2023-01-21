@@ -7,6 +7,6 @@ import * as imageSelectors from './image.selectors'
 import * as videoSelectors from './video.selectors'
 import * as productsSelectors from './products.selectors'
 import * as productSelectors from './product.selectors'
+import * as orderSelectors from './product.selectors'
 
-
-export { authSelectors, cartSelectors, genderSelectors, apparelCategoriesSelectors, brandsSelectors, imageSelectors, videoSelectors, productsSelectors, productSelectors};
+export { authSelectors, cartSelectors, genderSelectors, apparelCategoriesSelectors, brandsSelectors, imageSelectors, videoSelectors, productsSelectors, productSelectors, orderSelectors};

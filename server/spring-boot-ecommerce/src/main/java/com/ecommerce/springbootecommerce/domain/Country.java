@@ -17,6 +17,8 @@ public class Country {
 
     private String name;
 
+    private String code;
+
     @OneToOne(mappedBy = "country")
     private Address address;
 }

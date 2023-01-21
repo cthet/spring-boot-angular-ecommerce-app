@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, mergeMap, Observable } from 'rxjs';
-import { Brand } from '../../models/brand';
+import { Brand } from '../../models/Brand';
 import { brandsSelectors } from '../../store/selectors';
 
 @Injectable({ providedIn: 'root' })

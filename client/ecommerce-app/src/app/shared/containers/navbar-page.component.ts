@@ -3,9 +3,9 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { ApparelCategory } from '../../models/apparelCategory';
-import { Brand } from '../../models/brand';
-import { Gender } from '../../models/gender';
+import { ApparelCategory } from '../../models/ApparelCategory';
+import { Brand } from '../../models/Brand';
+import { Gender } from '../../models/Gender';
  
 import { apparelCategoriesActions, brandsActions } from '../../store/actions';
 import { apparelCategoriesSelectors, brandsSelectors, genderSelectors, imageSelectors, videoSelectors } from '../../store/selectors';

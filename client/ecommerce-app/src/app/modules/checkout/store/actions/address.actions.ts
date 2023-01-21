@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Address } from "src/app/models/address";
+import { Address } from "src/app/models/Address";
 
 export const loadAddresses = createAction('[Profile/Checkout PageComponent] Load Addresses');
 

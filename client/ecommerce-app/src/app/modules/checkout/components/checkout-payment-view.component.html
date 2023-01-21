@@ -1,0 +1,107 @@
+<!-- <div class="container-payment">
+    <div class="p-b">
+      <h3 class="card-txt">Saisissez votre carte bancaire</h3>
+      <p class="payment-txt">Paiement sécurisé</p>
+    </div>
+
+  <div class="payment-block"> 
+    <div class="card">
+      <div class="card-payment">
+                      
+            <form [formGroup]="paymentForm" (ngSubmit)="formSubmit.emit()">
+
+              <div class="card-info">
+
+                <div class="row">                
+                  <div class="col-12 p-t">
+                    <mat-form-field class="input-l" appearance="outline">
+                      <mat-label>Nom sur la carte</mat-label>
+                      <input matInput type="text" name formControlName="name" required placeholder="Nom sur la carte"/>
+                      <mat-error
+                      *ngIf="
+                      paymentForm.pristine ||
+                      (paymentForm.dirty &&
+                      paymentForm.value.name.length === 0)
+                      "
+                      >Ce champ est requis.
+                    </mat-error>
+                    </mat-form-field>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-12 p-t">
+                    <mat-form-field class="input-l" appearance="outline">
+                      <mat-label>N° Carte</mat-label>
+                      <input matInput type="text" credit-card formControlName="number" required placeholder="1234 1234 1234 1234"/>
+                      <mat-error
+                      *ngIf="
+                      paymentForm.pristine ||
+                      (paymentForm.dirty &&
+                      paymentForm.value.number.size === 0)
+                      "
+                      >Ce champ est requis.
+                    </mat-error>
+                    </mat-form-field>
+                  </div>         
+               </div>
+
+              <div class="row">
+                <div class="col-6 p-t">
+                  <mat-form-field class="input-l" appearance="outline">
+                    <mat-label>Date d'expiration</mat-label>
+                    <input matInput type="text" expiration-date  required placeholder="MM/AA"/>
+                    <mat-error
+                    *ngIf="
+                    paymentForm.pristine ||
+                    (paymentForm.dirty &&
+                    paymentForm.value.number.size === 0)
+                    "
+                    >Ce champ est requis.
+                  </mat-error>
+                  </mat-form-field>
+                </div>         
+              </div>
+            </div>
+
+              <div class="row">
+                <div class="col-6 p-t">
+                  <mat-form-field class="input-l" appearance="outline">
+                    <mat-label>CVC</mat-label>
+                    <input matInput type="text" cvc formControlName="cvc" required placeholder="xxx"/>
+                    <mat-error
+                    *ngIf="
+                    paymentForm.pristine ||
+                    (paymentForm.dirty &&
+                    paymentForm.value.number.size === 0)
+                    "
+                    >Ce champ est requis.
+                  </mat-error>
+                  </mat-form-field>
+                </div>         
+              </div>
+
+
+            
+            <button  mat-button matStepperPrevious>Retour</button>
+            <button  mat-button [disabled]="!paymentForm.valid">Valider</button>
+          </form>
+          </div>
+        </div>        
+  </div>
+
+</div> -->
+
+<form [formGroup]="paymentFormGroup" (ngSubmit)="onSubmit.emit()">
+  
+  <h3>Carte bancaire</h3>
+
+  <div id="card-element">
+      <!-- a Stripe element will be inserted here -->
+  </div>
+
+  <!-- submit button-->
+  <div class="text-center">
+    <button type="submit" mat-button  [disabled]="!paymentFormGroup.valid" >Purchase</button>
+  </div>
+</form>

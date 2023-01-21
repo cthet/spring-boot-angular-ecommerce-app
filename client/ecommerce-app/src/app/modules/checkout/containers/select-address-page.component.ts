@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { Address } from 'src/app/models/address';
+import { Address } from 'src/app/models/Address';
 import { addressActions } from '../store/actions';
 import { addressSelectors } from '../store/selectors';
-import { selectAddress } from '../store/selectors/address.selectors';
 
 @Component({
   selector: 'app-select-address-page',
@@ -17,7 +16,7 @@ export class SelectAddressPageComponent implements OnInit {
   addressTotal$!: Observable<number>;
 
   constructor(private store: Store<Store>) {
-    this.address$ = this.store.select(selectAddress); 
+    this.address$ = this.store.select(addressSelectors.selectShippingAddress); 
     this.listAddress$ = this.store.select(addressSelectors.selectAllAddresses);    
     this.addressTotal$ = this.store.select(addressSelectors.selectAddressTotal);
   }
@@ -45,4 +44,5 @@ export class SelectAddressPageComponent implements OnInit {
   deleteAddress(id: number){
     this.store.dispatch(addressActions.deleteAddress({id}));
   }
+
 }

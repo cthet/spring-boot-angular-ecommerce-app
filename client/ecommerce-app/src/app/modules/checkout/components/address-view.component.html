@@ -8,8 +8,8 @@
 
           <div class="address-form-civility">
               <mat-radio-group formControlName="civility" required>
-                <mat-radio-button value="2" [checked]="address.value.civility==2">Mme</mat-radio-button>
-                <mat-radio-button value="1" [checked]="address.value.civility===1">M.</mat-radio-button>
+                <mat-radio-button [value]=Mrs [checked]="address.value.civility.id==2">Mme</mat-radio-button>
+                <mat-radio-button [value]=M [checked]="address.value.civility.id===1">M.</mat-radio-button>
               </mat-radio-group>
           </div>
           <div class="row">
@@ -177,10 +177,9 @@
             </div>
           </div>          
         </form>
-        <button *ngIf="edit" mat-button (click)="cancel.emit()">Annuler</button>
-        <button *ngIf="edit && editAddress" mat-button [disabled]="!address.valid" (click)="update.emit()">Modifier</button>
-        <button *ngIf="edit && !editAddress" [disabled]="!address.valid" mat-button (click)="save.emit()">Ajouter</button>
-        <button *ngIf="!edit" mat-button [disabled]="!address.valid" (click)="save.emit()">Continuer vers la livraison</button>
+        <button mat-button (click)="cancel.emit()">Annuler</button>
+        <button *ngIf="editAddress" mat-button [disabled]="!address.valid" (click)="update.emit()">Modifier</button>
+        <button *ngIf="!editAddress" [disabled]="!address.valid" mat-button (click)="save.emit()">Ajouter</button>
       </div>
     </div>
 </div>

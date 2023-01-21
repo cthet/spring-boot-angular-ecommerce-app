@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { CartItem } from '../../models/cartItem';
-import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCart, loadCartFailure, loadCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.action';
+import { CartItem } from '../../models/CartItem';
+import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCart, loadCartFailure, loadCartSuccess, saveCart, saveCartFailure, saveCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.actions';
 
 export const cartFeaturesKey = 'cart';
 
@@ -43,6 +43,24 @@ export const reducer = createReducer<State>(
   on(loadCartSuccess, (state, { cart }) => adapter.upsertMany(cart.cartItems, {...state, status: 'success', error: null})),
 
   on(loadCartFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    status: 'error',
+  })),
+
+  on(saveCart, (state) => ({
+    ...state,
+    error: null,
+    status: 'loading',
+  })),
+
+  on(saveCartSuccess, (state) => ({
+    ...state,
+    error: null,
+    status: 'success',
+  })),
+
+  on(saveCartFailure, (state, {error}) => ({
     ...state,
     error: error,
     status: 'error',

@@ -7,6 +7,7 @@ import * as fromImage from './reducers/image.reducer';
 import * as fromVideo from './reducers/video.reducer';
 import * as fromProducts from './reducers/products.reducer';
 import * as fromProduct from './reducers/product.reducer';
+import * as fromOrder from './reducers/order.reducer';
 
 import { Action, ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../environments/environment';
@@ -24,6 +25,7 @@ export interface AppState {
   [fromVideo.VideoFeatureKey]: fromVideo.State;  
   [fromProducts.ProductsFeatureKey]: fromProducts.State; 
   [fromProduct.ProductFeatureKey]: fromProduct.State; 
+  [fromOrder.orderFeaturesKey]: fromOrder.State; 
 }
 
 export const reducers = new InjectionToken<ActionReducerMap<AppState, Action>>('Root reducers token', {
@@ -37,6 +39,7 @@ export const reducers = new InjectionToken<ActionReducerMap<AppState, Action>>('
     [fromVideo.VideoFeatureKey]: fromVideo.reducer,
     [fromProducts.ProductsFeatureKey]: fromProducts.reducer,
     [fromProduct.ProductFeatureKey]: fromProduct.reducer,
+    [fromOrder.orderFeaturesKey]: fromOrder.reducer 
   }),
 });
 

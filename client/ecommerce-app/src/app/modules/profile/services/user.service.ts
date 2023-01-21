@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { User } from '../../auth/interfaces/User';
+import { PersonalInfo } from '../models/PersonalInfo';
+import { Profile } from '../models/Profile';
 
 @Injectable({
   providedIn: 'root',
@@ -9,15 +10,15 @@ import { User } from '../../auth/interfaces/User';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  updateUser(user: User): Observable<any> {
+  getUserProfile(): Observable<Profile> {
     return this.http
-      .post('http://localhost:8080/user/name', user)
+      .get<Profile>(`http://localhost:8080/api/user/profile`)
       .pipe(catchError(this.handleError));
   }
 
-  getUser(): Observable<User> {
+  updatePersonalInfo(personalInfo: PersonalInfo): Observable<any> {
     return this.http
-      .get<User>(`http://localhost:8080/user/name`)
+      .post('http://localhost:8080/api/user/info', personalInfo)
       .pipe(catchError(this.handleError));
   }
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, take } from 'rxjs';
-import { Cart } from '../../../models/cart';
+import { Cart } from '../../../models/Cart';
 import { imageActions, videoActions } from '../../../store/actions';
 import { cartSelectors } from '../../../store/selectors';
 

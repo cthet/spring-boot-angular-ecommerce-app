@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { responseAddress } from 'src/app/models/responseAddress';
-import { Address } from '../../models/address';
+import { AddressResponse } from 'src/app/models/AddressResponse';
+import { Address } from '../../models/Address';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,9 @@ export class AdressService {
       .pipe(catchError(this.handleError));
   }
 
-  fetchListAddress(): Observable<responseAddress> {
+  fetchListAddress(): Observable<AddressResponse> {
     return this.http
-      .get<responseAddress>('http://localhost:8080/api/user/address')
+      .get<AddressResponse>('http://localhost:8080/api/user/address')
       .pipe(catchError(this.handleError));
   }
 

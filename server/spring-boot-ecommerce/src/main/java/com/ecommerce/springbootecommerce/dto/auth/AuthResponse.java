@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class AuthResponse {
 
     @JsonProperty("user")
-    private UserDTO user;
+    private UserDto user;
 
     @NotBlank(message = "token cannot be blank")
     private String token;

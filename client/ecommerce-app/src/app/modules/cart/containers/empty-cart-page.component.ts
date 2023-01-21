@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
-import { Gender } from 'src/app/models/gender';
+import { Gender } from 'src/app/models/Gender';
 import { genderSelectors } from 'src/app/store/selectors';
 
 @Component({

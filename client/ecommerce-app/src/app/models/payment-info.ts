@@ -1,4 +1,4 @@
 export class PaymentInfo {
-  amount!: number;
+  totalPrice!: number;
   currency!: string;
 }

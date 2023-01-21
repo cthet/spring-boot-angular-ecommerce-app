@@ -18,7 +18,7 @@ public class ApparelCategory {
     private int id;
 
     @Column(name = "apparel_category_type")
-    private String type;
+    private String name;
 
     @OneToMany(mappedBy = "apparelCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();

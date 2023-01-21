@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Gender } from '../../models/gender';
+import { Gender } from '../../models/Gender';
 import { browserReload, setGender } from '../actions/gender.actions';
 
 export const GenderFeatureKey = 'gender';

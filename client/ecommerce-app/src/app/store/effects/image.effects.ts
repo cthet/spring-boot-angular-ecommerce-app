@@ -18,7 +18,6 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(imageActions.setLoginImage),
       map((action) =>
-
       imageActions.setImage({
           image: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/auth-page/identification-header_retina.jpg`,
         })
@@ -31,7 +30,6 @@ export class ImageEffects {
     ofType(imageActions.setBrandImage),
     withLatestFrom(this.store.select(brandsSelectors.selectBrand)),
     map(([action, brand]) => 
-
     imageActions.setImage({
         image: brand!.image_url,
       })    

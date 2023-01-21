@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../../models/product';
-import { responseProducts } from '../../models/responseProducts';
+import { ProductsResponse } from 'src/app/models/ProductsResponse';
+import { Product } from '../../models/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { responseProducts } from '../../models/responseProducts';
 export class ProductsService {
   constructor(private http: HttpClient) {}
 
-  fetchProducts(params: any): Observable<responseProducts> {
-    return this.http.get<responseProducts>(
+  fetchProducts(params: any): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
       `http://localhost:8080/api/products`,
       { params }
     );

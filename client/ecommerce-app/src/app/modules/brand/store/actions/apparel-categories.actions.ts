@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ApparelCategory } from '../../../../models/apparelCategory';
+import { ApparelCategory } from '../../../../models/ApparelCategory';
 
 export const loadApparelCategoriesByBrand = createAction('[Brand Page] Load Categories By Brand');
 

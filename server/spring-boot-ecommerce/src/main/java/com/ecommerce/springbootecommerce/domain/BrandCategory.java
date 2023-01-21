@@ -18,7 +18,7 @@ public class BrandCategory {
     private int id;
 
     @Column(name = "brand_category_type")
-    private String type;
+    private String name;
 
     @Column(columnDefinition = "TEXT", length = 2048)
     private String description;

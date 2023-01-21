@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { CartService } from 'src/app/modules/services/cart.service';
-import { Cart } from '../../models/cart';
+import { Cart } from '../../models/Cart';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { cartActions } from '../actions';
 import { cartSelectors } from '../selectors';
@@ -28,12 +28,31 @@ export class CartEffects {
             cartActions.loadCartSuccess({cart}),          
             ),           
             catchError((error) =>
-              of(cartActions.loadCartFailure({ error: error }))        
+              of(cartActions.loadCartFailure({ error }))        
             )
           ),          
       )     
     ),
   );
+
+  saveCart$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(cartActions.saveCart),
+    concatLatestFrom((action) => this.store.select(cartSelectors.selectCart)),
+    mergeMap(([action, cart]) =>
+      this.cartService.saveCart(cart)
+      .pipe(
+        switchMap(() => ([
+          cartActions.saveCartSuccess(),          
+          cartActions.clearAllCartItems()
+        ])        
+        ),           
+        catchError((error) =>
+          of(cartActions.saveCartFailure({ error }))        
+        )
+      ),          
+  )     
+  ))
 
   saveCartToLocalStorage$ = createEffect(() =>
   this.actions$.pipe(
@@ -49,5 +68,6 @@ export class CartEffects {
   ),
   {dispatch: false}
   )
+
 
 }

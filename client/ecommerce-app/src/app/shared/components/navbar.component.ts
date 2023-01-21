@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ApparelCategory } from '../../models/apparelCategory';
-import { Brand } from '../../models/brand';
+import { ApparelCategory } from '../../models/ApparelCategory';
+import { Brand } from '../../models/Brand';
 
 @Component({
   selector: 'app-navbar',

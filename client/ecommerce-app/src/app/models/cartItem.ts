@@ -1,4 +1,5 @@
-import { Product } from './product';
+import { Product } from "./Product";
+
 
 export class CartItem {
   item!: Product;

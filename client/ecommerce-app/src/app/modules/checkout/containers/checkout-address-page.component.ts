@@ -1,19 +1,21 @@
+import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { combineLatestWith, map } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Observable} from 'rxjs';
 import { addressActions } from '../store/actions';
 import { addressSelectors } from '../store/selectors';
-
 @Component({
   selector: 'app-checkout-address-page',
-  template: `
-    <app-typing-address-page *ngIf="(edit$ | async) || (addressTotal$ | async) === 0"></app-typing-address-page>
-    <app-select-address-page *ngIf="!(edit$ | async) && (addressTotal$ | async) != 0"></app-select-address-page>
-  `,
+  template: `<app-select-address-page *ngIf="listAddressPresent"></app-select-address-page>
+  <app-typing-address-page *ngIf="!listAddressPresent"></app-typing-address-page>`,
 })
-export class CheckoutAddressPageComponent implements OnInit {
+export class CheckoutAddressPageComponent implements OnInit, OnDestroy {
+  listAddressPresent!: boolean;
   edit$: Observable<boolean>;
   addressTotal$: Observable<number>;
+  routerSubscription!: Subscription;
 
   constructor(private store: Store<Store>) {
     this.edit$ = this.store.select(addressSelectors.selectEdit);
@@ -21,7 +23,23 @@ export class CheckoutAddressPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(addressActions.loadAddresses());    
+  this.store.dispatch(addressActions.loadAddresses());    
+
+  this.routerSubscription = this.edit$.pipe(
+   combineLatestWith(this.addressTotal$),
+   map(([edit, addressTotal]) => {
+      if(edit || addressTotal === 0) {
+        this.listAddressPresent = false;
+      } else {
+        this.listAddressPresent = true;
+      }
+    })
+    ).subscribe();
   }
+
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
+
 
 }

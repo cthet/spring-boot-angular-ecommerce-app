@@ -1,8 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { Country } from 'src/app/models/country';
+import { Country } from 'src/app/models/Country';
 import { loadAddressesFailure } from '../actions/address.actions';
 import { loadCountries, loadCountriesSuccess } from '../actions/country.actions';
-import { adapter } from './address.reducer';
 
 export const CountryFeatureKey = 'country';
 
@@ -39,18 +38,6 @@ export const reducer = createReducer<State>(
     status: 'error',
   })),
 );
-
-const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();
-
-export const selectCountryIds = selectIds;
-export const selectCountryEntities = selectEntities;
-export const selectAllCountries = selectAll;
-export const selectCountryTotal = selectTotal;
 
 export const getCountries = (state: State) => state.countries; 
 export const getError = (state: State) => state.error;

@@ -11,28 +11,28 @@ import { Component, Input } from '@angular/core';
   `,
   styles: [
     `
-    *,
-::before,
-::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-      .container {
-        display: block;
-        height: 100vh;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      h1 {
-        text-align: center;
-        padding: 20px;
-        margin: 0 auto;
-      }
-    `,
+                                  *,
+                              ::before,
+                              ::after {
+                                box-sizing: border-box;
+                                margin: 0;
+                                padding: 0;
+                              }
+                                    .container {
+                                      display: block;
+                                      height: 100vh;
+                                    }
+                              
+                                    img {
+                                      width: 100%;
+                                    }
+                              
+                                    h1 {
+                                      text-align: center;
+                                      padding: 20px;
+                                      margin: 0 auto;
+                                    }
+                                  `,
   ],
 })
 export class HomeComponent {

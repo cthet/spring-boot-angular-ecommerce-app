@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { ApparelCategory } from '../../models/apparelCategory';
+import { ApparelCategory } from '../../models/ApparelCategory';
 import { loadApparelCategories, loadApparelCategoriesFailure, loadApparelCategoriesSuccess } from '../actions/apparel-categories.actions';
 
 export const ApparelCategoriesFeatureKey = 'apparelCategories';

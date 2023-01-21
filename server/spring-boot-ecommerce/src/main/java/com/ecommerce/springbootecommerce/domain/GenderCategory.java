@@ -18,7 +18,7 @@ public class GenderCategory {
     private int id;
 
     @Column(name = "gender_category_type")
-    private String type;
+    private String name;
 
     @OneToMany(mappedBy = "genderCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products = new HashSet<>();

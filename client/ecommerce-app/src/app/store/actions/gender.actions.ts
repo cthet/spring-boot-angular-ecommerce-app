@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Gender } from '../../models/gender';
+import { Gender } from '../../models/Gender';
 
 export const setGender = createAction(
   '[App Component] Set Gender',

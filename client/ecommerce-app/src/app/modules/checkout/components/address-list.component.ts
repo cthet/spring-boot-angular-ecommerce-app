@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Address } from 'src/app/models/address';
+import { Address } from 'src/app/models/Address';
 
 @Component({
   selector: 'app-address-list',
@@ -14,6 +14,7 @@ export class AddressListComponent implements OnInit {
   @Output() select = new EventEmitter<Address>();
   @Output() add = new EventEmitter<Address>(); 
   @Output() delete = new EventEmitter<number>();
+  @Output() continue = new EventEmitter();
   
   ngOnInit(): void {}  
 

@@ -1,11 +1,11 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
-import com.ecommerce.springbootecommerce.dto.cart.CartDTO;
+import com.ecommerce.springbootecommerce.dto.cart.CartDto;
 
 public interface CartService {
 
-    CartDTO getCartDTO();
+    CartDto getCartDTO();
 
-    String saveCart(CartDTO cartDTO);
+    String saveCart(CartDto cartDTO);
 
 }

@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Address } from 'src/app/models/address';
+import { Address } from 'src/app/models/Address';
 import { saveAddress, updateAddress, saveAddressSuccess, updateAddressSuccess, saveAddressFailure, updateAddressFailure, cancelEditAddress, editAddress, loadAddresses, loadAddressesFailure, loadAddressesSuccess, setAddress, unsetAddress, enterNewAddress, deleteAddress, deleteAddressFailure, deleteAddressSuccess } from '../actions/address.actions';
 
 export const AddressFeatureKey = 'address';

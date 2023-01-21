@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Brand } from "../../models/brand";
+import { Brand } from "../../models/Brand";
 
 export const loadBrands = createAction('[Navbar PageComponent] Load Brands');
 

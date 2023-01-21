@@ -2,42 +2,42 @@
 --------------COUNTRIES-------------------------------
 -----------------------------------------------------
 
-INSERT INTO ecommerce.country(id, name) VALUES ('1', 'Afrique du Sud');
-INSERT INTO ecommerce.country(id, name) VALUES ('2', 'Algérie');
-INSERT INTO ecommerce.country(id, name) VALUES ('3', 'Allemagne');
-INSERT INTO ecommerce.country(id, name) VALUES ('4', 'Arabie Saoudite');
-INSERT INTO ecommerce.country(id, name) VALUES ('5', 'Argentine');
-INSERT INTO ecommerce.country(id, name) VALUES ('6', 'Arménie');
-INSERT INTO ecommerce.country(id, name) VALUES ('7', 'Australie');
-INSERT INTO ecommerce.country(id, name) VALUES ('8', 'Autriche');
-INSERT INTO ecommerce.country(id, name) VALUES ('9', 'Belgique');
-INSERT INTO ecommerce.country(id, name) VALUES ('10', 'Brésil');
-INSERT INTO ecommerce.country(id, name) VALUES ('11', 'Canada');
-INSERT INTO ecommerce.country(id, name) VALUES ('12', 'Chine');
-INSERT INTO ecommerce.country(id, name) VALUES ('13', 'Colombie');
-INSERT INTO ecommerce.country(id, name) VALUES ('14', 'Corée du Sud');
-INSERT INTO ecommerce.country(id, name) VALUES ('15', 'Croatie');
-INSERT INTO ecommerce.country(id, name) VALUES ('16', 'Danemark');
-INSERT INTO ecommerce.country(id, name) VALUES ('17', 'Emirats arabe unis');
-INSERT INTO ecommerce.country(id, name) VALUES ('18', 'Espagne');
-INSERT INTO ecommerce.country(id, name) VALUES ('19', 'Etats-Unis');
-INSERT INTO ecommerce.country(id, name) VALUES ('20', 'France');
-INSERT INTO ecommerce.country(id, name) VALUES ('21', 'Inde');
-INSERT INTO ecommerce.country(id, name) VALUES ('22', 'Indonésie');
-INSERT INTO ecommerce.country(id, name) VALUES ('23', 'Irlande');
-INSERT INTO ecommerce.country(id, name) VALUES ('24', 'Italie');
-INSERT INTO ecommerce.country(id, name) VALUES ('25', 'Japon');
-INSERT INTO ecommerce.country(id, name) VALUES ('26', 'Luxembourg');
-INSERT INTO ecommerce.country(id, name) VALUES ('27', 'Maroc');
-INSERT INTO ecommerce.country(id, name) VALUES ('28', 'Monaco');
-INSERT INTO ecommerce.country(id, name) VALUES ('29', 'Norvège');
-INSERT INTO ecommerce.country(id, name) VALUES ('30', 'Qatar');
-INSERT INTO ecommerce.country(id, name) VALUES ('31', 'Royaume-uni');
-INSERT INTO ecommerce.country(id, name) VALUES ('32', 'Singapour');
-INSERT INTO ecommerce.country(id, name) VALUES ('33', 'Suède');
-INSERT INTO ecommerce.country(id, name) VALUES ('34', 'Suisse');
-INSERT INTO ecommerce.country(id, name) VALUES ('35', 'Taïwan');
-INSERT INTO ecommerce.country(id, name) VALUES ('36', 'Tunisie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('1', 'SA','Afrique du Sud');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('2', 'DZ', 'Algérie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('3', 'DE', 'Allemagne');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('4', 'AE', 'Arabie Saoudite');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('5', 'AR', 'Argentine');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('6', 'AM', 'Arménie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('7', 'AU', 'Australie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('8', 'AT', 'Autriche');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('9', 'BE', 'Belgique');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('10', 'BR', 'Brésil');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('11', 'CA', 'Canada');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('12', 'CN', 'Chine');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('13', 'CO', 'Colombie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('14', 'KW', 'Corée du Sud');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('15', 'HR', 'Croatie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('16', 'DK', 'Danemark');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('17', 'AE', 'Emirats arabe unis');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('18', 'ES', 'Espagne');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('19', 'US', 'Etats-Unis');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('20', 'FR', 'France');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('21', 'IN','Inde');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('22', 'ID', 'Indonésie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('23', 'IE', 'Irlande');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('24', 'IT', 'Italie');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('25', 'JP', 'Japon');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('26', 'LU', 'Luxembourg');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('27', 'MA', 'Maroc');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('28', 'MC', 'Monaco');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('29', 'NO', 'Norvège');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('30', 'QA', 'Qatar');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('31', 'GB', 'Royaume-uni');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('32', 'SG', 'Singapour');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('33', 'SE', 'Suède');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('34', 'CH', 'Suisse');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('35', 'TZ', 'Taïwan');
+INSERT INTO ecommerce.country(id, code, name) VALUES ('36', 'TN', 'Tunisie');
 
 -----------------------------------------------------
 --------------CIVILITY-------------------------------

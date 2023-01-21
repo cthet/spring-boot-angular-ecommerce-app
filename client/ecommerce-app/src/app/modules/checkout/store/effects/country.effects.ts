@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, of, mergeMap } from 'rxjs';
-import { countriesActions } from '../../../../store/actions';
 import { CountryService } from 'src/app/modules/services/country.service';
-
+import { countryActions } from '../actions';
 
 @Injectable()
 export class CountryEffects {
@@ -14,17 +13,17 @@ export class CountryEffects {
 
   loadAddress$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(countriesActions.loadCountries),
+      ofType(countryActions.loadCountries),
       mergeMap((action) =>
         this.countryService.fetchCountries()
           .pipe(
             map((responseCountries) =>
-            countriesActions.loadCountriesSuccess({
+            countryActions.loadCountriesSuccess({
                 countries: responseCountries.countries,
               })
             ),
             catchError((error) =>
-              of(countriesActions.loadAddressesFailure({ error: error }))
+              of(countryActions.loadAddressesFailure({ error: error }))
             )
           )
       )

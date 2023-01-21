@@ -1,18 +1,18 @@
 package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
-import com.ecommerce.springbootecommerce.domain.Civility;
 import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
 import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
-import com.ecommerce.springbootecommerce.dto.auth.UserDTO;
+import com.ecommerce.springbootecommerce.dto.auth.UserDto;
 import com.ecommerce.springbootecommerce.enums.Role;
-import com.ecommerce.springbootecommerce.repository.CivilityRepository;
+import com.ecommerce.springbootecommerce.mappers.UserMapper;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
 import com.ecommerce.springbootecommerce.security.UserPrincipal;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,17 +28,18 @@ import javax.validation.Valid;
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     UserRepository userRepository;
     @Autowired
-    CivilityRepository civilityRepository;
-    @Autowired
     PasswordEncoder encoder;
     @Autowired
     JwtUtils jwtUtils;
+
+    private final UserMapper userMapper;
 
     public AuthResponse signin(@Valid @RequestBody AuthRequest authRequest) {
 
@@ -55,7 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             String email = userPrincipal.getEmail();
             String role = userPrincipal.getAuthorities().toString();
 
-            UserDTO userDTO = new UserDTO(id, role);
+            UserDto userDTO = new UserDto(id, role);
 
             String jwt = jwtUtils.generateToken(email, role);
 
@@ -67,20 +68,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
     public String signup(@Valid @RequestBody SignupRequest signupRequest) {
 
-            if (userRepository.existsByEmail(signupRequest.getEmail())) {
-                throw new ApiRequestException("Email already exists in database.", HttpStatus.BAD_REQUEST);
-            }
+        if (userRepository.existsByEmail(signupRequest.getEmail())) {
+            throw new ApiRequestException("Email already exists in database.", HttpStatus.BAD_REQUEST);
+        }
 
-            User user = new User();
+        //User user = new User();
 
-            Civility civility = civilityRepository.findCivilityById(signupRequest.getCivility()).orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
+        User user = userMapper.signupRequestToUser(signupRequest);
+        user.setRole(Collections.singleton(Role.USER));
+        user.setPassword(encoder.encode(signupRequest.getPassword()));
+           // Civility civility = civilityRepository.findCivilityById(signupRequest.getCivility()).orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
 
-            user.setCivility(civility);
-            user.setFirstName(signupRequest.getFirstName());
-            user.setLastName(signupRequest.getLastName());
-            user.setEmail(signupRequest.getEmail());
-            user.setRole(Collections.singleton(Role.USER));
-            user.setPassword(encoder.encode(signupRequest.getPassword()));
+//            user.setCivility(civility);
+//            user.setFirstName(signupRequest.getFirstName());
+//            user.setLastName(signupRequest.getLastName());
+//            user.setEmail(signupRequest.getEmail());
+//            user.setRole(Collections.singleton(Role.USER));
+//            user.setPassword(encoder.encode(signupRequest.getPassword()));
 
             userRepository.save(user);
 

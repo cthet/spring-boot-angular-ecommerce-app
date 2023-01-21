@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Cart } from 'src/app/models/cart';
-import { CartItem } from 'src/app/models/cartItem';
+import { Cart } from 'src/app/models/Cart';
+import { CartItem } from 'src/app/models/CartItem';
 import { cartActions } from 'src/app/store/actions';
 import { cartSelectors } from 'src/app/store/selectors';
 

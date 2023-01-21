@@ -1,11 +1,11 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
-import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDTO;
-import com.ecommerce.springbootecommerce.dto.category.BrandCategoryDTO;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDto;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoryDto;
 
 public interface BrandCategoryService {
 
-    BrandCategoriesDTO getBrandCategoriesByGenderId(int gender);
+    BrandCategoriesDto getBrandCategoriesByGenderId(int gender);
 
-    BrandCategoryDTO getBrandCategoryByIdAndGenderId(int id, int gender);
+    BrandCategoryDto getBrandCategoryByIdAndGenderId(int id, int gender);
 }

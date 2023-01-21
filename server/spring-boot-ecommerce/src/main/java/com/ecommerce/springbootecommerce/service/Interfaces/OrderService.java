@@ -1,13 +1,13 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
-import com.ecommerce.springbootecommerce.dto.order.OrderDTO;
+import com.ecommerce.springbootecommerce.dto.order.OrderDto;
 
 import java.util.List;
 
 public interface OrderService {
 
-    String  saveOrder(OrderDTO order);
+    OrderDto saveOrder(OrderDto order);
 
-    List<OrderDTO> fetchOrders();
+    List<OrderDto> fetchOrders();
 
 }

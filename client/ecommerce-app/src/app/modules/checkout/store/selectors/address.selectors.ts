@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { Address } from "src/app/models/address";
+import { Address } from "src/app/models/Address";
 import { selectCheckoutState } from "..";
 import * as fromAddress from '../reducers/address.reducer'
 
@@ -24,7 +24,7 @@ export const selectAddressTotal = createSelector(
   fromAddress.selectAddressTotal
 );
 
-export const selectAddress = createSelector(
+export const selectShippingAddress = createSelector(
   selectAddressState,
   fromAddress.getSelectedAddress
 );
@@ -33,7 +33,6 @@ export const selectEdit = createSelector(
   selectAddressState,
   fromAddress.getEdit
 );
-
 
 export const selectEditAddress = createSelector(
   selectAddressState,

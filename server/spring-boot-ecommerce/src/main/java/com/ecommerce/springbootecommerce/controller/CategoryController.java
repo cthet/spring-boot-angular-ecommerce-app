@@ -1,8 +1,8 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDTO;
-import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDTO;
-import com.ecommerce.springbootecommerce.dto.category.BrandCategoryDTO;
+import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDto;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDto;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoryDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
 import com.ecommerce.springbootecommerce.service.Interfaces.BrandCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CategoryController {
     @GetMapping("/brands")
     public ResponseEntity<?> getBrandsByGenderId(@RequestParam(required = true) int genderId) {
         try {
-             BrandCategoriesDTO brandCategoriesDTO = brandCategoryService.getBrandCategoriesByGenderId(genderId);
+             BrandCategoriesDto brandCategoriesDTO = brandCategoryService.getBrandCategoriesByGenderId(genderId);
 
             return new ResponseEntity<>(brandCategoriesDTO, HttpStatus.OK);
 
@@ -34,7 +34,7 @@ public class CategoryController {
     public ResponseEntity<?> getBrandById(@PathVariable("id") int id,
                                           @RequestParam(required = true) int genderId){
         try{
-            BrandCategoryDTO brandCategoryDTO = brandCategoryService.getBrandCategoryByIdAndGenderId(id, genderId);
+            BrandCategoryDto brandCategoryDTO = brandCategoryService.getBrandCategoryByIdAndGenderId(id, genderId);
 
             return new ResponseEntity<>(brandCategoryDTO, HttpStatus.OK);
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class CategoryController {
     public ResponseEntity<?> getApparelsCategoryByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
                                                                  @RequestParam(defaultValue = "0") int brandId) {
         try {
-            ApparelCategoriesDTO apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(genderId, brandId);
+            ApparelCategoriesDto apparelCategoriesDTO = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(genderId, brandId);
 
             return new ResponseEntity<>(apparelCategoriesDTO, HttpStatus.OK);
 

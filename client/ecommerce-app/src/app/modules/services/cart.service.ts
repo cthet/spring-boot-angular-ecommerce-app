@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Cart } from 'src/app/models/cart';
-import { CartItem} from 'src/app/models/cartItem';
+import { Cart } from 'src/app/models/Cart';
 
 
 @Injectable({
@@ -18,16 +17,10 @@ export class CartService {
   }
 
 
-  saveCart(cartItems: CartItem[], totalQuantity: number, totalPrice: number): Observable<any> {
+  saveCart(cart: Cart): Observable<any> {
     return this.http
       .post(
-        `http://localhost:8080/api/cart/user`,
-        {
-          cartItems,
-          totalQuantity,
-          totalPrice
-        },
-      )
+        `http://localhost:8080/api/cart/user`, cart)
       .pipe(catchError(this.handleError));
   }
 
@@ -46,7 +39,7 @@ export class CartService {
       return throwError(() => error.error.message);
     }
   }
-
+}
 
 
   // addToCart(product: Product): void {
@@ -105,4 +98,4 @@ export class CartService {
   // }
 
 
-}
+

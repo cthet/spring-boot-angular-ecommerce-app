@@ -1,14 +1,6 @@
-import { NgModule } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { AuthRoutingModule } from './auth-routing.module';
-import {
-  MatRadioModule,
-  MAT_RADIO_DEFAULT_OPTIONS,
-} from '@angular/material/radio';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthFeatureKey, reducers } from './store';
@@ -20,6 +12,11 @@ import { LoginComponent } from './components/login.component';
 import { SignupComponent } from './components/signup.component';
 import { SignupEffects } from './store/effects/signup.effects';
 import { LoginEffects } from './store/effects/login.effects';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 export const COMPONENTS = [LoginComponent, SignupComponent];
 
@@ -33,8 +30,7 @@ export const CONTAINERS = [
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
     SharedModule,
-    AuthRoutingModule,
-    MatButtonModule,
+    AuthRoutingModule,    
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

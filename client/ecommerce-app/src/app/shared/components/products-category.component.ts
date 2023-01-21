@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApparelCategory } from '../../models/apparelCategory';
+import { ApparelCategory } from '../../models/ApparelCategory';
 
 @Component({
   selector: 'app-products-category',

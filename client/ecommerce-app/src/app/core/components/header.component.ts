@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Gender } from '../../models/gender';
+import { Gender } from '../../models/Gender';
 
 @Component({
   selector: 'app-header',

@@ -1,13 +1,13 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
 import com.ecommerce.springbootecommerce.domain.User;
-import com.ecommerce.springbootecommerce.dto.profile.EmailDTO;
-import com.ecommerce.springbootecommerce.dto.profile.InfoDTO;
-import com.ecommerce.springbootecommerce.dto.profile.ProfileResponse;
+import com.ecommerce.springbootecommerce.dto.profile.EmailDto;
+import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
+import com.ecommerce.springbootecommerce.dto.profile.ProfileDto;
 
 public interface UserService {
-    String updateUserInfo(InfoDTO infoDTO);
-    String updateUserEmail(EmailDTO emailDTO);
-    ProfileResponse getUserProfile();
+    String updateUserInfo(InfoDto infoDTO);
+    String updateUserEmail(EmailDto emailDTO);
+    ProfileDto getUserProfile();
     User getUser();
 }

@@ -59,16 +59,4 @@ public class User {
         }
     }
 
-    public void addAddress(Address address) {
-        if(address != null) {
-
-            if (addresses == null) {
-                addresses = new HashSet<>();
-            }
-
-            addresses.add(address);
-            address.setUser(this);
-        }
-    }
-
 }

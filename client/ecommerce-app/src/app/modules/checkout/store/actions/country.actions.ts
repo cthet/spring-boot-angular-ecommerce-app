@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Country } from "src/app/models/country";
+import { Country } from "src/app/models/Country";
 
 export const loadCountries = createAction('[Profile/Checkout-Address PageComponent] Load Countries');
 

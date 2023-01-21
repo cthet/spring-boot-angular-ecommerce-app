@@ -1,8 +1,10 @@
-import { Country } from "./country";
+import { Civility } from "./Civility";
+import { Country } from "./Country";
+
 
 
 interface AddressArgs {
-  civility: number;
+  civility: Civility;
   firstName: string;
   lastName: string;
   street: string;
@@ -15,7 +17,7 @@ interface AddressArgs {
 
 export class AddressBuilder {
   id!: number;
-  civility: number;
+  civility: Civility;
   firstName: string;
   lastName: string;
   street: string;
@@ -71,7 +73,7 @@ export class AddressBuilder {
 
 export class Address {
   id: number;
-  civility: number;
+  civility: Civility;
   firstName: string;
   lastName: string;
   street: string;
@@ -81,7 +83,7 @@ export class Address {
   country: Country;
   phoneNumber: string;
 
-  constructor(id: number, civility: number, firstName: string, lastName: string, street: string, addressComplement: string, postCode: number, city: string, country: Country, phoneNumber: string)
+  constructor(id: number, civility: Civility, firstName: string, lastName: string, street: string, addressComplement: string, postCode: number, city: string, country: Country, phoneNumber: string)
   {
     this.id = id;
     this.civility = civility;

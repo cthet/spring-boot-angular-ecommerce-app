@@ -1,6 +1,6 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.dto.product.ProductDTO;
+import com.ecommerce.springbootecommerce.dto.product.ProductDto;
 import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id) {
 
         try {
             return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);

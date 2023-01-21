@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
-import { CartService } from 'src/app/modules/services/cart.service';
-import { Gender } from '../../models/gender';
+import { Observable } from 'rxjs';
+import { Gender } from '../../models/Gender';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { authActions, cartActions, genderActions } from '../../store/actions';
 import { authSelectors, cartSelectors, genderSelectors } from '../../store/selectors';
@@ -27,7 +26,6 @@ export class HeaderPageComponent {
   constructor(
     private store: Store<Store>,
     private localStorageService: LocalStorageService,
-    private cartService: CartService,
     private router: Router
   ) {
     this.gender$ = this.store.select(genderSelectors.selectGender);
@@ -50,12 +48,8 @@ export class HeaderPageComponent {
   }
 
   logout() {          
-    this.store.select(cartSelectors.selectCart).pipe(
-      take(1)).subscribe(cart => {
-      this.cartService.saveCart(cart.cartItems, cart.totalQuantity, cart.totalPrice).subscribe()
-    });
-    this.store.dispatch(authActions.clearUser());
-    this.store.dispatch(cartActions.clearAllCartItems());
+    this.store.dispatch(cartActions.saveCart());
+    this.store.dispatch(authActions.clearUser());    
     this.localStorageService.logout();
     this.router.navigate(['']);
     

@@ -1,0 +1,56 @@
+.container-payment{
+  width: 100%;
+  min-height: 550px;
+  margin: 10px;
+  padding: 20px;
+}
+
+.p-b{
+  padding-bottom: 1rem;
+}
+
+.p-t{
+  padding-top: 1rem;
+}
+
+.card-txt{
+  display: block;
+  font-size: 2rem;
+}
+
+.payment-txt{
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.payment-block{
+  width: 100%;
+  height: 100%;
+}
+
+.card-payment{  
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+}
+
+.input-l{
+  width: 100%;
+}
+
+.card-info{
+  display: flex;  
+  margin: 20px auto;
+  padding: 25px;
+  flex-direction: column;  
+  width: 100%;
+}
+
+/* .expiration-info{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  /*display: inline-block;
+} */
+

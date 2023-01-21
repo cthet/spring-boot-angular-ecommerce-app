@@ -1,8 +1,8 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.dto.MessageResponse;
-import com.ecommerce.springbootecommerce.dto.profile.EmailDTO;
-import com.ecommerce.springbootecommerce.dto.profile.InfoDTO;
+import com.ecommerce.springbootecommerce.dto.profile.EmailDto;
+import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,16 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile() {
+        try {
+            return ResponseEntity.ok(userService.getUserProfile());
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+    }
     @PostMapping("/info")
-    public ResponseEntity<?> updateUserInfo(@Valid @RequestBody InfoDTO infoDTO) {
+    public ResponseEntity<?> updateUserInfo(@Valid @RequestBody InfoDto infoDTO) {
         try {
             return ResponseEntity.ok(new MessageResponse(userService.updateUserInfo(infoDTO)));
         } catch (Exception e) {
@@ -27,18 +35,9 @@ public class UserController {
         }
     }
     @PostMapping("/email")
-    public ResponseEntity<?> updateUserEmail(@Valid @RequestBody EmailDTO emailDTO) {
+    public ResponseEntity<?> updateUserEmail(@Valid @RequestBody EmailDto emailDTO) {
         try {
             return ResponseEntity.ok(new MessageResponse(userService.updateUserEmail(emailDTO)));
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping("/profile")
-    public ResponseEntity<?> getUserProfile() {
-        try {
-            return ResponseEntity.ok(userService.getUserProfile());
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
