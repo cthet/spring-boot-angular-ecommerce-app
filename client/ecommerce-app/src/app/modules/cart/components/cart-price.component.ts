@@ -14,7 +14,7 @@ import { Cart } from '../../../models/Cart';
       <span>(taxes locales et livraison incluses)</span>
       <span class="t-a-r total-price">{{cart?.totalPrice | currency: 'EUR'}}</span>
       </div>
-      <button type="button" class="d-f btn-cmd" mat-raised-button (click)="checkout.emit()">
+      <button [ngStyle]="{'background-color': backgroundColor, 'color':fontColor}"  type="button" class="d-f btn-cmd" mat-raised-button (click)="checkout.emit()">
         Commander    
       </button>
     </mat-card-content>
@@ -23,7 +23,9 @@ import { Cart } from '../../../models/Cart';
   styleUrls: ['./cart-price.component.css'],
 })
 export class CartPriceComponent {
-  @Input() cart!: Cart | null;  
+  backgroundColor:string = "#000";
+  fontColor: string = "#f1f1f1";
 
+  @Input() cart!: Cart | null;  
   @Output() checkout = new EventEmitter();
 }

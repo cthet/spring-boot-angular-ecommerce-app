@@ -31,7 +31,7 @@ public class Cart {
     private BigDecimal totalPrice;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
-    private Set<CartItem> cartItems = new HashSet<>();
+    Set<CartItem> cartItems = new HashSet<>();
     public void addCartItem(CartItem cartItem) {
         if(cartItem != null) {
             if (cartItems == null) {

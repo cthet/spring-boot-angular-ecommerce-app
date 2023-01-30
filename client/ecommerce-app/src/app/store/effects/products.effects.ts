@@ -27,16 +27,19 @@ export class ProductsEffects {
           .fetchProducts({
             gender: gender?.id,
             brand: brand?.id,
-            category: 0,
           })
           .pipe(
             map((ResponseProducts) =>
             productsActions.loadProductsSuccess({
                 products: ResponseProducts.products,
+                current_page: ResponseProducts.current_page,
+                size: ResponseProducts.size,
+                total_items: ResponseProducts.total_items,
+                total_pages: ResponseProducts.total_pages
               })
             ),
             catchError((error) =>
-              of(productsActions.loadProductsFailure({ error: error }))
+              of(productsActions.loadProductsFailure({ error: error.message }))
             )
           )
       )
@@ -50,9 +53,10 @@ export class ProductsEffects {
     this.store.select(genderSelectors.selectGender),
     this.store.select(brandsSelectors.selectBrand),
     this.store.select(apparelCategoriesBrandSelectors.selectApparelCategories),
-    this.store.select(productsSelectors.selectSort)
+    this.store.select(productsSelectors.selectSort),
+    this.store.select(productsSelectors.selectCurrentPage),
   ]),
-    mergeMap(([action, gender, brand, categories, sort]) =>
+    mergeMap(([action, gender, brand, categories, sort, page]) =>
       this.productsService
         .fetchProducts({
           gender: gender?.id,
@@ -61,50 +65,25 @@ export class ProductsEffects {
             .filter((category) => category.checked == true)
             .map((category) => category.id),
           sort: sort,
+          page: page-1 
         })
         .pipe(
           map((ResponseProducts) =>
           productsActions.loadProductsSuccess({
-              products: ResponseProducts.products,
+            products: ResponseProducts.products,
+            current_page: ResponseProducts.current_page + 1,
+            size: ResponseProducts.size,
+            total_items: ResponseProducts.total_items,
+            total_pages: ResponseProducts.total_pages
             })
           ),
           catchError((error) =>
-            of(productsActions.loadProductsFailure({ error: error }))
+            of(productsActions.loadProductsFailure({ error: error.message }))
           )
         )
     )
   )
 );
-
-  // loadProducts$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(loadProducts),
-  //     concatLatestFrom((action) => [
-  //       this.store.select(rootSelectors.selectGender),
-  //       this.store.select(productsSelectors.selectBrandAndCategoryAndSort),
-  //     ]),
-  //     mergeMap(([action, gender, params]) =>
-  //       this.productsService
-  //         .fetchProducts({
-  //           gender: gender!.id,
-  //           brand: params!.brand!.id,
-  //           category: params.category
-  //             .filter((category) => category.checked == true)
-  //             .map((category) => category.id),
-  //           sort: params.sort,
-  //         })
-  //         .pipe(
-  //           map((ResponseProducts) =>
-  //             loadProductsSuccess({
-  //               products: ResponseProducts.products,
-  //             })
-  //           ),
-  //           catchError((error) => of(loadProductsFailure({ error: error })))
-  //         )
-  //     )
-  //   )
-  // );
-
 
 }
 

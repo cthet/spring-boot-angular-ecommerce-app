@@ -9,8 +9,7 @@ import { Component } from '@angular/core';
     <div class="brand-footer">
       <span class="brand-name-title">Shop</span>
       <p class="footer-txt">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam id
-        dolorem corrupti ipsam nam explicabo
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
       </p>
     </div>
 
@@ -29,12 +28,12 @@ import { Component } from '@angular/core';
       <span class="payment-methods-title">Moyens de paiement</span>
       <ul>
         <img
-          src="../../../assets/ressources/Mastercard-logo.svg"
+          src="../../../assets/ressources/Mastercard-Logo.svg"
           alt="mastercard-icon"
         />
         <img
-          src="../../../assets/ressources/Mastercard-logo.svg"
-          alt="mastercard-icon"
+          src="../../../assets/ressources/Visa_Inc.-Logo.svg"
+          alt="visa-icon"
         />
       </ul>
     </div>
@@ -61,9 +60,10 @@ import { Component } from '@angular/core';
         /></a>
       </ul>
     </div>
+    <div class="copyright">ShopApp © 2022</div>
+    </div>
 
-    <p class="copyright">ShopApp © 2022</p>
-  </div>
+
 </footer>`,
   styleUrls: ['./footer.component.css'],
 })

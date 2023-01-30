@@ -3,8 +3,9 @@ package com.ecommerce.springbootecommerce.service.Impl;
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.BrandCategory;
 import com.ecommerce.springbootecommerce.domain.BrandCategoryImage;
-import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesDto;
+import com.ecommerce.springbootecommerce.dto.category.BrandCategoriesResponse;
 import com.ecommerce.springbootecommerce.dto.category.BrandCategoryDto;
+import com.ecommerce.springbootecommerce.mappers.BrandCategoryMapper;
 import com.ecommerce.springbootecommerce.repository.BrandCategoryImageRepository;
 import com.ecommerce.springbootecommerce.repository.BrandCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,54 +30,44 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
 
+    private final BrandCategoryMapper brandCategoryMapper;
+
 
     @Override
-    public BrandCategoriesDto getBrandCategoriesByGenderId(int gender) {
+    public BrandCategoriesResponse getBrandCategoriesByGenderId(int gender, int apparelCategoryId) {
 
-        List<BrandCategory> brandCategories = brandCategoryRepository.findByGenderCategoryId(gender);
+        BrandCategoriesResponse brandCategoriesResponse = new BrandCategoriesResponse();
 
+        brandCategoriesResponse.setGender(genderCategoryRepository.findById(gender)
+                .orElseThrow(() -> new ApiRequestException("No gender found in database!", HttpStatus.NOT_FOUND))
+                .getName());
 
-        if (brandCategories.isEmpty()) {
-            throw new ApiRequestException("No brands found in database for this gender!", HttpStatus.NOT_FOUND);
+        List<BrandCategory> brandCategories = new ArrayList<BrandCategory>();
+        if(apparelCategoryId == 0){
+            brandCategories = brandCategoryRepository.findByGenderCategoryId(gender);
+        } else {
+            brandCategories = brandCategoryRepository.findByGenderCategoryIdAndApparelCategoryId(gender, apparelCategoryId);
         }
 
-        BrandCategoriesDto brandCategoriesDTO = new BrandCategoriesDto();
-        brandCategoriesDTO.setGender(genderCategoryRepository.findById(gender)
-                .orElseThrow(() -> new ApiRequestException("No gender found in database!", HttpStatus.NOT_FOUND)).getName());
+        if(brandCategories.isEmpty()){
+            throw new ApiRequestException("Brand Categories not found !", HttpStatus.NOT_FOUND);
+        }
 
         List<BrandCategoryDto> brandCategoryDtos = new ArrayList<BrandCategoryDto>();
 
-        for (BrandCategory brandCategory : brandCategories) {
-
-            BrandCategoryDto brandCategoryDTO = new BrandCategoryDto();
-
-            Optional<BrandCategoryImage> optionalBrandCategoryImage = brandCategoryImageRepository.findByBrandCategoryIdAndGenderCategoryId(brandCategory.getId(), gender);
-            optionalBrandCategoryImage.ifPresent(brandCategoryImage -> brandCategoryDTO.setImageUrl(brandCategoryImage.getImage_url()));
-            brandCategoryDTO.setId(brandCategory.getId());
-            brandCategoryDTO.setBrand(brandCategory.getName());
-            brandCategoryDTO.setDescription(brandCategory.getDescription());
+        brandCategories.forEach(brandCategory -> {
+            BrandCategoryDto brandCategoryDTO = brandCategoryMapper.brandCategoryToBrandCategoryDto(brandCategory);
+            BrandCategoryImage BrandCategoryImage = brandCategoryImageRepository.findByBrandCategoryIdAndGenderCategoryId(brandCategory.getId(), gender)
+                    .orElseThrow(()-> new ApiRequestException("Brand Categories images not found !", HttpStatus.NOT_FOUND));
+            brandCategoryDTO.setImageUrl(BrandCategoryImage.getImage_url());
             brandCategoryDtos.add(brandCategoryDTO);
-        }
-        brandCategoriesDTO.setBrandCategories(brandCategoryDtos);
+        });
+        brandCategoriesResponse.setBrandCategories(brandCategoryDtos);
 
-        return brandCategoriesDTO;
+        return brandCategoriesResponse;
 
     }
 
-    @Override
-    public BrandCategoryDto getBrandCategoryByIdAndGenderId(int id, int gender) {
-        BrandCategory brandCategory = brandCategoryRepository.findById(id)
-                .orElseThrow(() -> new ApiRequestException("No Brand found in database!", HttpStatus.NOT_FOUND));
 
-        BrandCategoryImage brandCategoryImage = brandCategoryImageRepository.findByBrandCategoryIdAndGenderCategoryId(id, gender)
-                .orElseThrow(() -> new ApiRequestException("No Brand image found in database!", HttpStatus.NOT_FOUND));
 
-        BrandCategoryDto brandCategoryDTO = new BrandCategoryDto();
-        brandCategoryDTO.setId(brandCategory.getId());
-        brandCategoryDTO.setBrand(brandCategory.getName());
-        brandCategoryDTO.setDescription(brandCategory.getDescription());
-        brandCategoryDTO.setImageUrl(brandCategoryImage.getImage_url());
-
-        return brandCategoryDTO;
-    }
 }

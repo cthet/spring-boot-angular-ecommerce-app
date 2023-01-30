@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, switchMap} from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { catchError, concatMap, map, mergeMap, of, switchMap, tap} from 'rxjs';
+import { Gender } from 'src/app/models/Gender';
 import { Order, OrderBuilder } from 'src/app/models/Order';
 import { addressSelectors } from 'src/app/modules/checkout/store/selectors';
 import { OrderService } from 'src/app/modules/services/order.service';
 import { orderActions } from '../actions';
-import { cartSelectors } from '../selectors';
+import { cartSelectors, genderSelectors } from '../selectors';
 
 @Injectable()
 export class OrderEffects {
@@ -14,6 +16,7 @@ export class OrderEffects {
     private actions$: Actions,
     private orderService: OrderService,
     private store: Store,
+    private router: Router
   ) {}
 
   saveOrder$ = createEffect(() =>
@@ -22,11 +25,11 @@ export class OrderEffects {
     concatLatestFrom((action) => [      
       this.store.select(cartSelectors.selectAllCartItems),
       this.store.select(addressSelectors.selectShippingAddress),
-      this.store.select(cartSelectors.selectCartItemsTotalQuantity),
       this.store.select(cartSelectors.selectCartItemsTotalPrice),
+      this.store.select(cartSelectors.selectCartItemsTotalQuantity),      
     ]),
-    map(([action, cartItems, address, quantity, totalPrice]) => {
-      const order = new OrderBuilder(cartItems, address!, quantity, totalPrice).buildNewOrder();
+    map(([action, cartItems, address, totalPrice, totalQuantity]) => {
+      const order = new OrderBuilder(cartItems, address!, totalPrice, totalQuantity).buildNewOrder();
       return order;
     }),     
     switchMap((order: Order) => 
@@ -35,11 +38,28 @@ export class OrderEffects {
           orderActions.saveOrderSuccess({order}),        
         ),           
         catchError((error) =>
-          of(orderActions.saveOrderFailure({ error }))        
-        )
-      ),        
-    ),     
-  ));  
+          of(orderActions.saveOrderFailure({ error: error.message }))        
+        ),
+
+    ))
+    )
+    );  
+     
+    saveOrdersSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(orderActions.saveOrderSuccess),
+      switchMap(() => 
+      this.store.select(genderSelectors.selectGender)),      
+      tap((gender: Gender |null) => {    
+        if (gender) {
+          this.router.navigate([`/`, `${gender?.type}`]);
+          }
+        }      
+      ),
+        ),
+        {dispatch: false}   
+    )
+
 
   loadOrder$ = createEffect(() =>
     this.actions$.pipe(
@@ -58,4 +78,11 @@ export class OrderEffects {
     ),
   );
 
-}
+
+
+
+}     
+              
+
+
+

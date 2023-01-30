@@ -73,7 +73,3 @@ export const getApparelCategories = (state: State) => state.apparelCategories;
 export const getError = (state: State) => state.error;
 
 export const getStatus = (state: State) => state.status;
-
-// .map((category) => {
-//   return { ...category, checked: false };
-// }),

@@ -3,13 +3,19 @@ import { ApparelCategory } from '../../models/ApparelCategory';
 
 @Component({
   selector: 'app-products-category',
-  template: `
+  template: `  
     <div class="container">
-      <h2>Catégories</h2>
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-        <ngb-panel title="Prêt à porter">
-          <ng-template ngbPanelContent>
-            <ul>
+      <h3>Catégories</h3>
+
+    <div class="accordion">
+      <mat-accordion>
+        <mat-expansion-panel class="accordion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="accordion-title">
+              Prêt à porter
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul>
               <li *ngFor="let category of apparelCategories">
                 <mat-checkbox
                   [checked]="category.checked"
@@ -22,15 +28,20 @@ import { ApparelCategory } from '../../models/ApparelCategory';
                   >{{ category.apparel_category }}</mat-checkbox
                 >
               </li>
-            </ul>
-          </ng-template>
-        </ngb-panel>
-      </ngb-accordion>
+          </ul>
+        </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+          
+            </mat-expansion-panel>
+          </mat-accordion>
+      </div>
     </div>
   `,
   styleUrls: ['./products-category.component.css'],
 })
 export class ProductsCategoryComponent {
+  panelOpenState = false;
   @Input() apparelCategories!: ApparelCategory[] | null;
 
   @Output() filter = new EventEmitter<{

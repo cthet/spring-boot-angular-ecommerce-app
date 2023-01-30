@@ -6,8 +6,12 @@ import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
 import com.ecommerce.springbootecommerce.dto.profile.ProfileDto;
 
 public interface UserService {
+
     String updateUserInfo(InfoDto infoDTO);
+
     String updateUserEmail(EmailDto emailDTO);
+
     ProfileDto getUserProfile();
+
     User getUser();
 }

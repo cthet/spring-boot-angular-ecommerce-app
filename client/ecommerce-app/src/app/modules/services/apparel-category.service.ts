@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { ApparelCategoriesResponse } from 'src/app/models/ApparelCategoriesResponse';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApparelCategoryService {
+  
   constructor(private http: HttpClient) {}
 
   fetchApparelCategoriesByGenderId(
@@ -14,7 +15,7 @@ export class ApparelCategoryService {
   ): Observable<ApparelCategoriesResponse> {
     return this.http.get<ApparelCategoriesResponse>(
       `http://localhost:8080/api/category/apparels?genderId=${genderId}`
-    );
+    ).pipe(catchError(this.handleError));
   }
 
   fetchApparelCategoriesByGenderIdAndBrandId(
@@ -23,7 +24,23 @@ export class ApparelCategoryService {
   ): Observable<ApparelCategoriesResponse> {
     return this.http.get<ApparelCategoriesResponse>(
       `http://localhost:8080/api/category/apparels?genderId=${genderId}&brandId=${brandId}`
-    );
+    ).pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      //a client-side or network error occured. Handle it accordingly.
+      console.log('An error occured:', error.error);
+      return throwError(() => error.message);
+    } else {
+      // the backend returned an unsuccesful response code.
+      // the response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was:`,
+        error.error
+      );
+      return throwError(() => new Error(error.message));
+    }
   }
 
 

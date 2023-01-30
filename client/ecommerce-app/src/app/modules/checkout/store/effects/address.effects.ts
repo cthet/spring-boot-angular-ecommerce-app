@@ -24,7 +24,7 @@ export class AddressEffects {
               })
             ),
             catchError((error) =>
-              of(addressActions.loadAddressesFailure({ error }))
+              of(addressActions.loadAddressesFailure({ error: error.message}))
             )
           )
       )
@@ -41,7 +41,7 @@ export class AddressEffects {
             addressActions.saveAddressSuccess({address}),
             addressActions.cancelEditAddress()]),
             catchError((error) =>
-              of(addressActions.saveAddressFailure({ error }))
+              of(addressActions.saveAddressFailure({ error: error.message}))
             )
           )
       )
@@ -58,7 +58,7 @@ export class AddressEffects {
             addressActions.updateAddressSuccess({address}),
             addressActions.cancelEditAddress()])),
             catchError((error) =>
-              of(addressActions.updateAddressFailure({ error }))
+              of(addressActions.updateAddressFailure({ error: error.message }))
             )
           )
       )
@@ -75,7 +75,7 @@ export class AddressEffects {
             addressActions.deleteAddressSuccess({id}),
             addressActions.cancelEditAddress()])),
             catchError((error) =>
-              of(addressActions.deleteAddressFailure({ error }))
+              of(addressActions.deleteAddressFailure({ error: error.message }))
             )
           )
       )

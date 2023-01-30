@@ -13,3 +13,20 @@ export const selectSort = createSelector(
   selectProductsState,
   fromProducts.getSort
 );
+
+export const selectCurrentPage = createSelector(
+  selectProductsState,
+  fromProducts.getCurrentPage
+);
+export const selectSize = createSelector(
+  selectProductsState,
+  fromProducts.getSize
+);
+export const selectTotalItems = createSelector(
+  selectProductsState,
+  fromProducts.getTotalItems
+);
+export const selectTotalPages = createSelector(
+  selectProductsState,
+  fromProducts.getTotalPages
+);

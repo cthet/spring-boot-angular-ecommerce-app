@@ -5,6 +5,7 @@ export class Product {
   image_url!: string;
   units_in_stock!: number;
   active!: boolean;
+  new!: boolean;
   gender_category!: string;
   product_category!: string;
   brand_category!: string;

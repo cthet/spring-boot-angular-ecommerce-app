@@ -23,7 +23,7 @@ export class CountryEffects {
               })
             ),
             catchError((error) =>
-              of(countryActions.loadAddressesFailure({ error: error }))
+              of(countryActions.loadAddressesFailure({ error: error.message }))
             )
           )
       )

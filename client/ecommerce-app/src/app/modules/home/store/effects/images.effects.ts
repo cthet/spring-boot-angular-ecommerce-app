@@ -16,13 +16,13 @@ export class ImagesEffects {
       map(([action, gender]) => {
         if (gender!.id == 1) {
           return setGenderImages({
-            headerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/d0c53a9f01a948849467309582c85dce.jpg`,
-            footerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/d0c53a9f01a948849467309582c85dce.jpg`,
+            headerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/landingpage/men-brand-list-desktop.jpg`,
+            footerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/e94505279fc44755b968a9f9ecd5f5dd.jpg`,
           });
         } else {
           return setGenderImages({
-            headerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/landingpage/Big_desktop-exquisite-gucci_2x_20220930164026.jpg`,
-            footerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/landingpage/Big_desktop-exquisite-gucci_2x_20220930164026.jpg`,
+            headerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/landingpage/women-brand-list-desktop.jpg`,
+            footerImage: `https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/landingpage/5bc1a5cbcf1b44cd91f0dbfb54cdf335.jpg`,
           });
         }
       })

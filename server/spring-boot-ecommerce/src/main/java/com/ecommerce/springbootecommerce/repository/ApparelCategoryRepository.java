@@ -19,5 +19,5 @@ public interface ApparelCategoryRepository extends JpaRepository<ApparelCategory
             " JOIN a.brandCategories b" +
             " JOIN a.genderCategories g" +
             " WHERE b.id = :brandId AND g.id = :genderId")
-    List<ApparelCategory> findByBrandCategoryIdAndGenderId(@Param("brandId")int brandId, @Param("genderId") int genderId);
+    List<ApparelCategory> findByBrandCategoryIdAndGenderCategoryId(@Param("brandId")int brandId, @Param("genderId") int genderId);
 }

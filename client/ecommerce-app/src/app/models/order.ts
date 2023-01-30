@@ -1,6 +1,8 @@
 import { Address } from "./Address";
 import { CartItem } from "./CartItem";
+
 export class OrderBuilder {
+  id?: number;
   orderTrackingNumber?: string;
   orderItems: CartItem[];
   shippingAddress: Address;
@@ -30,6 +32,7 @@ export class OrderBuilder {
 
   build() {
     return new Order(
+      this.id,
       this.orderTrackingNumber,
       this.orderItems,
       this.shippingAddress,
@@ -40,14 +43,16 @@ export class OrderBuilder {
 }
 
 export class Order {
+  id?: number;
   orderTrackingNumber?: string;
   orderItems: CartItem[];
   shippingAddress: Address;
   totalPrice: number;
   totalQuantity: number;
 
-  constructor(orderTrackingNumber: string | undefined, orderItems: CartItem[], shippingAddress: Address, totalPrice: number, totalQuantity: number)
+  constructor(id: number | undefined, orderTrackingNumber: string | undefined, orderItems: CartItem[], shippingAddress: Address, totalPrice: number, totalQuantity: number)
   {
+    this.id = id;
     this.orderTrackingNumber = orderTrackingNumber;
     this.orderItems = orderItems;
     this.shippingAddress = shippingAddress;

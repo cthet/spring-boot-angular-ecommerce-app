@@ -40,3 +40,5 @@ export const deleteAddress = createAction('[Checkout Address Page/Profile Compon
 export const deleteAddressSuccess = createAction('[Checkout Address Page/Profile Component] Delete address Success', props<{id: number}>());
 
 export const deleteAddressFailure = createAction('[Checkout Address Page/Profile Component] Delete address Failure', props<{error: string}>());
+
+export const clearAddresses = createAction('[Header Page Component]Clear Addresses');

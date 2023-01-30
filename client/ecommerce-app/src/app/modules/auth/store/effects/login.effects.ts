@@ -28,7 +28,7 @@ export class LoginEffects {
               loginApiActions.loginSuccess({ authResponse: authResponse })
             ),
             catchError((error) =>
-              of(loginApiActions.loginFailure({ error: error }))
+              of(loginApiActions.loginFailure({ error: error.message }))
             )
           )
       )

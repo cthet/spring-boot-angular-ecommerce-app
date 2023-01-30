@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { addressActions } from 'src/app/modules/checkout/store/actions';
 import { Gender } from '../../models/Gender';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { authActions, cartActions, genderActions } from '../../store/actions';
@@ -49,11 +50,11 @@ export class HeaderPageComponent {
 
   logout() {          
     this.store.dispatch(cartActions.saveCart());
-    this.store.dispatch(authActions.clearUser());    
+    this.store.dispatch(authActions.clearUser());   
+    this.store.dispatch(addressActions.clearAddresses()); 
     this.localStorageService.logout();
     this.router.navigate(['']);
     
-    //return this.http.post<any>('http://localhost:8080/logout', customerId);
   }
 
 }

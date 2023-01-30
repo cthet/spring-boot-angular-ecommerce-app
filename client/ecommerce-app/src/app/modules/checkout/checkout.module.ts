@@ -16,7 +16,7 @@ import { AddressListComponent } from './components/address-list.component';
 import { AddressViewComponent } from './components/address-view.component';
 import { SelectAddressPageComponent } from './containers/select-address-page.component';
 import { TypingAddressPageComponent } from './containers/typing-address-page.component';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select'; 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -24,8 +24,6 @@ import { CheckoutFeatureKey, reducers } from './store';
 import { AddressEffects } from './store/effects/address.effects';
 import { CountryEffects } from './store/effects/country.effects';
 import { CheckoutPaymentViewComponent } from './components/checkout-payment-view.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TypingPaymentPageComponent } from './containers/typing-payment-page.component';
 
 export const COMPONENTS = [CheckoutCartViewComponent, CheckoutPaymentViewComponent, AddressViewComponent, AddressListComponent];
@@ -47,10 +45,14 @@ export const CONTAINERS = [CheckoutPageComponent, CheckoutAddressPageComponent, 
         ReactiveFormsModule,
         CommonModule,
         CheckoutRoutingModule,
-        MatDatepickerModule,
-        MatMomentDateModule,
         StoreModule.forFeature(CheckoutFeatureKey, reducers),
         EffectsModule.forFeature([AddressEffects, CountryEffects]),        
-    ]
+    ],
+    providers: [
+        {
+          provide: MAT_RADIO_DEFAULT_OPTIONS,
+          useValue: { color: 'primary' },
+        },
+      ],
 })
 export class CheckoutModule {}

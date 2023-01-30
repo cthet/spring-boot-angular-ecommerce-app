@@ -6,40 +6,27 @@
   padding: 0;
 }
 
-ul {
+.container{
+  margin-top: 70px;
+  width: 100%;  
+}
+
+.accordion{
+  margin: 50px 0;
+  font-size: 1rem;
+}
+
+.accordion-title{
+  font-size: 1rem;
+}
+
+.accordion-panel{
+  padding: 20px;
+}
+
+ul{
   padding: 0;
   list-style: none;
 }
 
-ngb-accordion {
-  padding: 20px;
-}
 
-/* .card {
-  width: 200px;
-  max-width: 80%;
-  min-width: max-content;
-  margin-left: 0;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid black;
-}
-
-
-
-.title {
-  font-size: 20px;
-  font-weight: 550;
-}
-.card-body {
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
-}
-.radio-group {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0;
-}
-.radio-button {
-  margin: 5px;
-} */

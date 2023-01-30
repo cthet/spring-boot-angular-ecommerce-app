@@ -6,7 +6,8 @@ export const loadProductsByBrand = createAction(
 
 export const loadProductsSuccess = createAction(
   '[Products Effect] Load Products Success',
-  props<{ products: Product[] }>()
+  props<{ products: Product[], current_page: number, size: number, total_items: number,
+    total_pages: number }>()
 );
 
 export const loadProductsFailure = createAction(
@@ -19,11 +20,12 @@ export const setSort = createAction(
   props<{ sort: string[] }>()
 );
 
-export const loadFilteredProducts = createAction(
-  '[Sort Products Page] Load Filtered Products By Category and sorted By Price');
+export const setCurrentPage = createAction(
+  '[Products Component] Set CurrentPage',
+  props<{ currentPage: number }>()
+);
 
-export function loadSortedProducts(arg0: { sort: any; }): any {
-  throw new Error('Function not implemented.');
-}
+export const loadFilteredProducts = createAction(
+  '[Brand Products Page] Load Filtered Products By Category and sorted By Price and Page');
 
 

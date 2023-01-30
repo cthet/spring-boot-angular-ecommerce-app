@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, catchError, of, mergeMap, withLatestFrom } from 'rxjs';
+import { map, catchError, of, mergeMap } from 'rxjs';
 import { brandsSelectors, genderSelectors } from '../../../../store/selectors';
 import { ApparelCategoryService } from '../../../services/apparel-category.service';
 import { apparelCategoriesBrandActions } from '../actions';
-import { apparelCategoriesBrandSelectors } from '../selectors';
 
 @Injectable()
 export class CategoriesEffects {
@@ -34,7 +33,7 @@ export class CategoriesEffects {
             catchError((error) =>
               of(
                 apparelCategoriesBrandActions.loadApparelCategoriesByBrandFailure({
-                  error: error,
+                  error: error.message,
                 })
               )
             )
@@ -43,39 +42,4 @@ export class CategoriesEffects {
     )
   );
 
-  // checkCategory$ = createEffect(() =>
-  // this.actions$.pipe(
-  //   ofType(apparelCategoriesBrandActions.checkApparelCategory),
-  //   withLatestFrom(this.store.select(apparelCategoriesBrandSelectors.selectApparelCategories)),
-  //   map(([action, categories]) => {
-
-  //   categories.map((category) => {
-  //     if (category.id === action.apparelCategoryId) {
-  //       return { ...category, checked: true };
-  //     }
-  //     return category;
-  //   });     
-
-  //   return apparelCategoriesBrandActions.setApparelCategories({apparelCategories: categories});
-  //   }))
-    
-
-
-// uncheckCategory$ = createEffect(() =>
-// this.actions$.pipe(
-//   ofType(apparelCategoriesBrandActions.checkApparelCategory),
-//   withLatestFrom(this.store.select(apparelCategoriesBrandSelectors.selectApparelCategories)),
-//   map(([action, categories]) => {
-
-//   categories.map((category) => {
-//     if (category.id === action.apparelCategoryId) {
-//       return { ...category, checked: false };
-//     }
-//     return category;
-//   });     
-
-//   return apparelCategoriesBrandActions.setApparelCategories({apparelCategories: categories});
-//   }))
-  
-// );
 }

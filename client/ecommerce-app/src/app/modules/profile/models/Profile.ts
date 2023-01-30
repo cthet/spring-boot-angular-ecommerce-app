@@ -1,4 +1,4 @@
-import { Email } from "./email";
+import { Email } from "./Email";
 import { PersonalInfo } from "./PersonalInfo";
 
 export class Profile{

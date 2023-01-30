@@ -43,6 +43,12 @@ const routes: Routes = [
         import('./modules/home/home.module').then((mod) => mod.HomeModule),
       },   
       {
+        path: ':gender/pret-a-porter/:category',
+        canActivate: [],
+        loadChildren: () =>
+        import('./modules/apparel-category/apparel-category.module').then((mod) => mod.ApparelCategoryModule),
+      },
+      {
         path: ':gender/:brand',
         canActivate: [BrandGuard],
         loadChildren: () =>
@@ -54,12 +60,7 @@ const routes: Routes = [
         component: PagenotfoundComponent
       },
     ]
-       // {
-      //   path: ':gender/pret-a-porter/:category',
-      //   canActivate: [],
-      //   loadChildren: () =>
-      //   import('./modules/brand/products.module').then((mod) => mod.ProductsModule),
-      // },
+
 
 
 @NgModule({

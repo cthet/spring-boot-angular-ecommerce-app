@@ -14,6 +14,16 @@
   border-radius: 0%;
 }
 
+.cart-total{
+  margin-top: 100px;
+  padding: 20px;
+  margin-bottom: 200px;
+}
+
+.cart-total .h-3{
+  font-size: 1rem;
+}
+
 .d-f{
   display: flex;
 }
@@ -32,13 +42,7 @@
   margin-left: auto;
 }
 
-.cart-total{
-  margin-top: 100px;
-}
 
-.cart-total .h-3{
-  font-size: 1rem;
-}
 
 .total{
   flex-direction: row;

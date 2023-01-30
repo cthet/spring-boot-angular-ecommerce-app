@@ -31,18 +31,14 @@ public class Address {
     private String city;
 
     private int postCode;
+
     @OneToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 
     private String phoneNumber;
 
-    @OneToOne(mappedBy = "shippingAddress")
-    private Order order;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
-
 
 }

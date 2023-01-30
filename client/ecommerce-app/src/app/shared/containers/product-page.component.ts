@@ -8,7 +8,7 @@ import { CartItem } from '../../models/CartItem';
 
 import { cartActions, imageActions, productActions, videoActions } from '../../store/actions';
 import { cartSelectors, productSelectors,  } from '../../store/selectors';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -46,7 +46,7 @@ export class ProductPageComponent implements OnInit {
     this.isProductInCart$.pipe(take(1)).subscribe((isProductInCart) => {
       if (!isProductInCart) {
         const cartItem = {
-          item: product,
+          product: product,
           quantity: 1,
           amount: product.unit_price
         };
@@ -57,11 +57,11 @@ export class ProductPageComponent implements OnInit {
           .pipe(take(1))
           .subscribe((cartItem) => {
             const cartItemUpdated: Update<CartItem> = {
-              id: cartItem?.item.id!,
+              id: cartItem?.product.id!,
               changes: {
-                item: cartItem!.item,
+                product: cartItem!.product,
                 quantity: cartItem!.quantity + 1,
-                amount: cartItem!.amount + cartItem!.item.unit_price
+                amount: cartItem!.amount + cartItem!.product.unit_price
               },
             };
             this.store.dispatch(

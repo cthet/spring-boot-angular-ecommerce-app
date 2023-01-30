@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/address")
 public class AddressController {
 
     @Autowired
     AddressService addressService;
 
-    @PostMapping("/address")
+    @PostMapping
     public ResponseEntity<?> createNewAddress(@Valid @RequestBody AddressDto addressDTO) {
         try {
             return ResponseEntity.ok(addressService.createAddress(addressDTO));
@@ -27,7 +27,7 @@ public class AddressController {
         }
     }
 
-    @PutMapping("/address/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateAddress(@Valid @RequestBody AddressDto addressDTO, @PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok(addressService.updateAddress(addressDTO));
@@ -36,7 +36,7 @@ public class AddressController {
         }
     }
 
-    @GetMapping("/address")
+    @GetMapping
     public ResponseEntity<?> getAddresses() {
         try {
             return ResponseEntity.ok(new AddressResponse(addressService.getUserAddress()));
@@ -45,7 +45,7 @@ public class AddressController {
         }
     }
 
-    @DeleteMapping("/address/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable("id") Long id) {
         try {
             return new ResponseEntity(addressService.deleteAddress(id), HttpStatus.OK);

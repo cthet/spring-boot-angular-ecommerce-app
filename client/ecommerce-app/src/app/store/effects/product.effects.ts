@@ -26,7 +26,7 @@ export class ProductEffects {
               })
             ),
             catchError((error) =>
-              of(productActions.loadProductFailure({ error: error }))
+              of(productActions.loadProductFailure({ error: error.message }))
             )
           )
       )

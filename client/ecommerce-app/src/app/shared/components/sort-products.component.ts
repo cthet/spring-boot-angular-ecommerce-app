@@ -4,10 +4,16 @@ import { MatRadioChange } from '@angular/material/radio';
 @Component({
   selector: 'app-sort-products',
   template: `
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-        <ngb-panel title="Trier par">
-          <ng-template ngbPanelContent>
-            <ul>
+
+    <div class="accordion">
+      <mat-accordion>
+        <mat-expansion-panel class="accordion-panel">
+          <mat-expansion-panel-header>
+            <mat-panel-title class="accordion-title">
+            Trier par
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul>
               <mat-radio-group (change)="sort.emit($event)">
                 <li>
                   <mat-radio-button value="unitPrice, desc"
@@ -21,13 +27,17 @@ import { MatRadioChange } from '@angular/material/radio';
                 </li>
               </mat-radio-group>
             </ul>
-          </ng-template>
-        </ngb-panel>
-      </ngb-accordion>
+        </mat-expansion-panel>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+          
+            </mat-expansion-panel>
+          </mat-accordion>
+      </div>
   `,
   styleUrls: ['./products-category.component.css'],
 })
 export class SortProductsComponent {
-
+  panelOpenState = false;
   @Output() sort = new EventEmitter<MatRadioChange>();
 }

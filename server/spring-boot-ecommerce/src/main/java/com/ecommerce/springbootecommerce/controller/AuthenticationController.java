@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins ="*", allowedHeaders = "*")
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
     @Autowired
     AuthenticationService authenticationService;
-    @PostMapping("/signin")
+    @PostMapping("/sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthRequest authRequest) {
         try {
             return ResponseEntity.ok(authenticationService.signin(authRequest));

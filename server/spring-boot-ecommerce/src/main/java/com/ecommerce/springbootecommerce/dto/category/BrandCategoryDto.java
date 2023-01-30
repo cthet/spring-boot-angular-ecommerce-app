@@ -15,7 +15,7 @@ public class BrandCategoryDto {
 
     @JsonProperty("brand_category")
     @NotBlank(message = "brand cannot be blank")
-    private String brand;
+    private String name;
 
     @JsonProperty("image_url")
     @NotBlank(message = "image_url cannot be blank")

@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
     <div class="global-container">
       <h1>Je crée un compte</h1>
 
-      <div class="container signup-container">
-        <div *ngIf="error != null" class="msg-error">{{ error }}</div>
+      <div class="signup-container">
 
-        <div class="row">
+        <div *ngIf="error != null" class="msg-error">{{ error }}</div>
           <div class="signup-form">
+
             <form [formGroup]="signup">
-              <div class="signup-form-civility col-xs-12">
+              <div class="signup-form-civility">
                 <label>Civilité *</label>
                 <div>
                   <mat-radio-group formControlName="civility" required>
@@ -26,15 +26,14 @@ import { FormGroup } from '@angular/forms';
               </div>
 
               <div class="row">
-                <div class="col-xs-12 col-md-6">
+                  <div class="col-12">
                   <mat-form-field appearance="outline">
                     <mat-label>Prénom</mat-label>
                     <input
                       matInput
                       required
                       type="text"
-                      formControlName="firstName"
-                     
+                      formControlName="firstName"                     
                     />
                     <mat-error
                       *ngIf="
@@ -52,6 +51,7 @@ import { FormGroup } from '@angular/forms';
                       >Ce champ ne peut contenir de caractères spéciaux.
                     </mat-error>
                   </mat-form-field>
+
 
                   <mat-form-field appearance="outline">
                     <mat-label>Nom</mat-label>
@@ -77,9 +77,12 @@ import { FormGroup } from '@angular/forms';
                       >Ce champ ne peut contenir de caractères spéciaux.
                     </mat-error>
                   </mat-form-field>
+                 </div>
+
                 </div>
 
-                <div class="col-xs-12 col-md-6">
+                <div class="row">
+                <div class="col-12">
                   <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
                     <input
@@ -132,15 +135,18 @@ import { FormGroup } from '@angular/forms';
                       >Renseignez un autre mot de passe de plus de 8 caractères.
                     </mat-error>
                   </mat-form-field>
-                  <button class="btn" (click)="signupAction.emit()">
-                    Créer un compte
-                  </button>
+
+                     </div>
+
+           
                 </div>
-              </div>
+                <button class="btn" (click)="signupAction.emit()">
+                    Créer un compte
+                  </button>    
             </form>
-          </div>
+          
+            </div>
         </div>
-      </div>
     </div>
   `,
   styleUrls: ['./signup.component.css'],

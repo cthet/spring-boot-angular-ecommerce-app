@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
-    @GetMapping("/product/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id) {
 
         try {
@@ -29,7 +29,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "2") int gender,
                                                         @RequestParam(defaultValue = "0") int brand,
                                                         @RequestParam(value = "category" , defaultValue = "0"  ) List<Integer> category,
@@ -43,5 +43,19 @@ public class ProductController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/new")
+    public ResponseEntity<ProductsResponse> getNewProducts(@RequestParam(defaultValue = "2") int gender,
+                                                        @RequestParam(defaultValue = "0")  int page,
+                                                        @RequestParam(defaultValue = "10") int size) {
+        try {
+            return new ResponseEntity<>(productService.getNewProducts(gender, page, size), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 }

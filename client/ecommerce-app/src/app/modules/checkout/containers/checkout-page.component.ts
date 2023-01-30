@@ -12,7 +12,8 @@ import { addressSelectors } from '../store/selectors';
   <div class="checkout-container">
     <div class="checkout-wrapper">
       <div class="row">
-        <div class="col-lg-8">
+
+        <div class="col-md-8">
           <mat-stepper linear>
             <mat-step [stepControl]="addressValid">
               <ng-template matStepLabel>ADRESSE</ng-template>
@@ -24,9 +25,11 @@ import { addressSelectors } from '../store/selectors';
             </mat-step>         
           </mat-stepper>
         </div>
-        <div class="col-lg-4">
+
+        <div class="col-md-4 mt-4">
           <app-checkout-cart-page></app-checkout-cart-page>
         </div>
+
       </div>
     </div>
   </div>
@@ -34,9 +37,9 @@ import { addressSelectors } from '../store/selectors';
   styles: [`
   .checkout-container {
     margin-top: 140px;
-    height: 100vh;
+    height: 100%;
     background-color: #faf8f6;      
-    overflow:hidden;
+    overflow:hidden;    
   }  
   .checkout-wrapper{
     padding-top: 50px;
@@ -44,6 +47,7 @@ import { addressSelectors } from '../store/selectors';
     margin-right: auto;   
     width: 100%;
     max-width: 73rem;
+    padding-bottom: 50px;
   }
   `]
 })

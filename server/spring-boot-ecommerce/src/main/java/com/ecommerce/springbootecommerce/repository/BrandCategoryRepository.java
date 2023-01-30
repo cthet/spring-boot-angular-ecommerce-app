@@ -13,4 +13,10 @@ public interface BrandCategoryRepository extends JpaRepository<BrandCategory, In
 
     @Query("SELECT DISTINCT b FROM BrandCategory b JOIN b.genderCategories g WHERE g.id = :genderId  ")
     List<BrandCategory> findByGenderCategoryId(@Param("genderId") int genderId);
+
+    @Query("SELECT DISTINCT b FROM BrandCategory b" +
+            " JOIN b.apparelCategories a" +
+            " JOIN b.genderCategories g" +
+            " WHERE a.id = :apparelCategoryId AND g.id = :genderId")
+    List<BrandCategory> findByGenderCategoryIdAndApparelCategoryId(@Param("genderId") int genderId, @Param("apparelCategoryId") int apparelCategoryId);
 }

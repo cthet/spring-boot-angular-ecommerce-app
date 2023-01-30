@@ -10,12 +10,14 @@ import java.util.List;
 @Data
 public class OrderDto {
 
+    private Long id;
+
     @JsonProperty("orderTrackingNumber")
     private String orderTrackingNumber;
 
 
     @JsonProperty("shippingAddress")
-    private AddressDto shippingAddressDto;
+    private AddressDto addressDto;
 
     @JsonProperty("orderItems")
     private List<OrderItemDto> orderItems;

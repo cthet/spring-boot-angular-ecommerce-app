@@ -13,22 +13,18 @@ import { CartItem } from '../../../models/CartItem';
     <article *ngFor="let cartItem of cart?.cartItems">
       <mat-card-content class="cart-content" >
         <div class="d-f">     
-            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
-              <img class="image" src="{{ cartItem.item.image_url }}" />              
+            <a>
+              <img class="image" src="{{ cartItem.product.image_url }}" />              
             </a>
           <div class="item-info">  
               <div class="d-f j-c-sb">
                 <div class="p-r">
                   <div class="d-f m-b">
-                    <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
-                      <p class="brand-name">{{cartItem.item.brand_category}}</p> 
-                    </a>                      
+                      <p class="brand-name">{{cartItem.product.brand_category}}</p> 
                   </div>
-                  <a class="d-f" [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
                     <div class="f-d item-description">
-                      <p>{{cartItem.item.product_category}} / {{cartItem.item.product_name}}</p>
+                      <p>{{cartItem.product.product_category}} / {{cartItem.product.product_name}}</p>
                     </div>
-                  </a>    
                   <div class="d-f actions">
                     <button type="button" mat-icon-button class="d-f a-i-c j-c-c" (click)="removeOne.emit(cartItem)">
                       <mat-icon>remove</mat-icon>                   
@@ -38,17 +34,17 @@ import { CartItem } from '../../../models/CartItem';
                     </button>
                   </div>
                   <div class="d-f actions">
-                    <button type="button" mat-raised-button class="d-f j-c-c del-btn" (click)="remove.emit(cartItem)">
+                    <button [ngStyle]="{'background-color': backgroundColor, 'color':fontColor}" type="button" mat-raised-button class="d-f j-c-c del-btn" (click)="remove.emit(cartItem)">
                       <span>Supprimer</span>
                     </button>
                   <button type="button" mat-icon-button class="d-f a-i-c j-c-c favorite-btn">
                     <mat-icon>favorite</mat-icon>
-                    <span>Déplacer vers mes envies</span>   
+                    <span class="ms-2">Déplacer vers mes envies</span>   
                   </button>                    
                 </div>
               </div>
               <div class="item-price t-a-r">
-                <p class="t-t-u">Prix: {{cartItem.item.unit_price |currency: 'EUR'}}</p>
+                <p class="t-t-u">Prix: {{cartItem.product.unit_price |currency: 'EUR'}}</p>
               </div>   
               <div class="item-price t-a-r">
                 <p class="t-t-u">Quantité: {{cartItem.quantity}}</p>
@@ -66,6 +62,9 @@ import { CartItem } from '../../../models/CartItem';
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent {
+  backgroundColor:string = "#000";
+  fontColor: string = "#f1f1f1";
+
   @Input() cart!: Cart | null;
 
   @Output() addOne = new EventEmitter<CartItem>();

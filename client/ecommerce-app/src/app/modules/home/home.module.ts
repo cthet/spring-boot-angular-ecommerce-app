@@ -8,6 +8,8 @@ import { HomePageComponent } from './containers/home-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { HomeFeatureKey, reducers } from './store';
 import { ImagesEffects } from './store/effects/images.effects';
+import { NewProductsEffects } from './store/effects/newProducts.effects';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 export const COMPONENTS = [
   HomeComponent,
@@ -20,11 +22,12 @@ export const CONTAINERS = [
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
+    CarouselModule,
     SharedModule,
     CommonModule,
     HomeRoutingModule,
     StoreModule.forFeature(HomeFeatureKey, reducers),
-    EffectsModule.forFeature([ImagesEffects]),  
+    EffectsModule.forFeature([ImagesEffects, NewProductsEffects]),  
   ]
 })
 export class HomeModule { }

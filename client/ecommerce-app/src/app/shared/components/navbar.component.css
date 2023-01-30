@@ -7,14 +7,17 @@
 }
 
 img {
+  display:block;
   width: 100%;
-  max-height: 500px;
+  height: 500px;
   overflow: hidden;
   object-fit: cover;
+  object-position: center;
 }
 
 video {
   width: 100%;
+  height: auto;
 }
 
 .navbar {
@@ -22,19 +25,36 @@ video {
   z-index: 1;
   display: flex;
   justify-content: center;
+  flex-direction: row;
   top: 0;
   left: 0;
   right: 0;
-  margin-top: 91.2px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 62.5%;
+  height: 50px;
   width: 100%;
   background: hsla(0, 0%, 100%, .45);
+}
+
+ul:hover .dropdown-background{
+  z-index: 0;
+  position: absolute;
+  margin: 0 auto;
+  top: -100px;
+  left: 0;
+  right: 0;
+  height: 450px;
+  width: 100%;
+  background:  hsla(0, 0%, 100%, 1);
 }
 
 .brands-dropdown,
 .apparel-categories-dropdown {
   width: 50%;
-  min-width: 500px;
+  margin: 0 auto;
+  min-width: 500px; 
 }
 
 ul {
@@ -87,13 +107,38 @@ ul li a:hover {
   color: rgb(179, 117, 60);
 }
 
-ul:hover .dropdown-background{
-  z-index: 0;
-  position: absolute;
-  top: -91.2px;
-  left: 0;
-  right: 0;
-  height: 420px;
-  width: 100%;
-  background: hsla(0, 0%, 95%, 0.93);
+@media (max-width: 1050px) {
+  .brands-dropdown,
+  .apparel-categories-dropdown {
+    min-width: 370px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brands-dropdown,
+  .apparel-categories-dropdown {
+     min-width: 270px; 
+  }
+}
+
+@media (max-width: 576px) {
+  .brands-dropdown,
+  .apparel-categories-dropdown {
+    min-width: 220px; 
+  }
+
+ @media (max-width: 425px) {
+    .brands-dropdown,
+    .apparel-categories-dropdown {
+      min-width: 180px; 
+  }
+}
+
+  @media (min-width: 375px) {
+    .brands-dropdown,
+    .apparel-categories-dropdown {
+     min-width: 150px; 
+  }
+  }
+
 }

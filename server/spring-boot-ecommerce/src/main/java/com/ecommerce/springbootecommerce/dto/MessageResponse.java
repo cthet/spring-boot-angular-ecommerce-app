@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 public class MessageResponse {
+
     @NotBlank(message = "message cannot be blank")
     private String message;
 

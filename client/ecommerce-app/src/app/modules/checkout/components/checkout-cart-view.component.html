@@ -1,11 +1,9 @@
-<div>  
-
-  <div class="cart-title">
+<div class="cart-title">
     <h3 class="h-3">Votre panier</h3>
     <p>{{totalQuantity}} article(s)</p>
-  </div>
+</div>
 
-  <mat-card class="card-details">
+<mat-card class="card-details">
     <mat-card-content class="card-content">
       <div class="cost-details">
         <p>Sous-total TTC</p>
@@ -29,22 +27,18 @@
       </div>    
       <article *ngFor="let cartItem of cart?.cartItems">
         <div class="cart-item">     
-          <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
-            <img class="image" src="{{ cartItem.item.image_url }}" />              
+          <a>
+            <img class="image" src="{{ cartItem.product.image_url }}" />              
           </a>
           <div class="item-info">
-            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
-              <p class="brand-name">{{cartItem.item.brand_category}}</p> 
-            </a>                      
-            <a [routerLink]="['cartItem.item.product_category/cartItem.item.product_name/cartItem.item.id']">
+              <p class="brand-name">{{cartItem.product.brand_category}}</p> 
               <div class="f-d item-description">
-                <p>{{cartItem.item.product_category}} / {{cartItem.item.product_name}}</p>
+                <p>{{cartItem.product.product_category}} / {{cartItem.product.product_name}}</p>
               </div>
-            </a>    
           </div>
           <div class="item-cost">
             <div>
-              <p>{{cartItem.item.unit_price |currency: 'EUR'}}</p>
+              <p>{{cartItem.product.unit_price |currency: 'EUR'}}</p>
             </div>   
             <div>
               <p>x {{cartItem.quantity}}</p>
@@ -56,6 +50,4 @@
         </div>
       </article>  
   </mat-card-content>
-  </mat-card>
-  
-</div>
+</mat-card>

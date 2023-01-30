@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,7 +45,7 @@ import { OrderEffects } from './store/effects/order.effects';
       logOnly: environment.production,
     }),
   ],
-  providers: [authInterceptorProviders, {provide: LOCALE_ID, useValue: 'fr'}],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

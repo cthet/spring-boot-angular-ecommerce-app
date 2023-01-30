@@ -28,7 +28,7 @@ export class CartEffects {
             cartActions.loadCartSuccess({cart}),          
             ),           
             catchError((error) =>
-              of(cartActions.loadCartFailure({ error }))        
+              of(cartActions.loadCartFailure({ error: error.message }))        
             )
           ),          
       )     
@@ -48,7 +48,7 @@ export class CartEffects {
         ])        
         ),           
         catchError((error) =>
-          of(cartActions.saveCartFailure({ error }))        
+          of(cartActions.saveCartFailure({ error: error.message }))        
         )
       ),          
   )     

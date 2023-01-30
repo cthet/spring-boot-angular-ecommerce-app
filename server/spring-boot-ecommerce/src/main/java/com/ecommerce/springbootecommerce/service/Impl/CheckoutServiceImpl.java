@@ -9,7 +9,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,6 @@ public class CheckoutServiceImpl implements CheckoutService {
     private UserRepository userRepository;
     @Autowired
     UserPrincipalServiceImpl userPrincipalService;
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Value("${stripe.key.secret}")
     private String secretKey;
@@ -43,13 +40,5 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         return PaymentIntent.create(params);
     }
-
-    public CheckoutServiceImpl(UserRepository userRepository, @Value("${stripe.key.secret}") String secretKey) {
-        this.userRepository = userRepository;
-        Stripe.apiKey = secretKey;
-    }
-
-
-
 }
 

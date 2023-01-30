@@ -1,5 +1,6 @@
 package com.ecommerce.springbootecommerce.service.Impl;
 
+import com.ecommerce.springbootecommerce.domain.Country;
 import com.ecommerce.springbootecommerce.dto.address.CountryDto;
 import com.ecommerce.springbootecommerce.mappers.CountryMapper;
 import com.ecommerce.springbootecommerce.repository.CountryRepository;
@@ -22,8 +23,9 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public List<CountryDto> fetchCountries() {
 
+        List<Country> countries = countryRepository.findAll();
 
-        List<CountryDto> countriesDto = countryMapper.countriesToCountriesDto(countryRepository.findAll());
+        List<CountryDto> countriesDto = countryMapper.countriesToCountriesDto(countries);
 
         return countriesDto;
     }

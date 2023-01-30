@@ -45,7 +45,7 @@ export class SignupEffects {
             }),
               ),
             catchError((error) =>
-              of(signupApiActions.signupFailure({ error: error }))
+              of(signupApiActions.signupFailure({ error: error.message }))
             )
           )
       )

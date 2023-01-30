@@ -9,9 +9,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 
       <div class="container login-container">
         <div class="row">
-          <div class="login-form col-xs-12 col-md-6">
+          <div class="login-form col-6">
+
             <h3>Connexion</h3>
             <form [formGroup]="login">
+
+            <div class="col-12">
               <mat-form-field appearance="outline">
                 <mat-label>Adresse email</mat-label>
                 <input
@@ -36,7 +39,9 @@ import { FormControl, FormGroup } from '@angular/forms';
               <span class="error-msg" *ngIf="error != null"
                 >Vos identifiants sont incorrects.</span
               >
+              </div>
 
+              <div class="col-12">
               <mat-form-field appearance="outline">
                 <mat-label>Mot de passe</mat-label>
                 <input
@@ -66,6 +71,7 @@ import { FormControl, FormGroup } from '@angular/forms';
               <span class="error-msg" *ngIf="error != null"
                 >Vos identifiants sont incorrects.</span
               >
+              </div>
 
               <p class="passwd-link"><a>Mot de passe oublié?</a></p>
 
@@ -74,8 +80,7 @@ import { FormControl, FormGroup } from '@angular/forms';
               </button>
             </form>
           </div>
-
-          <div class="goto-signup col-xs-12 col-md-6">
+          <div class="goto-signup col-6">
             <h3>Je crée un compte</h3>
             <p class="signup-txt">
               Bénéficier d'offres exclusives.

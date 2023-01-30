@@ -2,8 +2,10 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.ApparelCategory;
-import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesDto;
+import com.ecommerce.springbootecommerce.domain.GenderCategory;
+import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesResponse;
 import com.ecommerce.springbootecommerce.dto.category.ApparelCategoryDto;
+import com.ecommerce.springbootecommerce.mappers.ApparelCategoryMapper;
 import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
@@ -12,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,39 +24,34 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
     ApparelCategoryRepository apparelCategoryRepository;
     @Autowired
     GenderCategoryRepository genderCategoryRepository;
+
+    private final ApparelCategoryMapper apparelCategoryMapper;
     @Override
-    public ApparelCategoriesDto getApparelCategoriesByBrandIdAndGenderId(int gender, int brand) {
+    public ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int gender, int brand) {
+
+        ApparelCategoriesResponse apparelCategoriesResponse = new ApparelCategoriesResponse();
+
+        GenderCategory _gender = genderCategoryRepository.findById(gender)
+                .orElseThrow(() -> new ApiRequestException("Gender not found in database!", HttpStatus.NOT_FOUND));
+        apparelCategoriesResponse.setGender(_gender.getName());
 
         List<ApparelCategory> apparelCategories;
 
         if (brand==0) {
             apparelCategories = apparelCategoryRepository.findByGenderCategoryId(gender);
         } else {
-            apparelCategories = apparelCategoryRepository.findByBrandCategoryIdAndGenderId(brand, gender);
+            apparelCategories = apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryId(brand, gender);
         }
 
         if (apparelCategories.isEmpty()) {
-            throw new ApiRequestException("No Apparel Categories found in database!", HttpStatus.NOT_FOUND);
+            throw new ApiRequestException("Apparel Categories not found !", HttpStatus.NOT_FOUND);
         }
 
-        ApparelCategoriesDto apparelCategoriesDTO = new ApparelCategoriesDto();
+        List<ApparelCategoryDto> apparelCategoriesDto = apparelCategoryMapper.apparelCategoriesToApparelCategoriesDto(apparelCategories);
+        apparelCategoriesResponse.setApparelCategories(apparelCategoriesDto);
 
-        apparelCategoriesDTO.setGender(genderCategoryRepository.findById(gender)
-                .orElseThrow(() -> new ApiRequestException("No gender found in database!", HttpStatus.NOT_FOUND)).getName());
+        return apparelCategoriesResponse;
 
-
-        List<ApparelCategoryDto> apparelCategoryDtos = new ArrayList<ApparelCategoryDto>();
-
-        for (ApparelCategory apparelCategory : apparelCategories) {
-            ApparelCategoryDto apparelCategoryDTO = new ApparelCategoryDto();
-            apparelCategoryDTO.setId(apparelCategory.getId());
-            apparelCategoryDTO.setCategory(apparelCategory.getName());
-            apparelCategoryDtos.add(apparelCategoryDTO);
-        }
-
-        apparelCategoriesDTO.setApparelCategories(apparelCategoryDtos);
-
-        return apparelCategoriesDTO;
     }
 
 }

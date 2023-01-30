@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApparelCategoryPipe } from './pipes/apparelCategoryPipe';
-import { BrandPipe } from './pipes/brandsPipe';
-import { HyphenPipe } from './pipes/hyphenPipe';
+import { ApparelCategoryPipe } from '../utility/pipes/apparelCategoryPipe';
+import { BrandPipe } from '../utility/pipes/brandsPipe';
+import { HyphenPipe } from '../utility/pipes/hyphenPipe';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './components/navbar.component';
@@ -16,6 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { ProductPageComponent } from './containers/product-page.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export const COMPONENTS = [
   NavbarComponent,
@@ -33,6 +35,8 @@ export const CONTAINERS = [NavbarPageComponent, ProductPageComponent];
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
+    NgxPaginationModule,
+    MatExpansionModule,
     CommonModule,
     RouterModule,
     MatCardModule, 

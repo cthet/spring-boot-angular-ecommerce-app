@@ -7,6 +7,35 @@
 }
 
 .brand-container {
+  display: block;
   width: 100%;
   background-color: rgb(231, 231, 231);
+  font-size: 62.5%;
+  padding: 20px;
+  height: auto;
+}
+
+.brand-title{
+  display: block;
+  text-align: center;
+  padding: 10px;
+}
+
+.brand-desc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: justify;
+  line-height: 1.7rem;
+  font-size: 1rem;
+  max-width: 1300px;
+}
+
+.button{
+  display: block;
+  margin: 20px auto;
+  padding: 10px;
+  font-size: 0.8rem;
 }

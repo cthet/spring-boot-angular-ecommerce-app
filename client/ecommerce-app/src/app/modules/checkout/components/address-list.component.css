@@ -2,6 +2,15 @@
   box-sizing: border-box;
 }
 
+.container{
+  height: 100%;
+  font-size: 62.5%;
+  width: 100%;
+}
+
+
+
+
 .emphasize {
   border: solid 1px red;
 }
@@ -10,3 +19,17 @@
   display: flex;
 }
 
+.address-card{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 1rem;
+}
+
+mat-card {
+  display: flex;
+  width: 100%;  
+  margin: 20px;
+}

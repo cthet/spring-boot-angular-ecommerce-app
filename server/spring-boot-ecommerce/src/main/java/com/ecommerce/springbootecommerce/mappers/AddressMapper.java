@@ -1,6 +1,7 @@
 package com.ecommerce.springbootecommerce.mappers;
 
 import com.ecommerce.springbootecommerce.domain.Address;
+import com.ecommerce.springbootecommerce.domain.ShippingAddress;
 import com.ecommerce.springbootecommerce.dto.address.AddressDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -30,9 +31,13 @@ public interface AddressMapper {
     @Mapping(ignore = true, target = "civility")
     Address addressDtoToAddress(AddressDto addressDto);
 
-    List<AddressDto> addressesToAddressesDto(List<Address> addresses);
+    @Mapping(ignore = true, target = "country")
+    @Mapping(ignore = true, target = "civility")
+    ShippingAddress addressDtoToShippingAddress(AddressDto addressDto);
 
-    List<Address> addressesDtoToAddresses(List<AddressDto> addressesDto);
+    ShippingAddress addressToShippingAddress(Address address);
+
+    List<AddressDto> addressesToAddressesDto(List<Address> addresses);
 
 
 //    @Mapping(target = "int", source = "civility.id")

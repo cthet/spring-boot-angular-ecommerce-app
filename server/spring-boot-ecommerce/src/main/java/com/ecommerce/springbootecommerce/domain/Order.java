@@ -20,11 +20,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-
     private String orderTrackingNumber;
 
     @Column(name = "total_quantity")
@@ -33,18 +28,20 @@ public class Order {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderItem> orderItems = new HashSet<>();
-
-
-    @OneToOne
-    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
-    private Address shippingAddress;
-
-
     @Column(name="date_created")
     @CreationTimestamp
     private Date Datecreated;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderItem> orderItems = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
+    private ShippingAddress shippingAddress;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public void addOrderItem(OrderItem orderItem) {
         if(orderItem != null) {
@@ -56,6 +53,5 @@ public class Order {
             orderItem.setOrder(this);
         }
     }
-
 
 }

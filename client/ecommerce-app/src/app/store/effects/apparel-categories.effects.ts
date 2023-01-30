@@ -29,7 +29,7 @@ export class ApparelCategoriesEffects {
               })
             ),
             catchError((error) =>
-              of(apparelCategoriesActions.loadApparelCategoriesFailure({ error: error }))
+              of(apparelCategoriesActions.loadApparelCategoriesFailure({ error: error.message }))
             )
           )
       )

@@ -3,7 +3,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, catchError, of, mergeMap, tap } from 'rxjs';
 import { genderSelectors } from '../selectors/index';
-import { HyphenPipe } from '../../shared/pipes/hyphenPipe';
+import { HyphenPipe } from '../../utility/pipes/hyphenPipe';
 import { Router } from '@angular/router';
 import { BrandService } from '../../modules/services/brand.service';
 import { brandsActions } from '../actions';
@@ -32,7 +32,7 @@ export class BrandsEffects {
             })
           ),        
           catchError((error) =>
-            of(brandsActions.loadBrandsFailure({ error: error }))
+            of(brandsActions.loadBrandsFailure({ error: error.message }))
           )         
         )
       )

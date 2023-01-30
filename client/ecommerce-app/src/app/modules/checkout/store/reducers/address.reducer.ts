@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Address } from 'src/app/models/Address';
-import { saveAddress, updateAddress, saveAddressSuccess, updateAddressSuccess, saveAddressFailure, updateAddressFailure, cancelEditAddress, editAddress, loadAddresses, loadAddressesFailure, loadAddressesSuccess, setAddress, unsetAddress, enterNewAddress, deleteAddress, deleteAddressFailure, deleteAddressSuccess } from '../actions/address.actions';
+import { saveAddress, updateAddress, saveAddressSuccess, updateAddressSuccess, saveAddressFailure, updateAddressFailure, cancelEditAddress, editAddress, loadAddresses, loadAddressesFailure, loadAddressesSuccess, setAddress, unsetAddress, enterNewAddress, deleteAddress, deleteAddressFailure, deleteAddressSuccess, clearAddresses } from '../actions/address.actions';
 
 export const AddressFeatureKey = 'address';
 
@@ -80,6 +80,10 @@ export const reducer = createReducer<State>(
     editAddress: null,
     edit: true
   })),
+
+  on(clearAddresses, (state) => {
+  return adapter.removeAll({...state, selectedAddress: null, editAddress: null, edit:false, error: null, status: 'pending'
+  })}),
 
 );
 

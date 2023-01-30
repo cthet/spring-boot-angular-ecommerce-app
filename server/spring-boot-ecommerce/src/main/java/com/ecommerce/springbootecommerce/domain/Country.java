@@ -19,6 +19,4 @@ public class Country {
 
     private String code;
 
-    @OneToOne(mappedBy = "country")
-    private Address address;
 }

@@ -1,9 +1,10 @@
 <div class="global-container">
-  <h1>Saisissez votre adresse de livraison</h1>
+  <h3>Saisissez votre adresse de livraison</h3>
 
   <div class="container address-container">
     
       <div class="address-form">
+
         <form [formGroup]="address">
 
           <div class="address-form-civility">
@@ -12,6 +13,7 @@
                 <mat-radio-button [value]=M [checked]="address.value.civility.id===1">M.</mat-radio-button>
               </mat-radio-group>
           </div>
+
           <div class="row">
             <div class="col-6">
               <mat-form-field appearance="outline">
@@ -39,6 +41,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Nom</mat-label>
@@ -65,6 +68,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Adresse</mat-label>
@@ -91,6 +95,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Complément d'adresse (optionnel)</mat-label>
@@ -101,6 +106,7 @@
                 />
               </mat-form-field>
             </div>
+
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Code Postal</mat-label>
@@ -120,6 +126,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Ville</mat-label>
@@ -139,6 +146,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
             <div class="col-6" >
               <mat-form-field appearance="outline">
                 <mat-label>Pays</mat-label>
@@ -147,6 +155,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
+
             <div class="col-6">
                 <mat-form-field appearance="outline">
                   <mat-label>Numéro de téléphone</mat-label>
@@ -175,9 +184,10 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
           </div>          
         </form>
-        <button mat-button (click)="cancel.emit()">Annuler</button>
+        <button *ngIf="addressTotal" mat-button (click)="cancel.emit()">Annuler</button>
         <button *ngIf="editAddress" mat-button [disabled]="!address.valid" (click)="update.emit()">Modifier</button>
         <button *ngIf="!editAddress" [disabled]="!address.valid" mat-button (click)="save.emit()">Ajouter</button>
       </div>

@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 @Data
 public class CartItemDto {
 
-    @JsonProperty("item")
-    private ProductDto productDTO;
+    @JsonProperty("product")
+    private ProductDto productDto;
 
     @JsonProperty("quantity")
     private int quantity;

@@ -8,7 +8,7 @@ import { Gender } from '../../models/Gender';
     <nav class="header-container">
       <div class="navbar-container">
         <!--gender-->
-        <div class="gender-links col-xs-5">
+        <div class="gender-links">
           <a
             [ngStyle]="gender?.id == 1? {'color':  'rgb(179, 117, 60)' } : null"
             routerLink="/homme"
@@ -29,7 +29,7 @@ import { Gender } from '../../models/Gender';
         <!--E-commerce Brand-->
         <a routerLink="/" class="brand col-xs-2 justify-content-center">Shop</a>
 
-        <div class="right-links col-xs-5">
+        <div class="right-links">
           <!--authentication-->
           <a
             *ngIf="!isLoggedIn"

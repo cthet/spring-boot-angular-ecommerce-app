@@ -5,7 +5,7 @@ import { Product } from '../../models/Product';
   selector: 'app-products-list',
   template: `
     <div class="main">
-      <div *ngFor="let product of products">
+      <div *ngFor="let product of productsC | paginate :{itemsPerPage: size!, currentPage: currentPage!,  totalItems: totalItems!}, let i=index">
         <mat-card
           *ngIf="product.active"
           class="custom"
@@ -31,8 +31,15 @@ import { Product } from '../../models/Product';
             </p>
           </mat-card-content>
         </mat-card>
+
         </div>
-    </div>
+       
+            <pagination-controls      
+              previousLabel="Precedent"
+              nextLabel="Suivant"
+              (pageChange)="PageChange.emit($event)">
+            </pagination-controls>
+            </div>
   `,
   styleUrls: ['./products-list.component.css'],
 })
@@ -40,4 +47,22 @@ export class ProductsListComponent {
   @Input() products!: Product[] | null;
 
   @Output() setProduct = new EventEmitter<Product>();
+  @Output() PageChange = new EventEmitter<number>();
+
+  @Input() currentPage!:number | null;
+  @Input() totalItems!:number | null;
+  @Input() size!:number | null;
+
+  get productsC() {
+    if(this.products!=null){
+    let collection = [];
+    for(let i=0; i<this.products.length; i++){
+    collection?.push(this.products![i]);
+    }
+    return collection;
+    }
+    else return [];
+  }
 }
+
+

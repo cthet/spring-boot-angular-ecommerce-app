@@ -25,7 +25,6 @@ public class UserPrincipal implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
 
-
     public static UserPrincipal build(User user) {
         String userRole = user.getRole().iterator().next().toString();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));

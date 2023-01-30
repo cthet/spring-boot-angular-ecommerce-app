@@ -24,6 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -40,20 +41,8 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ApiRequestException("Product not found in database!", HttpStatus.NOT_FOUND));
-//        String apparel_category = product.getApparelCategory().getType();
-//        String gender_category = product.getGenderCategory().getType();
-//        String brand_category = product.getBrandCategory().getType();
 
-        //ProductDto productDTO = new ProductDto();
         return productMapper.productToProductDto(product);
-//        productDTO = modelMapper.map(product, ProductDto.class);
-//
-//        productDTO.setGender_category(gender_category);
-//        productDTO.setProduct_category(apparel_category);
-//        productDTO.setBrand_category(brand_category);
-
-       // return productDTO;
-
     }
 
     @Override
@@ -80,30 +69,8 @@ public class ProductServiceImpl implements ProductService {
             throw new ApiRequestException("Error in request", HttpStatus.BAD_REQUEST);
         }
 
-            List<Product> products = pageProduct.getContent();
-
-            List<ProductDto> productDtos =  productMapper.productsToProductsDto(products);
-
-//            for (Product product : products) {
-//
-//                ProductDto productDTO = new ProductDto();
-//
-//                productDTO = modelMapper.map(product, ProductDto.class);
-//
-//
-//                String apparel_category = product.getApparelCategory().getName();
-//                String gender_category = product.getGenderCategory().getName();
-//                String brand_category = product.getBrandCategory().getName();
-//
-//                productDTO.setGender_category(gender_category);
-//                productDTO.setProduct_category(apparel_category);
-//                productDTO.setBrand_category(brand_category);
-//
-//                productDtos.add(productDTO);
-//            }
-
             ProductsResponse productsResponse = new ProductsResponse();
-            productsResponse.setProductsDTO(productDtos);
+            productsResponse.setProductsDTO(productMapper.productsToProductsDto(pageProduct.getContent()));
             productsResponse.setCurrentPage(pageProduct.getNumber());
             productsResponse.setSize(pageProduct.getSize());
             productsResponse.setTotalItems(pageProduct.getTotalElements());
@@ -111,6 +78,23 @@ public class ProductServiceImpl implements ProductService {
 
             return productsResponse;
         }
+
+    @Override
+    public ProductsResponse getNewProducts(int gender, int page, int size) {
+        Pageable pagingSort = PageRequest.of(page, size);
+
+        Page<Product> pageProduct = productRepository.findNewProductByGenderCategoryId(gender, true, pagingSort);
+
+        ProductsResponse productsResponse = new ProductsResponse();
+        productsResponse.setProductsDTO(productMapper.productsToProductsDto(pageProduct.getContent()));
+        productsResponse.setCurrentPage(pageProduct.getNumber());
+        productsResponse.setSize(pageProduct.getSize());
+        productsResponse.setTotalItems(pageProduct.getTotalElements());
+        productsResponse.setTotalPages(pageProduct.getTotalPages());
+
+        return productsResponse;
+    }
+
     public Sort.Direction getSortDirection (String direction){
         if (direction.equals("asc")) {
             return Sort.Direction.ASC;

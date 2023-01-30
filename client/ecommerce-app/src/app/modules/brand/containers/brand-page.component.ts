@@ -10,7 +10,7 @@ import { apparelCategoriesBrandActions } from '../store/actions';
   template: `
     <app-navbar-page></app-navbar-page>
     <app-brand-products-page></app-brand-products-page>
-  `,
+`, 
 })
 export class BrandPageComponent implements OnInit, OnDestroy  { 
   brandSubscription!: Subscription;

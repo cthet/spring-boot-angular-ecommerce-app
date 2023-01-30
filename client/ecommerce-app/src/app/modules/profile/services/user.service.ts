@@ -22,6 +22,12 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  updateEmail(email: string): Observable<any> {
+    return this.http
+      .post('http://localhost:8080/api/user/email', email)
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       //a client-side or network error occured. Handle it accordingly.

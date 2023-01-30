@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { CartItem } from '../../models/CartItem';
-import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCart, loadCartFailure, loadCartSuccess, saveCart, saveCartFailure, saveCartSuccess, updateCartItem, upsertCartItems } from '../actions/cart.actions';
+import { addCartItem, browserReload, clearAllCartItems, deleteCartItem, loadCart, loadCartFailure, loadCartSuccess, saveCart, saveCartFailure, saveCartSuccess, updateCartItem } from '../actions/cart.actions';
 
 export const cartFeaturesKey = 'cart';
 
@@ -22,7 +22,7 @@ export const initialState: State = adapter.getInitialState({
 });
 
 export function selectCartItemId(cartItem: CartItem): number {
-  return cartItem.item.id;
+  return cartItem.product.id;
 }
 
 export const reducer = createReducer<State>(

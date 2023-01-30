@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Product } from '../../models/Product';
 
 @Component({
@@ -36,11 +36,11 @@ import { Product } from '../../models/Product';
   </div>
 
   <div class="row">
-  <div class="col-sm-8">     
+  <div class="col-md-8">     
       <img class="image" src="{{ image_url }}" />
   </div>  
-  <div class="col-sm-4">
-    <mat-card>
+  <div class="col-md-4">    
+    <mat-card class="card-container">
               <div class="mt-3 fw-bold">
                 <h2>{{ brand_category }}</h2>
               </div>
@@ -59,8 +59,9 @@ import { Product } from '../../models/Product';
                 <button
                 *ngIf="product"
                 mat-raised-button
-                  (click)="add.emit(product)"
-                  class="cart-button mt-4"
+                [ngStyle]="{'background-color': backgroundColor, 'color':fontColor}"
+                class="cart-button mt-4"
+                  (click)="add.emit(product)"                  
                 >
                   Ajouter au panier
                 </button>
@@ -79,14 +80,14 @@ import { Product } from '../../models/Product';
         </mat-card>
         </div>
       </div>
-  </div>`,
-    
-  
+  </div>`,      
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent {
-  @Input() product!: Product | null;
+  backgroundColor: string = "#000";
+  fontColor: string = "#f1f1f1";
 
+  @Input() product!: Product | null;
   @Output() add = new EventEmitter<Product>();
 
   get gender_category() {

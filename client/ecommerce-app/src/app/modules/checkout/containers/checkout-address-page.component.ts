@@ -8,11 +8,11 @@ import { addressActions } from '../store/actions';
 import { addressSelectors } from '../store/selectors';
 @Component({
   selector: 'app-checkout-address-page',
-  template: `<app-select-address-page *ngIf="listAddressPresent"></app-select-address-page>
-  <app-typing-address-page *ngIf="!listAddressPresent"></app-typing-address-page>`,
+  template: `<app-select-address-page *ngIf="typingAddressPage"></app-select-address-page>
+  <app-typing-address-page *ngIf="!typingAddressPage"></app-typing-address-page>`,
 })
 export class CheckoutAddressPageComponent implements OnInit, OnDestroy {
-  listAddressPresent!: boolean;
+  typingAddressPage!: boolean;
   edit$: Observable<boolean>;
   addressTotal$: Observable<number>;
   routerSubscription!: Subscription;
@@ -29,9 +29,9 @@ export class CheckoutAddressPageComponent implements OnInit, OnDestroy {
    combineLatestWith(this.addressTotal$),
    map(([edit, addressTotal]) => {
       if(edit || addressTotal === 0) {
-        this.listAddressPresent = false;
+        this.typingAddressPage = false;
       } else {
-        this.listAddressPresent = true;
+        this.typingAddressPage = true;
       }
     })
     ).subscribe();

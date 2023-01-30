@@ -28,6 +28,9 @@ public class Product {
     @Column(name="active")
     private Boolean active;
 
+    @Column(name="new")
+    private Boolean newProduct;
+
     @Column(name = "units_in_stock")
     private int unitsInStocks;
     @ManyToOne(fetch = FetchType.LAZY)

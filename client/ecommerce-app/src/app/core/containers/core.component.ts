@@ -3,15 +3,29 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { authActions, brandsActions, cartActions, genderActions } from '../../store/actions';
-import localeFr from '@angular/common/locales/fr';
 
 @Component({
   selector: 'app-root',
   template: `
     <app-header-page></app-header-page>
+    <div class="wrap">
+      <div id="main">
     <router-outlet></router-outlet>
+    </div>
+    </div>
     <app-footer></app-footer>
-  `,
+  `, styles: [`
+.wrap {
+  min-height: 100%;
+}
+#main {
+  overflow: auto;
+  width: 100%;
+  padding-bottom: 300px;
+  background-color: #f8f8f8;
+}
+
+  `]
 })
 export class AppComponent implements OnInit{
   constructor(
@@ -21,7 +35,6 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-    registerLocaleData(localeFr, 'fr');
     this.hydrateUser();
     this.hydrateCart();    
     this.hydrateGender();

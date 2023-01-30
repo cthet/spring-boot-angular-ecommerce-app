@@ -29,7 +29,7 @@ import { cartSelectors } from 'src/app/store/selectors';
   styles: [`
   .cart-details-container {
     margin-top: 140px;
-    height: 100vh;
+    height: 100%;
     background-color: #faf8f6;  
   }  
   .cart-details-wrapper{
@@ -51,11 +51,11 @@ export class CartDetailsPageComponent implements OnInit {
 
   addOne(cartItem: CartItem) {    
     const cartItemUpdated: Update<CartItem> = {
-      id: cartItem?.item.id!,
+      id: cartItem?.product.id!,
       changes: {
-        item: cartItem.item,
+        product: cartItem.product,
         quantity: cartItem.quantity! + 1,
-        amount: cartItem.amount + cartItem.item.unit_price
+        amount: cartItem.amount + cartItem.product.unit_price
       },
     };
     this.store.dispatch(cartActions.updateCartItem({update: cartItemUpdated}));
@@ -64,21 +64,21 @@ export class CartDetailsPageComponent implements OnInit {
   removeOne(cartItem: CartItem) {    
     if(cartItem.quantity>1){
       const cartItemUpdated: Update<CartItem> = {
-        id: cartItem?.item.id!,
+        id: cartItem?.product.id!,
         changes: {
-          item: cartItem?.item,
+          product: cartItem?.product,
           quantity: cartItem?.quantity! - 1,
-          amount: cartItem.amount - cartItem.item.unit_price
+          amount: cartItem.amount - cartItem.product.unit_price
         },
       };
       this.store.dispatch(cartActions.updateCartItem({update: cartItemUpdated}));
     } else {
-      this.store.dispatch(cartActions.deleteCartItem({id: cartItem.item.id}));
+      this.store.dispatch(cartActions.deleteCartItem({id: cartItem.product.id}));
     }
   }
 
   remove(cartItem: CartItem) {
-    this.store.dispatch(cartActions.deleteCartItem({id: cartItem.item.id}));
+    this.store.dispatch(cartActions.deleteCartItem({id: cartItem.product.id}));
   }
 
   checkout() {

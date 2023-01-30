@@ -4,12 +4,10 @@ interface CountryArgs {
   code?: string;
 }
 
-
 export class Country {
   id?: number;
   country?: string;
   code?: string;
-
   
   constructor(args: CountryArgs){
     this.id = args.id;
