@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, catchError, of, mergeMap } from 'rxjs';
+import { ApparelCategoriesResponse } from '../../../../models/ApparelCategoriesResponse';
+import { ApparelCategoryService } from '../../../../services/apparel-category.service';
 import { brandsSelectors, genderSelectors } from '../../../../store/selectors';
-import { ApparelCategoryService } from '../../../services/apparel-category.service';
 import { apparelCategoriesBrandActions } from '../actions';
 
 @Injectable()
-export class CategoriesEffects {
+export class BrandCategoriesEffects {
   constructor(
     private actions$: Actions,
     private apparelCategoryService: ApparelCategoryService,
@@ -25,7 +26,7 @@ export class CategoriesEffects {
         this.apparelCategoryService
           .fetchApparelCategoriesByGenderIdAndBrandId(gender!.id, brand!.id)
           .pipe(
-            map((ResponseApparelCategories) =>
+            map((ResponseApparelCategories: ApparelCategoriesResponse) =>
             apparelCategoriesBrandActions.loadApparelCategoriesByBrandSuccess({
                 apparelCategories: ResponseApparelCategories.apparel_categories,
               })

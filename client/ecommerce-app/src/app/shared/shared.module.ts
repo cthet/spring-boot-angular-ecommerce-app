@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NavbarComponent } from './components/navbar.component';
 import { ProductComponent } from './components/product.component';
-import { ProductsCategoryComponent } from './components/products-category.component';
 import { ProductsListComponent } from './components/products-list.component';
 import { SortProductsComponent } from './components/sort-products.component';
 import { NavbarPageComponent } from './containers/navbar-page.component';
@@ -22,7 +21,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export const COMPONENTS = [
   NavbarComponent,
   ProductComponent,
-  ProductsCategoryComponent,
   ProductsListComponent,
   SortProductsComponent,
   HyphenPipe,
@@ -35,13 +33,12 @@ export const CONTAINERS = [NavbarPageComponent, ProductPageComponent];
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],
   imports: [
-    NgxPaginationModule,
-    MatExpansionModule,
+    NgxPaginationModule,    
     CommonModule,
     RouterModule,
     MatCardModule, 
-    NgbModule,
-    MatCheckboxModule,
+    NgbModule,    
+    MatExpansionModule,
     MatButtonModule,
     MatRadioModule
   ],

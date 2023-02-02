@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "2") int gender,
-                                                        @RequestParam(defaultValue = "0") int brand,
+                                                        @RequestParam(value = "brand" , defaultValue = "0") List<Integer> brand,
                                                         @RequestParam(value = "category" , defaultValue = "0"  ) List<Integer> category,
                                                         @RequestParam(defaultValue = "0")  int page,
                                                         @RequestParam(defaultValue = "10") int size,

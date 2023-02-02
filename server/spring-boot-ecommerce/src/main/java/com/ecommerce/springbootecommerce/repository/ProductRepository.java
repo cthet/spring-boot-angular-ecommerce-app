@@ -14,10 +14,10 @@ import java.util.List;
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
     Page<Product> findByGenderCategoryId(int gender, Pageable pageable);
 
-    Page<Product> findByGenderCategoryIdAndBrandCategoryId(int gender, int brand, Pageable pageable);
+    Page<Product> findByGenderCategoryIdAndBrandCategoryIdIn(int gender, List<Integer> brand, Pageable pageable);
     Page<Product> findByGenderCategoryIdAndApparelCategoryIdIn(int gender, List<Integer> category, Pageable pageable);
 
-    Page<Product> findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryId(int gender, List<Integer> category, int brand, Pageable pageable);
+    Page<Product> findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(int gender, List<Integer> category, List<Integer> brand, Pageable pageable);
 
     @Query("SELECT p FROM Product p" +
             " WHERE p.newProduct = :newProduct AND p.genderCategory.id = :genderId" +

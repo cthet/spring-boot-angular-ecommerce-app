@@ -1,10 +1,10 @@
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PagenotfoundComponent } from './core/components/pagenotfound.component';
+import { ApparelCategoryGuard } from './utility/guards/apparelCategory.guard';
 import { AuthGuard } from './utility/guards/auth.guard';
-import { BrandGuard } from './utility/guards/brand.guards';
-import { GenderGuard } from './utility/guards/gender.guards';
+import { BrandGuard } from './utility/guards/brand.guard';
+import { GenderGuard } from './utility/guards/gender.guard';
 import { UnAuthGuard } from './utility/guards/unauth.guard';
 
 const routes: Routes = [
@@ -44,7 +44,7 @@ const routes: Routes = [
       },   
       {
         path: ':gender/pret-a-porter/:category',
-        canActivate: [],
+        canActivate: [ApparelCategoryGuard],
         loadChildren: () =>
         import('./modules/apparel-category/apparel-category.module').then((mod) => mod.ApparelCategoryModule),
       },

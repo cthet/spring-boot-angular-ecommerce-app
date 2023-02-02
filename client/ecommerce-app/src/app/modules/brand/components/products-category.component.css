@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+.container{
+  margin-top: 70px;
+  width: 100%;  
+}
 
 .accordion{
   margin: 50px 0;
@@ -24,4 +28,5 @@ ul{
   padding: 0;
   list-style: none;
 }
+
 

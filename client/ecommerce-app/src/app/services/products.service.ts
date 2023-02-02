@@ -1,26 +1,32 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { Order } from 'src/app/models/Order';
-import { OrdersResponse } from 'src/app/models/OrdersResponse';
-
+import { catchError, Observable, throwError } from 'rxjs';
+import { Product } from '../models/Product';
+import { ProductsResponse } from '../models/ProductsResponse';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class OrderService {
+export class ProductsService {
 
   constructor(private http: HttpClient) {}
-  
-  saveOrder(order: Order): Observable<Order> {
-    return this.http
-      .post<Order>(
-        `http://localhost:8080/api/order/register`, order)
-      .pipe(catchError(this.handleError));
+
+  fetchProduct(productId: number): Observable<Product> {
+    return this.http.get<Product>(
+      `http://localhost:8080/api/product/${productId}`
+    ).pipe(catchError(this.handleError));
   }
 
-  fetchOrders(): Observable<OrdersResponse> {
-    return this.http.get<OrdersResponse>(
-      `http://localhost:8080/api/order/fetch`
+  fetchProducts(params: any): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `http://localhost:8080/api/product`,
+      { params }
+    ).pipe(catchError(this.handleError));
+  }
+
+  fetchNewProducts(params: any): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `http://localhost:8080/api/product/new`,
+      { params }
     ).pipe(catchError(this.handleError));
   }
 

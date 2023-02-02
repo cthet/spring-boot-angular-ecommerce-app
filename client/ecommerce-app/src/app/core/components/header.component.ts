@@ -39,7 +39,13 @@ import { Gender } from '../../models/Gender';
           </a>
 
           <!--logout-->
-          <a
+          <a *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="menu"  class="fa fa-user nav-item"></a>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item  routerLink="/profile">Profile</button>
+            <button mat-menu-item (click)="logout.emit()">Se déconnecter</button>
+          </mat-menu>
+
+          <!-- <a
             *ngIf="isLoggedIn"
             class="fa fa-user nav-item"
             (click)="logout.emit()"
@@ -47,12 +53,13 @@ import { Gender } from '../../models/Gender';
           </a>
 
           <!--profile-->
-          <a
+
+          <!-- <a
             *ngIf="isLoggedIn"
             routerLink="/profile"
             class="fa fa-user"
           >
-          </a>
+          </a>  -->
 
           <!--Cart-->
           <a

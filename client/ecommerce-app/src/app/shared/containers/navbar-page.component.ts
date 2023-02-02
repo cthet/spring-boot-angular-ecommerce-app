@@ -20,10 +20,12 @@ import { apparelCategoriesSelectors, brandsSelectors, genderSelectors, imageSele
       [brands]="brands$ | async"
       [apparelCategories]="apparelCategories$ | async"
       (selectBrand)="setBrand($event)"
+      (selectApparelCategory)="setApparelCategory($event)"
     ></app-navbar>
   `,
 })
 export class NavbarPageComponent implements OnInit{
+
   video$: Observable<string | null>;
   image$: Observable<string | null>;
   brands$: Observable<Brand[]>;
@@ -54,6 +56,10 @@ export class NavbarPageComponent implements OnInit{
 
   setBrand(brand: Brand) {
     this.store.dispatch(brandsActions.setBrand({brand}));
+  }
+
+  setApparelCategory(apparelCategory: ApparelCategory) {
+    this.store.dispatch(apparelCategoriesActions.setApparelCategory({apparelCategory}));
   }
 
   ngOnDestroy(): void {

@@ -1,33 +1,27 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ProductsResponse } from 'src/app/models/ProductsResponse';
-import { Product } from '../../models/Product';
+import { BrandsResponse } from '../models/BrandsResponse';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
+export class BrandService {
 
   constructor(private http: HttpClient) {}
 
-  fetchProduct(productId: number): Observable<Product> {
-    return this.http.get<Product>(
-      `http://localhost:8080/api/product/${productId}`
+  fetchBrandsByGenderId(genderId: number): Observable<BrandsResponse> {
+    return this.http.get<BrandsResponse>(
+      `http://localhost:8080/api/category/brands?genderId=${genderId}`
     ).pipe(catchError(this.handleError));
   }
 
-  fetchProducts(params: any): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>(
-      `http://localhost:8080/api/product`,
-      { params }
-    ).pipe(catchError(this.handleError));
-  }
-
-  fetchNewProducts(params: any): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>(
-      `http://localhost:8080/api/product/new`,
-      { params }
+  fetchBrandsByGenderIdAndApparelCategoryId(
+    genderId: number,
+    apparelCategoryId: number
+  ): Observable<BrandsResponse> {
+    return this.http.get<BrandsResponse>(
+      `http://localhost:8080/api/category/brands?genderId=${genderId}&apparelCategoryId=${apparelCategoryId}`
     ).pipe(catchError(this.handleError));
   }
 

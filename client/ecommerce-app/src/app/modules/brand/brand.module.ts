@@ -11,12 +11,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { BrandPageComponent } from './containers/brand-page.component';
 import { BrandProductsPageComponent } from './containers/brand-products-page.component';
 import { BrandComponent } from './components/brand.component';
-import { CategoriesEffects } from './store/effects/apparel-categories.effects';
-import { TruncatePipe } from 'src/app/utility/pipes/TruncatePipe';
 import { MatButtonModule } from '@angular/material/button';
+import { BrandCategoriesEffects} from './store/effects/apparel-categories.effects';
+import { TruncatePipe } from '../../utility/pipes/TruncatePipe';
+import { ProductsCategoryComponent } from './components/products-category.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
-export const COMPONENTS = [BrandComponent];
+export const COMPONENTS = [BrandComponent, ProductsCategoryComponent];
 
 export const CONTAINERS = [BrandPageComponent, BrandProductsPageComponent];
 
@@ -30,8 +32,9 @@ export const CONTAINERS = [BrandPageComponent, BrandProductsPageComponent];
     MatCardModule,
     SharedModule,
     MatButtonModule,
+    MatExpansionModule,
     StoreModule.forFeature(BrandFeatureKey, reducers),
-    EffectsModule.forFeature([CategoriesEffects]),
+    EffectsModule.forFeature([BrandCategoriesEffects]),
   ]
 })
 export class BrandModule { }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { select, Store } from '@ngrx/store';
-import { catchError, concatMap, map, mergeMap, of, switchMap, tap} from 'rxjs';
-import { Gender } from 'src/app/models/Gender';
-import { Order, OrderBuilder } from 'src/app/models/Order';
-import { addressSelectors } from 'src/app/modules/checkout/store/selectors';
-import { OrderService } from 'src/app/modules/services/order.service';
+import { Store } from '@ngrx/store';
+import { catchError, map, mergeMap, of, switchMap, tap} from 'rxjs';
+import { Gender } from '../../models/Gender';
+import { OrderBuilder, Order } from '../../models/Order';
+import { addressSelectors } from '../../modules/checkout/store/selectors';
+import { OrderService } from '../../services/order.service';
 import { orderActions } from '../actions';
 import { cartSelectors, genderSelectors } from '../selectors';
 

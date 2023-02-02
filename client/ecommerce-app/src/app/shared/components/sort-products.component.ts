@@ -35,7 +35,7 @@ import { MatRadioChange } from '@angular/material/radio';
           </mat-accordion>
       </div>
   `,
-  styleUrls: ['./products-category.component.css'],
+  styleUrls: ['./sort-products.component.css'],
 })
 export class SortProductsComponent {
   panelOpenState = false;

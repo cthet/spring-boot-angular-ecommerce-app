@@ -14,17 +14,17 @@ export const loadApparelCategoriesByBrandFailure = createAction(
 );
 
 export const checkApparelCategory = createAction(
-  '[Products Categories Page] Check Category',
+  '[Products Categories Page] Check Apparel Category',
   props<{ apparelCategoryId: number }>()
 );
 
 export const uncheckApparelCategory = createAction(
-  '[Products Categories Page] Uncheck Category',
+  '[Products Categories Page] Uncheck Apparel Category',
   props<{ apparelCategoryId: number }>()
 );
 
 export const setApparelCategories = createAction(
-  '[Products Categories Page] Set Categories',
+  '[Products Categories Page] Set Apparel Categories',
   props<{ apparelCategories: ApparelCategory[] }>()
 );
 

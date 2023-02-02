@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Cart } from 'src/app/models/Cart';
+import { Cart } from '../../models/Cart';
 
 
 @Injectable({

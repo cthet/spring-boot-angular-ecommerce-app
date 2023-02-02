@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { Civility } from "../../../../models/Civility";
 
 export const setSignupEmail = createAction(
   '[Login Page] Set Signup Email',
@@ -8,7 +9,7 @@ export const setSignupEmail = createAction(
 export const signup = createAction(
   '[Signup Page] Signup User',
   props<{
-    civility: number;
+    civility: Civility;
     firstName: string;
     lastName: string;
     email: string;

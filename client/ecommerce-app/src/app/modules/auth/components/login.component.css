@@ -11,8 +11,9 @@
 
 .global-container h1 {
   margin: -200px auto 0;
-  font-size: 2.6rem;
+  font-size: 2.3rem;
   color: #fff;
+  padding: 20px;
 }
 
 .login-container {

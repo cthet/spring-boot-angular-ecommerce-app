@@ -1,31 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ApparelCategory } from '../../models/ApparelCategory';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Brand } from '../../../models/Brand';
 
 @Component({
-  selector: 'app-products-category',
+  selector: 'app-brands-category',
   template: `  
-    <div class="container">
-      <h3>Catégories</h3>
-
     <div class="accordion">
       <mat-accordion>
         <mat-expansion-panel class="accordion-panel">
           <mat-expansion-panel-header>
             <mat-panel-title class="accordion-title">
-              Prêt à porter
+             Marques
             </mat-panel-title>
           </mat-expansion-panel-header>
           <ul>
-              <li *ngFor="let category of apparelCategories">
+              <li *ngFor="let brand of brands">
                 <mat-checkbox
-                  [checked]="category.checked"
+                  [checked]="brand.checked"
                   (change)="
                     filter.emit({
                       checked: $event.checked,
-                      categoryId: category.id
+                      brandId: brand.id
                     })
                   "
-                  >{{ category.apparel_category }}</mat-checkbox
+                  >{{ brand.brand_category }}</mat-checkbox
                 >
               </li>
           </ul>
@@ -35,19 +32,17 @@ import { ApparelCategory } from '../../models/ApparelCategory';
           
             </mat-expansion-panel>
           </mat-accordion>
-      </div>
     </div>
   `,
-  styleUrls: ['./products-category.component.css'],
+  styleUrls: ['./brands-category.component.css'],
 })
-export class ProductsCategoryComponent {
+export class BrandsCategoryComponent {
   panelOpenState = false;
-  @Input() apparelCategories!: ApparelCategory[] | null;
+  @Input() brands!: Brand[] | null;
 
   @Output() filter = new EventEmitter<{
     checked: boolean;
-    categoryId: number;
+    brandId: number;
   }>();
-
 
 }

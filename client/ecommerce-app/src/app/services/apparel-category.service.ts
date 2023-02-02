@@ -1,19 +1,29 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { BrandsResponse } from 'src/app/models/BrandsResponse';
-import { Brand } from '../../models/Brand';
+import { ApparelCategoriesResponse } from '../models/ApparelCategoriesResponse';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BrandService {
-
+export class ApparelCategoryService {
+  
   constructor(private http: HttpClient) {}
 
-  fetchBrandsByGenderId(genderId: number): Observable<BrandsResponse> {
-    return this.http.get<BrandsResponse>(
-      `http://localhost:8080/api/category/brands?genderId=${genderId}`
+  fetchApparelCategoriesByGenderId(
+    genderId: number
+  ): Observable<ApparelCategoriesResponse> {
+    return this.http.get<ApparelCategoriesResponse>(
+      `http://localhost:8080/api/category/apparels?genderId=${genderId}`
+    ).pipe(catchError(this.handleError));
+  }
+
+  fetchApparelCategoriesByGenderIdAndBrandId(
+    genderId: number,
+    brandId: number
+  ): Observable<ApparelCategoriesResponse> {
+    return this.http.get<ApparelCategoriesResponse>(
+      `http://localhost:8080/api/category/apparels?genderId=${genderId}&brandId=${brandId}`
     ).pipe(catchError(this.handleError));
   }
 
@@ -32,4 +42,6 @@ export class BrandService {
       return throwError(() => new Error(error.message));
     }
   }
+
+
 }

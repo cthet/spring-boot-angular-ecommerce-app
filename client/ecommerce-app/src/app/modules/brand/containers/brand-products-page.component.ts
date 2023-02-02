@@ -26,7 +26,7 @@ import { apparelCategoriesBrandSelectors } from '../store/selectors';
             (filter)="filterApparelsCategory($event)"          
           ></app-products-category>
 
-          <app-sort-products class="col-xs-6"(sort)="sortProducts($event)"
+          <app-sort-products (sort)="sortProducts($event)"
           ></app-sort-products>  
 
         </div>
@@ -90,7 +90,7 @@ export class BrandProductsPageComponent implements OnInit{
       );
     }
     this.store.dispatch(productsActions.setCurrentPage({currentPage: 1}));
-    this.store.dispatch(productsActions.loadFilteredProducts());
+    this.store.dispatch(productsActions.loadFilteredProductsFromBrand());
   }
 
   sortProducts(event: MatRadioChange) {
@@ -98,15 +98,13 @@ export class BrandProductsPageComponent implements OnInit{
       productsActions.setSort({ sort: event.value })
     );
     this.store.dispatch(productsActions.setCurrentPage({currentPage: 1}));
-    this.store.dispatch(productsActions.loadFilteredProducts());
+    this.store.dispatch(productsActions.loadFilteredProductsFromBrand());
   }
 
 
   handlePageChange(event: number){
     this.store.dispatch(productsActions.setCurrentPage({currentPage: event}));
-    this.store.dispatch(productsActions.loadFilteredProducts());
-  
-
+    this.store.dispatch(productsActions.loadFilteredProductsFromBrand());  
   }
 
 }

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { ApparelCategory } from '../../models/ApparelCategory';
-import { loadApparelCategories, loadApparelCategoriesFailure, loadApparelCategoriesSuccess } from '../actions/apparel-categories.actions';
+import { browserReload, checkApparelCategory, loadApparelCategories, loadApparelCategoriesFailure, loadApparelCategoriesSuccess, setApparelCategory, uncheckApparelCategory } from '../actions/apparel-categories.actions';
 
 export const ApparelCategoriesFeatureKey = 'apparelCategories';
 
@@ -40,9 +40,45 @@ export const reducer = createReducer<State>(
     status: 'error',
   })),
 
+  on(setApparelCategory, (state, { apparelCategory }) => ({
+    ...state,
+    apparelCategory: apparelCategory,
+  })),
+
+  on(checkApparelCategory, (state, { apparelCategoryId }) => ({
+    ...state,
+    apparelCategories: state.apparelCategories.map((category) => {
+      if (category.id === apparelCategoryId) {
+        return { ...category, checked: true };
+      }
+      return category;
+    }),
+    error: null,
+    status: 'pending',
+  })),
+
+  on(uncheckApparelCategory, (state, { apparelCategoryId }) => ({
+    ...state,
+    apparelCategories: state.apparelCategories.map((category) => {
+      if (category.id === apparelCategoryId) {
+        return { ...category, checked: false };
+      }
+      return category;
+    }),
+    error: null,
+    status: 'pending',
+  })),
+
+  on(browserReload, (state, { apparelCategory }) => ({
+    ...state,
+    apparelCategory : apparelCategory,
+  })),
+
 );
 
 export const getCategories = (state: State) => state.apparelCategories;
+
+export const getApparelCategory = (state: State) => state.apparelCategory;
 
 export const getError = (state: State) => state.error;
 

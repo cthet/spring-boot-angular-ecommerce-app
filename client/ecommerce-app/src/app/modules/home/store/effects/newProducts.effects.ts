@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, catchError, of, mergeMap } from "rxjs";
-import { ProductsService } from "src/app/modules/services/products.service";
-import { genderSelectors } from "src/app/store/selectors";
+import { ProductsService } from "../../../../services/products.service";
+import { genderSelectors } from "../../../../store/selectors";
 import { newProductsActions } from "../actions";
 
 @Injectable()

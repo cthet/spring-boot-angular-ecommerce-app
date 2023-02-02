@@ -2,7 +2,10 @@ import { createAction, props } from "@ngrx/store";
 import { Product } from "../../models/Product";
 
 export const loadProductsByBrand = createAction(
-  '[Products Component] Load Products');
+  '[Products Component] Load Products By Brand');
+
+export const loadProductsByApparelCategory = createAction(
+    '[Products Component] Load Products By Apparel Category');
 
 export const loadProductsSuccess = createAction(
   '[Products Effect] Load Products Success',
@@ -25,7 +28,11 @@ export const setCurrentPage = createAction(
   props<{ currentPage: number }>()
 );
 
-export const loadFilteredProducts = createAction(
-  '[Brand Products Page] Load Filtered Products By Category and sorted By Price and Page');
+export const loadFilteredProductsFromBrand = createAction(
+  '[Products Page Component] Load Filtered Products By Apparel Category, sorted By Price, and Page');
+
+export const loadFilteredProductsFromApparelCategory = createAction(
+  '[Products Page Component] Load Filtered Products By Brand, Apparel Category, sorted By Price, and Page');
+  
 
 

@@ -5,9 +5,9 @@ import { map, catchError, of, mergeMap, tap } from 'rxjs';
 import { genderSelectors } from '../selectors/index';
 import { HyphenPipe } from '../../utility/pipes/hyphenPipe';
 import { Router } from '@angular/router';
-import { BrandService } from '../../modules/services/brand.service';
 import { brandsActions } from '../actions';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { BrandService } from '../../services/brand.service';
 
 
 @Injectable()

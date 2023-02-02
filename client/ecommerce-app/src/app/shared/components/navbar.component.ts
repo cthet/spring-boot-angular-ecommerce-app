@@ -39,7 +39,7 @@ import { Brand } from '../../models/Brand';
                   <ul class="apparel-categories-dropdown-content">
                     <ng-container *ngFor="let apparelCategory of apparelCategories">
                       <li>
-                        <a 
+                        <a (click)="selectApparelCategory.emit(apparelCategory)"
                         >
                           {{ apparelCategory.apparel_category }}
                         </a>
@@ -60,4 +60,5 @@ export class NavbarComponent {
   @Input() apparelCategories!: ApparelCategory[] | null;
 
   @Output() selectBrand = new EventEmitter<Brand>();
+  @Output() selectApparelCategory = new EventEmitter<ApparelCategory>();
 }

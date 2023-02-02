@@ -8,6 +8,7 @@ import { HeaderPageComponent } from './containers/header-page.component';
 
 import { AppComponent } from './containers/core.component';
 import { PagenotfoundComponent } from './components/pagenotfound.component';
+import {MatMenuModule} from '@angular/material/menu'; 
 
 export const COMPONENTS = [FooterComponent, HeaderComponent, PagenotfoundComponent];
 
@@ -18,7 +19,8 @@ export const CONTAINERS = [AppComponent, HeaderPageComponent];
   imports: [
     CommonModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatMenuModule
   ],
 })
 export class CoreModule {}

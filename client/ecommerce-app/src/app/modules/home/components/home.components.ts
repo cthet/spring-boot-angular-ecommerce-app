@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Product } from 'src/app/models/Product';
+import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'app-home-details',

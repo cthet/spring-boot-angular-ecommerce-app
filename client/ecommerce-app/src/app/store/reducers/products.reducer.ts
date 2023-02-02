@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Product } from '../../models/Product';
-import { loadProductsSuccess, loadProductsFailure, loadFilteredProducts, loadProductsByBrand, setSort, setCurrentPage } from '../actions/products.actions';
+import { loadProductsSuccess, loadProductsFailure, loadProductsByBrand, setSort, setCurrentPage, loadFilteredProductsFromBrand } from '../actions/products.actions';
 
 export const ProductsFeatureKey = 'products';
 
@@ -29,7 +29,7 @@ export const initialState: State = {
 export const reducer = createReducer<State>(
   initialState,
 
-  on(loadProductsByBrand, loadFilteredProducts, (state) => ({
+  on(loadProductsByBrand, loadFilteredProductsFromBrand, (state) => ({
     ...state,
     status: 'loading',
   })),

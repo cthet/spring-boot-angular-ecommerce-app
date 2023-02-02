@@ -38,7 +38,7 @@ export class BrandGuard implements CanActivate {
           }
 
           const isbrandFromUrlInStore =  this.brands$.pipe(
-            map(brands => brands.filter(brand => brandFromUrl() == brand.brand_category ).length > 0? true : false));
+            map(brands => brands.filter(brand => brandFromUrl() === brand.brand_category ).length > 0? true : false));
 
           return isbrandFromUrlInStore.pipe(
               mergeMap( isbrandInStore => 

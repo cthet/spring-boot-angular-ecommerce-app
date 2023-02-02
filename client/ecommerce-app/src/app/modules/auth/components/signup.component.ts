@@ -17,10 +17,10 @@ import { FormGroup } from '@angular/forms';
                 <label>Civilité *</label>
                 <div>
                   <mat-radio-group formControlName="civility" required>
-                    <mat-radio-button value="2" [checked]="true"
+                    <mat-radio-button [value]=Mrs [checked]="signup.value.civility.id==2"
                       >Mme</mat-radio-button
                     >
-                    <mat-radio-button value="1">M.</mat-radio-button>
+                    <mat-radio-button [value]=M [checked]="signup.value.civility.id==1">M.</mat-radio-button>
                   </mat-radio-group>
                 </div>
               </div>
@@ -85,9 +85,10 @@ import { FormGroup } from '@angular/forms';
                 <div class="col-12">
                   <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input
+                    <input                        
                       matInput
                       required
+                      [placeholder]="email!"
                       type="email"
                       email="true"
                       formControlName="email"                  
@@ -154,6 +155,9 @@ import { FormGroup } from '@angular/forms';
 export class SignupComponent {
   @Input() signup!: FormGroup;
   @Input() error!: string | null;
+  @Input() email!: string | null;
 
   @Output() signupAction = new EventEmitter();
+  Mrs = {id: 2, name: 'Madame'};
+  M = {id: 1, name: 'Monsieur'};
 }

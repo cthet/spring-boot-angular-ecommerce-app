@@ -18,3 +18,8 @@ export const selectApparelCategoriesStatus = createSelector(
   selectApparelCategoriesState,
   fromApparelCategories.getStatus
 );
+
+export const selectApparelCategory = createSelector(
+  selectApparelCategoriesState,
+  fromApparelCategories.getApparelCategory
+);

@@ -1,13 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AddressResponse } from 'src/app/models/AddressResponse';
 import { Address } from '../../models/Address';
+import { AddressResponse } from '../../models/AddressResponse';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdressService {
+export class AddressService {
 
   constructor(private http: HttpClient) {}
 

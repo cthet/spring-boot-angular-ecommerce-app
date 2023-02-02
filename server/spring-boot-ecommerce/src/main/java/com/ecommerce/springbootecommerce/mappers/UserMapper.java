@@ -19,6 +19,7 @@ public interface UserMapper {
 
 
     @Mapping(target = "password", ignore = true)
+    @Mapping(ignore = true, target = "civility")
     User signupRequestToUser(SignupRequest signup);
 
     @Mapping(source = "id", target = "id")

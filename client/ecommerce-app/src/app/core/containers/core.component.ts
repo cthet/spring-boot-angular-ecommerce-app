@@ -2,7 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { authActions, brandsActions, cartActions, genderActions } from '../../store/actions';
+import { apparelCategoriesActions, authActions, brandsActions, cartActions, genderActions } from '../../store/actions';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit{
     this.hydrateCart();    
     this.hydrateGender();
     this.hydrateBrand();
+    this.hydrateApparelCategory();
   }
 
   hydrateUser(){
@@ -66,6 +67,13 @@ export class AppComponent implements OnInit{
       const brand = this.localStorageService.getBrand();
         if (brand != null) {
         this.store.dispatch(brandsActions.browserReload({brand}));
+      }    
+    }
+
+    hydrateApparelCategory() {
+      const category = this.localStorageService.getApparelCategory();
+        if (category != null) {
+        this.store.dispatch(apparelCategoriesActions.browserReload({apparelCategory: category}));
       }    
     }
 

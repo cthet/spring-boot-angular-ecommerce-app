@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
     @Autowired
     ApparelCategoryService apparelCategoryService;
+
     @Autowired
     BrandCategoryService brandCategoryService;
+
     @GetMapping("/brands")
     public ResponseEntity<?> getBrandsByGenderId(@RequestParam(required = true) int genderId,
                                                  @RequestParam(defaultValue = "0") int apparelCategoryId) {

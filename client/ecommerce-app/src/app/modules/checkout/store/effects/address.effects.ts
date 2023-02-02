@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, of, mergeMap, switchMap } from 'rxjs';
-import { AdressService } from 'src/app/modules/services/address.service';
 import { addressActions } from '../actions';
+import { AddressService } from '../../../services/address.service';
 
 
 @Injectable()
 export class AddressEffects {
   constructor(
     private actions$: Actions,
-    private addressService: AdressService,
+    private addressService: AddressService,
   ) {}
 
   loadAddress$ = createEffect(() =>

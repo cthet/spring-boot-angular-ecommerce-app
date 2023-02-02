@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApparelCategory } from '../models/ApparelCategory';
 import { Brand } from '../models/Brand';
 import { Cart } from '../models/Cart';
 import { Gender } from '../models/Gender';
@@ -9,6 +10,7 @@ const USER_KEY = 'auth-user';
 const CART = 'cart';
 const GENDER_KEY = 'gender';
 const BRAND_KEY = 'brand';
+const APPARELCATEGORY_KEY = 'apprel_category';
 
 @Injectable({
   providedIn: 'root',
@@ -88,6 +90,21 @@ export class LocalStorageService {
     }
     return null;
   }
+
+    /////////////////////////////////////////////////////////////////////
+
+    public saveApparelCategory(apparelCategory: ApparelCategory): void {
+      window.localStorage.removeItem(APPARELCATEGORY_KEY);
+      window.localStorage.setItem(APPARELCATEGORY_KEY, JSON.stringify(apparelCategory));
+    }
+  
+    public getApparelCategory(): ApparelCategory | null {
+      const apparelCategory = window.localStorage.getItem(APPARELCATEGORY_KEY);
+      if (apparelCategory) {
+        return JSON.parse(apparelCategory);
+      }
+      return null;
+    }
 
 
 }

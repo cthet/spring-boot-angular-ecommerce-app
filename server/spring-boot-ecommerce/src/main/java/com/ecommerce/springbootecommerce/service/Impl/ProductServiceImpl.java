@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductsResponse getProducts(int gender, int brand, List<Integer> category, int page, int size, String[] sort) {
+    public ProductsResponse getProducts(int gender, List<Integer> brand, List<Integer> category, int page, int size, String[] sort) {
 
         List<Sort.Order> orders = new ArrayList<Sort.Order>();
         Sort.Direction direction = getSortDirection(sort[1]);
@@ -57,14 +57,14 @@ public class ProductServiceImpl implements ProductService {
 
         Page<Product> pageProduct;
 
-        if (gender != 0 && category.contains(0) && brand == 0) {
+        if (gender != 0 && category.contains(0) && brand.contains(0)) {
             pageProduct = productRepository.findByGenderCategoryId(gender, pagingSort);
         } else if (gender != 0 && category.contains(0)) {
-            pageProduct = productRepository.findByGenderCategoryIdAndBrandCategoryId(gender, brand, pagingSort);
-        } else if (gender != 0 && brand == 0) {
+            pageProduct = productRepository.findByGenderCategoryIdAndBrandCategoryIdIn(gender, brand, pagingSort);
+        } else if (gender != 0 && brand.contains(0)) {
             pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdIn(gender, category, pagingSort);
         } else if (gender != 0) {
-            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryId(gender, category, brand, pagingSort);
+            pageProduct = productRepository.findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(gender, category, brand, pagingSort);
         } else {
             throw new ApiRequestException("Error in request", HttpStatus.BAD_REQUEST);
         }
