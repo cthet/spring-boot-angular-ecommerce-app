@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,8 +21,8 @@ public class Civility {
 
     private String name;
 
-    @OneToOne(mappedBy = "civility")
-    private User user;
+    @OneToMany(mappedBy = "civility", cascade = CascadeType.ALL)
+    private Set<User> users = new HashSet<>();
 
     public Civility(int id){
         setId(id);

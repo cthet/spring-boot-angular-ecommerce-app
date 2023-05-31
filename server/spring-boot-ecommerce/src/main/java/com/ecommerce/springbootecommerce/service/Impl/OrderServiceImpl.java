@@ -2,7 +2,6 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.*;
-import com.ecommerce.springbootecommerce.dto.address.AddressDto;
 import com.ecommerce.springbootecommerce.dto.order.OrderDto;
 import com.ecommerce.springbootecommerce.dto.order.OrderItemDto;
 import com.ecommerce.springbootecommerce.mappers.AddressMapper;
@@ -27,19 +26,13 @@ public class OrderServiceImpl implements OrderService {
     UserService userService;
 
     @Autowired
-    CivilityRepository civilityRepository;
-
-    @Autowired
-    CountryRepository countryRepository;
-
-    @Autowired
     OrderRepository orderRepository;
 
     @Autowired
     ProductRepository productRepository;
 
     @Autowired
-    ShippingAddressRepository shippingAddressRepository;
+    AddressRepository addressRepository;
 
     private final OrderMapper orderMapper;
 
@@ -51,53 +44,46 @@ public class OrderServiceImpl implements OrderService {
             return UUID.randomUUID().toString();
     }
 
-    private ShippingAddress getShippingAddress(AddressDto addressDTO) {
-
-        ShippingAddress shippingAddress = addressMapper.addressDtoToShippingAddress(addressDTO);
-
-        Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
-        Country country = countryRepository.findById(addressDTO.getCountryDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
-
-        shippingAddress.setCivility(civility);
-        shippingAddress.setCountry(country);
-        return shippingAddressRepository.save(shippingAddress);
-
-    }
-
     @Override
     public OrderDto saveOrder(OrderDto orderdto) {
 
-        Order order = new Order();
+        if(orderdto != null) {
 
-        User user = userService.getUser();
-        user.addOrder(order);
+            Order order = new Order();
 
-        ShippingAddress shippingAddress = this.getShippingAddress(orderdto.getAddressDto());
-        order.setShippingAddress(shippingAddress);
+            String orderTrackingNumber = this.generateOrderTrackingNumber();
+            order.setOrderTrackingNumber(orderTrackingNumber);
 
-        String orderTrackingNumber = this.generateOrderTrackingNumber();
-        order.setOrderTrackingNumber(orderTrackingNumber);
+            order.setTotalQuantity(orderdto.getTotalQuantity());
+            order.setTotalPrice(orderdto.getTotalPrice());
 
-        order.setTotalQuantity(orderdto.getTotalQuantity());
-        order.setTotalPrice(orderdto.getTotalPrice());
+            User user = userService.getUser();
+            order.setUser(user);
 
-        List<OrderItemDto> orderItemDtos = orderdto.getOrderItems();
+            Address address = addressMapper.addressDtoToAddress(orderdto.getAddressDto());
+            Address dbAddress = addressRepository.findById(address.getId())
+                    .orElseThrow(() -> new ApiRequestException("product not found", HttpStatus.NOT_FOUND));
+            order.setAddress(dbAddress);
 
-        orderItemDtos.forEach(orderItemDto -> {
-            Product product = productRepository.findById(orderItemDto.getProductDto().getId()).orElseThrow(() -> new ApiRequestException("product not found", HttpStatus.NOT_FOUND));
-            OrderItem orderItem = orderItemMapper.orderItemDtoToOrderItem(orderItemDto);
-            orderItem.setProduct(product);
-            order.addOrderItem(orderItem);
-        });
+            List<OrderItemDto> orderItemDtos = orderdto.getOrderItems();
 
+            orderItemDtos.forEach((orderItemDto) -> {
+                    OrderItem orderItem = orderItemMapper.orderItemDtoToOrderItem(orderItemDto);
 
-        order.setShippingAddress(shippingAddress);
+                    Product product = productRepository.findById(orderItemDto.getProductDto().getId())
+                            .orElseThrow(() -> new ApiRequestException("product not found", HttpStatus.NOT_FOUND));
 
-        Order savedOrder = orderRepository.save(order);
+                    orderItem.setOrder(order);
+                    orderItem.setProduct(product);
+                    order.addOrderItem(orderItem);
+            });
 
-        return orderMapper.orderToOrderDto(savedOrder);
+            Order savedOrder = orderRepository.save(order);
+
+            return orderMapper.orderToOrderDto(savedOrder);
+        } else {
+            throw new ApiRequestException("orderDto is null", HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

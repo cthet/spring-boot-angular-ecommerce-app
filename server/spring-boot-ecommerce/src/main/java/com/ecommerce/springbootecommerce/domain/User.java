@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -19,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "civility_id", referencedColumnName = "id")
     private Civility civility;
 
@@ -34,28 +33,39 @@ public class User {
 
     private String password;
 
-    @OneToOne(mappedBy = "user")
-    private Cart cart;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Order> orders = new HashSet<>();
-
     @ElementCollection(targetClass = Role.class)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Role> role;
+    private Set<Role> role = new HashSet<>();
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Address> addresses = new HashSet<>();
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
+
+    public List<Order> getOrders() {
+        return Collections.unmodifiableList(orders);
+    }
+
+    public List<Address> getAddresses() {
+        return Collections.unmodifiableList(addresses);
+    }
 
     public void addOrder(Order order){
         if(order != null) {
-
-            if (orders == null) {
-                orders = new HashSet<>();
-            }
-
-            orders.add(order);
+            this.orders.add(order);
             order.setUser(this);
+        }
+    }
+
+    public void addAddress(Address address){
+        if(address != null) {
+            this.addresses.add(address);
+            address.setUser(this);
         }
     }
 

@@ -6,9 +6,10 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,24 +34,23 @@ public class Order {
     private Date Datecreated;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
-    private ShippingAddress shippingAddress;
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(orderItems);
+    }
+
     public void addOrderItem(OrderItem orderItem) {
         if(orderItem != null) {
-            if (orderItems == null) {
-                orderItems = new HashSet<>();
-            }
-
             orderItems.add(orderItem);
-            orderItem.setOrder(this);
         }
     }
 

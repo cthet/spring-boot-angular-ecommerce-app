@@ -18,8 +18,10 @@ public class CountryController {
 
     @Autowired
     CountryRepository countryRepository;
+
     @Autowired
     CountryService countryService;
+
     @GetMapping("/all")
     public ResponseEntity<?> getCountries(){
 

@@ -26,7 +26,7 @@ export class BrandComponent implements OnDestroy{
       this.limit$.next(300);
       this.text = "agrandir";
     }
-    }
+  }
 
     ngOnDestroy(){
     this.limit$.unsubscribe();

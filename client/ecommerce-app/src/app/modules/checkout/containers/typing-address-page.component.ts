@@ -44,7 +44,7 @@ export class TypingAddressPageComponent implements OnInit, OnDestroy {
       postCode: new FormControl('',Validators.required),
       city:  new FormControl('',Validators.required),
       country: new FormControl<Country>(new Country({}),[Validators.required, this.validCountry()]),
-      phoneNumber: new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(10)])
+      phoneNumber: new FormControl('',[Validators.required,Validators.pattern('^[0-9]{10}$')])
    })
   }
 

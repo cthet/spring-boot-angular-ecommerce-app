@@ -22,8 +22,9 @@ public class OrderItem {
 
     @OneToOne
     private Product product;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

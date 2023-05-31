@@ -11,11 +11,11 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {AddressMapper.class, OrderItemMapper.class})
 public interface OrderMapper {
 
-    @Mapping(target = "addressDto", source = "shippingAddress")
+    @Mapping(target = "addressDto", source = "address")
     OrderDto orderToOrderDto(Order order);
 
-    @Mapping(target = "shippingAddress", source = "addressDto")
-    Order orderDtoToOrder(OrderDto orderDto);
+    //@Mapping(target = "shippingAddress", source = "addressDto")
+    //Order orderDtoToOrder(OrderDto orderDto);
 
     List<OrderDto> ordersToOrdersDto(List<Order> orders);
 

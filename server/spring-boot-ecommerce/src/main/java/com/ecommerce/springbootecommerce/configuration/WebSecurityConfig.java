@@ -29,9 +29,9 @@ public class WebSecurityConfig {
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
+
     @Autowired
     public UserPrincipalServiceImpl userDetailsService;
-
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -53,7 +53,10 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors().and().csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+                .cors()
+                .and()
+                .csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

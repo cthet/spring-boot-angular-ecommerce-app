@@ -40,10 +40,9 @@ export class OrderEffects {
         catchError((error) =>
           of(orderActions.saveOrderFailure({ error: error.message }))        
         ),
-
-    ))
+      ))
     )
-    );  
+  );  
      
     saveOrdersSuccess$ = createEffect(() =>
     this.actions$.pipe(
@@ -58,7 +57,7 @@ export class OrderEffects {
       ),
         ),
         {dispatch: false}   
-    )
+  );
 
 
   loadOrder$ = createEffect(() =>
@@ -77,9 +76,6 @@ export class OrderEffects {
       )     
     ),
   );
-
-
-
 
 }     
               

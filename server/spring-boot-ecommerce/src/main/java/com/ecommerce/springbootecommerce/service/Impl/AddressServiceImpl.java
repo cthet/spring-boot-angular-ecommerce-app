@@ -79,6 +79,7 @@ public class AddressServiceImpl implements AddressService {
 
         Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())
                 .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
+
         Country country = countryRepository.findById(addressDTO.getCountryDto().getId())
                 .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
 
