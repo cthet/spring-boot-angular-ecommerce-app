@@ -5,9 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -31,16 +29,21 @@ public class Cart {
     private BigDecimal totalPrice;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
-    Set<CartItem> cartItems = new HashSet<>();
+    List<CartItem> cartItems = new ArrayList<>();
+
+    public List<CartItem> getCartItems() {
+        return Collections.unmodifiableList(cartItems);
+    }
+
     public void addCartItem(CartItem cartItem) {
         if(cartItem != null) {
-            if (cartItems == null) {
-                cartItems = new HashSet<>();
-            }
-
             cartItems.add(cartItem);
             cartItem.setCart(this);
         }
+    }
+
+    public void clearCartItem(){
+        cartItems.clear();
     }
 
     public void deleteCartItem(CartItem item){
@@ -49,8 +52,6 @@ public class Cart {
         }
     }
 
-    public Set<CartItem> getCartItems() {
-        return Collections.unmodifiableSet(cartItems);
-    }
+
 
 }

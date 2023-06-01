@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, concat } from 'rxjs';
 import { Gender } from '../../models/Gender';
 import { addressActions } from '../../modules/checkout/store/actions';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -49,9 +49,9 @@ export class HeaderPageComponent {
   }
 
   logout() {          
-    this.store.dispatch(cartActions.saveCart());
+    //this.store.dispatch(cartActions.saveCart()),
     this.store.dispatch(authActions.clearUser());   
-    this.store.dispatch(addressActions.clearAddresses()); 
+    //this.store.dispatch(addressActions.clearAddresses()); 
     this.localStorageService.logout();
     this.router.navigate(['']);
     

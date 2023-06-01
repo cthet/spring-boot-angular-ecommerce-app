@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { Cart } from '../../models/Cart';
 import { CartService } from '../../modules/services/cart.service';
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -42,17 +42,85 @@ export class CartEffects {
     mergeMap(([action, cart]) =>
       this.cartService.saveCart(cart)
       .pipe(
-        switchMap(() => ([
-          cartActions.saveCartSuccess(),          
-          cartActions.clearAllCartItems()
-        ])        
+        map(() => 
+          cartActions.saveCartSuccess(),                          
         ),           
         catchError((error) =>
           of(cartActions.saveCartFailure({ error: error.message }))        
         )
       ),          
-  )     
-  ))
+    )     
+  )
+  )
+
+//   saveCartThenClearAllCartItems$ = createEffect(() =>
+//   this.actions$.pipe(
+//     ofType(cartActions.saveCartThenClearAllCartItems),
+//     concatLatestFrom((action) => this.store.select(cartSelectors.selectCart)),
+//     mergeMap(([action, cart]) =>
+//       this.cartService.saveCart(cart).pipe(
+//         mergeMap(() => [
+//           cartActions.saveCart(),                          
+//           cartActions.clearAllCartItems()
+//         ]),           
+//         catchError((error) =>
+//           of(cartActions.saveCartFailure({ error: error.message }))        
+//         )
+//       ),          
+//     )     
+//   )
+// );
+
+// clearAllCartItemsThensaveCart$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(cartActions.clearAllCartItemsThensaveCart),
+//   concatLatestFrom((action) => this.store.select(cartSelectors.selectCart)),
+//   mergeMap(([action, cart]) =>
+//     this.cartService.saveCart(cart)
+//     .pipe(
+//       map(() => 
+//         cartActions.clearAllCartItems(),                          
+//         cartActions.saveCart()
+//       ),           
+//       catchError((error) =>
+//         of(cartActions.saveCartFailure({ error: error.message }))        
+//       )
+//     ),          
+//   )     
+// )
+//);
+
+// clearAllCartItemsThensaveCart$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(cartActions.clearAllCartItemsThensaveCart),
+//   concatMap((cart) =>
+//    of(cartActions.clearAllCartItems()).pipe( 
+//    tap(() => cartActions.saveCart())
+//   ),
+//     ),
+// )
+// );
+
+
+
+  // clearCart$ = createEffect(() =>
+  // this.actions$.pipe(
+  //   ofType(cartActions.clearAllCartItems),
+  //   concatLatestFrom((action) => this.store.select(cartSelectors.selectCart)),
+  //   mergeMap(([action, cart]) =>
+  //     this.cartService.saveCart(cart)
+  //     .pipe(
+  //       switchMap(() => ([
+  //         cartActions.saveCartSuccess(),          
+  //       ])        
+  //       ),           
+  //       catchError((error) =>
+  //         of(cartActions.saveCartFailure({ error: error.message }))        
+  //       )
+  //     ),          
+  //   )     
+  // )
+  // )
 
   saveCartToLocalStorage$ = createEffect(() =>
   this.actions$.pipe(

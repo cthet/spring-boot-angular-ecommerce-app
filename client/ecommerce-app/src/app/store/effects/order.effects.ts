@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, mergeMap, of, switchMap, tap} from 'rxjs';
+import { catchError, concat, concatMap, map, mergeMap, of, switchMap, tap} from 'rxjs';
 import { Gender } from '../../models/Gender';
 import { OrderBuilder, Order } from '../../models/Order';
 import { addressSelectors } from '../../modules/checkout/store/selectors';
 import { OrderService } from '../../services/order.service';
-import { orderActions } from '../actions';
+import { cartActions, orderActions } from '../actions';
 import { cartSelectors, genderSelectors } from '../selectors';
 
 @Injectable()
@@ -44,26 +44,29 @@ export class OrderEffects {
     )
   );  
      
-    saveOrdersSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(orderActions.saveOrderSuccess),
-      switchMap(() => 
-      this.store.select(genderSelectors.selectGender)),      
-      tap((gender: Gender |null) => {    
-        if (gender) {
-          this.router.navigate([`/`, `${gender?.type}`]);
-          }
-        }      
-      ),
-        ),
-        {dispatch: false}   
-  );
+  saveOrdersSuccess$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(orderActions.saveOrderSuccess),    
+    concatLatestFrom((action) => this.store.select(genderSelectors.selectGender)),
+    concatMap(([action, gender]) => 
+    of(cartActions.saveCart()).pipe(                          
+      concatMap(() => of(cartActions.clearAllCartItems()).pipe(
+    tap(() => {    
+      if (gender) {
+        this.router.navigate([`/`, `${gender?.type}`]);
+        }
+      }      
+    ),
+    ),
+  ))
+)
+));
 
 
   loadOrder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(orderActions.loadOrders),
-      mergeMap((action) =>        
+      switchMap((action) =>        
         this.orderService.fetchOrders()
           .pipe(
             map((responseOrders) => 

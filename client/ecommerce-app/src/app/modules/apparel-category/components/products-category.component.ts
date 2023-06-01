@@ -15,22 +15,20 @@ import { ApparelCategory } from '../../../models/ApparelCategory';
           </mat-expansion-panel-header>
             <ul>
                 <mat-radio-group (change)="filter.emit($event)">
-                  <li>
-                    <mat-radio-button 
-                    *ngFor="let category of apparelCategories"
-                    [value]="category"
-                    
+                  <li *ngFor="let category of apparelCategories">
+                    <mat-radio-button                     
+                    [value]="category"                    
                     >{{ category.apparel_category }}                         
                     </mat-radio-button>                
                   </li>                  
                 </mat-radio-group>
             </ul>            
         </mat-expansion-panel>
-          <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false">
-          
-            </mat-expansion-panel>
-          </mat-accordion>
+          <mat-expansion-panel 
+          (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">          
+          </mat-expansion-panel>
+        </mat-accordion>
     </div>
   `,
   styleUrls: ['./products-category.component.css'],

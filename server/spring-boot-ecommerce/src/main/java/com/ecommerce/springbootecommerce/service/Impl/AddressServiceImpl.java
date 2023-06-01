@@ -42,7 +42,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDto fetchAddressDTO(Long id) {
-        Address address = addressRepository.findById(id).orElseThrow(() -> new ApiRequestException("Address not found!", HttpStatus.NOT_FOUND));
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Address not found!", HttpStatus.NOT_FOUND));
 
         AddressDto addressDto = addressMapper.addressToAddressDto(address);
 

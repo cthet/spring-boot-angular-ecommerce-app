@@ -33,9 +33,11 @@ public class Product {
 
     @Column(name = "units_in_stock")
     private int unitsInStocks;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gender_category_id")
     private GenderCategory genderCategory;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_category_id")
     private BrandCategory brandCategory;

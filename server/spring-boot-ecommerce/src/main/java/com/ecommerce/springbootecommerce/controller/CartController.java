@@ -12,13 +12,13 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/cart/user")
 public class CartController {
 
     @Autowired
     CartService cartService;
 
-    @GetMapping("/user")
+    @GetMapping
     public ResponseEntity<?> getCartByUser() {
         try {
             return new ResponseEntity<>(cartService.getCartDTO(), HttpStatus.OK);
@@ -27,7 +27,7 @@ public class CartController {
         }
     }
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<?> saveUserCart(@Valid @RequestBody CartDto cartDTO) {
         try {
             return new ResponseEntity<>(new MessageResponse(cartService.saveCart(cartDTO)), HttpStatus.OK);
@@ -35,4 +35,5 @@ public class CartController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

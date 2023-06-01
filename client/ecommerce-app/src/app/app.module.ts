@@ -20,6 +20,7 @@ import { CartEffects } from './store/effects/cart.effects';
 import { authInterceptorProviders } from './utility/interceptors/auth-interceptor';
 import { ProductEffects } from './store/effects/product.effects';
 import { OrderEffects } from './store/effects/order.effects';
+import { AuthEffects } from './store/effects/auth.effects';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { OrderEffects } from './store/effects/order.effects';
       strictActionTypeUniqueness: true,
     },
   }),
-    EffectsModule.forRoot([GenderEffects, CartEffects, ApparelCategoriesEffects, BrandsEffects, ImageEffects, ProductsEffects, ProductEffects, VideoEffects, OrderEffects]), 
+    EffectsModule.forRoot([AuthEffects, GenderEffects, CartEffects, ApparelCategoriesEffects, BrandsEffects, ImageEffects, ProductsEffects, ProductEffects, VideoEffects, OrderEffects]), 
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
