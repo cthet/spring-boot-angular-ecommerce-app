@@ -40,7 +40,13 @@ export const reducer = createReducer<State>(
     error: null,
   })),
 
-  on(loadCartSuccess, (state, { cart }) => adapter.upsertMany(cart.cartItems, {...state, status: 'success', error: null})),
+  // on(loadCartSuccess, (state, { cart }) => adapter.upsertMany(cart.cartItems, {...state, status: 'success', error: null})),
+
+  on(loadCartSuccess, (state, { cart }) => {
+    console.log(cart); 
+  
+    return adapter.upsertMany(cart.cartItems, { ...state, status: 'success', error: null });
+  }),
 
   on(loadCartFailure, (state, { error }) => ({
     ...state,

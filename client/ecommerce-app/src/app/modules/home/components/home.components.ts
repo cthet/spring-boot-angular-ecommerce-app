@@ -11,7 +11,7 @@ import { Product } from '../../../models/Product';
         <img [src]="headerImage" alt="headerImage"/>
       </div>
 
-      <div class="new-products">      
+      <div *ngIf=newProducts class="new-products">      
         <h1 class="new-title">Nouveautés</h1>
 
 

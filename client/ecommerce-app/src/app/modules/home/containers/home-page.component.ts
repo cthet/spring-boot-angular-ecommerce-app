@@ -16,7 +16,7 @@ import { imagesSelectors, newProductsSelectors } from '../store/selectors';
     <app-home-details
       [headerImage]="headerImage$ | async"
       [footerImage]="footerImage$ | async"
-      [newProducts]="newProducts$ |async"
+      [newProducts]="newProducts$ | async"
     >
     </app-home-details>
   `,

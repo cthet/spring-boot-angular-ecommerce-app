@@ -25,15 +25,15 @@ public class OrderController {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//    @GetMapping("/fetch")
-//    public ResponseEntity<?> getOrder() {
-//        try {
-//            return new ResponseEntity<>(orderService.fetchOrders(), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
+    @GetMapping("/user")
+    public ResponseEntity<?> getOrders() {
+        try {
+            return new ResponseEntity<>(orderService.fetchUserOrders(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

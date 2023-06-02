@@ -22,4 +22,6 @@ mat-card {
 
 button {
   width: 100%;
+  color: #fff;
+  background-color: #000;
 }

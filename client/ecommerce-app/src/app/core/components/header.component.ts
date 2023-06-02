@@ -50,7 +50,7 @@ import { Gender } from '../../models/Gender';
             class="fa fa-user nav-item"
             (click)="logout.emit()"
           >
-          </a>
+          </a>-->
 
           <!--profile-->
 

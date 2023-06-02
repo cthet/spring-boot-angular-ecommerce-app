@@ -4,13 +4,18 @@ import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.*;
 import com.ecommerce.springbootecommerce.dto.order.OrderDto;
 import com.ecommerce.springbootecommerce.dto.order.OrderItemDto;
+import com.ecommerce.springbootecommerce.dto.order.OrderResponse;
 import com.ecommerce.springbootecommerce.mappers.AddressMapper;
 import com.ecommerce.springbootecommerce.mappers.OrderItemMapper;
 import com.ecommerce.springbootecommerce.mappers.OrderMapper;
-import com.ecommerce.springbootecommerce.repository.*;
+import com.ecommerce.springbootecommerce.repository.AddressRepository;
+import com.ecommerce.springbootecommerce.repository.OrderRepository;
+import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.OrderService;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,9 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+
+
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
     UserService userService;
@@ -87,13 +95,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> fetchOrders() {
+    public OrderResponse fetchUserOrders() {
 
         User user = userService.getUser();
         List<Order> orders = orderRepository.findOrderByUserId(user.getId());
 
         List<OrderDto> orderDtos = orderMapper.ordersToOrdersDto(orders);
 
-        return orderDtos;
+        OrderResponse orderResponse = new OrderResponse(orderDtos);
+
+        return orderResponse;
     }
+
 }

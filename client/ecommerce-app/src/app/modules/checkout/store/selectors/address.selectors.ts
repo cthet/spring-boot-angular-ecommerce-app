@@ -1,5 +1,4 @@
 import { createSelector } from "@ngrx/store";
-import { Address } from "src/app/models/Address";
 import { selectCheckoutState } from "..";
 import * as fromAddress from '../reducers/address.reducer'
 

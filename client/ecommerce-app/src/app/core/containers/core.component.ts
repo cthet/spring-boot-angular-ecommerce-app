@@ -10,8 +10,8 @@ import { apparelCategoriesActions, authActions, brandsActions, cartActions, gend
     <app-header-page></app-header-page>
     <div class="wrap">
       <div id="main">
-    <router-outlet></router-outlet>
-    </div>
+        <router-outlet></router-outlet>
+      </div>
     </div>
     <app-footer></app-footer>
   `, styles: [`

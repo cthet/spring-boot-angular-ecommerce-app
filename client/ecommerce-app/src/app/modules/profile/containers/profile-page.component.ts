@@ -6,7 +6,7 @@ import { imageActions } from '../../../store/actions';
   selector: 'app-profile-page',  
   template: `
   <app-navbar-page></app-navbar-page>
-  <app-profile></app-profile>
+  <router-outlet></router-outlet>
   `,
 })
 export class ProfilePageComponent implements OnInit {

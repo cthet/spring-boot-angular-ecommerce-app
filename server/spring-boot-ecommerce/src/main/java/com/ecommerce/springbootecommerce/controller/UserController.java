@@ -26,6 +26,8 @@ public class UserController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
+
+
     @PostMapping("/info")
     public ResponseEntity<?> updateUserInfo(@Valid @RequestBody InfoDto infoDTO) {
         try {

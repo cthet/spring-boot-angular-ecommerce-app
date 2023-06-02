@@ -49,9 +49,7 @@ export class HeaderPageComponent {
   }
 
   logout() {          
-    //this.store.dispatch(cartActions.saveCart()),
     this.store.dispatch(authActions.clearUser());   
-    //this.store.dispatch(addressActions.clearAddresses()); 
     this.localStorageService.logout();
     this.router.navigate(['']);
     

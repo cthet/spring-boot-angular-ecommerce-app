@@ -1,0 +1,28 @@
+.global-container{ 
+  font-size: 62.5%;
+  background-color: #f8f8f8;
+  padding-top: 50px;
+  height: 100%;
+  width:100%;
+}
+
+.table-container {
+  height: 100%;
+  max-width: 1100px;
+  margin: 0px auto 100px;
+  padding-bottom: 60px;
+  background: #fff;
+}
+
+td img {
+  height: 100px;
+  width: 100px;
+}
+
+.column-header {
+  padding: 10px;
+}
+
+.column-data {
+  padding: 10px;
+}

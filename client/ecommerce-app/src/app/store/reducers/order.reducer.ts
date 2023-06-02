@@ -1,17 +1,17 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Order } from 'src/app/models/Order';
 import { loadOrders, loadOrdersFailure, loadOrdersSuccess, saveOrder, saveOrderFailure, saveOrderSuccess } from '../actions/order.actions';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+
 
 export const orderFeaturesKey = 'order';
 
-export interface State extends EntityState<Order> {
+export interface State  extends EntityState<Order> {
   error: string | null;
   status: 'pending' | 'loading' | 'error' | 'success';
 }
 
 export const adapter: EntityAdapter<Order> = createEntityAdapter<Order>({});
-
 
 export const initialState: State = adapter.getInitialState({
   error: null,
@@ -30,22 +30,16 @@ export const reducer = createReducer<State>(
 
   on(saveOrderSuccess, (state, { order }) => adapter.addOne(order, {...state, status: 'success', error: null})),
 
-  on(saveOrderFailure, (state, { error }) => ({
+  on(saveOrderFailure, loadOrdersFailure, (state, { error }) => ({
     ...state,
     error: error,
     status: 'error',
   })),
 
-  on(loadOrdersSuccess, (state, {orders}) => adapter.upsertMany(orders, {...state, status: 'success', error: null})),
-
-  on(loadOrdersFailure, (state, {error}) => ({
-    ...state,
-    error: error,
-    status: 'error',
-  })),
-
+  on(loadOrdersSuccess, (state, { ordersRes }) =>   
+    adapter.upsertMany(ordersRes.orders, { ...state, status: 'success', error: null }))
   )
-;
+
 
 
 const { selectIds, selectEntities, selectAll, selectTotal } =

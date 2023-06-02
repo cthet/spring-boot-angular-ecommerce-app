@@ -25,7 +25,6 @@ import { apparelCategoriesSelectors, brandsSelectors, genderSelectors, imageSele
   `,
 })
 export class NavbarPageComponent implements OnInit{
-
   video$: Observable<string | null>;
   image$: Observable<string | null>;
   brands$: Observable<Brand[]>;

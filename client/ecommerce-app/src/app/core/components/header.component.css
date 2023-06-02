@@ -16,12 +16,7 @@
   width: 100%;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    hsla(0, 0%, 100%, 0.8)0,
-    hsla(0, 0%, 100%, 0.7) 70%,
-    hsla(0, 0%, 100%, 0.45)
-  );
+  background: hsla(0, 0%, 100%, 0.9);  
   margin: 0 auto;
   font-size: 62.5%;
 }

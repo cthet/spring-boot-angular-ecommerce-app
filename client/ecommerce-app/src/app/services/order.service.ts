@@ -20,7 +20,7 @@ export class OrderService {
 
   fetchOrders(): Observable<OrdersResponse> {
     return this.http.get<OrdersResponse>(
-      `http://localhost:8080/api/order/fetch`
+      `http://localhost:8080/api/order/user`
     ).pipe(catchError(this.handleError));
   }
 
