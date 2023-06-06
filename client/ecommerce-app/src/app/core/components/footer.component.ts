@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
       <span class="payment-methods-title">Moyens de paiement</span>
       <ul>
         <img
-          src="../../../assets/ressources/Mastercard-Logo.svg"
+          src="../../../assets/ressources/Mastercard-logo.svg"
           alt="mastercard-icon"
         />
         <img
