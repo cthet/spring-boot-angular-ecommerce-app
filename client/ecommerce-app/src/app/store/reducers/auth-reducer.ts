@@ -1,9 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  loginSuccess,
-} from '../../modules/auth/store/actions/login-api.actions';
 import { User } from '../../modules/auth/interfaces/User';
-import { browserReload, clearUser } from '../actions/auth.actions';
+import { authSuccess, browserReload, clearUser } from '../actions/auth.actions';
 
 export const UserFeatureKey = 'user';
 
@@ -18,7 +15,7 @@ export const initialState: State = {
 export const reducer = createReducer<State>(
   initialState,
 
-  on(loginSuccess, (state, { authResponse }) => ({
+  on(authSuccess, (state, { authResponse }) => ({
     ...state,
     user: authResponse.user,
   })),

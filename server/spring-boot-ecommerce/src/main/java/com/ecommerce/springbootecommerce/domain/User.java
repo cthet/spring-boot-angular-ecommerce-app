@@ -1,10 +1,10 @@
 package com.ecommerce.springbootecommerce.domain;
 
 import com.ecommerce.springbootecommerce.enums.Role;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.*;
 
 

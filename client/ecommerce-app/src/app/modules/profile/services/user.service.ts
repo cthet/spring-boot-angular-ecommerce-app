@@ -1,9 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { PersonalInfo } from '../models/PersonalInfo';
 import { Profile } from '../models/Profile';
-import { Order } from 'src/app/models/Order';
 import { OrdersResponse } from 'src/app/models/OrdersResponse';
 
 @Injectable({
@@ -24,17 +22,6 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  // updatePersonalInfo(personalInfo: PersonalInfo): Observable<any> {
-  //   return this.http
-  //     .post('http://localhost:8080/api/user/info', personalInfo)
-  //     .pipe(catchError(this.handleError));
-  // }
-
-  // updateEmail(email: string): Observable<any> {
-  //   return this.http
-  //     .post('http://localhost:8080/api/user/email', email)
-  //     .pipe(catchError(this.handleError));
-  // }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

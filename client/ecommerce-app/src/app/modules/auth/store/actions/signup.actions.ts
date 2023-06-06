@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Civility } from "../../../../models/Civility";
+import { CivilityArgs } from "../../../../models/Civility";
 
 export const setSignupEmail = createAction(
   '[Login Page] Set Signup Email',
@@ -9,7 +9,7 @@ export const setSignupEmail = createAction(
 export const signup = createAction(
   '[Signup Page] Signup User',
   props<{
-    civility: Civility;
+    civility: number,
     firstName: string;
     lastName: string;
     email: string;
@@ -19,3 +19,7 @@ export const signup = createAction(
 
 
 export const clearSignupEmail = createAction('[Auth Effect] Clear signupEmail');
+
+export function signupSuccess(): any {
+  throw new Error('Function not implemented.');
+}

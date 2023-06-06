@@ -12,7 +12,7 @@ import com.ecommerce.springbootecommerce.mappers.UserMapper;
 import com.ecommerce.springbootecommerce.repository.CivilityRepository;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.JwtUtils;
-import com.ecommerce.springbootecommerce.security.UserPrincipal;
+import com.ecommerce.springbootecommerce.security.UserDetailsImpl;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +59,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-            Long id = userPrincipal.getId();
-            String email = userPrincipal.getEmail();
-            String role = userPrincipal.getAuthorities().toString();
+            UserDetailsImpl userDetailsimpl = (UserDetailsImpl) authentication.getPrincipal();
+            Long id = userDetailsimpl.getId();
+            String email = userDetailsimpl.getEmail();
+            String role = userDetailsimpl.getAuthorities().toString();
 
             UserDto userDTO = new UserDto(id, role);
 
@@ -74,7 +74,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw  new ApiRequestException("Credentials are uncorrect.", HttpStatus.FORBIDDEN);
         }
     }
-    public String signup(@Valid @RequestBody SignupRequest signupRequest) {
+    public void signup(@Valid @RequestBody SignupRequest signupRequest) {
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             throw new ApiRequestException("Email already exists in database.", HttpStatus.BAD_REQUEST);
@@ -84,13 +84,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRole(Collections.singleton(Role.USER));
         user.setPassword(encoder.encode(signupRequest.getPassword()));
 
-        Civility civility = civilityRepository.findCivilityById(signupRequest.getCivility().getId())
+        Civility civility = civilityRepository.findCivilityById(signupRequest.getCivility())
                 .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
 
         user.setCivility(civility);
 
         userRepository.save(user);
 
-        return "User registered successfully.";
     }
 }

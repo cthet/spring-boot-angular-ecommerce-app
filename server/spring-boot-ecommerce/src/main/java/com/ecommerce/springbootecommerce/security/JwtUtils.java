@@ -1,6 +1,9 @@
 package com.ecommerce.springbootecommerce.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
 
 @Component
@@ -25,9 +29,16 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     @Autowired
-    UserPrincipalServiceImpl userPrincipalService;
+    UserDetailsServiceImpl userPrincipalService;
+
+    private Key key() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+    }
+
 
     public String generateToken(String userEmail, String role){
+        SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
         Claims claims = Jwts.claims().setSubject(userEmail);
         claims.put("role", role);
         Date DateCreated = new Date();
@@ -36,7 +47,7 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setIssuedAt(DateCreated)
                 .setExpiration(new Date(DateCreated.getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(key(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -73,7 +84,7 @@ public class JwtUtils {
 
     public Authentication getAuthentication(String token){
 
-        UserPrincipal userPrincipal = userPrincipalService.loadUserByUsername(getUserNameFromJwtToken(token));
-        return new UsernamePasswordAuthenticationToken(userPrincipal, null, userPrincipal.getAuthorities());
+        UserDetailsImpl userDetailsimpl = userPrincipalService.loadUserByUsername(getUserNameFromJwtToken(token));
+        return new UsernamePasswordAuthenticationToken(userDetailsimpl, null, userDetailsimpl.getAuthorities());
     }
 }

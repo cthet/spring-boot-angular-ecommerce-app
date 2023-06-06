@@ -7,7 +7,7 @@ import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
 import com.ecommerce.springbootecommerce.dto.profile.ProfileDto;
 import com.ecommerce.springbootecommerce.mappers.UserMapper;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
-import com.ecommerce.springbootecommerce.security.UserPrincipalServiceImpl;
+import com.ecommerce.springbootecommerce.security.UserDetailsServiceImpl;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Autowired
-    UserPrincipalServiceImpl userPrincipalService;
+    UserDetailsServiceImpl userDetailsService;
 
     private final UserMapper userMapper;
 
     @Override
     public User getUser() {
-        return userRepository.findById(userPrincipalService.getUserPrincipalImpl().getId())
+        return userRepository.findById(userDetailsService.getUserPrincipalImpl().getId())
                 .orElseThrow(() -> new ApiRequestException("User Principal not found", HttpStatus.NOT_FOUND));
     }
 

@@ -6,7 +6,7 @@ public interface CartService {
 
     CartDto getCartDTO();
 
-    String saveCart(CartDto cartDTO);
+    void saveCart(CartDto cartDTO);
 
 
 }

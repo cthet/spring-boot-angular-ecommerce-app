@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, catchError, of, concatMap, tap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { loginActions, signupActions, signupApiActions } from '../actions';
+import { signupActions, signupApiActions } from '../actions';
 
 @Injectable()
 export class SignupEffects {
@@ -36,14 +36,9 @@ export class SignupEffects {
             action.password
           )
           .pipe(
-            map(() =>
-            loginActions.login({
-                credentials: {
-                  email: action.email,
-                  password: action.password
-              }
-            }),
-              ),
+            map(() => 
+            signupApiActions.signupSuccess()),
+            tap(() => this.router.navigate(['/connexion'])),            
             catchError((error) =>
               of(signupApiActions.signupFailure({ error: error.message }))
             )

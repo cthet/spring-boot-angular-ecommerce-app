@@ -11,26 +11,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserPrincipalServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
 
     @Override
     @Transactional
-    public UserPrincipal loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException("User Not Found with email: " + email));
 
-        return UserPrincipal.build(user);
+        return UserDetailsImpl.build(user);
     }
 
-    public UserPrincipal getUserPrincipalImpl() {
+    public UserDetailsImpl getUserPrincipalImpl() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //UserPrincipal userPrincipal = new UserPrincipal();
-
-        return (UserPrincipal) auth.getPrincipal();
-        //return modelMapper.map(auth.getPrincipal(),UserPrincipal.class);
+        Object principal = auth.getPrincipal();
+        if(principal instanceof UserDetailsImpl){
+            return (UserDetailsImpl) auth;
+        } else {
+            throw new RuntimeException("User is not connected");
+        }
     }
 
 }

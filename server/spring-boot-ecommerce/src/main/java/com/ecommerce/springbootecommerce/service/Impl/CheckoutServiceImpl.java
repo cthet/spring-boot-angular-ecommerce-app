@@ -2,7 +2,7 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.dto.payment.PaymentInfo;
 import com.ecommerce.springbootecommerce.repository.UserRepository;
-import com.ecommerce.springbootecommerce.security.UserPrincipalServiceImpl;
+import com.ecommerce.springbootecommerce.security.UserDetailsServiceImpl;
 import com.ecommerce.springbootecommerce.service.Interfaces.CheckoutService;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
@@ -20,7 +20,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    UserPrincipalServiceImpl userPrincipalService;
+    UserDetailsServiceImpl userPrincipalService;
 
     @Value("${stripe.key.secret}")
     private String secretKey;

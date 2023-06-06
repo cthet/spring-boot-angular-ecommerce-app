@@ -6,7 +6,7 @@ import { LocalStorageService } from '../../../../services/local-storage.service'
 import { Router } from '@angular/router';
 import { AuthResponse } from '../../interfaces/AuthResponse';
 import { loginActions, loginApiActions, signupActions } from '../actions';
-import { cartActions } from '../../../../store/actions';
+import { authActions, cartActions } from '../../../../store/actions';
 
 @Injectable()
 export class LoginEffects {
@@ -39,15 +39,14 @@ export class LoginEffects {
     () =>
       this.actions$.pipe(
         ofType(loginApiActions.loginSuccess),
-        tap((action) =>
-          this.localStorageService.saveToken(action.authResponse.token)
-        ),
-        tap((action) =>
-          this.localStorageService.saveUser(action.authResponse.user)
-        ),        
-        map((() => 
-         cartActions.loadCart()),
-         signupActions.clearSignupEmail()),
+        tap((action) => {
+          this.localStorageService.saveToken(action.authResponse.token);  
+          this.localStorageService.saveUser(action.authResponse.user);
+        }),        
+        concatMap(action => of(
+         authActions.authSuccess({ authResponse: action.authResponse}),
+         cartActions.loadCart(),
+         signupActions.clearSignupEmail())),
       tap(() => this.router.navigate(['/profile'])),
   )
   )

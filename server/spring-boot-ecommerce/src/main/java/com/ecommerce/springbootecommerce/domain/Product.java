@@ -1,9 +1,9 @@
 package com.ecommerce.springbootecommerce.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "product_name")

@@ -1,6 +1,5 @@
 package com.ecommerce.springbootecommerce.controller;
 
-import com.ecommerce.springbootecommerce.dto.MessageResponse;
 import com.ecommerce.springbootecommerce.dto.cart.CartDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,8 @@ public class CartController {
     @PostMapping
     public ResponseEntity<?> saveUserCart(@Valid @RequestBody CartDto cartDTO) {
         try {
-            return new ResponseEntity<>(new MessageResponse(cartService.saveCart(cartDTO)), HttpStatus.OK);
+            cartService.saveCart(cartDTO);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }

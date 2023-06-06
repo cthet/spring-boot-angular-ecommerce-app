@@ -8,5 +8,5 @@ public interface AuthenticationService {
 
     AuthResponse signin(AuthRequest authRequest);
 
-    String signup(SignupRequest signupRequest);
+    void signup(SignupRequest signupRequest);
 }

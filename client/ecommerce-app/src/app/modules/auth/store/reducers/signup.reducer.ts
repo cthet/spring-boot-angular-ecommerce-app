@@ -32,6 +32,12 @@ export const reducer = createReducer<State>(
 
   on(signupFailure, (state, { error }) => ({
     ...state,
+    error: null,
+    status: 'success',
+  })),
+
+  on(signupFailure, (state, { error }) => ({
+    ...state,
     error: error,
     status: 'error',
   })),

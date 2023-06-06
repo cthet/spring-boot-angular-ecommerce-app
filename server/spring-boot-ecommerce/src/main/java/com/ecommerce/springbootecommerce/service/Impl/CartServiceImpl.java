@@ -15,18 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
-    private static final Logger logger = Logger.getLogger(CartServiceImpl.class.getName());
-
     @Autowired
     UserServiceImpl userService;
+
     @Autowired
     CartRepository cartRepository;
+
     @Autowired
     ProductRepository productRepository;
 
@@ -59,7 +58,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String saveCart(CartDto cartDTO) {
+    public void saveCart(CartDto cartDTO) {
 
         Cart cart = cartMapper.cartDtoToCart(cartDTO);
 
@@ -74,12 +73,20 @@ public class CartServiceImpl implements CartService {
 
         cartDTO.getCartItems().forEach(cartItemDto -> {
             CartItem cartItem = cartItemMapper.cartItemDtoToCartItem(cartItemDto);
-            cart.addCartItem(cartItem);
+
+            Optional<CartItem> existingCartItem = cart.getCartItems()
+                    .stream()
+                    .filter(item -> item.getProduct().getId().equals(cartItemDto.getProductDto().getId()))
+                    .findFirst();
+
+            if (existingCartItem.isPresent()) {
+                existingCartItem.get().setQuantity(cartItemDto.getQuantity());
+            } else {
+                cart.addCartItem(cartItem);
+            }
         });
 
         cartRepository.save(cart);
-
-        return "cart saved successfully";
     }
 
 }

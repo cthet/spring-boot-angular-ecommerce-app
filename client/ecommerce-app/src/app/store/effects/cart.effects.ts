@@ -130,8 +130,9 @@ export class CartEffects {
       this.store.select(cartSelectors.selectCartItemsTotalPrice),
       this.store.select(cartSelectors.selectCartItemsTotalQuantity)
     ]),
-    tap(([action, cartItems, totalPrice, totalQuantity]) => 
-    this.localstorageService.saveCart(new Cart(cartItems, totalPrice, totalQuantity))
+    tap(([action, cartItems, totalPrice, totalQuantity]) => {
+    console.log(cartItems, totalPrice, totalQuantity),
+    this.localstorageService.saveCart(new Cart(cartItems, totalPrice, totalQuantity))}
     )
   ),
   {dispatch: false}

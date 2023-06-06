@@ -1,4 +1,4 @@
-interface CivilityArgs {
+export interface CivilityArgs {
   id?: number;
   name?: string;
 }

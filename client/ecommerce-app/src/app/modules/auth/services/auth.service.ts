@@ -5,7 +5,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Civility } from '../../../models/Civility';
 import { Credentials } from '../interfaces/Credentials';
 
 const httpOptions = {
@@ -33,7 +32,7 @@ export class AuthService {
   }
 
   signup(
-    civility: Civility,
+    civility: number,
     firstName: string,
     lastName: string,
     email: string,

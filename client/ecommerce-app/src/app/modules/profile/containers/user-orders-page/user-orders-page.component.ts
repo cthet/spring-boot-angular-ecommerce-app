@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { orderActions } from 'src/app/store/actions';
-import { Observable, filter } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Order } from 'src/app/models/Order';
 import { orderSelectors } from 'src/app/store/selectors';
 

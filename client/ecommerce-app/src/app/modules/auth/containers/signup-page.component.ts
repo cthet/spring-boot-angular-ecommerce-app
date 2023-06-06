@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, take } from 'rxjs';
-import { Civility } from '../../../models/Civility';
+import { Observable } from 'rxjs';
 import { signupActions } from '../store/actions';
 import { signupSelectors } from '../store/selectors';
 
@@ -28,7 +27,7 @@ export class SignupPageComponent implements OnInit {
     private store: Store<Store>,
   ) {
     this.signupForm = new FormGroup({
-      civility: new FormControl<Civility>(new Civility({id: 2}), Validators.required),
+      civility: new FormControl<number>(2, Validators.required),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
