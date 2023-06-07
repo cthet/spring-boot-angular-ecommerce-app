@@ -14,9 +14,6 @@ import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.OrderService;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -27,25 +24,12 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-
-    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    OrderRepository orderRepository;
-
-    @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
-    AddressRepository addressRepository;
-
+    private final UserService userService;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
+    private final AddressRepository addressRepository;
     private final OrderMapper orderMapper;
-
     private final OrderItemMapper orderItemMapper;
-
     private final AddressMapper addressMapper;
 
     private String generateOrderTrackingNumber () {
@@ -102,9 +86,8 @@ public class OrderServiceImpl implements OrderService {
 
         List<OrderDto> orderDtos = orderMapper.ordersToOrdersDto(orders);
 
-        OrderResponse orderResponse = new OrderResponse(orderDtos);
+        return new OrderResponse(orderDtos);
 
-        return orderResponse;
     }
 
 }

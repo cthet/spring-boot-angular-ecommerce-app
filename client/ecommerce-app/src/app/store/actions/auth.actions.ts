@@ -14,3 +14,12 @@ export const browserReload = createAction(
 
 export const clearUser = createAction(
   '[Header Page Component] Clear User');
+
+export const clearUserSuccess = createAction(
+  '[Header Page Component] Clear User Success',
+);
+
+export const clearUserFailure = createAction(
+  '[Header Page Component] Clear User Failure',
+  props<{error: string}>()
+);

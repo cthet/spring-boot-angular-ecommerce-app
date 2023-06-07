@@ -6,6 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Credentials } from '../interfaces/Credentials';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,6 +18,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -24,7 +26,7 @@ export class AuthService {
 
     return this.http
       .post(
-        'http://localhost:8080/api/auth/sign-in',
+        `${this.apiUrl}/auth/signin`,
         credentials,
         httpOptions
       )
@@ -40,7 +42,7 @@ export class AuthService {
   ): Observable<any> {
     return this.http
       .post<any>(
-        'http://localhost:8080/api/auth/signup',
+        `${this.apiUrl}/auth/signup`,
         {
           civility,
           firstName,

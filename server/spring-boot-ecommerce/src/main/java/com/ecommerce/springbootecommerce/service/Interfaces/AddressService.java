@@ -1,19 +1,18 @@
 package com.ecommerce.springbootecommerce.service.Interfaces;
 
 import com.ecommerce.springbootecommerce.dto.address.AddressDto;
-
-import java.util.List;
+import com.ecommerce.springbootecommerce.dto.address.AddressResponse;
 
 public interface AddressService {
 
     AddressDto createAddress(AddressDto addressDTO);
 
-    AddressDto updateAddress(AddressDto addressDTO);
+    AddressDto updateAddress(Long id, AddressDto addressDTO);
 
     AddressDto fetchAddressDTO(Long id);
 
-    List<AddressDto> getUserAddress();
+    AddressResponse getUserAddress();
 
-    Long deleteAddress(Long id);
+    void deleteAddress(Long id);
 
 }

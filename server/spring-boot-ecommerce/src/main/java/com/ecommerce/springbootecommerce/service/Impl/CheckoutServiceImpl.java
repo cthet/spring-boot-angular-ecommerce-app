@@ -9,7 +9,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CheckoutServiceImpl implements CheckoutService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    UserDetailsServiceImpl userPrincipalService;
+    private final UserRepository userRepository;
+    private final UserDetailsServiceImpl userPrincipalService;
 
     @Value("${stripe.key.secret}")
     private String secretKey;

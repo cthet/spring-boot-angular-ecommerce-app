@@ -25,8 +25,7 @@ export class HeaderPageComponent {
   
   constructor(
     private store: Store<Store>,
-    private localStorageService: LocalStorageService,
-    private router: Router
+
   ) {
     this.gender$ = this.store.select(genderSelectors.selectGender);
     this.isLoggedIn$ = this.store.select(authSelectors.selectLoggedIn);
@@ -48,10 +47,7 @@ export class HeaderPageComponent {
   }
 
   logout() {          
-    this.store.dispatch(authActions.clearUser());   
-    this.localStorageService.logout();
-    this.router.navigate(['']);
-    
+    this.store.dispatch(authActions.clearUser());       
   }
 
 }

@@ -3,7 +3,7 @@ package com.ecommerce.springbootecommerce.configuration;
 import com.ecommerce.springbootecommerce.security.AuthEntryPointJwt;
 import com.ecommerce.springbootecommerce.security.JwtFilter;
 import com.ecommerce.springbootecommerce.security.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,8 +18,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    private final AuthEntryPointJwt unauthorizedHandler;
+    private final UserDetailsServiceImpl userDetailsService;
+
+    private static final String[] WHITE_LIST_URLS = {
+            "/api/auth/**",
+            "/api/category/**",
+            "/api/product/**",
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,22 +49,11 @@ public class WebSecurityConfig {
         return http.build();
     }
 
-    private static final String[] WHITE_LIST_URLS = {
-            "/api/auth/**",
-            "/api/category/**",
-            "/api/product/**",
-    };
-
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
-
-    @Autowired
-    public UserDetailsServiceImpl userDetailsService;
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -65,11 +63,11 @@ public class WebSecurityConfig {
 
         return authProvider;
     }
+
     @Bean
     public JwtFilter authenticationJwtTokenFilter() {
         return new JwtFilter();
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

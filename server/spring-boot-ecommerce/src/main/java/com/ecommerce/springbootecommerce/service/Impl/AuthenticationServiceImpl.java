@@ -15,7 +15,6 @@ import com.ecommerce.springbootecommerce.security.JwtUtils;
 import com.ecommerce.springbootecommerce.security.UserDetailsImpl;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,21 +31,12 @@ import java.util.Collections;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    CivilityRepository civilityRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
-    JwtUtils jwtUtils;
-
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final CivilityRepository civilityRepository;
+    private final PasswordEncoder encoder;
+    private final JwtUtils jwtUtils;
     private final UserMapper userMapper;
 
     public AuthResponse signin(@Valid @RequestBody AuthRequest authRequest) {

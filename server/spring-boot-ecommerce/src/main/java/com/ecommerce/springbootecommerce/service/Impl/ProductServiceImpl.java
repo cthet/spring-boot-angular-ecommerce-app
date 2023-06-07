@@ -5,12 +5,9 @@ import com.ecommerce.springbootecommerce.domain.Product;
 import com.ecommerce.springbootecommerce.dto.product.ProductDto;
 import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 import com.ecommerce.springbootecommerce.mappers.ProductMapper;
-import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
-import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,15 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    ApparelCategoryRepository apparelCategoryRepository;
-
-    @Autowired
-    GenderCategoryRepository genderCategoryRepository;
-
+    private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
     @Override

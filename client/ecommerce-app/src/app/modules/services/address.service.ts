@@ -3,35 +3,37 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Address } from '../../models/Address';
 import { AddressResponse } from '../../models/AddressResponse';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddressService {
-
+  apiUrl = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
 
   saveAddress(address: Address): Observable<Address> {
     return this.http
-      .post<Address>(`http://localhost:8080/api/address`, address)
+      .post<Address>(`${this.apiUrl}/address`, address)
       .pipe(catchError(this.handleError));
   }
 
   updateAddress(address: Address): Observable<Address> {
     return this.http
-      .put<Address>(`http://localhost:8080/api/address/${address.id}`, address)
+      .put<Address>(`${this.apiUrl}/address/${address.id}`, address)
       .pipe(catchError(this.handleError));
   }
 
   fetchListAddress(): Observable<AddressResponse> {
     return this.http
-      .get<AddressResponse>('http://localhost:8080/api/address')
+      .get<AddressResponse>(`${this.apiUrl}/address`)
       .pipe(catchError(this.handleError));
   }
 
   deleteAddress(id: number): Observable<number> {
     return this.http
-      .delete<number>(`http://localhost:8080/api/address/${id}`)
+      .delete<number>(`${this.apiUrl}/address/${id}`)
       .pipe(catchError(this.handleError));
   }
 

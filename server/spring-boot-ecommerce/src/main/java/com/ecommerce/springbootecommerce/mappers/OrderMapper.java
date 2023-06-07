@@ -14,15 +14,7 @@ public interface OrderMapper {
     @Mapping(target = "addressDto", source = "address")
     OrderDto orderToOrderDto(Order order);
 
-    //@Mapping(target = "shippingAddress", source = "addressDto")
-    //Order orderDtoToOrder(OrderDto orderDto);
-
     List<OrderDto> ordersToOrdersDto(List<Order> orders);
-
-
-//    @Mapping(target = "int", source = "civility.id")
-//    Integer civilityToInt(Civility civility);
-
 
     default Integer map(Civility civility){
         return civility.getId();

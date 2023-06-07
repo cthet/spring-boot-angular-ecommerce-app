@@ -5,7 +5,6 @@ import com.ecommerce.springbootecommerce.domain.Civility;
 import com.ecommerce.springbootecommerce.repository.CivilityRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.CivilityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CivilityServiceImpl implements CivilityService {
 
-    @Autowired
-    private CivilityRepository civilityRepository;
+    private final CivilityRepository civilityRepository;
 
     @Override
     public Civility getCivilityById(int id) {

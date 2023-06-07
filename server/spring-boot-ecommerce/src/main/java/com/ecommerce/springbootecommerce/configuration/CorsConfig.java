@@ -16,21 +16,14 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Permet à tous les domaines
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(Arrays.asList("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Vous pouvez personnaliser le chemin ici
+        source.registerCorsConfiguration("/api/v1/**", configuration);
         return source;
     }
-//    @Override
-//    public void addCorsMappings(CorsRegistry registry){
-//        registry.addMapping("/api/**")
-//                .allowedOrigins("http://localhost:4200")
-//                .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
-//                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization")
-//                .allowCredentials(true);
-//    }
+
 }

@@ -10,7 +10,6 @@ import com.ecommerce.springbootecommerce.repository.ApparelCategoryRepository;
 import com.ecommerce.springbootecommerce.repository.GenderCategoryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ApparelCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +19,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ApparelCategoryServiceImpl implements ApparelCategoryService {
-    @Autowired
-    ApparelCategoryRepository apparelCategoryRepository;
-    @Autowired
-    GenderCategoryRepository genderCategoryRepository;
 
+    private final ApparelCategoryRepository apparelCategoryRepository;
+    private final GenderCategoryRepository genderCategoryRepository;
     private final ApparelCategoryMapper apparelCategoryMapper;
+
     @Override
     public ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int gender, int brand) {
 

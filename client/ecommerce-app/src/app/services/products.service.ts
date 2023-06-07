@@ -3,29 +3,31 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Product } from '../models/Product';
 import { ProductsResponse } from '../models/ProductsResponse';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-
+  apiUrl = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
 
   fetchProduct(productId: number): Observable<Product> {
     return this.http.get<Product>(
-      `http://localhost:8080/api/product/${productId}`
+      `${this.apiUrl}/product/${productId}`
     ).pipe(catchError(this.handleError));
   }
 
   fetchProducts(params: any): Observable<ProductsResponse> {
     return this.http.get<ProductsResponse>(
-      `http://localhost:8080/api/product`,
+      `${this.apiUrl}/product`,
       { params }
     ).pipe(catchError(this.handleError));
   }
 
   fetchNewProducts(params: any): Observable<ProductsResponse> {
     return this.http.get<ProductsResponse>(
-      `http://localhost:8080/api/product/new`,
+      `${this.apiUrl}/product/new`,
       { params }
     ).pipe(catchError(this.handleError));
   }

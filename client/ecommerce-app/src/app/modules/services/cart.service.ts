@@ -2,18 +2,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Cart } from '../../models/Cart';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  apiUrl = environment.apiUrl;
   
   constructor(private http: HttpClient) {}
 
   fetchCart(): Observable<Cart> {
     return this.http.get<Cart>(
-      `http://localhost:8080/api/cart/user`
+      `${this.apiUrl}/cart`
     ).pipe(catchError(this.handleError));
   }
 
@@ -21,7 +23,7 @@ export class CartService {
   saveCart(cart: Cart): Observable<any> {
     return this.http
       .post(
-        `http://localhost:8080/api/cart/user`, cart)
+        `${this.apiUrl}/cart`, cart)
       .pipe(catchError(this.handleError));
   }
 

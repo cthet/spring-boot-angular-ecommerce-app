@@ -3,24 +3,26 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Order } from '../models/Order';
 import { OrdersResponse } from '../models/OrdersResponse';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
   
   saveOrder(order: Order): Observable<Order> {
     return this.http
       .post<Order>(
-        `http://localhost:8080/api/order/register`, order)
+        `${this.apiUrl}/order/register`, order)
       .pipe(catchError(this.handleError));
   }
 
   fetchOrders(): Observable<OrdersResponse> {
     return this.http.get<OrdersResponse>(
-      `http://localhost:8080/api/order/user`
+      `${this.apiUrl}/order/user`
     ).pipe(catchError(this.handleError));
   }
 

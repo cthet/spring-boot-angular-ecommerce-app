@@ -6,6 +6,7 @@ import com.ecommerce.springbootecommerce.domain.Civility;
 import com.ecommerce.springbootecommerce.domain.Country;
 import com.ecommerce.springbootecommerce.domain.User;
 import com.ecommerce.springbootecommerce.dto.address.AddressDto;
+import com.ecommerce.springbootecommerce.dto.address.AddressResponse;
 import com.ecommerce.springbootecommerce.mappers.AddressMapper;
 import com.ecommerce.springbootecommerce.repository.AddressRepository;
 import com.ecommerce.springbootecommerce.repository.CivilityRepository;
@@ -13,10 +14,10 @@ import com.ecommerce.springbootecommerce.repository.CountryRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.AddressService;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,20 +26,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    AddressRepository addressRepository;
-
-    @Autowired
-    CountryRepository countryRepository;
-
-    @Autowired
-    CivilityRepository civilityRepository;
-
+    private final UserService userService;
+    private final AddressRepository addressRepository;
+    private final CountryRepository countryRepository;
+    private final CivilityRepository civilityRepository;
     private final AddressMapper addressMapper;
-
 
     @Override
     public AddressDto fetchAddressDTO(Long id) {
@@ -50,6 +42,7 @@ public class AddressServiceImpl implements AddressService {
         return addressDto;
     }
 
+    @Override
     public AddressDto createAddress(AddressDto addressDTO) {
 
         Optional<Address> optAddress = addressRepository.findById(addressDTO.getId());
@@ -67,16 +60,20 @@ public class AddressServiceImpl implements AddressService {
         address.setCivility(civility);
         address.setCountry(country);
         address.setUser(userService.getUser());
-        //save shipping address
-        return addressMapper.addressToAddressDto(addressRepository.save(address));
+
+        Address savedAddress = addressRepository.save(address);
+
+        return addressMapper.addressToAddressDto(savedAddress);
 
     }
 
     @Override
-    public AddressDto updateAddress(AddressDto addressDTO) {
+    public AddressDto updateAddress(Long id, AddressDto addressDTO) {
 
-        addressRepository.findById(addressDTO.getId())
+        Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
+
+        this.checkUserAddress(address);
 
         Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())
                 .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
@@ -84,31 +81,46 @@ public class AddressServiceImpl implements AddressService {
         Country country = countryRepository.findById(addressDTO.getCountryDto().getId())
                 .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
 
-        Address address = addressMapper.addressDtoToAddress(addressDTO);
         address.setCivility(civility);
         address.setCountry(country);
-        address.setUser(userService.getUser());
+        addressMapper.updateAddressFromDto(addressDTO, address);
 
-        //save shipping address
-        return addressMapper.addressToAddressDto(addressRepository.save(address));
+        Address savedAddress = addressRepository.save(address);
+
+        return addressMapper.addressToAddressDto(savedAddress);
 
     }
 
     @Override
-    public List<AddressDto> getUserAddress() {
+    public AddressResponse getUserAddress() {
         User user = userService.getUser();
         List<Address> addresses = addressRepository.findByUserId(user.getId());
 
         if (addresses.isEmpty()) {
-            return List.of();
+            return new AddressResponse(new ArrayList<>());
         }
 
-        return addressMapper.addressesToAddressesDto(addresses);
+        List<AddressDto> addressDtos = addressMapper.addressesToAddressesDto(addresses);
+
+        return new AddressResponse(addressDtos);
+
     }
 
     @Override
-    public Long deleteAddress(Long id) {
+    public void deleteAddress(Long id) {
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
+
+        this.checkUserAddress(address);
+
         addressRepository.deleteById(id);
-        return id;
+
+    }
+
+    private void checkUserAddress(Address address){
+        User user = userService.getUser();
+        if(user != address.getUser()){
+            throw new ApiRequestException("Address does not belong to authenticated user", HttpStatus.FORBIDDEN);
+        }
     }
 }

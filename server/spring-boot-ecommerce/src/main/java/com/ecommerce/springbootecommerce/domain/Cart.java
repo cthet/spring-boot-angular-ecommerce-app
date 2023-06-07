@@ -39,18 +39,18 @@ public class Cart {
 
     public void addCartItem(CartItem cartItem) {
         if(cartItem != null) {
-            cartItems.add(cartItem);
+            this.cartItems.add(cartItem);
             cartItem.setCart(this);
         }
     }
 
     public void clearCartItem(){
-        cartItems.clear();
+        this.cartItems.clear();
     }
 
     public void deleteCartItem(CartItem item){
         if(item != null){
-            cartItems.remove(item);
+            this.cartItems.remove(item);
         }
     }
 

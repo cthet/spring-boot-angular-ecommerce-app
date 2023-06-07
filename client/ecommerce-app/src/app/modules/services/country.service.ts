@@ -2,18 +2,20 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { CountriesResponse } from '../../models/CountriesResponse';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
-
+  apiUrl = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
 
   fetchCountries(): Observable<CountriesResponse> {
     return this.http
-      .get<CountriesResponse>('http://localhost:8080/api/country/all')
+      .get<CountriesResponse>(`${this.apiUrl}/country/all`)
       .pipe(catchError(this.handleError));
   }
 

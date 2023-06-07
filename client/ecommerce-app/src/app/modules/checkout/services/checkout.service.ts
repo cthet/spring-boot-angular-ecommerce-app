@@ -1,19 +1,21 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { PaymentInfo } from 'src/app/models/Payment-info';
+import { PaymentInfo } from 'src/app/models/payment-info';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckoutService {
-
+  apiUrl = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
 
   createPaymentIntent(paymentInfo: PaymentInfo): Observable<any> {
     return this.http
       .post<PaymentInfo>(
-        `http://localhost:8080/api/checkout/payment-intent`,
+        `${this.apiUrl}/checkout/payment-intent`,
         paymentInfo
       )
       .pipe(catchError(this.handleError));

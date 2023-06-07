@@ -2,19 +2,23 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ApparelCategoriesResponse } from '../models/ApparelCategoriesResponse';
+import { environment } from 'src/environments/environment';
+
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApparelCategoryService {
-  
+  apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) {}
 
   fetchApparelCategoriesByGenderId(
     genderId: number
   ): Observable<ApparelCategoriesResponse> {
     return this.http.get<ApparelCategoriesResponse>(
-      `http://localhost:8080/api/category/apparels?genderId=${genderId}`
+      `${this.apiUrl}/category/apparels?genderId=${genderId}`
     ).pipe(catchError(this.handleError));
   }
 
@@ -23,7 +27,7 @@ export class ApparelCategoryService {
     brandId: number
   ): Observable<ApparelCategoriesResponse> {
     return this.http.get<ApparelCategoriesResponse>(
-      `http://localhost:8080/api/category/apparels?genderId=${genderId}&brandId=${brandId}`
+      `${this.apiUrl}/category/apparels?genderId=${genderId}&brandId=${brandId}`
     ).pipe(catchError(this.handleError));
   }
 

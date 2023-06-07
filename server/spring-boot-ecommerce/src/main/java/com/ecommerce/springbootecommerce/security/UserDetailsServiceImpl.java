@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object principal = auth.getPrincipal();
         if(principal instanceof UserDetailsImpl){
-            return (UserDetailsImpl) auth;
+            return (UserDetailsImpl) principal;
         } else {
             throw new RuntimeException("User is not connected");
         }

@@ -10,9 +10,7 @@ import java.util.Optional;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-
     Optional<Address> findById(Long id);
 
-    //@Query("SELECT DISTINCT a FROM Address a WHERE a.user.id =:userId")
     List<Address> findByUserId(long userId);
 }

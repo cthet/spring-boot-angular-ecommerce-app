@@ -3,46 +3,35 @@ package com.ecommerce.springbootecommerce.controller;
 import com.ecommerce.springbootecommerce.dto.MessageResponse;
 import com.ecommerce.springbootecommerce.dto.profile.EmailDto;
 import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
+import com.ecommerce.springbootecommerce.dto.profile.ProfileDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 
 @RestController
-@RequestMapping("/api/user")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/user")
 public class UserController {
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/profile")
-    public ResponseEntity<?> getUserProfile() {
-        try {
-            return ResponseEntity.ok(userService.getUserProfile());
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
-    }
+    public ResponseEntity<ProfileDto> getUserProfile() {
 
+            return ResponseEntity.ok(userService.getUserProfile());
+    }
 
     @PostMapping("/info")
-    public ResponseEntity<?> updateUserInfo(@Valid @RequestBody InfoDto infoDTO) {
-        try {
-            return ResponseEntity.ok(new MessageResponse(userService.updateUserInfo(infoDTO)));
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<MessageResponse> updateUserInfo(@Valid @RequestBody InfoDto infoDTO) {
+            return ResponseEntity.ok((userService.updateUserInfo(infoDTO)));
     }
+
     @PostMapping("/email")
-    public ResponseEntity<?> updateUserEmail(@Valid @RequestBody EmailDto emailDTO) {
-        try {
-            return ResponseEntity.ok(new MessageResponse(userService.updateUserEmail(emailDTO)));
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<MessageResponse> updateUserEmail(@Valid @RequestBody EmailDto emailDTO) {
+            return ResponseEntity.ok((userService.updateUserEmail(emailDTO)));
     }
 
 }

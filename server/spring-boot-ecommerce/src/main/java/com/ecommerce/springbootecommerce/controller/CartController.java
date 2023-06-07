@@ -2,7 +2,7 @@ package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.dto.cart.CartDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,29 +11,21 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/cart/user")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/cart")
 public class CartController {
 
-    @Autowired
-    CartService cartService;
+    private final CartService cartService;
 
     @GetMapping
-    public ResponseEntity<?> getCartByUser() {
-        try {
+    public ResponseEntity<CartDto> getCartByUser() {
             return new ResponseEntity<>(cartService.getCartDTO(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @PostMapping
-    public ResponseEntity<?> saveUserCart(@Valid @RequestBody CartDto cartDTO) {
-        try {
+    public ResponseEntity<Void> saveUserCart(@Valid @RequestBody CartDto cartDTO) {
             cartService.saveCart(cartDTO);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
 }

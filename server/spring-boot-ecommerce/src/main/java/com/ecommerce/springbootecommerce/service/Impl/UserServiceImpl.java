@@ -2,6 +2,7 @@ package com.ecommerce.springbootecommerce.service.Impl;
 
 import com.ecommerce.springbootecommerce.Exception.ApiRequestException;
 import com.ecommerce.springbootecommerce.domain.User;
+import com.ecommerce.springbootecommerce.dto.MessageResponse;
 import com.ecommerce.springbootecommerce.dto.profile.EmailDto;
 import com.ecommerce.springbootecommerce.dto.profile.InfoDto;
 import com.ecommerce.springbootecommerce.dto.profile.ProfileDto;
@@ -10,7 +11,6 @@ import com.ecommerce.springbootecommerce.repository.UserRepository;
 import com.ecommerce.springbootecommerce.security.UserDetailsServiceImpl;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
+    private final UserRepository userRepository;
+    private final UserDetailsServiceImpl userDetailsService;
     private final UserMapper userMapper;
 
     @Override
@@ -33,22 +29,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String updateUserInfo(InfoDto infoDTO) {
+    public MessageResponse updateUserInfo(InfoDto infoDTO) {
 
         userRepository.save(userMapper.infoDtoToUser(infoDTO));
 
-        return "User Personal information successfully updated !";
+        return new MessageResponse("User Personal information successfully updated !");
     }
 
     @Override
-    public String updateUserEmail(EmailDto emailDTO) {
+    public MessageResponse updateUserEmail(EmailDto emailDTO) {
 
         User user = this.getUser();
         user.setEmail(emailDTO.getEmail());
 
         userRepository.save(user);
 
-        return "User email successfully updated !";
+        return new MessageResponse("User email successfully updated !");
     }
 
     @Override

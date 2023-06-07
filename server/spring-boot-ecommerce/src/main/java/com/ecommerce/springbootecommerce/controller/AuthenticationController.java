@@ -1,9 +1,10 @@
 package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
+import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
 import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,28 +16,21 @@ import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
-    @Autowired
-    AuthenticationService authenticationService;
 
-    @PostMapping("/sign-in")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody AuthRequest authRequest) {
-        try {
+    private final AuthenticationService authenticationService;
+
+    @PostMapping("/signin")
+    public ResponseEntity<AuthResponse> authenticateUser(@Valid @RequestBody AuthRequest authRequest) {
             return ResponseEntity.ok(authenticationService.signin(authRequest));
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
-        try {
-            authenticationService.signup(signupRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Void> signupUser(@Valid @RequestBody SignupRequest signupRequest) {
+        authenticationService.signup(signupRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

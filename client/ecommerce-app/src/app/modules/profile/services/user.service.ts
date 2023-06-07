@@ -3,22 +3,25 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Profile } from '../models/Profile';
 import { OrdersResponse } from 'src/app/models/OrdersResponse';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  apiUrl = environment.apiUrl;
+  
   constructor(private http: HttpClient) {}
 
   getUserProfile(): Observable<Profile> {
     return this.http
-      .get<Profile>(`http://localhost:8080/api/user/profile`)
+      .get<Profile>(`${this.apiUrl}/user/profile`)
       .pipe(catchError(this.handleError));
   }
 
   getUserOrders(): Observable<OrdersResponse> {
     return this.http
-      .get<OrdersResponse>(`http://localhost:8080/api/order/user`)
+      .get<OrdersResponse>(`${this.apiUrl}/order/user`)
       .pipe(catchError(this.handleError));
   }
 

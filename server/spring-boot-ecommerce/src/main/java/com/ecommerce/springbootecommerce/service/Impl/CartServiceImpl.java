@@ -11,27 +11,20 @@ import com.ecommerce.springbootecommerce.repository.CartRepository;
 import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
 
-    @Autowired
-    UserServiceImpl userService;
-
-    @Autowired
-    CartRepository cartRepository;
-
-    @Autowired
-    ProductRepository productRepository;
-
-
+    private final UserServiceImpl userService;
+    private final CartRepository cartRepository;
+    private final ProductRepository productRepository;
     private final CartMapper cartMapper;
-
     private final CartItemMapper cartItemMapper;
 
     @Override
@@ -60,31 +53,35 @@ public class CartServiceImpl implements CartService {
     @Override
     public void saveCart(CartDto cartDTO) {
 
-        Cart cart = cartMapper.cartDtoToCart(cartDTO);
-
         User user = userService.getUser();
-        cart.setUser(user);
 
-        Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
+        Cart cart = cartRepository.findCartByUserId(user.getId())
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    newCart.setUser(user);
+                    return newCart;
+                });
 
-        if (optionalCart.isPresent()) {
-            cart.setId(optionalCart.get().getId());
-        }
+        Map<Long, CartItem> cartItemMap = cart.getCartItems().stream()
+                .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));
+
+        cart.clearCartItem();
 
         cartDTO.getCartItems().forEach(cartItemDto -> {
-            CartItem cartItem = cartItemMapper.cartItemDtoToCartItem(cartItemDto);
+            CartItem cartItem = cartItemMap.get(cartItemDto.getProductDto().getId());
 
-            Optional<CartItem> existingCartItem = cart.getCartItems()
-                    .stream()
-                    .filter(item -> item.getProduct().getId().equals(cartItemDto.getProductDto().getId()))
-                    .findFirst();
-
-            if (existingCartItem.isPresent()) {
-                existingCartItem.get().setQuantity(cartItemDto.getQuantity());
+            if (cartItem == null) {
+                cartItem = cartItemMapper.cartItemDtoToCartItem(cartItemDto);
             } else {
-                cart.addCartItem(cartItem);
+                cartItem.setQuantity(cartItemDto.getQuantity());
+                cartItem.setAmount(cartItemDto.getAmount());
             }
+
+            cart.addCartItem(cartItem);
+
         });
+        cart.setTotalPrice(cartDTO.getTotalPrice());
+        cart.setTotalQuantity(cartDTO.getTotalQuantity());
 
         cartRepository.save(cart);
     }
