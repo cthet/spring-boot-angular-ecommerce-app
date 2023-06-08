@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Gender } from '../../models/Gender';
-import { LocalStorageService } from '../../services/local-storage.service';
-import { authActions, cartActions, genderActions } from '../../store/actions';
+import { authActions, genderActions } from '../../store/actions';
 import { authSelectors, cartSelectors, genderSelectors } from '../../store/selectors';
 
 @Component({

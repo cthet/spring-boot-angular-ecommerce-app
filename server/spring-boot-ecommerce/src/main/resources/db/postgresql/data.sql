@@ -50,8 +50,8 @@ INSERT INTO ecommerce.civility(id, name) VALUES ('2', 'Madame');
 --------------CATEGORIES--------------------------------
 ---------------------------------------------------------
 
-INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('1', 'Men');
-INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('2', 'Women');
+INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('1', 'Homme');
+INSERT INTO ecommerce.gender_category(id, gender_category_type) VALUES ('2', 'Femme');
 
 
 --Apparel Categories--

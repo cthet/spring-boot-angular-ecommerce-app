@@ -45,21 +45,6 @@ import { Gender } from '../../models/Gender';
             <button mat-menu-item (click)="logout.emit()">Se déconnecter</button>
           </mat-menu>
 
-          <!-- <a
-            *ngIf="isLoggedIn"
-            class="fa fa-user nav-item"
-            (click)="logout.emit()"
-          >
-          </a>-->
-
-          <!--profile-->
-
-          <!-- <a
-            *ngIf="isLoggedIn"
-            routerLink="/profile"
-            class="fa fa-user"
-          >
-          </a>  -->
 
           <!--Cart-->
           <a

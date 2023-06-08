@@ -1,0 +1,45 @@
+version: '1'
+networks:
+  ecommerce-db-compose:
+services:
+  ecommerce-springboot:
+    image: ecommerce-springboot
+    build:
+      context: ./server/spring-boot-ecommerce
+      dockerfile: ecommerce-springboot.Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - ecommerce-db-compose
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=ecommerce
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - ecommerce-db-compose
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ecommerce"]
+      interval: 15s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+  ecommerce-angular:
+    image: ecommerce-angular
+    build:
+      context: ./client/ecommerce-app
+      dockerfile: ecommerce-angular.Dockerfile
+    volumes:
+      - ./client/ecommerce-app:/app
+      - /app/node_modules
+    ports:
+      - 4200:4200
+    networks:
+      - ecommerce-db-compose
+    depends_on:
+      - ecommerce-app
