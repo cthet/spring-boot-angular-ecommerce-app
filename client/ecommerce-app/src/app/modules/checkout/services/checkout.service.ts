@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { PaymentInfo } from 'src/app/models/payment-info';
+import { PaymentInfo } from 'src/app/models/Payment-info';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

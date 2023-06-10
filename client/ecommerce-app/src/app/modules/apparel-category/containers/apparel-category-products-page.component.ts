@@ -7,7 +7,6 @@ import { Brand } from '../../../models/Brand';
 import { Product } from '../../../models/Product';
 import { apparelCategoriesActions, productsActions } from '../../../store/actions';
 import { apparelCategoriesSelectors, brandsSelectors, productsSelectors } from '../../../store/selectors';
-import { apparelCategoriesBrandActions } from '../../brand/store/actions';
 import { brandCategoriesActions } from '../store/actions';
 
 @Component({
