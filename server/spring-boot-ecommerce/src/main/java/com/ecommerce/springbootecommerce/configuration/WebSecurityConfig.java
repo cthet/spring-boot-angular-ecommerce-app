@@ -37,8 +37,8 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers(WHITE_LIST_URLS).permitAll()
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers(WHITE_LIST_URLS).permitAll()
                                 .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider())

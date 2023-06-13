@@ -25,6 +25,7 @@ public class ProductController {
 
     }
 
+
     @GetMapping
     public ResponseEntity<ProductsResponse> getProducts(@RequestParam(defaultValue = "2") int gender,
                                                         @RequestParam(value = "brand" , defaultValue = "0") List<Integer> brand,
@@ -36,6 +37,7 @@ public class ProductController {
             return new ResponseEntity<>(productService.getProducts(gender, brand, category, page, size, sort), HttpStatus.OK);
 
     }
+
 
     @GetMapping("/new")
     public ResponseEntity<ProductsResponse> getNewProducts(@RequestParam(defaultValue = "2") int gender,
