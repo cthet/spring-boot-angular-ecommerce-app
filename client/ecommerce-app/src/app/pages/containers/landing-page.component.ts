@@ -12,7 +12,7 @@ import { genderSelectors } from '../../store/selectors';
     ></app-home-view>
   `,
 })
-export class HomePageComponent {
+export class LandingPageComponent {
   gender$: Observable<Gender | null>;
 
   constructor(private store: Store<Store>) {

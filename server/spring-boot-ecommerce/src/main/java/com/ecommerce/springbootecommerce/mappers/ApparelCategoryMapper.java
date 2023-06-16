@@ -9,8 +9,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ApparelCategoryMapper {
 
-    ApparelCategoryDto apparelCategoryToApparelCategoryDto(ApparelCategory apparelCategory);
-
     List<ApparelCategoryDto> apparelCategoriesToApparelCategoriesDto(List<ApparelCategory> apparelCategories);
 
 

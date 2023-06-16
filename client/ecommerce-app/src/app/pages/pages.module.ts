@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 
-import { HomePageComponent } from './containers/home-page.component';
-import { HomeViewComponent } from './components/home-view.component';
+import { LandingPageComponent } from './containers/landing-page.component';
+import { LandingPageViewComponent } from './components/landing-page-view.component';
 import { MatButtonModule } from '@angular/material/button';
 
-const COMPONENTS = [HomeViewComponent]
+const COMPONENTS = [LandingPageViewComponent]
 
-const CONTAINERS = [HomePageComponent]
+const CONTAINERS = [LandingPageComponent]
 
 @NgModule({
   declarations: [COMPONENTS, CONTAINERS],

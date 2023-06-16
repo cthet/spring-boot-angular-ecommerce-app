@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output } from '@angular/core';
 import { ApparelCategory } from '../../models/ApparelCategory';
 import { Brand } from '../../models/Brand';
 
@@ -61,4 +61,5 @@ export class NavbarComponent {
 
   @Output() selectBrand = new EventEmitter<Brand>();
   @Output() selectApparelCategory = new EventEmitter<ApparelCategory>();
+
 }

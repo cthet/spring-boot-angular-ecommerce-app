@@ -18,6 +18,11 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @GetMapping("/hello")
+    public ResponseEntity<String> hello(){
+        return new ResponseEntity<>("hello", HttpStatus.OK);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long id) {
 

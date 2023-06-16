@@ -1,14 +1,9 @@
-version: '1'
+version: '3.8'
 networks:
   ecommerce-db-compose:
 services:
   ecommerce-springboot:
     image: ecommerce-springboot
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
     build:
       context: ./server/spring-boot-ecommerce
       dockerfile: ecommerce-springboot.Dockerfile
@@ -17,7 +12,7 @@ services:
     networks:
       - ecommerce-db-compose
     depends_on:
-      db:
+      db:      
         condition: service_healthy
   db:
     image: postgres
@@ -36,11 +31,6 @@ services:
       timeout: 5s
   ecommerce-angular:
     image: ecommerce-angular
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "200k"
-        max-file: "10"
     build:
       context: ./client/ecommerce-app
       dockerfile: ecommerce-angular.Dockerfile

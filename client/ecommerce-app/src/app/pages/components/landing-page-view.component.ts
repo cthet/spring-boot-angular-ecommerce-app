@@ -27,9 +27,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
       </div>
     </div>
   `,
-  styleUrls: ['./home-view.component.css'],
+  styleUrls: ['./landing-page-view.component.css'],
 })
-export class HomeViewComponent {
+export class LandingPageViewComponent {
   backgroundColor:string = "#000";
   fontColor: string = "#f1f1f1";
   

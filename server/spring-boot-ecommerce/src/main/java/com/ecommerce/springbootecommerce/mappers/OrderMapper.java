@@ -12,6 +12,7 @@ import java.util.List;
 public interface OrderMapper {
 
     @Mapping(target = "addressDto", source = "address")
+    @Mapping(target = "dateCreated", source = "dateCreated")
     OrderDto orderToOrderDto(Order order);
 
     List<OrderDto> ordersToOrdersDto(List<Order> orders);

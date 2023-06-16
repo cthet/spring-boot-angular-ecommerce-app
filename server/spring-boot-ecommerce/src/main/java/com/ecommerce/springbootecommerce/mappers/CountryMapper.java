@@ -10,8 +10,6 @@ import java.util.List;
 public interface CountryMapper {
 
 
-    CountryDto countryToCountryDto(Country country);
-
     List<CountryDto> countriesToCountriesDto(List<Country> countries);
 
 

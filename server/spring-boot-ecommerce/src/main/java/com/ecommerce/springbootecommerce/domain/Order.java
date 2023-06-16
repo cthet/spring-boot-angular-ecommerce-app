@@ -31,7 +31,7 @@ public class Order {
 
     @Column(name="date_created")
     @CreationTimestamp
-    private Date Datecreated;
+    private Date dateCreated;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();

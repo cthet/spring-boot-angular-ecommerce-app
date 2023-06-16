@@ -15,12 +15,5 @@ public interface ProductMapper {
     @Mapping(source = "brandCategory.name", target = "brand_category")
     ProductDto productToProductDto(Product product);
 
-    @Mapping(source = "gender_category", target = "genderCategory.name")
-    @Mapping(source = "product_category", target = "apparelCategory.name")
-    @Mapping(source = "brand_category", target = "brandCategory.name")
-    Product productDtoToProduct(ProductDto productDto);
-
-    List<Product> productsDtoToProducts(List<ProductDto> productsDto);
-
     List<ProductDto> productsToProductsDto(List<Product> products);
 }

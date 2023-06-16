@@ -9,7 +9,7 @@ import org.mapstruct.MappingTarget;
 import java.util.List;
 
 
-@Mapper(componentModel = "spring", uses = {CountryMapper.class, CivilityMapper.class})
+@Mapper(componentModel = "spring", uses = {CountryMapper.class})
 public interface AddressMapper {
 
     @Mapping(source = "country", target = "countryDto")

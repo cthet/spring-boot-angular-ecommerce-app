@@ -1,11 +1,12 @@
-FROM maven:3.9.2-amazoncorretto-17 as build
+FROM maven:3.9-eclipse-temurin-17 as build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:resolve
-COPY src .
-RUN mvn package
+COPY src src
+RUN mvn clean install -DskipTests
 
-FROM tomcat:10
-COPY --from=build /app/target/ecommerce.war ${CATALINA_HOME}/webapps/ROOT.war
+FROM amazoncorretto:17
+WORKDIR /app
+COPY --from=build /app/target/ecommerce.jar /app/ecommerce.jar
 EXPOSE 8080
-ENTRYPOINT ["catalina.sh", "run"]
+ENTRYPOINT ["java", "-jar", "/app/ecommerce.jar"]

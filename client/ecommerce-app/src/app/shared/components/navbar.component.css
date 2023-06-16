@@ -117,35 +117,29 @@ ul:hover ul li a:hover {
 @media (max-width: 1050px) {
   .brands-dropdown,
   .apparel-categories-dropdown {
-    width: 370px;
+    min-width: 380px; 
   }
 }
 
 @media (max-width: 768px) {
   .brands-dropdown,
   .apparel-categories-dropdown {
-     min-width: 270px; 
+     min-width: 284px; 
   }
 }
 
 @media (max-width: 576px) {
   .brands-dropdown,
   .apparel-categories-dropdown {
-    min-width: 220px; 
+    min-width: 212px; 
   }
 
  @media (max-width: 425px) {
     .brands-dropdown,
     .apparel-categories-dropdown {
-      min-width: 180px; 
+    min-width: 187px; 
   }
 }
 
-  @media (min-width: 375px) {
-    .brands-dropdown,
-    .apparel-categories-dropdown {
-     min-width: 150px; 
-  }
-  }
 
 }
