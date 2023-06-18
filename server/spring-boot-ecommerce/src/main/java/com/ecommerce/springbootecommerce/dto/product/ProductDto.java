@@ -31,13 +31,13 @@ public class ProductDto {
     @NotBlank(message = "image_url cannot be blank")
     private String imageUrl;
 
-    @JsonProperty("units_in_stock")
-    @NotEmpty(message = "units_in_stock cannot be empty")
-    private int unitsInStocks;
-
     @JsonProperty("active")
     @NotEmpty(message = "active cannot be empty")
     private Boolean active;
+
+    @JsonProperty("units_in_stock")
+    @NotEmpty(message = "units_in_stock cannot be empty")
+    private int unitsInStocks;
 
     @JsonProperty("gender_category")
     @NotBlank(message = "gender_category cannot be blank")

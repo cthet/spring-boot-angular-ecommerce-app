@@ -26,4 +26,6 @@ public class BrandCategoryImage {
     @JoinColumn(name = "gender_category_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private GenderCategory genderCategory;
+
+
 }

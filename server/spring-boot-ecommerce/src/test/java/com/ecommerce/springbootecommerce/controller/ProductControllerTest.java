@@ -45,7 +45,7 @@ public class ProductControllerTest {
     void testGetProductById() throws Exception {
 
         BigDecimal bigDecimal = new BigDecimal("1000");
-        ProductDto mockProductDto = new ProductDto(1L, "product name", bigDecimal,"productImageUrl", 100, true, "femme", "Manteaux", "Alexander McQueen");
+        ProductDto mockProductDto = new ProductDto(1L, "product name", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
         doReturn(mockProductDto).when(service).getProductById(1L);
 
         mockMvc.perform(get("/api/v1/product/1"))
@@ -89,8 +89,8 @@ public class ProductControllerTest {
     void testGetProduct() throws Exception {
 
         BigDecimal bigDecimal = new BigDecimal("1000");
-        ProductDto mockProductDto1 = new ProductDto(1L, "product name1", bigDecimal,"productImageUrl", 100, true, "femme", "Manteaux", "Alexander McQueen");
-        ProductDto mockProductDto2 = new ProductDto(2L, "product name2", bigDecimal,"productImageUrl", 100, true, "femme", "Manteaux", "Alexander McQueen");
+        ProductDto mockProductDto1 = new ProductDto(1L, "product name1", bigDecimal,"productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
+        ProductDto mockProductDto2 = new ProductDto(2L, "product name2", bigDecimal,"productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
 
         List<ProductDto> mockProductsDto = List.of(mockProductDto1, mockProductDto2);
         ProductsResponse mockProductsResponse = new ProductsResponse(mockProductsDto, 0, 10, 2L, 1);
@@ -171,8 +171,8 @@ public class ProductControllerTest {
     void testGetNewProduct() throws Exception {
 
         BigDecimal bigDecimal = new BigDecimal("1000");
-        ProductDto mockProductDto1 = new ProductDto(1L, "product name1", bigDecimal, "productImageUrl", 100, true, "femme", "Manteaux", "Alexander McQueen");
-        ProductDto mockProductDto2 = new ProductDto(2L, "product name2", bigDecimal, "productImageUrl", 100, true, "femme", "Manteaux", "Alexander McQueen");
+        ProductDto mockProductDto1 = new ProductDto(1L, "product name1", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
+        ProductDto mockProductDto2 = new ProductDto(2L, "product name2", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
         List<ProductDto> mockProductsDto = List.of(mockProductDto1, mockProductDto2);
         ProductsResponse mockProductsResponse = new ProductsResponse(mockProductsDto, 0, 10, 2L, 1);
         doReturn(mockProductsResponse).when(service).getNewProducts(2, 0, 10);

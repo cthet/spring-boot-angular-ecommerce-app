@@ -48,7 +48,7 @@ public class AddressServiceImpl implements AddressService {
         Optional<Address> optAddress = addressRepository.findById(addressDTO.getId());
 
         if(optAddress.isPresent()){
-            throw new ApiRequestException("Address already exists !", HttpStatus.BAD_REQUEST);
+            throw new ApiRequestException("Address already exists !", HttpStatus.CONFLICT);
         }
 
         Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())

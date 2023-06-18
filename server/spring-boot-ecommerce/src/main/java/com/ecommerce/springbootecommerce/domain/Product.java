@@ -46,4 +46,5 @@ public class Product {
     @JoinColumn(name = "apparel_category_id")
     private ApparelCategory apparelCategory;
 
+
 }

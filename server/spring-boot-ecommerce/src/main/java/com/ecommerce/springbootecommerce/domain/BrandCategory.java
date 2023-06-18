@@ -56,4 +56,5 @@ public class BrandCategory {
             brandCategoryImage.setBrandCategory(this);
         }
     }
+
 }
