@@ -10,26 +10,21 @@ import com.ecommerce.springbootecommerce.dto.product.ProductsResponse;
 import com.ecommerce.springbootecommerce.mappers.ProductMapper;
 import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.ProductService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -39,53 +34,85 @@ public class ProductServiceTest {
     private ProductService productService;
 
     @MockBean
-    private ProductRepository repository;
+    private ProductRepository productRepository;
 
     @MockBean
     private ProductMapper productMapper;
 
+    private Product testProduct;
+    private ProductDto testProductDto;
+    private List<Product> testProducts = new ArrayList<>();
+    private List<ProductDto> testProductDtos = new ArrayList<>();
+    private Page<Product> testPageProduct;
+
+    private int testGenderId;
+    private List<Integer> testCategoryIds = new ArrayList<>();
+    private List<Integer> testBrandIds = new ArrayList<>();
+    private String[] testSort = new String[2];
+    private int testPage;
+    private int testSize;
+    private int testTotalItems;
+    private int testTotalPages;
+    private Pageable testPagingSort;
+
+    @BeforeEach
+    void setUp() {
+        GenderCategory genderCategory = new GenderCategory();
+        genderCategory.setName("femme");
+
+        ApparelCategory apparelCategory = new ApparelCategory();
+        apparelCategory.setName("Manteaux");
+
+        BrandCategory brandCategory = new BrandCategory();
+        brandCategory.setName("Alexander McQueen");
+
+        BigDecimal bigDecimal = new BigDecimal("1000");
+
+        testProduct = new Product();
+        testProduct.setId(1L);
+        testProduct.setProductName("product name");
+        testProduct.setUnitPrice(bigDecimal);
+        testProduct.setImageUrl("productImageUrl");
+        testProduct.setActive(true);
+        testProduct.setNewProduct(true);
+        testProduct.setUnitsInStocks(100);
+        testProduct.setGenderCategory(genderCategory);
+        testProduct.setBrandCategory(brandCategory);
+        testProduct.setApparelCategory(apparelCategory);
+        testProducts.add(testProduct);
+
+        testProductDto = new ProductDto(1L, "product name", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
+        testProductDtos.add(testProductDto);
+
+        testPageProduct = new PageImpl<>(testProducts);
+        testGenderId = 1;
+        testCategoryIds = Arrays.asList(1);
+        testBrandIds = Arrays.asList(1);
+        testSort[0]="id";
+        testSort[1]="asc";
+        testPage = 0;
+        testSize = 1;
+        testTotalItems = 1;
+        testTotalPages = 1;
+        testPagingSort = PageRequest.of(testPage, testSize);
+    }
 
     @Test
     @DisplayName("Test getProductById - Success")
     void testGetProductByIdSuccess() throws Exception {
-
-        GenderCategory mockGenderCategory = new GenderCategory();
-        mockGenderCategory.setName("femme");
-        ApparelCategory mockApparelCategory = new ApparelCategory();
-        mockApparelCategory.setName("Manteaux");
-        BrandCategory mockBrandCategory = new BrandCategory();
-        mockBrandCategory.setName("Alexander McQueen");
-
-        BigDecimal bigDecimal = new BigDecimal("1000");
-        Product mockProduct = new Product();
-        mockProduct.setId(1L);
-        mockProduct.setProductName("product name");
-        mockProduct.setUnitPrice(bigDecimal);
-        mockProduct.setImageUrl("productImageUrl");
-        mockProduct.setActive(true);
-        mockProduct.setNewProduct(true);
-        mockProduct.setUnitsInStocks(100);
-        mockProduct.setGenderCategory(mockGenderCategory);
-        mockProduct.setBrandCategory(mockBrandCategory);
-        mockProduct.setApparelCategory(mockApparelCategory);
-
-        ProductDto mockProductDto = new ProductDto(1L, "product name", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
-
-        when(repository.findById(1L)).thenReturn(Optional.of(mockProduct));
-        when(productMapper.productToProductDto(mockProduct)).thenReturn(mockProductDto);
+        given(productRepository.findById(1L)).willReturn(Optional.of(testProduct));
+        given(productMapper.productToProductDto(testProduct)).willReturn(testProductDto);
 
         ProductDto returnedProductDto = productService.getProductById(1L);
 
-        assertEquals(mockProductDto, returnedProductDto);
-
+        assertEquals(testProductDto, returnedProductDto);
     }
 
     @Test
     @DisplayName("Test getProductById - Not Found")
     void testGetProductByIdNotFound() throws Exception {
         Long nonExistingId = 1L;
-
-        when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
+        given(productRepository.findById(nonExistingId)).willReturn(Optional.empty());
 
         Exception exception = assertThrows(ApiRequestException.class, () -> {
             productService.getProductById(nonExistingId);
@@ -98,60 +125,68 @@ public class ProductServiceTest {
     }
 
     @Test
-    @DisplayName("Test getProductById - Found")
-    void testGetProducts() throws Exception {
+    @DisplayName("Test getProducts - Success")
+    void testGetProductsSuccess() throws Exception {
+        given(productRepository.findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(
+                testGenderId, testCategoryIds, testBrandIds,  PageRequest.of(testPage, testSize, Sort.by(Sort.Direction.ASC, "id"))))
+                .willReturn(testPageProduct);
+        given(productMapper.productsToProductsDto(testProducts)).willReturn(testProductDtos);
 
-        int mockGenderId = 1;
-        List<Integer> mockCategoryIds = Arrays.asList(1);
-        List<Integer> mockBrandIds = Arrays.asList(1);
-        String[] mockSort = {"id","asc"};
+        ProductsResponse productsResponse = productService.getProducts(testGenderId, testBrandIds, testCategoryIds, testPage, testSize, testSort);
 
-        int mockPage = 0;
-        int mockSize = 1;
-        int mockTotalItems = 1;
-        int mockTotalPages = 1;
-
-
-        GenderCategory mockGenderCategory = new GenderCategory();
-        mockGenderCategory.setName("femme");
-        ApparelCategory mockApparelCategory = new ApparelCategory();
-        mockApparelCategory.setName("Manteaux");
-        BrandCategory mockBrandCategory = new BrandCategory();
-        mockBrandCategory.setName("Alexander McQueen");
-
-        BigDecimal bigDecimal = new BigDecimal("1000");
-        Product mockProduct = new Product();
-        mockProduct.setId(1L);
-        mockProduct.setProductName("product name");
-        mockProduct.setUnitPrice(bigDecimal);
-        mockProduct.setImageUrl("productImageUrl");
-        mockProduct.setActive(true);
-        mockProduct.setNewProduct(true);
-        mockProduct.setUnitsInStocks(100);
-        mockProduct.setGenderCategory(mockGenderCategory);
-        mockProduct.setBrandCategory(mockBrandCategory);
-        mockProduct.setApparelCategory(mockApparelCategory);
-
-        ProductDto mockProductDto = new ProductDto(1L, "product name", bigDecimal, "productImageUrl", true, 100, "femme", "Manteaux", "Alexander McQueen");
-
-        List<Product> mockProducts = new ArrayList<>();
-        mockProducts.add(mockProduct);
-        Page<Product> mockPageProduct = new PageImpl<>(mockProducts);
-
-        List<ProductDto> mockProductDtos = new ArrayList<>();
-        mockProductDtos.add(mockProductDto);
-
-        when(repository.findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(mockGenderId, mockBrandIds, mockCategoryIds,  PageRequest.of(mockPage, mockSize, Sort.by(Sort.Direction.ASC, "id")))).thenReturn(mockPageProduct);
-        when(productMapper.productsToProductsDto(mockProducts)).thenReturn(mockProductDtos);
-
-        ProductsResponse productsResponse = productService.getProducts(mockGenderId, mockBrandIds, mockCategoryIds, mockPage, mockSize, mockSort);
-
-        assertEquals(mockProductDtos, productsResponse.getProductsDTO());
-        assertEquals(mockPage, productsResponse.getCurrentPage());
-        assertEquals(mockSize, productsResponse.getSize());
-        assertEquals(mockTotalItems, productsResponse.getTotalItems());
-        assertEquals(mockTotalPages, productsResponse.getTotalPages());
+        assertEquals(testProductDtos, productsResponse.getProductsDTO());
+        assertEquals(testPage, productsResponse.getCurrentPage());
+        assertEquals(testSize, productsResponse.getSize());
+        assertEquals(testTotalItems, productsResponse.getTotalItems());
+        assertEquals(testTotalPages, productsResponse.getTotalPages());
     }
 
+    @Test
+    @DisplayName("Test getProducts - Failure")
+    void testGetProductsFailure() throws Exception {
+        Exception exception = assertThrows(ApiRequestException.class, () -> {
+            productService.getProducts(0, Arrays.asList(0), Arrays.asList(0), testPage, testSize, testSort);
+        });
 
+        String expectedMessage = "Error in request";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+    @Test
+    @DisplayName("Test getNewProducts - Success")
+    void testGetNewProductsSuccess() throws Exception {
+
+        given(productRepository.findNewProductByGenderCategoryId(testGenderId, testPagingSort)).willReturn(testPageProduct);
+        given(productMapper.productsToProductsDto(testProducts)).willReturn(testProductDtos);
+
+        ProductsResponse productsResponse = productService.getNewProducts(testGenderId, testPage, testSize);
+
+        assertEquals(testProductDtos, productsResponse.getProductsDTO());
+        assertEquals(testPage, productsResponse.getCurrentPage());
+        assertEquals(testSize, productsResponse.getSize());
+        assertEquals(testTotalItems, productsResponse.getTotalItems());
+        assertEquals(testTotalPages, productsResponse.getTotalPages());
+    }
+
+    @Test
+    @DisplayName("Test getNewProducts - Empty")
+    void testGetNewProductsEmpty() throws Exception {
+        long testEmptyTotalItems = 0L;
+        List<ProductDto> testEmptyProductsDto = Collections.emptyList();
+        List<Product> testEmptyProducts = Collections.emptyList();
+        Page<Product> testEmptyPageProduct = new PageImpl<>(testEmptyProducts);
+
+        given(productRepository.findNewProductByGenderCategoryId(testGenderId, testPagingSort)).willReturn(testEmptyPageProduct);
+
+        ProductsResponse productsResponse = productService.getNewProducts(testGenderId, testPage, testSize);
+
+        assertEquals(testEmptyProductsDto, productsResponse.getProductsDTO());
+        assertEquals(testPage, productsResponse.getCurrentPage());
+        assertEquals(testSize, productsResponse.getSize());
+        assertEquals(testEmptyTotalItems, productsResponse.getTotalItems());
+        assertEquals(testTotalPages, productsResponse.getTotalPages());
+
+    }
 }

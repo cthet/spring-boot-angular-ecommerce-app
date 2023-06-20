@@ -44,9 +44,18 @@ public class AddressControllerTest {
 
         CivilityDto mockCivilityDto = new CivilityDto(1, "homme");
         CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
-        AddressDto mockAddressDto = new AddressDto(mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
+        AddressDto mockAddressDto = new AddressDto();
+        mockAddressDto.setCivilityDto(mockCivilityDto);
+        mockAddressDto.setFirstName("John");
+        mockAddressDto.setLastName("Doe");
+        mockAddressDto.setStreet("123 Main Street");
+        mockAddressDto.setAddressComplement("Apartment 4B");
+        mockAddressDto.setPostCode(12345);
+        mockAddressDto.setCity("Paris");
+        mockAddressDto.setCountryDto(mockCountryDto);
+        mockAddressDto.setPhoneNumber("0123456789");
         AddressDto mockSavedAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
-        doReturn(mockSavedAddressDto).when(addressService).createAddress(mockAddressDto);
+        doReturn(mockSavedAddressDto).when(addressService).saveAddress(mockAddressDto);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String addressDtoJson = objectMapper.writeValueAsString(mockAddressDto);
@@ -90,7 +99,7 @@ public class AddressControllerTest {
         CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
         AddressDto mockAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
         doThrow(new ApiRequestException("Address already exists !!", HttpStatus.CONFLICT))
-                .when(addressService).createAddress(mockAddressDto);
+                .when(addressService).saveAddress(mockAddressDto);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String addressDtoJson = objectMapper.writeValueAsString(mockAddressDto);

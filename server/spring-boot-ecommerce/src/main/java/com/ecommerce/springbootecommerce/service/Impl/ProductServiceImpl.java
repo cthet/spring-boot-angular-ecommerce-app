@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -66,20 +67,30 @@ public class ProductServiceImpl implements ProductService {
             productsResponse.setTotalPages(pageProduct.getTotalPages());
 
             return productsResponse;
-        }
+    }
 
     @Override
     public ProductsResponse getNewProducts(int gender, int page, int size) {
         Pageable pagingSort = PageRequest.of(page, size);
 
-        Page<Product> pageProduct = productRepository.findNewProductByGenderCategoryId(gender, true, pagingSort);
+        Page<Product> pageProduct = productRepository.findNewProductByGenderCategoryId(gender, pagingSort);
 
         ProductsResponse productsResponse = new ProductsResponse();
-        productsResponse.setProductsDTO(productMapper.productsToProductsDto(pageProduct.getContent()));
-        productsResponse.setCurrentPage(pageProduct.getNumber());
-        productsResponse.setSize(pageProduct.getSize());
-        productsResponse.setTotalItems(pageProduct.getTotalElements());
-        productsResponse.setTotalPages(pageProduct.getTotalPages());
+
+        if(pageProduct == null || pageProduct.isEmpty()){
+            productsResponse.setProductsDTO(Collections.emptyList());
+            productsResponse.setCurrentPage(0);
+            productsResponse.setSize(1);
+            productsResponse.setTotalItems(0L);
+            productsResponse.setTotalPages(1);
+        } else {
+            List<ProductDto> productDtoList = productMapper.productsToProductsDto(pageProduct.getContent());
+            productsResponse.setProductsDTO(productDtoList);
+            productsResponse.setCurrentPage(pageProduct.getNumber());
+            productsResponse.setSize(pageProduct.getSize());
+            productsResponse.setTotalItems(pageProduct.getTotalElements());
+            productsResponse.setTotalPages(pageProduct.getTotalPages());
+        }
 
         return productsResponse;
     }

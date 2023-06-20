@@ -43,7 +43,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public AddressDto createAddress(AddressDto addressDTO) {
+    public AddressDto saveAddress(AddressDto addressDTO) {
 
         Optional<Address> optAddress = addressRepository.findById(addressDTO.getId());
 

@@ -20,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(int gender, List<Integer> category, List<Integer> brand, Pageable pageable);
 
     @Query("SELECT p FROM Product p" +
-            " WHERE p.newProduct = :newProduct AND p.genderCategory.id = :genderId" +
+            " WHERE p.newProduct = true AND p.genderCategory.id = :genderId" +
     " ORDER BY p.id")
-    Page<Product> findNewProductByGenderCategoryId(@Param("genderId") int genderId, @Param("newProduct") boolean newProduct, Pageable pageable);
+    Page<Product> findNewProductByGenderCategoryId(@Param("genderId") int genderId, Pageable pageable);
 }

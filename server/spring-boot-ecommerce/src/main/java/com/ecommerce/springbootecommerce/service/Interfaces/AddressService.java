@@ -5,7 +5,7 @@ import com.ecommerce.springbootecommerce.dto.address.AddressResponse;
 
 public interface AddressService {
 
-    AddressDto createAddress(AddressDto addressDTO);
+    AddressDto saveAddress(AddressDto addressDTO);
 
     AddressDto updateAddress(Long id, AddressDto addressDTO);
 

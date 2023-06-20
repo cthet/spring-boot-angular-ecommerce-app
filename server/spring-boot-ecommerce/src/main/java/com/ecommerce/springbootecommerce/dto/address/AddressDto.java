@@ -50,15 +50,4 @@ public class AddressDto {
     @JsonProperty("phoneNumber")
     private String phoneNumber;
 
-    public AddressDto(CivilityDto civilityDto, String firstName, String lastName, String street, String addressComplement, int postCode, String city, CountryDto countryDto, String phoneNumber) {
-        this.civilityDto = civilityDto;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.street = street;
-        this.addressComplement = addressComplement;
-        this.postCode = postCode;
-        this.city = city;
-        this.countryDto = countryDto;
-        this.phoneNumber = phoneNumber;
-    }
 }

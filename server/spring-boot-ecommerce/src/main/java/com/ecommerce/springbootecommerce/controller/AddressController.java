@@ -18,20 +18,26 @@ public class AddressController {
 
     private final AddressService addressService;
 
+    @GetMapping
+    public ResponseEntity<AddressResponse> getAddresses() {
+        return ResponseEntity.ok(addressService.getUserAddress());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AddressDto> getAddress(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(addressService.fetchAddressDTO(id));
+    }
+
+
     @PostMapping
     public ResponseEntity<AddressDto> createAddress(@Valid @RequestBody AddressDto addressDTO) {
-            return ResponseEntity.ok(addressService.createAddress(addressDTO));
+            return ResponseEntity.ok(addressService.saveAddress(addressDTO));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AddressDto> updateAddress(@Valid @RequestBody AddressDto addressDTO,
                                                     @PathVariable("id") Long id) {
             return ResponseEntity.ok(addressService.updateAddress(id, addressDTO));
-    }
-
-    @GetMapping
-    public ResponseEntity<AddressResponse> getAddresses() {
-            return ResponseEntity.ok(addressService.getUserAddress());
     }
 
     @DeleteMapping("{id}")
