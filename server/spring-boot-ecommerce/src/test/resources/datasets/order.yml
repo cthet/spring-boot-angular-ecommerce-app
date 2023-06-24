@@ -1,0 +1,11 @@
+order:
+  - id: 1
+    orderTrackingNumber: ABC123
+    totalQuantity: 3
+    totalPrice: 76.49
+    dateCreated: "2023-06-21T12:34:56"
+    address: 1
+    user: 1
+    orderItems:
+      - 1
+      - 2

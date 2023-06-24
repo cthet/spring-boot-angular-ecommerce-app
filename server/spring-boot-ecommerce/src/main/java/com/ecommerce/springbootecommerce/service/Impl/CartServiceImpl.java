@@ -8,7 +8,6 @@ import com.ecommerce.springbootecommerce.dto.cart.CartItemDto;
 import com.ecommerce.springbootecommerce.mappers.CartItemMapper;
 import com.ecommerce.springbootecommerce.mappers.CartMapper;
 import com.ecommerce.springbootecommerce.repository.CartRepository;
-import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ public class CartServiceImpl implements CartService {
 
     private final UserServiceImpl userService;
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
     private final CartMapper cartMapper;
     private final CartItemMapper cartItemMapper;
 
@@ -63,6 +61,7 @@ public class CartServiceImpl implements CartService {
                 });
 
         Map<Long, CartItem> cartItemMap = cart.getCartItems().stream()
+                .filter(item -> item.getProduct() != null)
                 .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));
 
         cart.clearCartItem();

@@ -100,6 +100,7 @@
 			<version>${stripe-java.version}</version>
 		</dependency>
 
+		<!--tests-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -113,17 +114,25 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
 			<version>5.9.3</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.9.3</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>
@@ -144,6 +153,13 @@
 			<version>${lombok.version}</version>
 			<optional>true</optional>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.database-rider</groupId>
+			<artifactId>rider-junit5</artifactId>
+			<version>1.2.10</version>
+			<scope>test</scope>
 		</dependency>
 
 

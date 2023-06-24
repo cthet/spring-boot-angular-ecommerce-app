@@ -28,15 +28,18 @@ public class Address {
 
     private String street;
 
+    @Column(name = "address_complement")
     private String addressComplement;
 
     private String city;
 
+    @Column(name = "post_code")
     private int postCode;
 
     @OneToOne
     private Country country;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)

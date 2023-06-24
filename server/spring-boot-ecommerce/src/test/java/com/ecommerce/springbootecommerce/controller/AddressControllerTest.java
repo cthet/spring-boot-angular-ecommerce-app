@@ -7,6 +7,7 @@ import com.ecommerce.springbootecommerce.dto.address.CountryDto;
 import com.ecommerce.springbootecommerce.dto.profile.CivilityDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.AddressService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,9 +21,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -38,27 +41,46 @@ public class AddressControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    @DisplayName("POST api/v1/address - CREATED")
-    void createAddress() throws Exception {
+    private CivilityDto testCivilityDto;
+    private CountryDto testCountryDto;
+    private AddressDto testAddressDto;
+    private AddressDto testSavedAddressDto;
+    private List<AddressDto> testAddresses = new ArrayList<>();
+    private AddressResponse testAddressResponse;
+    private AddressResponse testEmptyAddressResponse;
 
-        CivilityDto mockCivilityDto = new CivilityDto(1, "homme");
-        CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
-        AddressDto mockAddressDto = new AddressDto();
-        mockAddressDto.setCivilityDto(mockCivilityDto);
-        mockAddressDto.setFirstName("John");
-        mockAddressDto.setLastName("Doe");
-        mockAddressDto.setStreet("123 Main Street");
-        mockAddressDto.setAddressComplement("Apartment 4B");
-        mockAddressDto.setPostCode(12345);
-        mockAddressDto.setCity("Paris");
-        mockAddressDto.setCountryDto(mockCountryDto);
-        mockAddressDto.setPhoneNumber("0123456789");
-        AddressDto mockSavedAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
-        doReturn(mockSavedAddressDto).when(addressService).saveAddress(mockAddressDto);
+    @BeforeEach
+    void setUp() {
+        testCivilityDto = new CivilityDto(1, "homme");
+        testCountryDto = new CountryDto(1, "France", "FR");
+
+        testAddressDto = new AddressDto();
+        testAddressDto.setCivilityDto(testCivilityDto);
+        testAddressDto.setFirstName("John");
+        testAddressDto.setLastName("Doe");
+        testAddressDto.setStreet("123 Main Street");
+        testAddressDto.setAddressComplement("Apartment 4B");
+        testAddressDto.setPostCode(12345);
+        testAddressDto.setCity("Paris");
+        testAddressDto.setCountryDto(testCountryDto);
+        testAddressDto.setPhoneNumber("0123456789");
+        testSavedAddressDto = new AddressDto(1L, testCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", testCountryDto, "0123456789");
+
+        testAddresses.add(testSavedAddressDto);
+        testAddressResponse = new AddressResponse();
+        testAddressResponse.setAddresses(testAddresses);
+        testEmptyAddressResponse = new AddressResponse();
+        testEmptyAddressResponse.setAddresses(Collections.emptyList());
+    }
+
+    @Test
+    @DisplayName("POST api/v1/address - Success")
+    void testSaveAddressSuccess() throws Exception {
+
+        doReturn(testSavedAddressDto).when(addressService).saveAddress(testAddressDto);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String addressDtoJson = objectMapper.writeValueAsString(mockAddressDto);
+        String addressDtoJson = objectMapper.writeValueAsString(testAddressDto);
 
         mockMvc.perform(post("/api/v1/address")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -92,17 +114,14 @@ public class AddressControllerTest {
     }
 
     @Test
-    @DisplayName("POST api/v1/address - CONFLICT")
-    void createAddressConflict() throws Exception {
+    @DisplayName("POST api/v1/address - Conflict")
+    void testSaveAddressConflict() throws Exception {
 
-        CivilityDto mockCivilityDto = new CivilityDto(1, "homme");
-        CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
-        AddressDto mockAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
-        doThrow(new ApiRequestException("Address already exists !!", HttpStatus.CONFLICT))
-                .when(addressService).saveAddress(mockAddressDto);
+       doThrow(new ApiRequestException("Address already exists !!", HttpStatus.CONFLICT))
+                .when(addressService).saveAddress(testAddressDto);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String addressDtoJson = objectMapper.writeValueAsString(mockAddressDto);
+        String addressDtoJson = objectMapper.writeValueAsString(testAddressDto);
 
         mockMvc.perform(post("/api/v1/address")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -112,16 +131,13 @@ public class AddressControllerTest {
     }
 
     @Test
-    @DisplayName("PUT api/v1/address/1 - UPDATE")
-    void updateAddressOk() throws Exception {
+    @DisplayName("PUT api/v1/address/1 - Success")
+    void testUpdateAddressSuccess() throws Exception {
 
-        CivilityDto mockCivilityDto = new CivilityDto(1, "homme");
-        CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
-        AddressDto mockAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe","123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
-        doReturn(mockAddressDto).when(addressService).updateAddress(1L, mockAddressDto);
+        doReturn(testSavedAddressDto).when(addressService).updateAddress(1L, testSavedAddressDto);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String addressDtoJson = objectMapper.writeValueAsString(mockAddressDto);
+        String addressDtoJson = objectMapper.writeValueAsString(testSavedAddressDto);
 
         mockMvc.perform(put("/api/v1/address/1")
                         .content(addressDtoJson)
@@ -156,17 +172,10 @@ public class AddressControllerTest {
     }
 
     @Test
-    @DisplayName("GET api/v1/address - FOUND")
-    void getAddresses() throws Exception {
+    @DisplayName("GET api/v1/address - Success")
+    void testGetAddresses() throws Exception {
 
-        CivilityDto mockCivilityDto = new CivilityDto(1, "homme");
-        CountryDto mockCountryDto = new CountryDto(1, "France", "FR");
-        AddressDto mockAddressDto = new AddressDto(1L, mockCivilityDto, "John", "Doe", "123 Main Street", "Apartment 4B", 12345, "Paris", mockCountryDto, "0123456789");
-        List<AddressDto> addresses = new ArrayList<>();
-                addresses.add(mockAddressDto);
-        AddressResponse addressResponse = new AddressResponse(addresses);
-        doReturn(addressResponse).when(addressService).getUserAddress();
-
+        doReturn(testAddressResponse).when(addressService).getUserAddress();
 
         mockMvc.perform(get("/api/v1/address")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -201,12 +210,10 @@ public class AddressControllerTest {
 
 
     @Test
-    @DisplayName("GET /api/v1/address - EMPTY")
-    void getAddressesEmpty() throws Exception {
+    @DisplayName("GET /api/v1/address - Empty")
+    void testGetAddressesEmpty() throws Exception {
 
-        List<AddressDto> addresses = new ArrayList<>();
-        AddressResponse addressResponse = new AddressResponse(addresses);
-        doReturn(addressResponse).when(addressService).getUserAddress();
+        doReturn(testEmptyAddressResponse).when(addressService).getUserAddress();
 
         mockMvc.perform(get("/api/v1/address")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -229,7 +236,7 @@ public class AddressControllerTest {
 
     @Test
     @DisplayName("DELETE /api/v1/address/1 - Success")
-    void testProductDeleteSuccess() throws Exception {
+    void testAddressDeleteSuccess() throws Exception {
         doNothing().when(addressService).deleteAddress(1L);
 
         mockMvc.perform(delete("/api/v1/address/1"))
@@ -238,11 +245,10 @@ public class AddressControllerTest {
 
     @Test
     @DisplayName("DELETE api/v1/address/1 - Not Found")
-    void testProductDeleteNotFound() throws Exception {
+    void testAddressDeleteNotFound() throws Exception {
         doThrow(new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND))
                 .when(addressService).deleteAddress(1L);
 
-        // Execute our DELETE request
         mockMvc.perform(delete("/api/v1/address/{id}", 1))
                 .andExpect(status().isNotFound());
     }

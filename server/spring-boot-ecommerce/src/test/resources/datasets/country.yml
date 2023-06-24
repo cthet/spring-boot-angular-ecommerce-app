@@ -1,0 +1,7 @@
+country:
+  - id: 1
+    name: "USA"
+    code: "US"
+  - id: 2
+    name: "Germany"
+    code: "DE"

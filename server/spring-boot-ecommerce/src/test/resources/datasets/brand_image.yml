@@ -1,0 +1,32 @@
+gender_category:
+  - id: 1
+    gender_category_type: "Male"
+  - id: 2
+    gender_category_type: "Female"
+
+brand_category:
+  - id: 1
+    brand_category_type: "Nike"
+    description: "Nike is an American multinational corporation that is engaged in the design, development, manufacturing, and worldwide marketing and sales of footwear, apparel, equipment, accessories, and services."
+  - id: 2
+    brand_category_type: "Adidas"
+    description: "Adidas is a multinational corporation, founded and headquartered in Herzogenaurach, Germany, that designs and manufactures shoes, clothing and accessories."
+
+
+brand_image:
+  - id: 1
+    image_url: "https://example.com/images/brand1.jpg"
+    brand_category_id: 1
+    gender_category_id: 1
+  - id: 2
+    image_url: "https://example.com/images/brand2.jpg"
+    brand_category_id: 2
+    gender_category_id: 2
+  - id: 3
+    image_url: "https://example.com/images/brand3.jpg"
+    brand_category_id: 1
+    gender_category_id: 2
+  - id: 4
+    image_url: "https://example.com/images/brand4.jpg"
+    brand_category_id: 2
+    gender_category_id: 1

@@ -67,7 +67,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void signup(@Valid @RequestBody SignupRequest signupRequest) {
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new ApiRequestException("Email already exists in database.", HttpStatus.BAD_REQUEST);
+            throw new ApiRequestException("Email already exists in database.", HttpStatus.CONFLICT);
         }
 
         User user = userMapper.signupRequestToUser(signupRequest);

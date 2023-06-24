@@ -12,6 +12,7 @@ import java.util.List;
 public interface ApparelCategoryRepository extends JpaRepository<ApparelCategory, Integer> {
 
     List<ApparelCategory> findAll();
+
     @Query("SELECT DISTINCT a FROM ApparelCategory a JOIN a.genderCategories g WHERE g.id =:genderId")
     List<ApparelCategory> findByGenderCategoryId(@Param("genderId") int genderId);
 

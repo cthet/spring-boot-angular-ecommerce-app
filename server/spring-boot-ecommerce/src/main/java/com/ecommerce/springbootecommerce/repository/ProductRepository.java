@@ -15,6 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByGenderCategoryId(int gender, Pageable pageable);
 
     Page<Product> findByGenderCategoryIdAndBrandCategoryIdIn(int gender, List<Integer> brand, Pageable pageable);
+
     Page<Product> findByGenderCategoryIdAndApparelCategoryIdIn(int gender, List<Integer> category, Pageable pageable);
 
     Page<Product> findByGenderCategoryIdAndApparelCategoryIdInAndBrandCategoryIdIn(int gender, List<Integer> category, List<Integer> brand, Pageable pageable);

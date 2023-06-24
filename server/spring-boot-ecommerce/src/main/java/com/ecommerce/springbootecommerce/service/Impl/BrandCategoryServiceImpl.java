@@ -52,7 +52,7 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
             BrandCategoryDto brandCategoryDTO = brandCategoryMapper.brandCategoryToBrandCategoryDto(brandCategory);
             BrandCategoryImage BrandCategoryImage = brandCategoryImageRepository.findByBrandCategoryIdAndGenderCategoryId(brandCategory.getId(), gender)
                     .orElseThrow(()-> new ApiRequestException("Brand Categories images not found !", HttpStatus.NOT_FOUND));
-            brandCategoryDTO.setImageUrl(BrandCategoryImage.getImage_url());
+        brandCategoryDTO.setImageUrl(BrandCategoryImage.getImage_url());
             brandCategoryDtos.add(brandCategoryDTO);
         });
         brandCategoriesResponse.setBrandCategories(brandCategoryDtos);

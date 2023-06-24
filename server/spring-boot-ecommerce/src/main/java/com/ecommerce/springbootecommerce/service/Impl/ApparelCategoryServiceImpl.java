@@ -25,7 +25,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
     private final ApparelCategoryMapper apparelCategoryMapper;
 
     @Override
-    public ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int gender, int brand) {
+    public ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int brand, int gender) {
 
         ApparelCategoriesResponse apparelCategoriesResponse = new ApparelCategoriesResponse();
 

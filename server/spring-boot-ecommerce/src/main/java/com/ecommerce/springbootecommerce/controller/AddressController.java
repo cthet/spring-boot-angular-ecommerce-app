@@ -30,7 +30,7 @@ public class AddressController {
 
 
     @PostMapping
-    public ResponseEntity<AddressDto> createAddress(@Valid @RequestBody AddressDto addressDTO) {
+    public ResponseEntity<AddressDto> saveAddress(@Valid @RequestBody AddressDto addressDTO) {
             return ResponseEntity.ok(addressService.saveAddress(addressDTO));
     }
 

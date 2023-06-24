@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -35,7 +34,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDto fetchAddressDTO(Long id) {
         Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new ApiRequestException("Address not found!", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
 
         AddressDto addressDto = addressMapper.addressToAddressDto(address);
 
@@ -45,16 +44,10 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDto saveAddress(AddressDto addressDTO) {
 
-        Optional<Address> optAddress = addressRepository.findById(addressDTO.getId());
+        checkAddressExistence(addressDTO.getId());
 
-        if(optAddress.isPresent()){
-            throw new ApiRequestException("Address already exists !", HttpStatus.CONFLICT);
-        }
-
-        Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
-        Country country = countryRepository.findById(addressDTO.getCountryDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
+        Civility civility = findCivility(addressDTO.getCivilityDto().getId());
+        Country country = findCountry(addressDTO.getCountryDto().getId());
 
         Address address = addressMapper.addressDtoToAddress(addressDTO);
         address.setCivility(civility);
@@ -70,16 +63,12 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public AddressDto updateAddress(Long id, AddressDto addressDTO) {
 
-        Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
+        Address address = findAddress(id);
 
-        this.checkUserAddress(address);
+        checkUserAddress(address);
 
-        Civility civility = civilityRepository.findCivilityById(addressDTO.getCivilityDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
-
-        Country country = countryRepository.findById(addressDTO.getCountryDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
+        Civility civility = findCivility(addressDTO.getCivilityDto().getId());
+        Country country = findCountry(addressDTO.getCountryDto().getId());
 
         address.setCivility(civility);
         address.setCountry(country);
@@ -120,7 +109,28 @@ public class AddressServiceImpl implements AddressService {
     private void checkUserAddress(Address address){
         User user = userService.getUser();
         if(user != address.getUser()){
-            throw new ApiRequestException("Address does not belong to authenticated user", HttpStatus.FORBIDDEN);
+            throw new ApiRequestException("Check User Address failed", HttpStatus.FORBIDDEN);
         }
+    }
+
+    private Address findAddress(Long id) {
+        return addressRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
+    }
+
+    private void checkAddressExistence(Long id) {
+        addressRepository.findById(id).ifPresent(s -> {
+            throw new ApiRequestException("Address already exists !", HttpStatus.CONFLICT);
+        });
+    }
+
+    private Civility findCivility(int id) {
+        return civilityRepository.findCivilityById(id)
+                .orElseThrow(() -> new ApiRequestException("Civility not found", HttpStatus.NOT_FOUND));
+    }
+
+    private Country findCountry(int id) {
+        return countryRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
     }
 }

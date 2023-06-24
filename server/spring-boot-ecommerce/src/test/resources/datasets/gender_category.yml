@@ -1,0 +1,7 @@
+gender_category:
+  - id: 1
+    gender_category_type: "Male"
+  - id: 2
+    gender_category_type: "Female"
+
+

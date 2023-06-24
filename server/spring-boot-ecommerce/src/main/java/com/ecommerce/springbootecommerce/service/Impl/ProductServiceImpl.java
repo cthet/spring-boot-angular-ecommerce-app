@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,23 +27,34 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getProductById(Long productId) {
-
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ApiRequestException("Product not found in database!", HttpStatus.NOT_FOUND));
-
+        Product product = fetchProduct(productId);
         return productMapper.productToProductDto(product);
     }
 
     @Override
     public ProductsResponse getProducts(int gender, List<Integer> brand, List<Integer> category, int page, int size, String[] sort) {
 
-        List<Sort.Order> orders = new ArrayList<Sort.Order>();
-        Sort.Direction direction = getSortDirection(sort[1]);
-        Sort.Order order = new Sort.Order(direction, sort[0]);
-        orders.add(order);
+        Pageable pagingSort = constructPageableWithSorting(page, size, sort);
+        Page<Product> pageProduct = fetchProducts(gender, brand, category, pagingSort);
 
-        Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
+        return constructProductsResponse(pageProduct);
+    }
 
+    @Override
+    public ProductsResponse getNewProducts(int gender, int page, int size) {
+
+        Pageable pagingSort = PageRequest.of(page, size);
+        Page<Product> pageProduct = productRepository.findNewProductByGenderCategoryId(gender, pagingSort);
+
+        return constructProductsResponse(pageProduct);
+    }
+
+    private Product fetchProduct(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new ApiRequestException("Product not found in database!", HttpStatus.NOT_FOUND));
+    }
+
+    private Page<Product> fetchProducts(int gender, List<Integer> brand, List<Integer> category, Pageable pagingSort) {
         Page<Product> pageProduct;
 
         if (gender != 0 && category.contains(0) && brand.contains(0)) {
@@ -58,26 +68,29 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new ApiRequestException("Error in request", HttpStatus.BAD_REQUEST);
         }
-
-            ProductsResponse productsResponse = new ProductsResponse();
-            productsResponse.setProductsDTO(productMapper.productsToProductsDto(pageProduct.getContent()));
-            productsResponse.setCurrentPage(pageProduct.getNumber());
-            productsResponse.setSize(pageProduct.getSize());
-            productsResponse.setTotalItems(pageProduct.getTotalElements());
-            productsResponse.setTotalPages(pageProduct.getTotalPages());
-
-            return productsResponse;
+        return pageProduct;
     }
 
-    @Override
-    public ProductsResponse getNewProducts(int gender, int page, int size) {
-        Pageable pagingSort = PageRequest.of(page, size);
+    private Pageable constructPageableWithSorting(int page, int size, String[] sort) {
+        Sort.Direction direction = getSortDirection(sort[1]);
+        Sort.Order order = new Sort.Order(direction, sort[0]);
+        return PageRequest.of(page, size, Sort.by(order));
+    }
 
-        Page<Product> pageProduct = productRepository.findNewProductByGenderCategoryId(gender, pagingSort);
 
+    public Sort.Direction getSortDirection (String direction){
+        if (direction.equals("asc")) {
+            return Sort.Direction.ASC;
+        } else if (direction.equals("desc")) {
+            return Sort.Direction.DESC;
+        }
+            return Sort.Direction.ASC;
+    }
+
+    private ProductsResponse constructProductsResponse(Page<Product> pageProduct) {
         ProductsResponse productsResponse = new ProductsResponse();
 
-        if(pageProduct == null || pageProduct.isEmpty()){
+        if (pageProduct == null || pageProduct.isEmpty()) {
             productsResponse.setProductsDTO(Collections.emptyList());
             productsResponse.setCurrentPage(0);
             productsResponse.setSize(1);
@@ -91,17 +104,7 @@ public class ProductServiceImpl implements ProductService {
             productsResponse.setTotalItems(pageProduct.getTotalElements());
             productsResponse.setTotalPages(pageProduct.getTotalPages());
         }
-
         return productsResponse;
-    }
-
-    public Sort.Direction getSortDirection (String direction){
-        if (direction.equals("asc")) {
-            return Sort.Direction.ASC;
-        } else if (direction.equals("desc")) {
-            return Sort.Direction.DESC;
-        }
-            return Sort.Direction.ASC;
     }
 
 }
