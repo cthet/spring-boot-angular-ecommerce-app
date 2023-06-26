@@ -33,9 +33,18 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
                 .orElseThrow(() -> new ApiRequestException("Gender not found in database!", HttpStatus.NOT_FOUND));
         apparelCategoriesResponse.setGender(_gender.getName());
 
+
+        List<ApparelCategoryDto> apparelCategoriesDto = getApparelCategoriesDto(brand, gender);
+        apparelCategoriesResponse.setApparelCategories(apparelCategoriesDto);
+
+        return apparelCategoriesResponse;
+
+    }
+
+    private List<ApparelCategoryDto> getApparelCategoriesDto(int brand, int gender) {
         List<ApparelCategory> apparelCategories;
 
-        if (brand==0) {
+        if (brand == 0) {
             apparelCategories = apparelCategoryRepository.findByGenderCategoryId(gender);
         } else {
             apparelCategories = apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryId(brand, gender);
@@ -45,11 +54,9 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
             throw new ApiRequestException("Apparel Categories not found !", HttpStatus.NOT_FOUND);
         }
 
-        List<ApparelCategoryDto> apparelCategoriesDto = apparelCategoryMapper.apparelCategoriesToApparelCategoriesDto(apparelCategories);
-        apparelCategoriesResponse.setApparelCategories(apparelCategoriesDto);
-
-        return apparelCategoriesResponse;
-
+        return apparelCategoryMapper.apparelCategoriesToApparelCategoriesDto(apparelCategories);
     }
 
 }
+
+

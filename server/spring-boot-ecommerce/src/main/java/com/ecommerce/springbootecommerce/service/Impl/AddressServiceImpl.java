@@ -33,9 +33,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDto fetchAddressDTO(Long id) {
-        Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
-
+        Address address = findAddress(id);
         AddressDto addressDto = addressMapper.addressToAddressDto(address);
 
         return addressDto;
@@ -46,17 +44,9 @@ public class AddressServiceImpl implements AddressService {
 
         checkAddressExistence(addressDTO.getId());
 
-        Civility civility = findCivility(addressDTO.getCivilityDto().getId());
-        Country country = findCountry(addressDTO.getCountryDto().getId());
+        Address savedAddress  = mapAndSave(addressDTO);
 
-        Address address = addressMapper.addressDtoToAddress(addressDTO);
-        address.setCivility(civility);
-        address.setCountry(country);
-        address.setUser(userService.getUser());
-
-        Address savedAddress = addressRepository.save(address);
-
-        return addressMapper.addressToAddressDto(savedAddress);
+        return addressMapper.addressToAddressDto(savedAddress );
 
     }
 
@@ -67,11 +57,6 @@ public class AddressServiceImpl implements AddressService {
 
         checkUserAddress(address);
 
-        Civility civility = findCivility(addressDTO.getCivilityDto().getId());
-        Country country = findCountry(addressDTO.getCountryDto().getId());
-
-        address.setCivility(civility);
-        address.setCountry(country);
         addressMapper.updateAddressFromDto(addressDTO, address);
 
         Address savedAddress = addressRepository.save(address);
@@ -97,8 +82,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void deleteAddress(Long id) {
-        Address address = addressRepository.findById(id)
-                .orElseThrow(() -> new ApiRequestException("Address not found !", HttpStatus.NOT_FOUND));
+        Address address = findAddress(id);
 
         this.checkUserAddress(address);
 
@@ -132,5 +116,14 @@ public class AddressServiceImpl implements AddressService {
     private Country findCountry(int id) {
         return countryRepository.findById(id)
                 .orElseThrow(() -> new ApiRequestException("Country not found", HttpStatus.NOT_FOUND));
+    }
+
+    private Address mapAndSave(AddressDto addressDto) {
+        Address address = addressMapper.addressDtoToAddress(addressDto);
+        address.setCivility(findCivility(addressDto.getCivilityDto().getId()));
+        address.setCountry(findCountry(addressDto.getCountryDto().getId()));
+        address.setUser(userService.getUser());
+
+        return addressRepository.save(address);
     }
 }

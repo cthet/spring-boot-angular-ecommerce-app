@@ -114,12 +114,12 @@ public class BrandCategoryServiceTest {
     @Test
     @DisplayName("Test testGetBrandCategoriesByGenderId - Failure - No gender found")
     public void testGetBrandCategoriesByGenderIdFailure_GenderNotFound() {
-        given(genderCategoryRepository.findById(1)).willReturn(Optional.empty());
+        given(genderCategoryRepository.findById(testGenderId)).willReturn(Optional.empty());
 
         ApiRequestException exception = assertThrows(ApiRequestException.class,
                 () -> brandCategoryService.getBrandCategoriesByGenderId(testGenderId, testApparelCategoryId));
 
-        assertEquals("No gender found in database!", exception.getMessage());
+        assertEquals("Gender with id " + testGenderId + " not found.", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
 
     }
@@ -134,7 +134,7 @@ public class BrandCategoryServiceTest {
         ApiRequestException exception = assertThrows(ApiRequestException.class,
                 () -> brandCategoryService.getBrandCategoriesByGenderId(testGenderId, testApparelCategoryId));
 
-        assertEquals("Brand Categories not found !", exception.getMessage());
+        assertEquals("No Brand Categories found for given parameters.", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
 
     }
@@ -151,7 +151,7 @@ public class BrandCategoryServiceTest {
         ApiRequestException exception = assertThrows(ApiRequestException.class,
                 () -> brandCategoryService.getBrandCategoriesByGenderId(testGenderId, testApparelCategoryId));
 
-        assertEquals("Brand Categories images not found !", exception.getMessage());
+        assertEquals("No Brand Categories images found for brand category id: " + testBrandCategory.getId(), exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
 
     }

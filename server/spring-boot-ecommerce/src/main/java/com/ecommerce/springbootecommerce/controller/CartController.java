@@ -2,12 +2,12 @@ package com.ecommerce.springbootecommerce.controller;
 
 import com.ecommerce.springbootecommerce.dto.cart.CartDto;
 import com.ecommerce.springbootecommerce.service.Interfaces.CartService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 
 @RestController

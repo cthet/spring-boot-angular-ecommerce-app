@@ -16,6 +16,7 @@ public class CivilityServiceImpl implements CivilityService {
 
     @Override
     public Civility getCivilityById(int id) {
-        return civilityRepository.findCivilityById(id).orElseThrow(()-> new ApiRequestException("civility not found", HttpStatus.NOT_FOUND));
+        return civilityRepository.findCivilityById(id)
+                .orElseThrow(()-> new ApiRequestException("civility not found", HttpStatus.NOT_FOUND));
     }
 }

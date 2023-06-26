@@ -1,12 +1,12 @@
 package com.ecommerce.springbootecommerce.dto.auth;
 
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor

@@ -28,22 +28,26 @@ In order to run this project, you'll need to have the following installed:
 
 **FEATURES**
 
-- Regular Username/Password authentication.
-- Stores user information in the Postgres database.
-- Select filters to display products based on the selections (brands, categories).
-- Sort products by prices.
-- Pagination to display max products on a single page.
-- Stores authentication details like token information in localstorage.
-- Store cart's product information in cookies.
-- Payment service using Stripe's API to buy products.
-- Responsiveness support for all devices.
+- Regular username/password authentication.
+- Stores user information in the PostgreSQL database.
+- Stores authentication details, such as token information, in localStorage.
+- Select filters to display products based on selections (gender, brands, apparel categories).
+- Sort products by price.
+- Pagination to display a maximum number of products on a single page.
+- Allow creation/deletion of user addresses.
+- Stores information like cart details in localStorage to persist page refresh.
+- Payment service using Stripe's API to purchase products.
+- Display orders list for the user.
+- Responsive design for all devices.
 
 
 **TOOLS USED**
-- **Rest API**
-- **Back-end:** Spring (Boot, Data), JPA / Hibernate, PostgreSQL, JUnit, Mockito, Maven
-- **Front-end:** Angular 15, Ngrx, Angular Material
-- **Security:** JWT
-- **AWS S3:** Server for storing product images. 
+- **Web-App:** Angular 15, RxJs, Ngrx, Angular Material
+- **Rest API:** Java 17, Spring Boot (v3.1.0), Spring Data, JPA/Hibernate, JPQL, Lombok, Mapstruct, Maven
+- **Unit test:** JUnit, Mockito
+- **DBMS:** PostgreSQL
+- **Security:** Spring Security, JWT
+- **Doc**: Swagger (springdoc-openapi)
+- **CDN:** AWS S3: server for storing images 
 - **Stripe:** Payment service API to handle user payment requests.
 - **Docker-Compose:** Easy way to bring up the application using containerization and behaves similarly in the production environment.

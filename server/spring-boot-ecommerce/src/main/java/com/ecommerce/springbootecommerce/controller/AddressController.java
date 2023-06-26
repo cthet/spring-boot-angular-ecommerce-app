@@ -3,12 +3,12 @@ package com.ecommerce.springbootecommerce.controller;
 import com.ecommerce.springbootecommerce.dto.address.AddressDto;
 import com.ecommerce.springbootecommerce.dto.address.AddressResponse;
 import com.ecommerce.springbootecommerce.service.Interfaces.AddressService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 
 @RestController

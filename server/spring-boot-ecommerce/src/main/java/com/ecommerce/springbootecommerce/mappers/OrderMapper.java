@@ -15,6 +15,12 @@ public interface OrderMapper {
     @Mapping(target = "dateCreated", source = "dateCreated")
     OrderDto orderToOrderDto(Order order);
 
+    @Mapping(ignore = true, target = "address")
+    @Mapping(ignore = true, target = "dateCreated")
+    @Mapping(ignore = true, target = "orderItems")
+    @Mapping(ignore = true, target = "user")
+    Order orderDtoToOrder(OrderDto orderDto);
+
     List<OrderDto> ordersToOrdersDto(List<Order> orders);
 
     default Integer map(Civility civility){
@@ -24,4 +30,6 @@ public interface OrderMapper {
     default  Civility map(Integer value){
         return new Civility(value);
     };
+
+
 }

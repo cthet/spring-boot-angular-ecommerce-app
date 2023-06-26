@@ -26,6 +26,8 @@ public class WebSecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
 
     private static final String[] WHITE_LIST_URLS = {
+            "/v3/api-docs/**",
+            "/swagger-ui.html/**",
             "/api/v1/auth/**",
             "/api/v1/category/**",
             "/api/v1/product/**",

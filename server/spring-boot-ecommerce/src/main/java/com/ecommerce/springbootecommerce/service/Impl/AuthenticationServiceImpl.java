@@ -41,35 +41,54 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public AuthResponse signin(@Valid @RequestBody AuthRequest authRequest) {
 
-        User user = userRepository.findByEmail(authRequest.getEmail())
-                .orElseThrow(() -> new ApiRequestException("Email not found in database!", HttpStatus.NOT_FOUND));
+        checkUserExistsInDatabase(authRequest.getEmail());
 
-        try {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
+        UserDetailsImpl userDetailsimpl = authenticateUser(authRequest.getEmail(), authRequest.getPassword());
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        Long id = userDetailsimpl.getId();
+        String email = userDetailsimpl.getEmail();
+        String role = userDetailsimpl.getAuthorities().toString();
 
-            UserDetailsImpl userDetailsimpl = (UserDetailsImpl) authentication.getPrincipal();
-            Long id = userDetailsimpl.getId();
-            String email = userDetailsimpl.getEmail();
-            String role = userDetailsimpl.getAuthorities().toString();
+        UserDto userDTO = new UserDto(id, role);
 
-            UserDto userDTO = new UserDto(id, role);
+        String jwt = jwtUtils.generateToken(email, role);
 
-            String jwt = jwtUtils.generateToken(email, role);
-
-            return new AuthResponse(userDTO, jwt);
-
-        } catch(AuthenticationException e) {
-            throw  new ApiRequestException("Credentials are uncorrect.", HttpStatus.FORBIDDEN);
-        }
+        return new AuthResponse(userDTO, jwt);
     }
+
     public void signup(@Valid @RequestBody SignupRequest signupRequest) {
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             throw new ApiRequestException("Email already exists in database.", HttpStatus.CONFLICT);
         }
 
+        createUser(signupRequest);
+    }
+
+    private void checkUserExistsInDatabase(String email){
+        if(email == null){
+            throw new ApiRequestException("Email is null", HttpStatus.BAD_REQUEST);
+        }
+
+        if(!userRepository.existsByEmail(email)){
+            throw new ApiRequestException("Email not found in database!", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    private UserDetailsImpl authenticateUser(String email, String password) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            return (UserDetailsImpl) authentication.getPrincipal();
+
+        } catch(AuthenticationException e) {
+            throw  new ApiRequestException("Credentials are uncorrect.", HttpStatus.FORBIDDEN);
+        }
+    }
+
+    private void createUser(SignupRequest signupRequest) {
         User user = userMapper.signupRequestToUser(signupRequest);
         user.setRole(Collections.singleton(Role.USER));
         user.setPassword(encoder.encode(signupRequest.getPassword()));
@@ -80,6 +99,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setCivility(civility);
 
         userRepository.save(user);
-
     }
+
 }

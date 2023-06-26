@@ -109,7 +109,7 @@ public class AuthenticationServiceTest {
     @Test
     @DisplayName("Test signIn - Success")
     void TestSignInSuccess() {
-        given(userRepository.findByEmail(testAuthRequest.getEmail())).willReturn(Optional.of(testUser));
+        given(userRepository.existsByEmail(testAuthRequest.getEmail())).willReturn(true);
         given(authenticationManager.authenticate(any())).willReturn(testAuth);
 
         given(jwtUtils.generateToken(testAuthRequest.getEmail(), testUserDetailsImpl.getAuthorities().toString())).willReturn(testToken);
@@ -123,7 +123,7 @@ public class AuthenticationServiceTest {
     @Test
     @DisplayName("Test signIn - Failure - Email not found")
     void TestSignInFailureEmailNotFound() {
-        given(userRepository.findByEmail(testAuthRequest.getEmail())).willReturn(Optional.empty());
+        given(userRepository.existsByEmail(testAuthRequest.getEmail())).willReturn(false);
 
         ApiRequestException exception = assertThrows(ApiRequestException.class,
                 () -> authenticationService.signin(testAuthRequest));
@@ -136,7 +136,7 @@ public class AuthenticationServiceTest {
     @Test
     @DisplayName("Test signIn - Failure - Credentials are uncorrect")
     void TestSignInFailureCredentialsIncorrect() {
-        given(userRepository.findByEmail(testAuthRequest.getEmail())).willReturn(Optional.of(testUser));
+        given(userRepository.existsByEmail(testAuthRequest.getEmail())).willReturn(true);
         given(authenticationManager.authenticate(any())).willThrow(new AuthenticationException("Test error") {});
 
         ApiRequestException exception = assertThrows(ApiRequestException.class,

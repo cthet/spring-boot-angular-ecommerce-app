@@ -20,7 +20,7 @@ public class CategoryController {
 
 
     @GetMapping("/brands")
-    public ResponseEntity<BrandCategoriesResponse> getBrandsByGenderId(@RequestParam(required = true) int genderId,
+    public ResponseEntity<BrandCategoriesResponse> getBrandsByGenderIdAndApparelCategoryId(@RequestParam(required = true) int genderId,
                                                                        @RequestParam(defaultValue = "0") int apparelCategoryId) {
 
              BrandCategoriesResponse brandCategoriesResponse = brandCategoryService.getBrandCategoriesByGenderId(genderId, apparelCategoryId);
@@ -29,7 +29,7 @@ public class CategoryController {
     }
 
     @GetMapping("/apparels")
-    public ResponseEntity<ApparelCategoriesResponse> getApparelsCategoryByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
+    public ResponseEntity<ApparelCategoriesResponse> getApparelCategoriesByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
                                                                                              @RequestParam(defaultValue = "0") int brandId) {
             ApparelCategoriesResponse apparelCategoriesResponse = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(genderId, brandId);
 

@@ -4,6 +4,7 @@ import com.ecommerce.springbootecommerce.dto.auth.AuthRequest;
 import com.ecommerce.springbootecommerce.dto.auth.AuthResponse;
 import com.ecommerce.springbootecommerce.dto.auth.SignupRequest;
 import com.ecommerce.springbootecommerce.service.Interfaces.AuthenticationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 
 
 @RestController

@@ -32,87 +32,68 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final OrderItemMapper orderItemMapper;
 
-    private String generateOrderTrackingNumber () {
-            return UUID.randomUUID().toString();
-    }
-
     @Override
     @Transactional
     public OrderDto saveOrder(OrderDto orderDto) {
         validateOrderDto(orderDto);
-
-        Order order = createOrder(orderDto);
-
+        Order order = mapOrderDtoToOrder(orderDto);
         Order savedOrder = orderRepository.save(order);
 
         return orderMapper.orderToOrderDto(savedOrder);
-
     }
 
     @Override
     public OrderResponse fetchUserOrders() {
-
         User user = userService.getUser();
         List<Order> orders = orderRepository.findOrderByUserId(user.getId());
-
         List<OrderDto> orderDtos = orderMapper.ordersToOrdersDto(orders);
 
         return new OrderResponse(orderDtos);
-
     }
 
     private void validateOrderDto(OrderDto orderDto) {
         if (orderDto == null) {
             throw new ApiRequestException("OrderDto is null", HttpStatus.BAD_REQUEST);
         }
-
     }
 
-    private Order createOrder(OrderDto orderDto) {
-        Order order = new Order();
-
-        String orderTrackingNumber = generateOrderTrackingNumber();
-        order.setOrderTrackingNumber(orderTrackingNumber);
-
-        order.setTotalQuantity(orderDto.getTotalQuantity());
-        order.setTotalPrice(orderDto.getTotalPrice());
-
-        User user = userService.getUser();
-        order.setUser(user);
-
-        Address address = getAddressFromDto(orderDto);
-        order.setAddress(address);
-
-        List<OrderItem> orderItems = createOrderItemsFromDto(orderDto, order);
-        order.setOrderItems(orderItems);
+    private Order mapOrderDtoToOrder(OrderDto orderDto) {
+        Order order = orderMapper.orderDtoToOrder(orderDto);
+        order.setOrderTrackingNumber(generateOrderTrackingNumber());
+        order.setUser(userService.getUser());
+        order.setAddress(getAddressFromOrderDto(orderDto));
+        order.setOrderItems(mapOrderItemDtosToOrderItems(orderDto.getOrderItemDtos(), order));
 
         return order;
     }
 
-    private Address getAddressFromDto(OrderDto orderDto) {
+    private String generateOrderTrackingNumber () {
+        return UUID.randomUUID().toString();
+    }
+
+    private Address getAddressFromOrderDto(OrderDto orderDto) {
         Long addressId = orderDto.getAddressDto().getId();
         return addressRepository.findById(addressId)
                 .orElseThrow(() -> new ApiRequestException("Address with ID " + addressId + " not found", HttpStatus.NOT_FOUND));
     }
 
-    private List<OrderItem> createOrderItemsFromDto(OrderDto orderDto, Order order) {
-        List<OrderItemDto> orderItemDtos = orderDto.getOrderItems();
-
+    private List<OrderItem> mapOrderItemDtosToOrderItems(List<OrderItemDto> orderItemDtos, Order order) {
         return orderItemDtos.stream()
-                .map(orderItemDto -> createOrderItemFromDto(orderItemDto, order))
+                .map(orderItemDto -> mapOrderItemDtoToOrderItem(orderItemDto, order))
                 .collect(Collectors.toList());
     }
 
-    private OrderItem createOrderItemFromDto(OrderItemDto orderItemDto, Order order) {
+    private OrderItem mapOrderItemDtoToOrderItem(OrderItemDto orderItemDto, Order order) {
         OrderItem orderItem = orderItemMapper.orderItemDtoToOrderItem(orderItemDto);
-
-        Product product = productRepository.findById(orderItemDto.getProductDto().getId())
-                .orElseThrow(() -> new ApiRequestException("Product with ID " + orderItemDto.getProductDto().getId() + " not found", HttpStatus.NOT_FOUND));
-
         orderItem.setOrder(order);
-        orderItem.setProduct(product);
-
+        orderItem.setProduct(findProductById(orderItemDto.getProductDto().getId()));
         return orderItem;
+    }
+
+
+    private Product findProductById(Long productId){
+        return  productRepository.findById(productId)
+                .orElseThrow(() -> new ApiRequestException("Product with ID " + productId + " not found", HttpStatus.NOT_FOUND));
     }
 
 }

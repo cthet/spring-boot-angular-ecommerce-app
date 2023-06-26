@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,19 +26,15 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartDto getCartDTO() {
-
         User user = userService.getUser();
 
-        Optional<Cart> optionalCart = cartRepository.findCartByUserId(user.getId());
+        return cartRepository.findCartByUserId(user.getId())
+                .map(this::mapCartToDto)
+                .orElseGet(CartDto::new);
+    }
 
-        if(optionalCart.isEmpty()){
-            return new CartDto();
-        }
-
-        Cart cart = optionalCart.get();
-
+    private CartDto mapCartToDto(Cart cart) {
         CartDto cartDto = cartMapper.cartToCartDto(cart);
-
         cart.getCartItems().forEach(cartItem -> {
             CartItemDto cartItemDto = cartItemMapper.cartItemToCartItemDto(cartItem);
             cartDto.addCartItemDto(cartItemDto);
@@ -52,37 +47,43 @@ public class CartServiceImpl implements CartService {
     public void saveCart(CartDto cartDTO) {
 
         User user = userService.getUser();
+        Cart cart = getOrCreateCart(user);
+        updateCartWithDto(cart, cartDTO);
+        cartRepository.save(cart);
+    }
 
-        Cart cart = cartRepository.findCartByUserId(user.getId())
+    private Cart getOrCreateCart(User user) {
+        return cartRepository.findCartByUserId(user.getId())
                 .orElseGet(() -> {
                     Cart newCart = new Cart();
                     newCart.setUser(user);
                     return newCart;
                 });
+    }
 
-        Map<Long, CartItem> cartItemMap = cart.getCartItems().stream()
-                .filter(item -> item.getProduct() != null)
-                .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));
+    private void updateCartWithDto(Cart cart, CartDto cartDTO) {
+        Map<Long, CartItem> cartItemMap = getCartItemsMap(cart);
 
         cart.clearCartItem();
+        updateCartItems(cart, cartDTO, cartItemMap);
 
-        cartDTO.getCartItems().forEach(cartItemDto -> {
-            CartItem cartItem = cartItemMap.get(cartItemDto.getProductDto().getId());
-
-            if (cartItem == null) {
-                cartItem = cartItemMapper.cartItemDtoToCartItem(cartItemDto);
-            } else {
-                cartItem.setQuantity(cartItemDto.getQuantity());
-                cartItem.setAmount(cartItemDto.getAmount());
-            }
-
-            cart.addCartItem(cartItem);
-
-        });
         cart.setTotalPrice(cartDTO.getTotalPrice());
         cart.setTotalQuantity(cartDTO.getTotalQuantity());
+    }
 
-        cartRepository.save(cart);
+    private Map<Long, CartItem> getCartItemsMap(Cart cart) {
+        return cart.getCartItems().stream()
+                .filter(item -> item.getProduct() != null)
+                .collect(Collectors.toMap(item -> item.getProduct().getId(), item -> item));
+    }
+
+    private void updateCartItems(Cart cart, CartDto cartDTO, Map<Long, CartItem> cartItemMap) {
+        cartDTO.getCartItems().forEach(cartItemDto -> {
+            CartItem cartItem = cartItemMap.computeIfAbsent(cartItemDto.getProductDto().getId(), k -> cartItemMapper.cartItemDtoToCartItem(cartItemDto));
+            cartItem.setQuantity(cartItemDto.getQuantity());
+            cartItem.setAmount(cartItemDto.getAmount());
+            cart.addCartItem(cartItem);
+        });
     }
 
 }

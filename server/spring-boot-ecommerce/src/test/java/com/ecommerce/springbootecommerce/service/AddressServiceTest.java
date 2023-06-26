@@ -142,14 +142,16 @@ public class AddressServiceTest {
     @DisplayName("Test saveAddress - Success")
     void testSaveAddressSuccess() throws Exception {
         given(addressRepository.findById(testAddressDto.getId())).willReturn(Optional.empty());
+        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
+        given(addressMapper.addressToAddressDto(testAddress)).willReturn(testAddressDto);
+
         given(civilityRepository.findCivilityById(testAddressDto.getCivilityDto().getId())).willReturn(Optional.of(testCivility));
         given(countryRepository.findById(testAddressDto.getCountryDto().getId())).willReturn(Optional.of(testCountry));
 
         given(userRepository.findById(testUser.getId())).willReturn(Optional.of(testUser));
         given(userDetailsService.getUserPrincipalImpl()).willReturn(userDetailsImpl);
         given(userService.getUser()).willReturn(testUser);
-        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
-        given(addressMapper.addressToAddressDto(testAddress)).willReturn(testAddressDto);
+
         given(addressRepository.save(testAddress)).willReturn(testAddress);
 
 
@@ -172,8 +174,9 @@ public class AddressServiceTest {
     @Test
     @DisplayName("Test saveAddress - Failure - Civility not found")
     void testSaveAddressFailureCivilityNotFound() {
-        given(addressRepository.findById(testAddress.getId())).willReturn(Optional.empty());
-        given(civilityRepository.findCivilityById(testCivility.getId())).willReturn(Optional.empty());
+        given(addressRepository.findById(testAddressDto.getId())).willReturn(Optional.empty());
+        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
+        given(civilityRepository.findCivilityById(testAddressDto.getCivilityDto().getId())).willReturn(Optional.empty());
 
         Exception exception = assertThrows(ApiRequestException.class, () -> addressService.saveAddress(testAddressDto));
 
@@ -185,8 +188,10 @@ public class AddressServiceTest {
     @DisplayName("Test saveAddress - Failure - Country not found")
     void testSaveAddressFailureCountryNotFound() {
         given(addressRepository.findById(testAddress.getId())).willReturn(Optional.empty());
-        given(civilityRepository.findCivilityById(testCivility.getId())).willReturn(Optional.of(testCivility));
-        given(countryRepository.findById(any())).willReturn(Optional.empty());
+        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
+        given(civilityRepository.findCivilityById(testAddressDto.getCivilityDto().getId())).willReturn(Optional.of(testCivility));
+        given(countryRepository.findById(testAddressDto.getCountryDto().getId())).willReturn(Optional.empty());
+
 
         Exception exception = assertThrows(ApiRequestException.class, () -> addressService.saveAddress(testAddressDto));
 
@@ -222,6 +227,7 @@ public class AddressServiceTest {
     @DisplayName("Test updateAddress - Failure - Civility not found")
     void testUpdateAddressFailureCivilityNotFound() {
         given(addressRepository.findById(testAddress.getId())).willReturn(Optional.empty());
+        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
         given(civilityRepository.findCivilityById(testCivility.getId())).willReturn(Optional.empty());
 
         Exception exception = assertThrows(ApiRequestException.class, () -> addressService.saveAddress(testAddressDto));
@@ -234,6 +240,7 @@ public class AddressServiceTest {
     @DisplayName("Test updateAddress - Failure - Country not found")
     void testUpdateAddressFailureCountryNotFound() {
         given(addressRepository.findById(testAddress.getId())).willReturn(Optional.empty());
+        given(addressMapper.addressDtoToAddress(testAddressDto)).willReturn(testAddress);
         given(civilityRepository.findCivilityById(testCivility.getId())).willReturn(Optional.of(testCivility));
         given(countryRepository.findById(any())).willReturn(Optional.empty());
 

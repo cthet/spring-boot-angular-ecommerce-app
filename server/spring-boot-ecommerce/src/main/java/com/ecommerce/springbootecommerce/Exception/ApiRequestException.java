@@ -4,9 +4,9 @@ package com.ecommerce.springbootecommerce.Exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-/**
- * Exception personnalisée pour gérer les erreurs liées aux requêtes API.
- * Cette exception contient un statut HTTP qui peut être utilisé pour définir la réponse HTTP.
+/*
+ Custom exception to handle errors related to API requests.
+ This exception contains an HTTP status that can be used to define the HTTP response.
  */
 
 @Getter

@@ -27,7 +27,7 @@ public class OrderDto {
     private AddressDto addressDto;
 
     @JsonProperty("orderItems")
-    private List<OrderItemDto> orderItems;
+    private List<OrderItemDto> orderItemDtos;
 
     @JsonProperty("totalQuantity")
     private int totalQuantity;

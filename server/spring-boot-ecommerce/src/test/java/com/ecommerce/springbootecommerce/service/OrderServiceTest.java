@@ -118,7 +118,7 @@ public class OrderServiceTest {
         testProduct = new Product();
         testProduct.setId(testProductDto.getId());
 
-        testOrderDto.setOrderItems(Arrays.asList(testOrderItemDto));
+        testOrderDto.setOrderItemDtos(Arrays.asList(testOrderItemDto));
         testOrder.setOrderItems(Arrays.asList(testOrderItem));
 
 
@@ -127,6 +127,7 @@ public class OrderServiceTest {
     @Test
     @DisplayName("test saveOrder - Success")
     void testSaveorderSuccess() {
+        given(orderMapper.orderDtoToOrder(testOrderDto)).willReturn(testOrder);
         given(userService.getUser()).willReturn(testUser);
         given(addressRepository.findById(testAddress.getId())).willReturn(Optional.of(testAddress));
         given(orderItemMapper.orderItemDtoToOrderItem(testOrderItemDto)).willReturn(testOrderItem);
@@ -145,6 +146,7 @@ public class OrderServiceTest {
     @DisplayName("test saveOrder - Failure - Address not found")
     void testSaveorderFailureAddressNotFound() {
         given(userService.getUser()).willReturn(testUser);
+        given(orderMapper.orderDtoToOrder(testOrderDto)).willReturn(testOrder);
         given(addressRepository.findById(any())).willReturn(Optional.empty());
 
         Exception exception = assertThrows(ApiRequestException.class, () -> {
@@ -159,6 +161,7 @@ public class OrderServiceTest {
     @Test
     @DisplayName("test saveOrder - Failure - Product not found")
     void testSaveorderFailureProductNotFound() {
+        given(orderMapper.orderDtoToOrder(testOrderDto)).willReturn(testOrder);
         given(userService.getUser()).willReturn(testUser);
         given(addressRepository.findById(testAddress.getId())).willReturn(Optional.of(testAddress));
         given(orderItemMapper.orderItemDtoToOrderItem(testOrderItemDto)).willReturn(testOrderItem);
