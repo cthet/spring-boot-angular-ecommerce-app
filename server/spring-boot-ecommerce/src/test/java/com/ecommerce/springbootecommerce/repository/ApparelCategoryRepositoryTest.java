@@ -49,7 +49,7 @@ public class ApparelCategoryRepositoryTest {
     @DisplayName("Test findByGenderCategoryId")
     @Transactional
     void testFindByGenderCategoryId() {
-        List<ApparelCategory> apparelCategories = repository.findByGenderCategoryId(1);
+        List<ApparelCategory> apparelCategories = repository.findByGenderCategoryIdAndProductsIsNotNull(1);
 
         assertFalse(apparelCategories.isEmpty(), "Apparel categories list should not be empty");
         apparelCategories.forEach(apparelCategory ->
@@ -63,7 +63,7 @@ public class ApparelCategoryRepositoryTest {
     @DisplayName("Test findByBrandCategoryIdAndGenderCategoryId")
     @Transactional
     void findByBrandCategoryIdAndGenderCategoryIdSuccess() {
-        List<ApparelCategory> apparelCategories = repository.findByBrandCategoryIdAndGenderCategoryId(1, 2);
+        List<ApparelCategory> apparelCategories = repository.findByBrandCategoryIdAndGenderCategoryIdAndProductsIsNotNull(1, 2);
 
         assertFalse(apparelCategories.isEmpty(), "Apparel categories list should not be empty");
 

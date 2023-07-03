@@ -11,12 +11,24 @@ import java.util.List;
 @Repository
 public interface BrandCategoryRepository extends JpaRepository<BrandCategory, Integer> {
 
-    @Query("SELECT DISTINCT b FROM BrandCategory b JOIN b.genderCategories g WHERE g.id = :genderId  ")
-    List<BrandCategory> findByGenderCategoryId(@Param("genderId") int genderId);
+    @Query("SELECT DISTINCT b FROM BrandCategory b" +
+            " JOIN b.products p" +
+            " JOIN b.genderCategories g" +
+            " WHERE g.id = :genderId" +
+            " AND p.genderCategory.id = :genderId" +
+            " GROUP BY b" +
+            " HAVING COUNT(p) > 0")
+    List<BrandCategory> findByGenderCategoryIdAndProductsIsNotNull(@Param("genderId") int genderId);
 
     @Query("SELECT DISTINCT b FROM BrandCategory b" +
+            " JOIN b.products p" +
             " JOIN b.apparelCategories a" +
             " JOIN b.genderCategories g" +
-            " WHERE a.id = :apparelCategoryId AND g.id = :genderId")
-    List<BrandCategory> findByGenderCategoryIdAndApparelCategoryId(@Param("genderId") int genderId, @Param("apparelCategoryId") int apparelCategoryId);
+            " WHERE a.id = :apparelCategoryId" +
+            " AND g.id = :genderId" +
+            " AND p.genderCategory.id = :genderId" +
+            " AND p.apparelCategory.id = :apparelCategoryId" +
+            " GROUP BY b" +
+            " HAVING COUNT(p) > 0")
+    List<BrandCategory> findByGenderCategoryIdAndApparelCategoryIdAndProductsIsNotNull(@Param("genderId") int genderId, @Param("apparelCategoryId") int apparelCategoryId);
 }

@@ -77,10 +77,10 @@ public class ApparelCategoryServiceTest {
     void testGetApparelCategoriesByBrandIdAndGenderIdSuccessBrandIsZero() {
 
         given(genderCategoryRepository.findById(testGenderId)).willReturn(Optional.of(testGenderCategory));
-        given(apparelCategoryRepository.findByGenderCategoryId(testGenderId)).willReturn(List.of(testApparelCategory));
+        given(apparelCategoryRepository.findByGenderCategoryIdAndProductsIsNotNull(testGenderId)).willReturn(List.of(testApparelCategory));
         given(apparelCategoryMapper.apparelCategoriesToApparelCategoriesDto(List.of(testApparelCategory))).willReturn(List.of(testApparelCategoryDto));
 
-        ApparelCategoriesResponse response = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(0, testGenderId);
+        ApparelCategoriesResponse response = apparelCategoryService.getApparelCategoriesByGenderIdAndBranCategoryId(testGenderId, 0);
 
         assertEquals( response.getGender(), testGenderCategory.getName());
         assertEquals(response.getApparelCategories(), List.of(testApparelCategoryDto));
@@ -91,10 +91,10 @@ public class ApparelCategoryServiceTest {
     void testGetApparelCategoriesByBrandIdAndGenderIdSuccessBrandIsNotZero() {
 
         given(genderCategoryRepository.findById(testGenderId)).willReturn(Optional.of(testGenderCategory));
-        given(apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryId(1, testGenderId)).willReturn(List.of(testApparelCategory));
+        given(apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryIdAndProductsIsNotNull(testGenderId, 1)).willReturn(List.of(testApparelCategory));
         given(apparelCategoryMapper.apparelCategoriesToApparelCategoriesDto(List.of(testApparelCategory))).willReturn(List.of(testApparelCategoryDto));
 
-        ApparelCategoriesResponse response = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(1, testGenderId);
+        ApparelCategoriesResponse response = apparelCategoryService.getApparelCategoriesByGenderIdAndBranCategoryId(1, testGenderId);
 
         assertEquals(response.getGender(), testGenderCategory.getName());
         assertEquals(response.getApparelCategories(), List.of(testApparelCategoryDto));
@@ -108,7 +108,7 @@ public class ApparelCategoryServiceTest {
         given(genderCategoryRepository.findById(testGenderId)).willReturn(Optional.empty());
 
         ApiRequestException exception = assertThrows(ApiRequestException.class,
-                () -> apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(testGenderId, 0));
+                () -> apparelCategoryService.getApparelCategoriesByGenderIdAndBranCategoryId(testGenderId, 0));
 
         assertEquals("Gender not found in database!", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
@@ -118,10 +118,10 @@ public class ApparelCategoryServiceTest {
     @DisplayName("Test getApparelCategoriesByBrandIdAndGenderId - Failure - Apparel Categories not found")
     void testGetApparelCategoriesByBrandIdAndGenderIdFailureApparelCategoriesNotFound() {
         given(genderCategoryRepository.findById(testGenderId)).willReturn(Optional.of(testGenderCategory));
-        given(apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryId(1, testGenderId)).willReturn(Collections.emptyList());
+        given(apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryIdAndProductsIsNotNull(1, testGenderId)).willReturn(Collections.emptyList());
 
         ApiRequestException exception = assertThrows(ApiRequestException.class,
-                () -> apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(testGenderId, 1));
+                () -> apparelCategoryService.getApparelCategoriesByGenderIdAndBranCategoryId(testGenderId, 1));
 
         assertEquals("Apparel Categories not found !", exception.getMessage());
         assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());

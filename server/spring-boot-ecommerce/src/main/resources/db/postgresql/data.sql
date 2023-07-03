@@ -62,13 +62,11 @@ INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('2', '
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('3', 'Maille');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('4', 'Sweatshirts');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('5', 'T-shirts');
-INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('6', 'Denim');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('7', 'Pantalons');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('8', 'Shorts');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('9', 'Chemises');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('10', 'Polos');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('11', 'Vestes');
-INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('12', 'Activewear');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('13', 'Tops');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('14', 'Robes');
 INSERT INTO ecommerce.apparel_category(id, apparel_category_type) VALUES ('15', 'Jupes');
@@ -153,7 +151,6 @@ INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_i
 INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_id) VALUES ('12','2');
 INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_id) VALUES ('13','2');
 INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_id) VALUES ('14','2');
-INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_id) VALUES ('15','2');
 INSERT INTO ecommerce.brand_category_gender(brand_category_id, gender_category_id) VALUES ('19','2');
 
 --Apparel Category per Gender--
@@ -163,13 +160,11 @@ INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_catego
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','3');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','4');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','5');
-INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','6');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','7');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','8');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','9');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','10');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','11');
-INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('1','12');
 
 --Women
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','1');
@@ -180,8 +175,6 @@ INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_catego
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','9');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','14');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','7');
-INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','6');
-INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','12');
 INSERT INTO ecommerce.apparel_category_gender(gender_category_id, apparel_category_id) VALUES ('2','15');
 
 --Apparel Category per Brand--
@@ -194,6 +187,7 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '2');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('2', '2');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '2');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '2');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '2');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('5', '2');
@@ -240,7 +234,6 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '8');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '8');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '8');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('5', '8');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '9');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '9');
@@ -271,54 +264,42 @@ INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '12');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '12');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('5', '12');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('13', '12');
 
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('2', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('14', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('13', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('2', '13');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('9', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('10', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('12', '13');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('8', '13');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '13');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '14');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '14');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '14');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('13', '14');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '14');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '15');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '15');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('5', '15');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '15');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '16');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '16');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '16');
 
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('14', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '17');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '17');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '17');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '17');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('4', '17');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '17');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('15', '18');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '18');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('2', '18');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '18');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '18');
 
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('1', '19');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('3', '19');
-INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('6', '19');
 INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('7', '19');
-
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('1', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/manteaux/manteaux-long-alexander-mcqueen.jpg','Manteaux long','2990','100','1','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('2', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/manteaux/doudoune-alexander-mcqueen.jpg','Doudoune','2490','100','1','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('3', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-en-denim-alexander-mcqueen.jpg','Veste en denim','1890','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('4', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/blazer-alexander-mcqueen.jpg','Blazer','2790','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('5', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-en-cuir-alexander-mcqueen.jpg','Veste en cuir','3490','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('6', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/blazer-un-bouton-alexander-mcqueen.jpg','Blazer un bouton','1590','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('7', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/blazer-sans-manches-alexander-mcqueen.jpg','Blazer sans manches','2150','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('8', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-tailleur-alexander-mcqueen.jpg','Veste tailleur','2150','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('9', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-en-jean-alexander-mcqueen.jpg','Veste en jean','1261','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('10', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-en-denim-bleu-alexander-mcqueen.jpg','Veste en Denim','1490','100','11','1','2');
-INSERT INTO ecommerce.product(id, active, image_url, product_name, unit_price, units_in_stock, apparel_category_id, brand_category_id, gender_category_id) VALUES ('11', 'true', 'https://ecommerce-luxe-images.s3.eu-west-3.amazonaws.com/apparel-image/Alexander+McQueen/vestes/veste-tailleur-2-alexander-mcqueen.jpg','Veste tailleur','1590','100','11','1','2');
+INSERT INTO ecommerce.apparel_category_brand(apparel_category_id, brand_category_id) VALUES ('11', '19');

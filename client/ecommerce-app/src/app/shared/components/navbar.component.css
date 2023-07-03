@@ -10,7 +10,7 @@ img {
   display:block;
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 450px;
   overflow: hidden;
   object-fit: cover;
   object-position: 50% 15%;
@@ -83,12 +83,12 @@ ul li a {
 
 ul li ul.brands-dropdown-content,
 ul li ul.apparel-categories-dropdown-content {
-  min-width: 100%; /* Set width of the dropdown */
+  min-width: 100%; 
+  margin: 20px;
   height: 300px;
   display: none;
   flex-direction: column;
   flex-wrap: wrap;
-  position: absolute;
   font-size: 1rem;
   z-index: 101;
   left: 0;

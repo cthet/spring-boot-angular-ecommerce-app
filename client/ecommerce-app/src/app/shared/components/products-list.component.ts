@@ -26,6 +26,7 @@ import { Product } from '../../models/Product';
           </div>
           <mat-card-content>
             <h6 class="title">{{ product.brand_category }}</h6>
+            <span>{{ product.product_name }}</span>
             <p class="price">
               {{ product.unit_price | currency: 'EUR' }}
             </p>

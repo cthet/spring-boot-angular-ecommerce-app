@@ -28,7 +28,7 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
     private final BrandCategoryMapper brandCategoryMapper;
 
     @Override
-    public BrandCategoriesResponse getBrandCategoriesByGenderId(int genderId, int apparelCategoryId) {
+    public BrandCategoriesResponse getBrandCategoriesByGenderIdAndApparelCategoryId(int genderId, int apparelCategoryId) {
 
         String genderName = getGenderName(genderId);
 
@@ -49,8 +49,8 @@ public class BrandCategoryServiceImpl implements BrandCategoryService {
 
     private List<BrandCategory> getBrandCategories(int genderId, int apparelCategoryId) {
         if(apparelCategoryId == 0)
-            return brandCategoryRepository.findByGenderCategoryId(genderId);
-        return brandCategoryRepository.findByGenderCategoryIdAndApparelCategoryId(genderId, apparelCategoryId);
+            return brandCategoryRepository.findByGenderCategoryIdAndProductsIsNotNull(genderId);
+        return brandCategoryRepository.findByGenderCategoryIdAndApparelCategoryIdAndProductsIsNotNull(genderId, apparelCategoryId);
     }
 
     private void checkBrandCategoriesNotEmpty(List<BrandCategory> brandCategories) {

@@ -13,12 +13,24 @@ public interface ApparelCategoryRepository extends JpaRepository<ApparelCategory
 
     List<ApparelCategory> findAll();
 
-    @Query("SELECT DISTINCT a FROM ApparelCategory a JOIN a.genderCategories g WHERE g.id =:genderId")
-    List<ApparelCategory> findByGenderCategoryId(@Param("genderId") int genderId);
+    @Query("SELECT DISTINCT a FROM ApparelCategory a" +
+            " JOIN a.products p"+
+            " JOIN a.genderCategories g" +
+            " WHERE p.genderCategory.id = :genderId" +
+            " AND g.id =:genderId"+
+            " GROUP BY a" +
+            " HAVING COUNT(p) > 0")
+    List<ApparelCategory> findByGenderCategoryIdAndProductsIsNotNull(@Param("genderId") int genderId);
 
     @Query("SELECT DISTINCT a FROM ApparelCategory a" +
+            " JOIN a.products p"+
             " JOIN a.brandCategories b" +
             " JOIN a.genderCategories g" +
-            " WHERE b.id = :brandId AND g.id = :genderId")
-    List<ApparelCategory> findByBrandCategoryIdAndGenderCategoryId(@Param("brandId")int brandId, @Param("genderId") int genderId);
+            " WHERE b.id = :brandId" +
+            " AND g.id = :genderId"+
+            " AND p.genderCategory.id = :genderId" +
+            " AND p.brandCategory.id = :brandId" +
+            " GROUP BY a" +
+            " HAVING COUNT(p) > 0")
+    List<ApparelCategory> findByBrandCategoryIdAndGenderCategoryIdAndProductsIsNotNull(@Param("brandId")int brandId, @Param("genderId") int genderId);
 }

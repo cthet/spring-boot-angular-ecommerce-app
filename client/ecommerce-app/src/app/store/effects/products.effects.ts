@@ -23,8 +23,9 @@ export class ProductsEffects {
       this.store.select(genderSelectors.selectGender),
       this.store.select(brandsSelectors.selectBrand),
       ]),
-      mergeMap(([action, gender, brand]) =>
-        this.productsService
+      mergeMap(([action, gender, brand]) => {
+        console.log(brand?.id);
+        return this.productsService
           .fetchProducts({
             gender: gender?.id,
             brand: brand?.id,
@@ -42,8 +43,11 @@ export class ProductsEffects {
             catchError((error) =>
               of(productsActions.loadProductsFailure({ error: error.message }))
             )
-          )
+          )}
+            
       )
+      
+
     )
   );
 

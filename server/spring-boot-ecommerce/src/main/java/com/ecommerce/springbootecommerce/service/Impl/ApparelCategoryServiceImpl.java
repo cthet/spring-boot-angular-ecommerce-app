@@ -25,7 +25,7 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
     private final ApparelCategoryMapper apparelCategoryMapper;
 
     @Override
-    public ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int brand, int gender) {
+    public ApparelCategoriesResponse getApparelCategoriesByGenderIdAndBranCategoryId(int gender, int brand) {
 
         ApparelCategoriesResponse apparelCategoriesResponse = new ApparelCategoriesResponse();
 
@@ -45,9 +45,9 @@ public class ApparelCategoryServiceImpl implements ApparelCategoryService {
         List<ApparelCategory> apparelCategories;
 
         if (brand == 0) {
-            apparelCategories = apparelCategoryRepository.findByGenderCategoryId(gender);
+            apparelCategories = apparelCategoryRepository.findByGenderCategoryIdAndProductsIsNotNull(gender);
         } else {
-            apparelCategories = apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryId(brand, gender);
+            apparelCategories = apparelCategoryRepository.findByBrandCategoryIdAndGenderCategoryIdAndProductsIsNotNull(brand, gender);
         }
 
         if (apparelCategories.isEmpty()) {

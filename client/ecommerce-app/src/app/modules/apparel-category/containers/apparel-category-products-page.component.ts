@@ -8,6 +8,7 @@ import { Product } from '../../../models/Product';
 import { apparelCategoriesActions, productsActions } from '../../../store/actions';
 import { apparelCategoriesSelectors, brandsSelectors, productsSelectors } from '../../../store/selectors';
 import { brandCategoriesActions } from '../store/actions';
+import { brandsApparelCategoriesSelectors } from '../store/selectors';
 
 @Component({
   selector: 'app-apparel-category-product-page',
@@ -69,7 +70,7 @@ export class ApparelCategoryProductsPageComponent {
   sort: string = "id,asc";
 
   constructor(private store: Store<Store>) {
-    this.brands$ = this.store.select(brandsSelectors.selectBrands);
+    this.brands$ = this.store.select(brandsApparelCategoriesSelectors.selectBrandCategories);
     this.apparelCategories$ = this.store.select(apparelCategoriesSelectors.selectApparelCategories);
     this.products$ = this.store.select(productsSelectors.selectProducts);    
     this.currentPage$ = this.store.select(productsSelectors.selectCurrentPage);

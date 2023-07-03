@@ -4,6 +4,6 @@ import com.ecommerce.springbootecommerce.dto.category.ApparelCategoriesResponse;
 
 public interface ApparelCategoryService {
 
-  ApparelCategoriesResponse getApparelCategoriesByBrandIdAndGenderId(int brandId, int genderId);
+  ApparelCategoriesResponse getApparelCategoriesByGenderIdAndBranCategoryId(int genderId, int brandId);
 
 }

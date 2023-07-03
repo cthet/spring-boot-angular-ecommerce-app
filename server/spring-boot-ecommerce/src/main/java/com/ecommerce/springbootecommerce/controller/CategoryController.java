@@ -20,18 +20,18 @@ public class CategoryController {
 
 
     @GetMapping("/brands")
-    public ResponseEntity<BrandCategoriesResponse> getBrandsByGenderIdAndApparelCategoryId(@RequestParam(required = true) int genderId,
+    public ResponseEntity<BrandCategoriesResponse> getBrandCategoriesByGenderIdAndApparelCategoryId(@RequestParam(required = true) int genderId,
                                                                        @RequestParam(defaultValue = "0") int apparelCategoryId) {
 
-             BrandCategoriesResponse brandCategoriesResponse = brandCategoryService.getBrandCategoriesByGenderId(genderId, apparelCategoryId);
+             BrandCategoriesResponse brandCategoriesResponse = brandCategoryService.getBrandCategoriesByGenderIdAndApparelCategoryId(genderId, apparelCategoryId);
 
             return new ResponseEntity<>(brandCategoriesResponse, HttpStatus.OK);
     }
 
     @GetMapping("/apparels")
-    public ResponseEntity<ApparelCategoriesResponse> getApparelCategoriesByGenderIdAndBrandId(@RequestParam(required = true) int genderId,
+    public ResponseEntity<ApparelCategoriesResponse> getApparelCategoriesByGenderIdAndBranCategoryId(@RequestParam(required = true) int genderId,
                                                                                              @RequestParam(defaultValue = "0") int brandId) {
-            ApparelCategoriesResponse apparelCategoriesResponse = apparelCategoryService.getApparelCategoriesByBrandIdAndGenderId(genderId, brandId);
+            ApparelCategoriesResponse apparelCategoriesResponse = apparelCategoryService.getApparelCategoriesByGenderIdAndBranCategoryId(genderId, brandId);
 
             return new ResponseEntity<>(apparelCategoriesResponse, HttpStatus.OK);
 
