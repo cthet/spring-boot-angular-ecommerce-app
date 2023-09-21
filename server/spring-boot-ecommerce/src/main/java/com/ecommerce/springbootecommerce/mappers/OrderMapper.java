@@ -13,6 +13,7 @@ public interface OrderMapper {
 
     @Mapping(target = "addressDto", source = "address")
     @Mapping(target = "dateCreated", source = "dateCreated")
+    @Mapping(target = "orderItemDtos", source = "orderItems")
     OrderDto orderToOrderDto(Order order);
 
     @Mapping(ignore = true, target = "address")

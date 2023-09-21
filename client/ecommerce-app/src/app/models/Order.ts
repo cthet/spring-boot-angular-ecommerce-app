@@ -1,6 +1,14 @@
 import { Address } from "./Address";
 import { CartItem } from "./CartItem";
 
+
+interface OrderBuilderArgs {
+  orderItems: CartItem[];
+  shippingAddress: Address;
+  totalPrice: number;
+  totalQuantity: number;
+}
+
 export class OrderBuilder {
   id?: number;
   orderTrackingNumber?: string;
@@ -10,23 +18,23 @@ export class OrderBuilder {
   totalPrice: number;
   totalQuantity: number;
   
-  constructor(orderItems: CartItem[], shippingAddress: Address, totalPrice: number, totalQuantity: number) {
-    this.orderItems = orderItems;
-    this.shippingAddress = shippingAddress;
-    this.totalPrice = totalPrice;
-    this.totalQuantity = totalQuantity;
+  constructor(args: OrderBuilderArgs) {
+    this.orderItems = args.orderItems;
+    this.shippingAddress = args.shippingAddress;
+    this.totalPrice = args.totalPrice;
+    this.totalQuantity = args.totalQuantity;
   }  
 
-  private setOrderTrackingNumber(orderTrackingNumber: string){
+  private setOrderTrackingNumber(orderTrackingNumber: string) {
     this.orderTrackingNumber = orderTrackingNumber;
     return this;
   }
 
-  buildNewOrder(){
+  buildNewOrder() {
     return this.build();
   }
 
-  buildExistingOrder(orderTrackingNumber: string){
+  buildExistingOrder(orderTrackingNumber: string) {
     this.setOrderTrackingNumber(orderTrackingNumber);
     return this.build();
   }

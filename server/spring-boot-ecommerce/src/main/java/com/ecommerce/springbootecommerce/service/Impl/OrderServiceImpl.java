@@ -13,6 +13,8 @@ import com.ecommerce.springbootecommerce.repository.ProductRepository;
 import com.ecommerce.springbootecommerce.service.Interfaces.OrderService;
 import com.ecommerce.springbootecommerce.service.Interfaces.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     private final UserService userService;
     private final OrderRepository orderRepository;
@@ -47,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         User user = userService.getUser();
         List<Order> orders = orderRepository.findOrderByUserId(user.getId());
         List<OrderDto> orderDtos = orderMapper.ordersToOrdersDto(orders);
-
+        logger.info("Liste des orders dto: " + orderDtos);
         return new OrderResponse(orderDtos);
     }
 
