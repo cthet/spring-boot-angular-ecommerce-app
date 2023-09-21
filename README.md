@@ -9,17 +9,17 @@ E-commerce project developed using Spring Boot and Angular<br>
 - **Front-end**: Typescript, Angular 15, RxJs, NgRx, Angular Material
 - **Security**: Spring Security, JWT
 - **Stripe:** Payment service API to handle user payment requests.
-- **AWS S3** 
+- **AWS S3**
 - **API Doc**: Swagger (springdoc-openapi)
 - **Docker-Compose:** Easy way to bring up the application using containerization and behaves similarly in the production environment.
-  
+
 ## Features
 
 - Authentication with JWT
 - JWT information are stored in localStorage.
 - Customer Information are stored in the database.
 - Customer can search for the product according to specified criteria (gender, brands, apparel categories)
-- Customer can sort products by price 
+- Customer can sort products by price
 - Pagination is used to display products for better efficiency and reduce the load on the server
 - Customer can add products to the shopping cart
 - Customer can add and delete product from the shopping cart
@@ -30,55 +30,56 @@ E-commerce project developed using Spring Boot and Angular<br>
 - Responsive design for all devices.
 
 ## Prerequisites
+
 In order to run this project, you'll need to have the following installed:
+
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Running the Project with Docker Compose
 
 1. **Clone the Repository**
-    
-    ```bash
-    git clone https://github.com/cthet/spring-boot-angular-ecommerce-app.git
-    ```
+
+   ```bash
+   git clone https://github.com/cthet/spring-boot-angular-ecommerce-app.git
+   ```
 
 2. **Build and Launch the Containers**
 
-    Use Docker Compose to build and launch the containers:
+   Use Docker Compose to build and launch the containers:
 
-    ```bash
-    docker-compose up --build
-    ```
+   ```bash
+   docker-compose up --build
+   ```
 
-    The `--build` option is used to build the images before starting the containers. If you've already built the images, you can simply use `docker-compose up`
-    
+   The `--build` option is used to build the images before starting the containers. If you've already built the images, you can simply use `docker-compose up`
+
 ## Swagger documentation
 
 local: http://localhost:8080/swagger-ui/index.html
 
 ## Screenshots
 
-Menu Page: Brands list for Women | Menu Page: Ready-to-wear (apparel categories) list for Men
-:------------------------:|:-------------------------:
-![Alt text](image.png) | ![Alt text](image-1.png)   
+|        Menu Page: Brands list for Women        |                      Menu Page: Ready-to-wear (apparel categories) list for Men                       |
+| :--------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
+| ![Menu Page: Brands list for Women](images/brand_list_women.png)| ![Menu Page: Ready-to-wear (apparel categories) list for Men](images/ready-to-wear-men.png) |
 
+| Women Brand Page: List of Apparels | Women Ready-to-wear page: List of Apparels |
+| :--------------------------------: | :----------------------------------------: |
+|      ![Women Brand Page: List of Apparels](images/balenciaga_women_list_of_products.png)      |          ![Women Ready-to-wear page: List of Apparels](images/ready-to-wear_women_list_of_products.png)          |
 
-Women Brand Page: List of Apparels | Women Ready-to-wear page: List of Apparels
-:------------------------:|:-------------------------:
-![Alt text](image-2.png) | ![Alt text](image-3.png) 
+| Authentication Page: Sign-in | Authentication Page: Sign-up |
+| :--------------------------: | :--------------------------: |
+|   ![Authentication Page: Sign-in](images/auth_page.png)   |   ![Authentication Page: Sign-up](images/auth_page_signup.png)   |
 
-Authentication Page: Sign-in | Authentication Page: Sign-up
-:------------------------:|:-------------------------:
-![Alt text](image-4.png) | ![Alt text](image-5.png) 
+|    Shopping Cart Page    | Order Page: Adding Address |
+| :----------------------: | :------------------------: |
+| ![Shopping Cart Page](images/shopping_cart_page.png) |  ![Order Page: Adding Address](images/order_page_add_address.png)  |
 
-Shopping Cart Page | Order Page: Adding Address
-:------------------------:|:-------------------------:
-![Alt text](image-6.png) | ![Alt text](image-7.png) 
+| Order Page: Selecting Address | Order Page: Adding Card Number |
+| :---------------------------: | :----------------------------: |
+|   ![Order Page: Selecting Address](images/order_page_adress_list.png)    |    ![Order Page: Adding Card Number](images/order_page_paiement.png)    |
 
-Order Page: Selecting Address | Order Page: Adding Card Number
-:------------------------:|:-------------------------:
-![Alt text](image-8.png) | ![Alt text](image-9.png) 
-
-Profile Page | Customer orders list
-:------------------------:|:-------------------------:
-![Alt text](image-10.png) | ![Alt text](image-11.png) 
+|       Profile Page        |   Customer orders list    |
+| :-----------------------: | :-----------------------: |
+| ![Profile Page](images/profile_page.png) | ![Customer orders list](images/profile_page_orders_list.png) |

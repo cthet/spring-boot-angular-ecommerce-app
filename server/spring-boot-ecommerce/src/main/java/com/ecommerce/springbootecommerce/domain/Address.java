@@ -17,7 +17,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "civility_id")
     private Civility civility;
 
     @Column(name="first_name")
@@ -36,7 +37,8 @@ public class Address {
     @Column(name = "post_code")
     private int postCode;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "country_id")
     private Country country;
 
     @Column(name = "phone_number")
